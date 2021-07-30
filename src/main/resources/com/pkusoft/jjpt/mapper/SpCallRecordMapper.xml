@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pkusoft.jjpt.mapper.SpCallRecordMapper">
+    <!-- @codeGenerate -->
+    <resultMap id="BaseResultMap" type="com.pkusoft.jjpt.po.SpCallRecord">
+            <id column="OBJID" jdbcType="VARCHAR" property="objid"/>
+            <result column="JJDBH" jdbcType="VARCHAR" property="jjdbh"/>
+            <result column="LDHM" jdbcType="VARCHAR" property="ldhm"/>
+            <result column="LD_TYPE" jdbcType="VARCHAR" property="ldType"/>
+            <result column="RECORD_FILEPATH" jdbcType="VARCHAR" property="recordFilepath"/>
+            <result column="RECORD_FILENAME" jdbcType="VARCHAR" property="recordFilename"/>
+            <result column="LD_TYPE_CODE" jdbcType="VARCHAR" property="ldTypeCode"/>
+            <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+            <result column="JJ_OBJID" jdbcType="VARCHAR" property="jjObjid"/>
+            <result column="KEEP_CALLING_TIME" jdbcType="VARCHAR" property="keepCallingTime"/>
+            <result column="ORG_CODE" jdbcType="VARCHAR" property="orgCode"/>
+            <result column="ORG_NAME" jdbcType="VARCHAR" property="orgName"/>
+            <result column="CLSJ" jdbcType="TIMESTAMP" property="clsj"/>
+            <result column="MEMO" jdbcType="VARCHAR" property="memo"/>
+            <result column="CREATE_ID" jdbcType="VARCHAR" property="createId"/>
+            <result column="CREATE_NAME" jdbcType="VARCHAR" property="createName"/>
+            <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime"/>
+            <result column="MODER_ID" jdbcType="VARCHAR" property="moderId"/>
+            <result column="MODER_NAME" jdbcType="VARCHAR" property="moderName"/>
+            <result column="MODER_TIME" jdbcType="TIMESTAMP" property="moderTime"/>
+            <result column="GA_OWNER_DEPT_1" jdbcType="VARCHAR" property="gaOwnerDept1"/>
+            <result column="GA_OWNER_DEPT_2" jdbcType="VARCHAR" property="gaOwnerDept2"/>
+            <result column="GA_OWNER_DEPT_3" jdbcType="VARCHAR" property="gaOwnerDept3"/>
+            <result column="GA_OWNER_DEPT_4" jdbcType="VARCHAR" property="gaOwnerDept4"/>
+            <result column="GA_OWNER_DEPT_5" jdbcType="VARCHAR" property="gaOwnerDept5"/>
+            <result column="OWNER_TYPE" jdbcType="VARCHAR" property="ownerType"/>
+            <result column="BZ_OWNER_DEPT_1" jdbcType="VARCHAR" property="bzOwnerDept1"/>
+            <result column="BZ_OWNER_DEPT_2" jdbcType="VARCHAR" property="bzOwnerDept2"/>
+            <result column="BZ_OWNER_DEPT_3" jdbcType="VARCHAR" property="bzOwnerDept3"/>
+            <result column="BZ_OWNER_DEPT_4" jdbcType="VARCHAR" property="bzOwnerDept4"/>
+            <result column="BZ_OWNER_DEPT_5" jdbcType="VARCHAR" property="bzOwnerDept5"/>
+            <result column="RESERVE1" jdbcType="VARCHAR" property="reserve1"/>
+            <result column="RESERVE2" jdbcType="VARCHAR" property="reserve2"/>
+            <result column="RESERVE3" jdbcType="VARCHAR" property="reserve3"/>
+            <result column="RESERVE4" jdbcType="VARCHAR" property="reserve4"/>
+            <result column="RESERVE5" jdbcType="VARCHAR" property="reserve5"/>
+
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        OBJID,JJDBH,LDHM,LD_TYPE,RECORD_FILEPATH,RECORD_FILENAME,LD_TYPE_CODE,STATUS,JJ_OBJID,KEEP_CALLING_TIME,ORG_CODE,ORG_NAME,CLSJ,MEMO,CREATE_ID,CREATE_NAME,CREATE_TIME,MODER_ID,MODER_NAME,MODER_TIME,GA_OWNER_DEPT_1,GA_OWNER_DEPT_2,GA_OWNER_DEPT_3,GA_OWNER_DEPT_4,GA_OWNER_DEPT_5,OWNER_TYPE,BZ_OWNER_DEPT_1,BZ_OWNER_DEPT_2,BZ_OWNER_DEPT_3,BZ_OWNER_DEPT_4,BZ_OWNER_DEPT_5,RESERVE1,RESERVE2,RESERVE3,RESERVE4,RESERVE5
+    </sql>
+
+    <!-- user-defined -->
+
+</mapper>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pkusoft.usercenter.mapper.SysDeptMapper">
+    <!-- @codeGenerate -->
+    <resultMap id="BaseResultMap" type="com.pkusoft.usercenter.po.SysDept">
+            <id column="DEPT_ID" jdbcType="VARCHAR" property="deptId"/>
+            <result column="DEPT_NAME" jdbcType="VARCHAR" property="deptName"/>
+            <result column="DEPT_LEVEL" jdbcType="VARCHAR" property="deptLevel"/>
+            <result column="TREE_LEVEL" jdbcType="DECIMAL" property="treeLevel"/>
+            <result column="PARENT_DEPT_ID" jdbcType="VARCHAR" property="parentDeptId"/>
+            <result column="ORDER_FLAG" jdbcType="DECIMAL" property="orderFlag"/>
+            <result column="TEL" jdbcType="VARCHAR" property="tel"/>
+            <result column="FAX" jdbcType="VARCHAR" property="fax"/>
+            <result column="IS_MAIN_DEPT" jdbcType="VARCHAR" property="isMainDept"/>
+            <result column="CUNITID" jdbcType="VARCHAR" property="cunitid"/>
+            <result column="SUNITID" jdbcType="VARCHAR" property="sunitid"/>
+            <result column="TUNITID" jdbcType="VARCHAR" property="tunitid"/>
+            <result column="DATA_CUNITID" jdbcType="VARCHAR" property="dataCunitid"/>
+            <result column="DATA_SUNITID" jdbcType="VARCHAR" property="dataSunitid"/>
+            <result column="DATA_TUNITID" jdbcType="VARCHAR" property="dataTunitid"/>
+            <result column="RESERVE1" jdbcType="VARCHAR" property="reserve1"/>
+            <result column="RESERVE2" jdbcType="VARCHAR" property="reserve2"/>
+            <result column="RESERVE3" jdbcType="VARCHAR" property="reserve3"/>
+            <result column="RESERVE4" jdbcType="VARCHAR" property="reserve4"/>
+            <result column="RESERVE5" jdbcType="VARCHAR" property="reserve5"/>
+            <result column="MANAGER" jdbcType="VARCHAR" property="manager"/>
+            <result column="DEPT_TYPE" jdbcType="VARCHAR" property="deptType"/>
+            <result column="MEMO" jdbcType="VARCHAR" property="memo"/>
+            <result column="ADD_USER_ID" jdbcType="VARCHAR" property="addUserId"/>
+            <result column="ADD_USER_NAME" jdbcType="VARCHAR" property="addUserName"/>
+            <result column="ADD_TIME" jdbcType="DATE" property="addTime"/>
+            <result column="MODIFY_USER_ID" jdbcType="VARCHAR" property="modifyUserId"/>
+            <result column="MODIFY_USER_NAME" jdbcType="VARCHAR" property="modifyUserName"/>
+            <result column="MODIFY_TIME" jdbcType="DATE" property="modifyTime"/>
+            <result column="SSXQ" jdbcType="VARCHAR" property="ssxq"/>
+
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        DEPT_ID,DEPT_NAME,DEPT_LEVEL,TREE_LEVEL,PARENT_DEPT_ID,ORDER_FLAG,TEL,FAX,IS_MAIN_DEPT,CUNITID,SUNITID,TUNITID,DATA_CUNITID,DATA_SUNITID,DATA_TUNITID,RESERVE1,RESERVE2,RESERVE3,RESERVE4,RESERVE5,MANAGER,DEPT_TYPE,MEMO,ADD_USER_ID,ADD_USER_NAME,ADD_TIME,MODIFY_USER_ID,MODIFY_USER_NAME,MODIFY_TIME,SSXQ
+    </sql>
+
+    <!-- user-defined -->
+<!-- 获取有上下级关系的单位，父取 子 create by tanggj-->
+	  <select id="getReleDeptListByParent" resultMap="BaseResultMap" parameterType="java.lang.Object" >
+	   <!--  <if test="pager != null" >
+	      <include refid="pageHeader" />
+	    </if> -->
+	    select
+	    <include refid="Base_Column_List" />
+	    from SYS_DEPT
+	    CONNECT BY PRIOR Dept_Id = Parent_Dept_Id start With Dept_Id=#{deptId,jdbcType=VARCHAR}
+	    Order By dept_id
+	    <!-- <if test="pager != null" >
+	      <include refid="pageRoot" />
+	    </if> -->
+	  </select>
+
+        <select id="getDeptListByOwnerDept" resultType="com.pkusoft.usercenter.po.SysDept" parameterType="Map">
+                <!--select d.* from SYS_DEPT d left join SYS_DATA_OWNER_DEPT t
+                on d.dept_id=t.dept_id
+                <if test="ownerDept == 1">
+                        where  t.OWNER_DEPT_1 =#{deptId,jdbcType=VARCHAR}
+                </if>
+                <if test="ownerDept == 2">
+                        where t.OWNER_DEPT_2 =#{deptId,jdbcType=VARCHAR}
+                </if>
+                <if test="ownerDept == 3">
+                        where  t.OWNER_DEPT_3 =#{deptId,jdbcType=VARCHAR}
+                </if>
+                <if test="ownerDept == 4">
+                        where  t.OWNER_DEPT_4 =#{deptId,jdbcType=VARCHAR}
+                </if>
+                <if test="ownerDept == 8">
+                        where  t.DEPT_ID =#{deptId,jdbcType=VARCHAR}
+                </if>-->
+
+            select * from SYS_DEPT where 1 = 1
+            <if test="deptId != null">
+               and DEPT_ID  like #{deptId,jdbcType=VARCHAR}
+            </if>
+        </select>
+
+        <select id="queryDeptList" parameterType="java.util.Map" resultType="com.pkusoft.usercenter.po.SysDept">
+                 SELECT * FROM SYS_DEPT WHERE 1=1
+                <if test="parentDeptId != null and parentDeptId != ''">
+                    AND parent_dept_id =#{parentDeptId,jdbcType=VARCHAR}
+                </if>
+                <if test="deptLevel != null and deptLevel != ''">
+                    AND dept_level =#{deptLevel,jdbcType=VARCHAR}
+                </if>
+        </select>
+
+    <select id="getParentDeptId" resultType="com.pkusoft.usercenter.po.SysDept" parameterType="java.lang.String">
+        select * from  USER_CENTER2.SYS_DEPT
+        where PARENT_DEPT_ID = #{deptId} or DEPT_ID = #{deptId}
+        order by DEPT_ID
+    </select>
+
+    <select id="getOnlyParentDeptId" resultType="com.pkusoft.usercenter.po.SysDept" parameterType="java.lang.String">
+        select * from  USER_CENTER2.SYS_DEPT
+        where PARENT_DEPT_ID = #{deptId}
+        order by DEPT_ID
+    </select>
+</mapper>

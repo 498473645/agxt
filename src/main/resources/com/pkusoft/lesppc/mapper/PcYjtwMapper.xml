@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pkusoft.lesppc.mapper.PcYjtwMapper">
+    <!-- @codeGenerate -->
+    <resultMap id="BaseResultMap" type="com.pkusoft.lesppc.model.PcYjtw">
+            <id column="yjwt_bh                "  jdbcType="VARCHAR"  property="yjwtBh          " />
+            <result column="wtmx_bh            "  jdbcType="VARCHAR"  property="wtmxBh          " />
+            <result column="wtmx_mc            "  jdbcType="VARCHAR"  property="wtmxMc          " />
+            <result column="wtly_bh            "  jdbcType="VARCHAR"  property="wtlyBh          " />
+            <result column="wtly_mc            "  jdbcType="VARCHAR"  property="wtlyMc          " />
+            <result column="sjly               "  jdbcType="VARCHAR"  property="sjly            " />
+            <result column="wtwd1              "  jdbcType="VARCHAR"  property="wtwd1           " />
+            <result column="wtwd2              "  jdbcType="VARCHAR"  property="wtwd2           " />
+            <result column="wtwd3              "  jdbcType="VARCHAR"  property="wtwd3           " />
+            <result column="wtwd4              "  jdbcType="VARCHAR"  property="wtwd4           " />
+            <result column="wtwd5              "  jdbcType="VARCHAR"  property="wtwd5           " />
+            <result column="ywry_bh            "  jdbcType="VARCHAR"  property="ywryBh          " />
+            <result column="ywry_xm            "  jdbcType="VARCHAR"  property="ywryXm          " />
+            <result column="ywry_sfzhm         "  jdbcType="VARCHAR"  property="ywrySfzhm       " />
+            <result column="ywry_jh            "  jdbcType="VARCHAR"  property="ywryJh          " />
+            <result column="ywdw_bm            "  jdbcType="VARCHAR"  property="ywdwBm          " />
+            <result column="ywdw_mc            "  jdbcType="VARCHAR"  property="ywdwMc          " />
+            <result column="ga_owner_dept_1    "  jdbcType="VARCHAR"  property="gaOwnerDept1    " />
+            <result column="ga_owner_dept_2    "  jdbcType="VARCHAR"  property="gaOwnerDept2    " />
+            <result column="ga_owner_dept_3    "  jdbcType="VARCHAR"  property="gaOwnerDept3    " />
+            <result column="ga_owner_dept_4    "  jdbcType="VARCHAR"  property="gaOwnerDept4    " />
+            <result column="ga_owner_dept_5    "  jdbcType="VARCHAR"  property="gaOwnerDept5    " />
+            <result column="bz_owner_dept_1    "  jdbcType="VARCHAR"  property="bzOwnerDept1    " />
+            <result column="bz_owner_dept_2    "  jdbcType="VARCHAR"  property="bzOwnerDept2    " />
+            <result column="bz_owner_dept_3    "  jdbcType="VARCHAR"  property="bzOwnerDept3    " />
+            <result column="bz_owner_dept_4    "  jdbcType="VARCHAR"  property="bzOwnerDept4    " />
+            <result column="bz_owner_dept_5    "  jdbcType="VARCHAR"  property="bzOwnerDept5    " />
+            <result column="wtzt               "  jdbcType="VARCHAR"  property="wtzt            " />
+            <result column="jzrq               "  jdbcType="VARCHAR"  property="jzrq            " />
+            <result column="created_user_id    "  jdbcType="VARCHAR"  property="createdUserId   " />
+            <result column="created_date       "  jdbcType="VARCHAR"  property="createdDate     " />
+            <result column="created_dept_id    "  jdbcType="VARCHAR"  property="createdDeptId   " />
+            <result column="created_dept_name  "  jdbcType="VARCHAR"  property="createdDeptName " />
+            <result column="modified_user_id   "  jdbcType="VARCHAR"  property="modifiedUserId  " />
+            <result column="modified_date      "  jdbcType="VARCHAR"  property="modifiedDate    " />
+            <result column="modified_dept_id   "  jdbcType="VARCHAR"  property="modifiedDeptId  " />
+            <result column="modified_dept_name "  jdbcType="VARCHAR"  property="modifiedDeptName" />
+
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        YJWT_BH,WTMX_BH,WTMX_MC,WTLY_BH,WTLY_MC,SJLY,WTWD1,WTWD2,WTWD3,WTWD4,WTWD5,YWRY_BH,YWRY_XM,YWRY_SFZHM,YWRY_JH,YWDW_BM,YWDW_MC,GA_OWNER_DEPT_1,GA_OWNER_DEPT_2,GA_OWNER_DEPT_3,GA_OWNER_DEPT_4,GA_OWNER_DEPT_5,BZ_OWNER_DEPT_1,BZ_OWNER_DEPT_2,BZ_OWNER_DEPT_3,BZ_OWNER_DEPT_4,BZ_OWNER_DEPT_5,WTZT,JZRQ,CREATED_USER_ID,CREATED_DATE,CREATED_DEPT_ID,CREATED_DEPT_NAME,MODIFIED_USER_ID,MODIFIED_DATE,MODIFIED_DEPT_ID,MODIFIED_DEPT_NAME
+    </sql>
+
+</mapper>

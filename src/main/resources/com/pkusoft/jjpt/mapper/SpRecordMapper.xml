@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pkusoft.jjpt.mapper.SpRecordMapper">
+    <!-- @codeGenerate -->
+    <resultMap id="BaseResultMap" type="com.pkusoft.jjpt.po.SpRecord">
+            <id column="OBJID" jdbcType="VARCHAR" property="objid"/>
+            <result column="JJD_OBJID" jdbcType="VARCHAR" property="jjdObjid"/>
+            <result column="BJSJ" jdbcType="TIMESTAMP" property="bjsj"/>
+            <result column="BADW" jdbcType="VARCHAR" property="badw"/>
+            <result column="XWR1_NAME" jdbcType="VARCHAR" property="xwr1Name"/>
+            <result column="XWR1_CODE" jdbcType="VARCHAR" property="xwr1Code"/>
+            <result column="XWR2_NAME" jdbcType="VARCHAR" property="xwr2Name"/>
+            <result column="XWR2_CODE" jdbcType="VARCHAR" property="xwr2Code"/>
+            <result column="JQBH" jdbcType="VARCHAR" property="jqbh"/>
+            <result column="JLR_NAME" jdbcType="VARCHAR" property="jlrName"/>
+            <result column="JLR_CODE" jdbcType="VARCHAR" property="jlrCode"/>
+            <result column="WHDD" jdbcType="VARCHAR" property="whdd"/>
+            <result column="WHDD_CODE" jdbcType="VARCHAR" property="whddCode"/>
+            <result column="KSSJ" jdbcType="TIMESTAMP" property="kssj"/>
+            <result column="JSSJ" jdbcType="TIMESTAMP" property="jssj"/>
+            <result column="AJLX" jdbcType="VARCHAR" property="ajlx"/>
+            <result column="XWDX" jdbcType="VARCHAR" property="xwdx"/>
+            <result column="DAFS" jdbcType="VARCHAR" property="dafs"/>
+            <result column="XM" jdbcType="VARCHAR" property="xm"/>
+            <result column="SFZH" jdbcType="VARCHAR" property="sfzh"/>
+            <result column="XB" jdbcType="VARCHAR" property="xb"/>
+            <result column="CSRQ" jdbcType="VARCHAR" property="csrq"/>
+            <result column="NL" jdbcType="VARCHAR" property="nl"/>
+            <result column="MZ" jdbcType="VARCHAR" property="mz"/>
+            <result column="WHCD" jdbcType="VARCHAR" property="whcd"/>
+            <result column="ZZMM" jdbcType="VARCHAR" property="zzmm"/>
+            <result column="ZY" jdbcType="VARCHAR" property="zy"/>
+            <result column="LXDH" jdbcType="VARCHAR" property="lxdh"/>
+            <result column="GZDW" jdbcType="VARCHAR" property="gzdw"/>
+            <result column="HJSZD" jdbcType="VARCHAR" property="hjszd"/>
+            <result column="XZZ" jdbcType="VARCHAR" property="xzz"/>
+            <result column="IS_RDDB" jdbcType="VARCHAR" property="isRddb"/>
+            <result column="RECORD_TYPE" jdbcType="VARCHAR" property="recordType"/>
+            <result column="BADW_NAME" jdbcType="VARCHAR" property="badwName"/>
+            <result column="RECORDS" jdbcType="CLOB" property="records"/>
+            <result column="CREATE_ID" jdbcType="VARCHAR" property="createId"/>
+            <result column="CREATE_NAME" jdbcType="VARCHAR" property="createName"/>
+            <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime"/>
+            <result column="MODER_ID" jdbcType="VARCHAR" property="moderId"/>
+            <result column="MODER_NAME" jdbcType="VARCHAR" property="moderName"/>
+            <result column="MODER_TIME" jdbcType="TIMESTAMP" property="moderTime"/>
+            <result column="ORG_CODE" jdbcType="VARCHAR" property="orgCode"/>
+            <result column="ORG_NAME" jdbcType="VARCHAR" property="orgName"/>
+            <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+            <result column="GA_OWNER_DEPT_1" jdbcType="VARCHAR" property="gaOwnerDept1"/>
+            <result column="GA_OWNER_DEPT_2" jdbcType="VARCHAR" property="gaOwnerDept2"/>
+            <result column="GA_OWNER_DEPT_3" jdbcType="VARCHAR" property="gaOwnerDept3"/>
+            <result column="GA_OWNER_DEPT_4" jdbcType="VARCHAR" property="gaOwnerDept4"/>
+            <result column="GA_OWNER_DEPT_5" jdbcType="VARCHAR" property="gaOwnerDept5"/>
+            <result column="OWNER_TYPE" jdbcType="VARCHAR" property="ownerType"/>
+            <result column="BZ_OWNER_DEPT_1" jdbcType="VARCHAR" property="bzOwnerDept1"/>
+            <result column="BZ_OWNER_DEPT_2" jdbcType="VARCHAR" property="bzOwnerDept2"/>
+            <result column="BZ_OWNER_DEPT_3" jdbcType="VARCHAR" property="bzOwnerDept3"/>
+            <result column="BZ_OWNER_DEPT_4" jdbcType="VARCHAR" property="bzOwnerDept4"/>
+            <result column="BZ_OWNER_DEPT_5" jdbcType="VARCHAR" property="bzOwnerDept5"/>
+            <result column="RESERVE1" jdbcType="VARCHAR" property="reserve1"/>
+            <result column="RESERVE2" jdbcType="VARCHAR" property="reserve2"/>
+            <result column="RESERVE3" jdbcType="VARCHAR" property="reserve3"/>
+            <result column="RESERVE4" jdbcType="VARCHAR" property="reserve4"/>
+            <result column="RESERVE5" jdbcType="VARCHAR" property="reserve5"/>
+
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        OBJID,JJD_OBJID,BJSJ,BADW,XWR1_NAME,XWR1_CODE,XWR2_NAME,XWR2_CODE,JQBH,JLR_NAME,JLR_CODE,WHDD,WHDD_CODE,KSSJ,JSSJ,AJLX,XWDX,DAFS,XM,SFZH,XB,CSRQ,NL,MZ,WHCD,ZZMM,ZY,LXDH,GZDW,HJSZD,XZZ,IS_RDDB,RECORD_TYPE,BADW_NAME,RECORDS,CREATE_ID,CREATE_NAME,CREATE_TIME,MODER_ID,MODER_NAME,MODER_TIME,ORG_CODE,ORG_NAME,STATUS,GA_OWNER_DEPT_1,GA_OWNER_DEPT_2,GA_OWNER_DEPT_3,GA_OWNER_DEPT_4,GA_OWNER_DEPT_5,OWNER_TYPE,BZ_OWNER_DEPT_1,BZ_OWNER_DEPT_2,BZ_OWNER_DEPT_3,BZ_OWNER_DEPT_4,BZ_OWNER_DEPT_5,RESERVE1,RESERVE2,RESERVE3,RESERVE4,RESERVE5
+    </sql>
+
+    <!-- user-defined -->
+
+</mapper>

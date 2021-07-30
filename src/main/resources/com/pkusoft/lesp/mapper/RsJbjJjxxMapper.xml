@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pkusoft.lesp.mapper.RsJbjJjxxMapper">
+    <!-- @codeGenerate -->
+    <resultMap id="BaseResultMap" type="com.pkusoft.lesp.po.RsJbjJjxx">
+            <id column="JJDBH" jdbcType="VARCHAR" property="jjdbh"/>
+            <result column="PJDBH" jdbcType="VARCHAR" property="pjdbh"/>
+            <result column="CJDBH" jdbcType="VARCHAR" property="cjdbh"/>
+            <result column="BJRXM" jdbcType="VARCHAR" property="bjrxm"/>
+            <result column="BJDH" jdbcType="VARCHAR" property="bjdh"/>
+            <result column="REPORTER_SOURCE" jdbcType="VARCHAR" property="reporterSource"/>
+            <result column="CALL_NUMBER" jdbcType="VARCHAR" property="callNumber"/>
+            <result column="ALARM_SEAT" jdbcType="VARCHAR" property="alarmSeat"/>
+            <result column="BJRXB" jdbcType="VARCHAR" property="bjrxb"/>
+            <result column="JQTYPEID1" jdbcType="VARCHAR" property="jqtypeid1"/>
+            <result column="JQTYPEID2" jdbcType="VARCHAR" property="jqtypeid2"/>
+            <result column="JQTYPEID3" jdbcType="VARCHAR" property="jqtypeid3"/>
+            <result column="JQTYPE_NAME1" jdbcType="VARCHAR" property="jqtypeName1"/>
+            <result column="JQTYPE_NAME2" jdbcType="VARCHAR" property="jqtypeName2"/>
+            <result column="JQTYPE_NAME3" jdbcType="VARCHAR" property="jqtypeName3"/>
+            <result column="AFDD" jdbcType="VARCHAR" property="afdd"/>
+            <result column="BJNR" jdbcType="VARCHAR" property="bjnr"/>
+            <result column="BJSJ" jdbcType="TIMESTAMP" property="bjsj"/>
+            <result column="JJSJ" jdbcType="TIMESTAMP" property="jjsj"/>
+            <result column="JJYGH" jdbcType="VARCHAR" property="jjygh"/>
+            <result column="JJYMC" jdbcType="VARCHAR" property="jjymc"/>
+            <result column="JJDW" jdbcType="VARCHAR" property="jjdw"/>
+            <result column="JJDWMC" jdbcType="VARCHAR" property="jjdwmc"/>
+            <result column="SLDW" jdbcType="VARCHAR" property="sldw"/>
+            <result column="GXDW" jdbcType="VARCHAR" property="gxdw"/>
+            <result column="XQDM" jdbcType="VARCHAR" property="xqdm"/>
+            <result column="XQMC" jdbcType="VARCHAR" property="xqmc"/>
+            <result column="DDR_CODE" jdbcType="VARCHAR" property="ddrCode"/>
+            <result column="DDR_NAME" jdbcType="VARCHAR" property="ddrName"/>
+            <result column="LLDH" jdbcType="VARCHAR" property="lldh"/>
+            <result column="SLDW_NAME" jdbcType="VARCHAR" property="sldwName"/>
+            <result column="GXDW_NAME" jdbcType="VARCHAR" property="gxdwName"/>
+            <result column="MEMO" jdbcType="VARCHAR" property="memo"/>
+            <result column="JQJC" jdbcType="VARCHAR" property="jqjc"/>
+            <result column="LYBH" jdbcType="VARCHAR" property="lybh"/>
+            <result column="BJR_ZJHM" jdbcType="VARCHAR" property="bjrZjhm"/>
+            <result column="BJR_ZJZL" jdbcType="VARCHAR" property="bjrZjzl"/>
+            <result column="ORG_CODE" jdbcType="VARCHAR" property="orgCode"/>
+            <result column="ORG_NAME" jdbcType="VARCHAR" property="orgName"/>
+            <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+            <result column="CQSJ" jdbcType="TIMESTAMP" property="cqsj"/>
+            <result column="GA_OWNER_DEPT_1" jdbcType="VARCHAR" property="gaOwnerDept1"/>
+            <result column="GA_OWNER_DEPT_2" jdbcType="VARCHAR" property="gaOwnerDept2"/>
+            <result column="GA_OWNER_DEPT_3" jdbcType="VARCHAR" property="gaOwnerDept3"/>
+            <result column="GA_OWNER_DEPT_4" jdbcType="VARCHAR" property="gaOwnerDept4"/>
+            <result column="GA_OWNER_DEPT_5" jdbcType="VARCHAR" property="gaOwnerDept5"/>
+            <result column="XGSJ" jdbcType="TIMESTAMP" property="xgsj"/>
+            <result column="BJID" jdbcType="VARCHAR" property="bjid"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        JJDBH,PJDBH,CJDBH,BJRXM,BJDH,REPORTER_SOURCE,CALL_NUMBER,ALARM_SEAT,BJRXB,JQTYPEID1,JQTYPEID2,JQTYPEID3,JQTYPE_NAME1,JQTYPE_NAME2,JQTYPE_NAME3,AFDD,BJNR,BJSJ,JJSJ,JJYGH,JJYMC,JJDW,JJDWMC,SLDW,GXDW,XQDM,XQMC,DDR_CODE,DDR_NAME,LLDH,SLDW_NAME,GXDW_NAME,MEMO,JQJC,LYBH,BJR_ZJHM,BJR_ZJZL,ORG_CODE,ORG_NAME,STATUS,CQSJ,GA_OWNER_DEPT_1,GA_OWNER_DEPT_2,GA_OWNER_DEPT_3,GA_OWNER_DEPT_4,GA_OWNER_DEPT_5,XGSJ,BJID
+    </sql>
+
+    <!-- user-defined -->
+
+</mapper>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pkusoft.lesppc.mapper.PcWtmxMapper">
+    <!-- @codeGenerate -->
+    <resultMap id="BaseResultMap" type="com.pkusoft.lesppc.model.PcWtmx">
+            <id column="WTMX_BH" jdbcType="VARCHAR" property="wtmxBh"/>
+            <result column="WTMX_MC" jdbcType="VARCHAR" property="wtmxMc"/>
+            <result column="WTMX_JC" jdbcType="VARCHAR" property="wtmxJc"/>
+            <result column="WTLY_BH" jdbcType="VARCHAR" property="wtlyBh"/>
+            <result column="WTLY_MC" jdbcType="VARCHAR" property="wtlyMc"/>
+            <result column="WTLY_JC" jdbcType="VARCHAR" property="wtlyJc"/>
+            <result column="BJWT_MS" jdbcType="VARCHAR" property="bjwtMs"/>
+            <result column="YJWT_MS" jdbcType="VARCHAR" property="yjwtMs"/>
+            <result column="WTWD1" jdbcType="VARCHAR" property="wtwd1"/>
+            <result column="WTWD2" jdbcType="VARCHAR" property="wtwd2"/>
+            <result column="WTWD3" jdbcType="VARCHAR" property="wtwd3"/>
+            <result column="WTWD4" jdbcType="VARCHAR" property="wtwd4"/>
+            <result column="WTWD5" jdbcType="VARCHAR" property="wtwd5"/>
+            <result column="XH" jdbcType="DECIMAL" property="xh"/>
+            <result column="LX" jdbcType="DECIMAL" property="lx"/>
+            <result column="LY" jdbcType="VARCHAR" property="ly"/>
+            <result column="LY_WTBH" jdbcType="VARCHAR" property="lyWtbh"/>
+            <result column="LY_BJWT_BH" jdbcType="VARCHAR" property="lyBjwtBh"/>
+            <result column="LY_YJWT_BH" jdbcType="VARCHAR" property="lyYjwtBh"/>
+            <result column="MODIFIED_USER_ID" jdbcType="VARCHAR" property="modifiedUserId"/>
+            <result column="MODIFIED_DATE" jdbcType="DATE" property="modifiedDate"/>
+            <result column="MODIFIED_DEPT_ID" jdbcType="VARCHAR" property="modifiedDeptId"/>
+            <result column="MODIFIED_DEPT_NAME" jdbcType="VARCHAR" property="modifiedDeptName"/>
+
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        WTMX_BH,WTMX_MC,WTMX_JC,WTLY_BH,WTLY_MC,WTLY_JC,BJWT_MS,YJWT_MS,WTWD1,WTWD2,WTWD3,WTWD4,WTWD5,XH,LX,LY,LY_WTBH,LY_BJWT_BH,LY_YJWT_BH,MODIFIED_USER_ID,MODIFIED_DATE,MODIFIED_DEPT_ID,MODIFIED_DEPT_NAME
+    </sql>
+
+    <!-- user-defined -->
+    <select id="getWtmxs" resultType="int" parameterType="String">
+        select count (*) from pc_wtmx t where t.lx in ('5','7')  and  t.wtly_bh =#{wtLyBh}
+    </select>
+
+    <select id="getYjmxs" resultType="int" parameterType="String">
+        select count (*) from pc_wtmx t where t.lx in ('3','6','7')  and t.wtly_bh =#{wtLyBh}
+    </select>
+
+    <select id="getJbjWtmxs" resultType="int" parameterType="String">
+        select count (*) from pc_wtmx t where t.wtly_bh =#{wtLyBh}
+    </select>
+
+</mapper>

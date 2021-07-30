@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pkusoft.jjpt.mapper.SpLogMapper">
+    <!-- @codeGenerate -->
+    <resultMap id="BaseResultMap" type="com.pkusoft.jjpt.po.SpLog">
+            <id column="OBJID" jdbcType="VARCHAR" property="objid"/>
+            <result column="JJDBH" jdbcType="VARCHAR" property="jjdbh"/>
+            <result column="JJD_OBJID" jdbcType="VARCHAR" property="jjdObjid"/>
+            <result column="TYPE" jdbcType="VARCHAR" property="type"/>
+            <result column="URL" jdbcType="VARCHAR" property="url"/>
+            <result column="REQ" jdbcType="VARCHAR" property="req"/>
+            <result column="RES" jdbcType="VARCHAR" property="res"/>
+            <result column="LOG_TIME" jdbcType="TIMESTAMP" property="logTime"/>
+            <result column="RESERVE1" jdbcType="VARCHAR" property="reserve1"/>
+            <result column="RESERVE2" jdbcType="VARCHAR" property="reserve2"/>
+            <result column="RESERVE3" jdbcType="VARCHAR" property="reserve3"/>
+
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        OBJID,JJDBH,JJD_OBJID,TYPE,URL,REQ,RES,LOG_TIME,RESERVE1,RESERVE2,RESERVE3
+    </sql>
+
+    <!-- user-defined -->
+
+</mapper>

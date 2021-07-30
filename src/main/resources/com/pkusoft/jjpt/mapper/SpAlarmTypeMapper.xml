@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pkusoft.jjpt.mapper.SpAlarmTypeMapper">
+    <!-- @codeGenerate -->
+    <resultMap id="BaseResultMap" type="com.pkusoft.jjpt.po.SpAlarmType">
+            <id column="OBJID" jdbcType="VARCHAR" property="objid"/>
+            <result column="OBJCODE" jdbcType="VARCHAR" property="objcode"/>
+            <result column="OBJVALUE" jdbcType="VARCHAR" property="objvalue"/>
+            <result column="BJLBDM" jdbcType="VARCHAR" property="bjlbdm"/>
+            <result column="BJLXDM" jdbcType="VARCHAR" property="bjlxdm"/>
+            <result column="BJXLDM" jdbcType="VARCHAR" property="bjxldm"/>
+            <result column="YWLXDM" jdbcType="VARCHAR" property="ywlxdm"/>
+            <result column="DIC_LEVEL" jdbcType="VARCHAR" property="dicLevel"/>
+            <result column="DIC_VERSION" jdbcType="VARCHAR" property="dicVersion"/>
+
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        OBJID,OBJCODE,OBJVALUE,BJLBDM,BJLXDM,BJXLDM,YWLXDM,DIC_LEVEL,DIC_VERSION
+    </sql>
+
+    <!-- user-defined -->
+
+</mapper>

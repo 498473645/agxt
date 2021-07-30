@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pkusoft.usercenter.mapper.SysUserMapper">
+    <!-- @codeGenerate -->
+    <resultMap id="BaseResultMap" type="com.pkusoft.usercenter.po.SysUser">
+            <id column="USER_ID" jdbcType="VARCHAR" property="userId"/>
+            <result column="LOGIN_NAME" jdbcType="VARCHAR" property="loginName"/>
+            <result column="USER_NAME" jdbcType="VARCHAR" property="userName"/>
+            <result column="POLICE_CODE" jdbcType="VARCHAR" property="policeCode"/>
+            <result column="PASSWORD" jdbcType="VARCHAR" property="password"/>
+            <result column="SALT" jdbcType="VARCHAR" property="salt"/>
+            <result column="DEPT_ID" jdbcType="VARCHAR" property="deptId"/>
+            <result column="USER_LEVEL" jdbcType="VARCHAR" property="userLevel"/>
+            <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+            <result column="USER_TYPE" jdbcType="VARCHAR" property="userType"/>
+            <result column="EMAIL" jdbcType="VARCHAR" property="email"/>
+            <result column="TEL" jdbcType="VARCHAR" property="tel"/>
+            <result column="MOBILE" jdbcType="VARCHAR" property="mobile"/>
+            <result column="IDCARD" jdbcType="VARCHAR" property="idcard"/>
+            <result column="CERTIFICATE" jdbcType="VARCHAR" property="certificate"/>
+            <result column="CUNITID" jdbcType="VARCHAR" property="cunitid"/>
+            <result column="SUNITID" jdbcType="VARCHAR" property="sunitid"/>
+            <result column="TUNITID" jdbcType="VARCHAR" property="tunitid"/>
+            <result column="RESERVE1" jdbcType="VARCHAR" property="reserve1"/>
+            <result column="RESERVE2" jdbcType="VARCHAR" property="reserve2"/>
+            <result column="RESERVE3" jdbcType="VARCHAR" property="reserve3"/>
+            <result column="RESERVE4" jdbcType="VARCHAR" property="reserve4"/>
+            <result column="RESERVE5" jdbcType="VARCHAR" property="reserve5"/>
+            <result column="MEMO" jdbcType="VARCHAR" property="memo"/>
+            <result column="ADD_USER_ID" jdbcType="VARCHAR" property="addUserId"/>
+            <result column="ADD_USER_NAME" jdbcType="VARCHAR" property="addUserName"/>
+            <result column="ADD_TIME" jdbcType="DATE" property="addTime"/>
+            <result column="MODIFY_USER_ID" jdbcType="VARCHAR" property="modifyUserId"/>
+            <result column="MODIFY_USER_NAME" jdbcType="VARCHAR" property="modifyUserName"/>
+            <result column="MODIFY_TIME" jdbcType="DATE" property="modifyTime"/>
+            <result column="BOUND_LOGIN" jdbcType="VARCHAR" property="boundLogin"/>
+            <result column="IP" jdbcType="VARCHAR" property="ip"/>
+            <result column="MAC_ADDRESS" jdbcType="VARCHAR" property="macAddress"/>
+            <result column="ISUPDATE" jdbcType="VARCHAR" property="isupdate"/>
+            <result column="HAS_FINGER" jdbcType="DECIMAL" property="hasFinger"/>
+            <result column="YHBH_LJZ" jdbcType="VARCHAR" property="yhbhLjz"/>
+            <result column="HAS_LRIS" jdbcType="DECIMAL" property="hasLris"/>
+
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        USER_ID,LOGIN_NAME,USER_NAME,POLICE_CODE,PASSWORD,SALT,DEPT_ID,USER_LEVEL,STATUS,USER_TYPE,EMAIL,TEL,MOBILE,IDCARD,CERTIFICATE,CUNITID,SUNITID,TUNITID,RESERVE1,RESERVE2,RESERVE3,RESERVE4,RESERVE5,MEMO,ADD_USER_ID,ADD_USER_NAME,ADD_TIME,MODIFY_USER_ID,MODIFY_USER_NAME,MODIFY_TIME,BOUND_LOGIN,IP,MAC_ADDRESS,ISUPDATE,HAS_FINGER,YHBH_LJZ,HAS_LRIS
+    </sql>
+    
+    <update id="updateSysUser" parameterType="com.pkusoft.usercenter.po.SysUser">
+        UPDATE SYS_USER SET
+        <trim suffixOverrides=",">
+            <if test="loginName!=null">
+              LOGIN_NAME=#{loginName, jdbcType=VARCHAR},
+            </if>
+            <if test="userName!=null">
+              USER_NAME=#{userName, jdbcType=VARCHAR},
+            </if>
+            <if test="policeCode!=null">
+            POLICE_CODE=#{policeCode, jdbcType=VARCHAR},
+            </if>
+            <if test="password!=null">
+            PASSWORD=#{password, jdbcType=VARCHAR},
+            </if>
+            <if test="salt!=null">
+            SALT=#{salt, jdbcType=VARCHAR},
+            </if>
+            <if test="deptId!=null">
+            DEPT_ID=#{deptId, jdbcType=VARCHAR},
+            </if>
+            <if test="userLevel!=null">
+            USER_LEVEL=#{userLevel, jdbcType=VARCHAR},
+            </if>
+            <if test="status!=null">
+            STATUS=#{status, jdbcType=VARCHAR},
+            </if>
+            <if test="userType!=null">
+            USER_TYPE=#{userType, jdbcType=VARCHAR},
+            </if>
+            <if test="email!=null">
+            EMAIL=#{email, jdbcType=VARCHAR},
+            </if>
+            <if test="tel!=null">
+            TEL=#{tel, jdbcType=VARCHAR},
+            </if>
+            <if test="mobile!=null">
+            MOBILE=#{mobile, jdbcType=VARCHAR},
+            </if>
+            <if test="idcard!=null">
+            IDCARD=#{idcard, jdbcType=VARCHAR},
+            </if>
+            <if test="certificate!=null">
+            CERTIFICATE=#{userId, jdbcType=VARCHAR},
+            </if>
+            <if test="cunitid!=null">
+            CUNITID=#{cunitid, jdbcType=VARCHAR},
+            </if>
+            <if test="sunitid!=null">
+            SUNITID=#{sunitid, jdbcType=VARCHAR},
+            </if>
+            <if test="tunitid!=null">
+            TUNITID=#{tunitid, jdbcType=VARCHAR},
+            </if>
+            <if test="reserve1!=null">
+            RESERVE1=#{reserve1, jdbcType=VARCHAR},
+            </if>
+            <if test="reserve2!=null">
+            RESERVE2=#{reserve2, jdbcType=VARCHAR},
+            </if>
+            <if test="reserve3!=null">
+            RESERVE3=#{reserve3, jdbcType=VARCHAR},
+            </if>
+            <if test="reserve4!=null">
+            RESERVE4=#{reserve4, jdbcType=VARCHAR},
+            </if>
+            <if test="reserve5!=null">
+            RESERVE5=#{reserve5, jdbcType=VARCHAR},
+            </if>
+            <if test="memo!=null">
+            MEMO=#{memo, jdbcType=VARCHAR},
+            </if>
+            <if test="addUserId!=null">
+            ADD_USER_ID=#{addUserId, jdbcType=VARCHAR},
+            </if>
+            <if test="addUserName!=null">
+            ADD_USER_NAME=#{addUserName, jdbcType=VARCHAR},
+            </if>
+            <if test="addTime!=null">
+            ADD_TIME=#{addTime, jdbcType=DATE},
+            </if>
+            <if test="modifyUserId!=null">
+            MODIFY_USER_ID=#{modifyUserId, jdbcType=VARCHAR},
+            </if>
+            <if test="modifyUserName!=null">
+            MODIFY_USER_NAME=#{modifyUserName, jdbcType=VARCHAR},
+            </if>
+            <if test="modifyTime!=null">
+            MODIFY_TIME=#{modifyTime, jdbcType=DATE},
+            </if>
+            <if test="hasFinger!=null">
+            HAS_FINGER=#{hasFinger, jdbcType=DECIMAL},
+            </if>
+            <if test="hasLris!=null">
+            HAS_LRIS=#{hasLris, jdbcType=DECIMAL},
+            </if>
+        </trim>
+        WHERE USER_ID=#{userId, jdbcType=VARCHAR}
+    </update>
+
+    <!-- user-defined -->
+
+</mapper>

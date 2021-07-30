@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pkusoft.lesp.mapper.RsJbjJgxtDynamicMapper">
+    <!-- @codeGenerate -->
+    <resultMap id="BaseResultMap" type="com.pkusoft.lesp.po.RsJbjJgxtDynamic">
+            <!--<result column="BJRXM" jdbcType="VARCHAR" property="bjrxm"/>-->
+            <id column="JJDBH" jdbcType="VARCHAR" property="jjdbh"/>
+            <result column="LLDH" jdbcType="VARCHAR" property="lldh"/>
+            <result column="REPORTER_SOURCE" jdbcType="VARCHAR" property="reporterSource"/>
+            <result column="JJDWMC" jdbcType="VARCHAR" property="jjdwmc"/>
+            <result column="JJSJ" jdbcType="TIMESTAMP" property="jjsj"/>
+            <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+            <result column="BJRXM" jdbcType="VARCHAR" property="bjrxm"/>
+            <result column="JQLY" jdbcType="VARCHAR" property="jqly"/>
+            <result column="BJLB" jdbcType="VARCHAR" property="bjlb"/>
+            <result column="BJSJ" jdbcType="TIMESTAMP" property="bjsj"/>
+            <result column="BJRGMSFHM" jdbcType="VARCHAR" property="bjrgmsfhm"/>
+            <result column="BJRLXDH" jdbcType="VARCHAR" property="bjrlxdh"/>
+            <result column="BJID" jdbcType="VARCHAR" property="bjid"/>
+            <result column="CJJGMC" jdbcType="VARCHAR" property="cjjgmc"/>
+            <result column="CJSJ" jdbcType="TIMESTAMP" property="cjsj"/>
+            <result column="CJDBH" jdbcType="VARCHAR" property="cjdbh"/>
+            <result column="GA_OWNER_DEPT_1" jdbcType="VARCHAR" property="gaOwnerDept1"/>
+            <result column="GA_OWNER_DEPT_2" jdbcType="VARCHAR" property="gaOwnerDept2"/>
+            <result column="GA_OWNER_DEPT_3" jdbcType="VARCHAR" property="gaOwnerDept3"/>
+            <result column="GA_OWNER_DEPT_4" jdbcType="VARCHAR" property="gaOwnerDept4"/>
+            <result column="GA_OWNER_DEPT_5" jdbcType="VARCHAR" property="gaOwnerDept5"/>
+
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        JJDBH,BJRXM,LLDH,REPORTER_SOURCE,JJDWMC,JJSJ,STATUS,JQLY,BJLB,BJSJ,BJRGMSFHM,BJRLXDH,BJID,CJJGMC,CJSJ,CJDBH,GA_OWNER_DEPT_1,GA_OWNER_DEPT_2,GA_OWNER_DEPT_3,GA_OWNER_DEPT_4,GA_OWNER_DEPT_5
+    </sql>
+
+    <!-- user-defined -->
+    <select id="getDynamicCount" resultType="int" >
+        select count(*)
+        from RS_JBJ_JGXT_DYNAMIC t
+        where 1=1
+        <if test="deptLevel != null and deptLevel != '' and deptLevel == '2'.toString()">
+            AND GA_OWNER_DEPT_2 = #{deptId,jdbcType=VARCHAR}
+        </if>
+        <if test="deptLevel != null and deptLevel != '' and deptLevel == '3'.toString()">
+            AND GA_OWNER_DEPT_3 = #{deptId,jdbcType=VARCHAR}
+        </if>
+        <if test="deptLevel != null and deptLevel != '' and deptLevel == '4'.toString()">
+            AND GA_OWNER_DEPT_4 = #{deptId,jdbcType=VARCHAR}
+        </if>
+        <if test="status != null and status != ''">
+            AND STATUS = #{status,jdbcType=VARCHAR}
+        </if>
+        <if test="reporterSource != null and reporterSource != '' ">
+            AND REPORTER_SOURCE = #{reporterSource,jdbcType=VARCHAR}
+        </if>
+        <!--<if test="jjsjEnd != null and jjsjEnd != '' ">
+            AND JJSJ > #{jjsjStart,jdbcType=VARCHAR} and JJSJ < #{jjsjEnd,jdbcType=VARCHAR}
+        </if>-->
+        <if test="jjsjEnd != null and jjsjEnd != '' ">
+            and TO_CHAR(JJSJ,'yyyy-mm-dd') &gt; #{jjsjStart,jdbcType=VARCHAR}
+            and TO_CHAR(JJSJ,'yyyy-mm-dd')  &lt; #{jjsjEnd,jdbcType=VARCHAR}
+        </if>
+
+    </select>
+
+</mapper>

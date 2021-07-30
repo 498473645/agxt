@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pkusoft.ygjw.mapper.PsApprsMapper">
+    <!-- @codeGenerate -->
+    <resultMap id="BaseResultMap" type="com.pkusoft.ygjw.model.PsApprs">
+            <id column="ID" jdbcType="VARCHAR" property="id"/>
+            <result column="TYPE" jdbcType="VARCHAR" property="type"/>
+            <result column="NAME" jdbcType="VARCHAR" property="name"/>
+            <result column="TRANS_ID" jdbcType="VARCHAR" property="transId"/>
+            <result column="TRANS_CODE" jdbcType="VARCHAR" property="transCode"/>
+            <result column="AP_TIME" jdbcType="DATE" property="apTime"/>
+            <result column="SCORE" jdbcType="VARCHAR" property="score"/>
+            <result column="DESCR" jdbcType="CLOB" property="descr"/>
+            <result column="HANDLER_ID" jdbcType="VARCHAR" property="handlerId"/>
+            <result column="HANDLER_NAME" jdbcType="VARCHAR" property="handlerName"/>
+            <result column="RESULT" jdbcType="CLOB" property="result"/>
+            <result column="DATA_TYPE" jdbcType="VARCHAR" property="dataType"/>
+            <result column="ORG_CODE" jdbcType="VARCHAR" property="orgCode"/>
+            <result column="ORG_NAME" jdbcType="VARCHAR" property="orgName"/>
+            <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+            <result column="MEMO" jdbcType="VARCHAR" property="memo"/>
+            <result column="CREATE_ID" jdbcType="VARCHAR" property="createId"/>
+            <result column="CREATE_NAME" jdbcType="VARCHAR" property="createName"/>
+            <result column="CREATE_TIME" jdbcType="DATE" property="createTime"/>
+            <result column="MODER_ID" jdbcType="VARCHAR" property="moderId"/>
+            <result column="MODER_NAME" jdbcType="VARCHAR" property="moderName"/>
+            <result column="MODER_TIME" jdbcType="DATE" property="moderTime"/>
+            <result column="OWN_ORG_1" jdbcType="VARCHAR" property="ownOrg1"/>
+            <result column="OWN_ORG_2" jdbcType="VARCHAR" property="ownOrg2"/>
+            <result column="OWN_ORG_3" jdbcType="VARCHAR" property="ownOrg3"/>
+            <result column="OWN_ORG_4" jdbcType="VARCHAR" property="ownOrg4"/>
+            <result column="OWN_ORG_5" jdbcType="VARCHAR" property="ownOrg5"/>
+            <result column="RESERVE1" jdbcType="VARCHAR" property="reserve1"/>
+            <result column="RESERVE2" jdbcType="VARCHAR" property="reserve2"/>
+
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ID,TYPE,NAME,TRANS_ID,TRANS_CODE,AP_TIME,SCORE,DESCR,HANDLER_ID,HANDLER_NAME,RESULT,DATA_TYPE,ORG_CODE,ORG_NAME,STATUS,MEMO,CREATE_ID,CREATE_NAME,CREATE_TIME,MODER_ID,MODER_NAME,MODER_TIME,OWN_ORG_1,OWN_ORG_2,OWN_ORG_3,OWN_ORG_4,OWN_ORG_5,RESERVE1,RESERVE2
+    </sql>
+
+    <!-- user-defined -->
+
+</mapper>

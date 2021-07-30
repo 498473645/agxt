@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pkusoft.lesppc.mapper.StasticMapper">
+	<resultMap id="ResultMap" type="com.pkusoft.lesp.po.StatisticsData">
+		<result column="DATA01" jdbcType="INTEGER" property="data01" />
+		<result column="DATA02" jdbcType="INTEGER" property="data02" />
+		<result column="DATA03" jdbcType="INTEGER" property="data03" />
+		<result column="DATA04" jdbcType="INTEGER" property="data04" />
+		<result column="DATA05" jdbcType="INTEGER" property="data05" />
+		<result column="DATA06" jdbcType="INTEGER" property="data06" />
+		<result column="DATA07" jdbcType="INTEGER" property="data07" />
+		<result column="DATA08" jdbcType="INTEGER" property="data08" />
+		<result column="DATA09" jdbcType="INTEGER" property="data09" />
+		<result column="DATA10" jdbcType="INTEGER" property="data10" />
+		<result column="DATA11" jdbcType="INTEGER" property="data11" />
+		<result column="DATA12" jdbcType="INTEGER" property="data12" />
+		<result column="DATA13" jdbcType="INTEGER" property="data13" />
+		<result column="DATA14" jdbcType="INTEGER" property="data14" />
+		<result column="DATA15" jdbcType="VARCHAR" property="data15" />
+		<!-- <result column="DATA17" jdbcType="INTEGER" property="data17" />
+		<result column="DATA18" jdbcType="INTEGER" property="data18" />
+		<result column="DATA19" jdbcType="INTEGER" property="data19" />
+		<result column="DATA20" jdbcType="INTEGER" property="data20" /> -->
+	</resultMap>
+
+
+
+
+	<select id="getWtmxCount" resultMap="ResultMap" >
+		select
+		nvl(sum(decode (t.WTMX_BH ,'LESP_PMS0403',1,0)) ,'0') as  data01,
+		nvl(sum(decode (t.WTMX_BH ,'LESP_PMS0404',1,0)) ,'0') as  data02,
+		nvl(sum(decode (t.WTMX_BH ,'LESP_PMS0402',1,0)) ,'0') as  data03,
+		nvl(sum(decode (t.WTMX_BH ,'LESP_PMS0405',1,0)) ,'0') as  data04
+		from PC_YJWT t
+		where
+		<if test="deptLevel != null and deptLevel != '' and deptLevel == '2'.toString()">
+			GA_OWNER_DEPT_2 = #{deptId,jdbcType=VARCHAR}
+		</if>
+		<if test="deptLevel != null and deptLevel != '' and deptLevel == '3'.toString()">
+			GA_OWNER_DEPT_3 = #{deptId,jdbcType=VARCHAR}
+		</if>
+		<if test="deptLevel != null and deptLevel != '' and deptLevel == '4'.toString()">
+			GA_OWNER_DEPT_4 = #{deptId,jdbcType=VARCHAR}
+		</if>
+		order by CREATED_DATE desc
+	</select>
+
+
+</mapper>

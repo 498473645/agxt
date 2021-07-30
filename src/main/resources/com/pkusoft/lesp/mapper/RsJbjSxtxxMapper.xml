@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pkusoft.lesp.mapper.RsJbjSxtxxMapper">
+    <!-- @codeGenerate -->
+    <resultMap id="BaseResultMap" type="com.pkusoft.lesp.po.RsJbjSxtxx">
+            <id column="OBJID" jdbcType="VARCHAR" property="objid"/>
+            <result column="OBJNAME" jdbcType="VARCHAR" property="objname"/>
+            <result column="RTMP" jdbcType="VARCHAR" property="rtmp"/>
+            <result column="ORG_CODE" jdbcType="VARCHAR" property="orgCode"/>
+            <result column="ORG_NAME" jdbcType="VARCHAR" property="orgName"/>
+            <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+            <result column="GXSJ" jdbcType="TIMESTAMP" property="gxsj"/>
+            <result column="CQSJ" jdbcType="TIMESTAMP" property="cqsj"/>
+            <result column="GA_OWNER_DEPT_1" jdbcType="VARCHAR" property="gaOwnerDept1"/>
+            <result column="GA_OWNER_DEPT_2" jdbcType="VARCHAR" property="gaOwnerDept2"/>
+            <result column="GA_OWNER_DEPT_3" jdbcType="VARCHAR" property="gaOwnerDept3"/>
+            <result column="GA_OWNER_DEPT_4" jdbcType="VARCHAR" property="gaOwnerDept4"/>
+            <result column="GA_OWNER_DEPT_5" jdbcType="VARCHAR" property="gaOwnerDept5"/>
+
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        OBJID,OBJNAME,RTMP,ORG_CODE,ORG_NAME,STATUS,GXSJ,CQSJ,GA_OWNER_DEPT_1,GA_OWNER_DEPT_2,GA_OWNER_DEPT_3,GA_OWNER_DEPT_4,GA_OWNER_DEPT_5
+    </sql>
+
+    <!-- user-defined -->
+    <select id="getDeptList" resultMap="BaseResultMap" >
+        select
+        ORG_CODE,ORG_NAME
+        from RS_JBJ_SXTXX t
+        where
+            1 = 1
+            <if test="deptLevel != null and deptLevel != '' and deptLevel == '2'.toString()">
+                AND GA_OWNER_DEPT_2 = #{deptId,jdbcType=VARCHAR}
+            </if>
+            <if test="deptLevel != null and deptLevel != '' and deptLevel == '3'.toString()">
+                AND GA_OWNER_DEPT_3 = #{deptId,jdbcType=VARCHAR}
+            </if>
+            <if test="deptLevel != null and deptLevel != '' and deptLevel == '4'.toString()">
+                AND GA_OWNER_DEPT_4 = #{deptId,jdbcType=VARCHAR}
+            </if>
+            <if test="deptLevel != null and deptLevel != '' and deptLevel == '8'.toString()">
+                AND ORG_CODE = #{userDeptId,jdbcType=VARCHAR}
+            </if>
+        group by ORG_CODE,ORG_NAME order by ORG_CODE
+    </select>
+
+</mapper>

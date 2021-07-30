@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pkusoft.jjpt.mapper.ZzjbjFjxxMapper">
+    <!-- @codeGenerate -->
+    <resultMap id="BaseResultMap" type="com.pkusoft.jjpt.po.ZzjbjFjxx">
+            <id column="FJBH" jdbcType="VARCHAR" property="fjbh"/>
+            <result column="BJID" jdbcType="VARCHAR" property="bjid"/>
+            <result column="FJLX" jdbcType="VARCHAR" property="fjlx"/>
+            <result column="AUDIO" jdbcType="BLOB" property="audio"/>
+            <result column="AUDIO_CN" jdbcType="VARCHAR" property="audioCn"/>
+            <result column="PTOTO" jdbcType="BLOB" property="ptoto"/>
+            <result column="VIDEO" jdbcType="BLOB" property="video"/>
+            <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+            <result column="BJDWDM" jdbcType="VARCHAR" property="bjdwdm"/>
+            <result column="BJDWMC" jdbcType="VARCHAR" property="bjdwmc"/>
+            <result column="GXSJ" jdbcType="TIMESTAMP" property="gxsj"/>
+            <result column="RESERVE1" jdbcType="VARCHAR" property="reserve1"/>
+            <result column="RESERVE2" jdbcType="VARCHAR" property="reserve2"/>
+            <result column="RESERVE3" jdbcType="VARCHAR" property="reserve3"/>
+            <result column="RESERVE4" jdbcType="VARCHAR" property="reserve4"/>
+            <result column="RESERVE5" jdbcType="VARCHAR" property="reserve5"/>
+            <result column="RESERVE6" jdbcType="VARCHAR" property="reserve6"/>
+            <result column="RESERVE7" jdbcType="VARCHAR" property="reserve7"/>
+            <result column="RESERVE8" jdbcType="VARCHAR" property="reserve8"/>
+
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        FJBH,BJID,FJLX,AUDIO,AUDIO_CN,PTOTO,VIDEO,STATUS,BJDWDM,BJDWMC,GXSJ,RESERVE1,RESERVE2,RESERVE3,RESERVE4,RESERVE5,RESERVE6,RESERVE7,RESERVE8
+    </sql>
+
+    <!-- user-defined -->
+
+</mapper>

@@ -1,0 +1,322 @@
+# ============================== 开始/公共配置/application.yml.template ================================================
+# 项目名，默认值/
+server:
+  servlet:
+    context-path: /babsjd-backend
+# （可选）当同一个tomcat部署多个应用时，必须为每个应用指定不同的值
+spring.jmx.default-domain: babsjd-backend
+# 端口
+server.port: 8085
+
+# jackson配置
+#spring.jackson:
+#  date-format: yyyyMMddHHmmss
+#  time-zone: GMT+8
+
+# 文件上传：
+# 最大文件大小，单位：KB、MB。默认值1MB  最大请求大小，单位：KB、MB。默认值10MB
+spring:
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+# 排除自动配置
+spring.autoconfigure.exclude:
+  - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+  - org.springframework.boot.autoconfigure.quartz.QuartzAutoConfiguration
+  - com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
+
+# （可选）swagger2配置
+swagger2:
+  # 是否启用swagger2。默认值：false
+  enabled: true
+  # 扫描接口所在的包
+  base-package: com.pkusoft
+
+#quartz:
+#  #  # （可选）quartz属性
+#  #  properties:
+#  #    org.quartz.threadPool.threadNamePrefix: xxx
+#  #    # 最大线程数，默认值：10
+#  #    org.quartz.threadPool.threadCount: '20'
+#  #
+#  #    ## （可选）任务的持久化。使用默认的数据源：dataSource0；建表语句参考：quartz-2.3.0.jar!/org/quartz/impl/jdbcjobstore/tables_oracle.sql
+#  #    #org.quartz.jobStore.class: org.quartz.impl.jdbcjobstore.JobStoreTX
+#  #
+#  #  # （可选）公共的jobDataMap，覆盖所有任务中的jobDataMap
+#  #  job-data-map:
+#  #    xxx: xxx
+#  #    xxx2: xxx
+#
+#  # 任务格式：{name: （可选）任务的名称,cron-expression: 执行计划,job-class: 任务的类}。job-class必须继承org.springframework.scheduling.quartz.QuartzJobBean
+#  triggers:
+#    - {name: task, cron-expression: '0 01 00 * * ?   ', job-class: com.pkusoft.quartz.TaskQuartzService}
+
+
+# ============================== 开始/数据库/jdbc.yml.template =========================================================
+# mybatis配置，第i个数据源的配置mybatis[i]：mybatis[0], mybatis[1], ...
+# mybatis[i]对应事务管理器为transactionManageri：transactionManager0, transactionManager1, ...
+mybatis:
+- datasource:
+    url: jdbc:oracle:thin:@27.17.3.62:1521:orcl
+    username: jjpt2
+    password: a
+    max-active: 100
+    validation-query: select 1 from dual
+    filters: stat,log4j,config
+    # （可选）删除超时连接，默认false
+    remove-abandoned: true
+    # （可选）超时时间，单位毫秒，默认300000毫秒
+    remove-abandoned-timeout-millis: 300000
+    # （可选）超时连接的日志，默认false
+    log-abandoned: true
+    # （可选）当数据库不可用时，获取数据库连接快速失败。true、抛出异常；false、柱塞获取数据库连接线程。默认false
+    fail-fast: true
+  mapper-locations:
+  - classpath*:com/pkusoft/jjpt/mapper/*.xml
+  base-package: com.pkusoft.jjpt.mapper
+  mapper-scanner-configurer-type: tk.mybatis.spring.mapper.MapperScannerConfigurer
+  configuration:
+    map-underscore-to-camel-case: true
+    default-fetch-size: 100
+
+- datasource:
+    url: jdbc:oracle:thin:@27.17.3.62:1521:orcl
+    username: jjpt2
+    password: a
+    max-active: 100
+    validation-query: select 1 from dual
+    filters: stat,log4j,config
+    # （可选）删除超时连接，默认false
+    remove-abandoned: true
+    # （可选）超时时间，单位毫秒，默认300000毫秒
+    remove-abandoned-timeout-millis: 300000
+    # （可选）超时连接的日志，默认false
+    log-abandoned: true
+    # （可选）当数据库不可用时，获取数据库连接快速失败。true、抛出异常；false、柱塞获取数据库连接线程。默认false
+    fail-fast: true
+  mapper-locations:
+  - classpath*:com/pkusoft/pzzx/mapper/*.xml
+  base-package: com.pkusoft.pzzx.mapper
+  mapper-scanner-configurer-type: tk.mybatis.spring.mapper.MapperScannerConfigurer
+  configuration:
+    map-underscore-to-camel-case: true
+    default-fetch-size: 100
+
+- datasource:
+    url: jdbc:oracle:thin:@27.17.3.62:1521:orcl
+    username: jjpt2
+    password: a
+    max-active: 100
+    validation-query: select 1 from dual
+    filters: stat,log4j,config
+    # （可选）删除超时连接，默认false
+    remove-abandoned: true
+    # （可选）超时时间，单位毫秒，默认300000毫秒
+    remove-abandoned-timeout-millis: 300000
+    # （可选）超时连接的日志，默认false
+    log-abandoned: true
+    # （可选）当数据库不可用时，获取数据库连接快速失败。true、抛出异常；false、柱塞获取数据库连接线程。默认false
+    fail-fast: true
+  mapper-locations:
+  - classpath*:com/pkusoft/ygjw/mapper/*.xml
+  base-package: com.pkusoft.ygjw.mapper
+  mapper-scanner-configurer-type: tk.mybatis.spring.mapper.MapperScannerConfigurer
+  configuration:
+    map-underscore-to-camel-case: true
+    default-fetch-size: 100
+
+#- datasource:
+#    url: jdbc:oracle:thin:@27.17.47.21:10001/orcl
+#    username: zfgk
+#    password: pkusoft2017
+#    max-active: 100
+#    validation-query: select 1 from dual
+#    filters: stat,log4j,config
+#    # （可选）删除超时连接，默认false
+#    remove-abandoned: true
+#    # （可选）超时时间，单位毫秒，默认300000毫秒
+#    remove-abandoned-timeout-millis: 300000
+#    # （可选）超时连接的日志，默认false
+#    log-abandoned: true
+#    # （可选）当数据库不可用时，获取数据库连接快速失败。true、抛出异常；false、柱塞获取数据库连接线程。默认false
+#    fail-fast: true
+#  mapper-locations:
+#  - classpath*:com/pkusoft/zfgk/mapper/*.xml
+#  base-package: com.pkusoft.zfgk.mapper
+#  mapper-scanner-configurer-type: tk.mybatis.spring.mapper.MapperScannerConfigurer
+#  configuration:
+#    map-underscore-to-camel-case: true
+#    default-fetch-size: 100
+
+- datasource:
+    url: jdbc:oracle:thin:@27.17.3.62:1521:orcl
+    username: user_center2
+    password: a
+    max-active: 50
+    validation-query: select 1 from dual
+    filters: stat,log4j,config
+    # （可选）删除超时连接，默认false
+    remove-abandoned: true
+    # （可选）超时时间，单位毫秒，默认300000毫秒
+    remove-abandoned-timeout-millis: 300000
+    # （可选）超时连接的日志，默认false
+    log-abandoned: true
+    # （可选）当数据库不可用时，获取数据库连接快速失败。true、抛出异常；false、柱塞获取数据库连接线程。默认false
+    fail-fast: true
+  mapper-locations:
+  - classpath*:com/pkusoft/usercenter/mapper/*.xml
+  base-package: com.pkusoft.usercenter.mapper
+  mapper-scanner-configurer-type: tk.mybatis.spring.mapper.MapperScannerConfigurer
+  configuration:
+    map-underscore-to-camel-case: true
+    default-fetch-size: 100
+
+- datasource:
+    url: jdbc:oracle:thin:@27.17.3.62:1521:orcl
+    username: lesp_rs
+    password: a
+    max-active: 50
+    validation-query: select 1 from dual
+    filters: stat,log4j
+    # （可选）删除超时连接，默认false
+    remove-abandoned: true
+    # （可选）超时时间，单位毫秒，默认300000毫秒
+    remove-abandoned-timeout-millis: 300000
+    # （可选）超时连接的日志，默认false
+    log-abandoned: true
+    # （可选）当数据库不可用时，获取数据库连接快速失败。true、抛出异常；false、柱塞获取数据库连接线程。默认false
+    fail-fast: true
+  mapper-locations:
+  - classpath*:com/pkusoft/lesp/mapper/*.xml
+  base-package: com.pkusoft.lesp.mapper
+  mapper-scanner-configurer-type: tk.mybatis.spring.mapper.MapperScannerConfigurer
+  configuration:
+    map-underscore-to-camel-case: true
+    default-fetch-size: 100
+
+- datasource:
+    url: jdbc:oracle:thin:@27.17.3.62:1521:orcl
+    username: lesp_pc
+    password: a
+    max-active: 100
+    validation-query: select 1 from dual
+    # connection-properties: config.decrypt=true
+    filters: stat,log4j,config
+    # （可选）删除超时连接，默认false
+    remove-abandoned: true
+    # （可选）超时时间，单位毫秒，默认300000毫秒
+    remove-abandoned-timeout-millis: 300000
+    # （可选）超时连接的日志，默认false
+    log-abandoned: true
+    # （可选）当数据库不可用时，获取数据库连接快速失败。true、抛出异常；false、柱塞获取数据库连接线程。默认false
+    fail-fast: true
+  mapper-locations:
+  - classpath*:com/pkusoft/lesppc/mapper/*.xml
+  base-package: com.pkusoft.lesppc.mapper
+  mapper-scanner-configurer-type: tk.mybatis.spring.mapper.MapperScannerConfigurer
+  configuration:
+    map-underscore-to-camel-case: true
+    default-fetch-size: 100
+
+- datasource:
+    url: jdbc:oracle:thin:@27.17.3.62:1521:orcl
+    username: lesp_rs20
+    password: a
+    max-active: 100
+    validation-query: select 1 from dual
+    # connection-properties: config.decrypt=true
+    filters: stat,log4j,config
+    # （可选）删除超时连接，默认false
+    remove-abandoned: true
+    # （可选）超时时间，单位毫秒，默认300000毫秒
+    remove-abandoned-timeout-millis: 300000
+    # （可选）超时连接的日志，默认false
+    log-abandoned: true
+    # （可选）当数据库不可用时，获取数据库连接快速失败。true、抛出异常；false、柱塞获取数据库连接线程。默认false
+    fail-fast: true
+  mapper-locations:
+    - classpath*:com/pkusoft/zfsp/mapper/*.xml
+  base-package: com.pkusoft.zfsp.mapper
+  mapper-scanner-configurer-type: tk.mybatis.spring.mapper.MapperScannerConfigurer
+  configuration:
+    map-underscore-to-camel-case: true
+    default-fetch-size: 100
+
+# druid监控配置
+spring.datasource.druid:
+  web-stat-filter:
+    url-pattern: /*
+    exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
+  stat-view-servlet:
+    url-pattern: /druid/*
+    reset-enable: true
+    login-username:
+    login-password:
+    allow:
+    deny:
+  filter.stat:
+    log-slow-sql: true
+    slow-sql-millis: 2000
+
+# shiro过滤的url，多个以逗号分隔
+shiro-proxy.url-patterns: /*
+
+# 过滤器的过滤地址，可用过滤器：sso-header-authc-proxy、sso-logout-proxy、sso-cookie-authc-proxy
+shiro-proxy.filter-chain-definition-map:
+
+  # eureka
+  /auditevents: anon
+  /dump: anon
+  /env: anon
+  /flyway: anon
+  /health: anon
+  /heapdump: anon
+  /info: anon
+  /liquibase: anon
+  /logfile: anon
+  /loggers: anon
+  /jolokia: anon
+  /metrics: anon
+  /list: anon
+  # druid
+  /druid/**: anon
+  # swagger
+  /swagger-resources/**: anon
+  /v2/**: anon
+  /psApprs/**: anon
+  /psGuide/**: anon
+  /psTemp/**: anon
+  /psTempDtl/**: anon
+  /psTrans/**: anon
+  /webjars/**: anon
+  /spFiles/**: anon
+  /dfsInterface/**: anon
+  #/swagger-ui.html/**: anon
+  # user-center-proxy
+  /config: anon
+  /proxy/**: anon
+  #  /logout: sso-logout-proxy
+  #/**: sso-cookie-authc-proxy
+  /**: sso-header-authc-proxy
+
+# 服务端的登录页面。不设置，则不启用过滤器sso-cookie-authc-proxy
+shiro-proxy.sso-server-login-url: http://27.17.3.62:7100/user-center/biz/login/zfjd/login.html
+# 服务端的注销地址。不设置，则不启用过滤器sso-logout-proxy
+shiro-proxy.sso-server-logout-url: http://27.17.3.62:7100/user-center/logout.do
+# 服务端地址
+shiro-proxy.sso-server-url: http://27.17.3.62:7100/user-center
+# （可选）成功页面。默认值：当前请求地址
+shiro-proxy.success-url: /swagger-ui.html
+
+# ============================== 开始/用户中心代理端/config-user-center-proxy.yml.template =============================
+# 系统标识
+user-center-proxy.sys-id: 812b35be-104f-440a-9ef9-5ddce1939301
+
+# =============================== dfs参数 =================================================================
+# 武汉使用的是老版本的hadoop，所有部署了一套新的dfs,为了不影响其他系统的使用，现在全湖北省的接警平台使用参数进行配置
+# 如果还是需要从用户中心参数里面取值，此处直接赋值为空字符串就可以了
+#dfs.hadoopUrl: http://27.17.3.62:8030/dfs
+dfs.hadoopUrl: ""
+# ============================== dfs参数结束 ===============================================================

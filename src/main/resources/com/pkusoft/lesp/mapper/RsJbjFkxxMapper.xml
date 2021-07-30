@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pkusoft.lesp.mapper.RsJbjFkxxMapper">
+    <!-- @codeGenerate -->
+    <resultMap id="BaseResultMap" type="com.pkusoft.lesp.po.RsJbjFkxx">
+            <id column="CJDBH" jdbcType="VARCHAR" property="cjdbh"/>
+            <result column="JJDBH" jdbcType="VARCHAR" property="jjdbh"/>
+            <result column="MEMO" jdbcType="VARCHAR" property="memo"/>
+            <result column="CJDWDM" jdbcType="VARCHAR" property="cjdwdm"/>
+            <result column="CJDWMC" jdbcType="VARCHAR" property="cjdwmc"/>
+            <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+            <result column="FKRGH" jdbcType="VARCHAR" property="fkrgh"/>
+            <result column="FKRXM" jdbcType="VARCHAR" property="fkrxm"/>
+            <result column="CJSJ" jdbcType="TIMESTAMP" property="cjsj"/>
+            <result column="DCSJ" jdbcType="TIMESTAMP" property="dcsj"/>
+            <result column="FKSJ" jdbcType="TIMESTAMP" property="fksj"/>
+            <result column="SFSJ" jdbcType="TIMESTAMP" property="sfsj"/>
+            <result column="CJRDM" jdbcType="VARCHAR" property="cjrdm"/>
+            <result column="CJRXM" jdbcType="VARCHAR" property="cjrxm"/>
+            <result column="XQDM" jdbcType="VARCHAR" property="xqdm"/>
+            <result column="XQMC" jdbcType="VARCHAR" property="xqmc"/>
+            <result column="CJJGMC" jdbcType="VARCHAR" property="cjjgmc"/>
+            <result column="FKJGMC" jdbcType="VARCHAR" property="fkjgmc"/>
+            <result column="FKJGBM" jdbcType="VARCHAR" property="fkjgbm"/>
+            <result column="CJJGBM" jdbcType="VARCHAR" property="cjjgbm"/>
+            <result column="CJCZSJ" jdbcType="TIMESTAMP" property="cjczsj"/>
+            <result column="REPORTER_SOURCE" jdbcType="VARCHAR" property="reporterSource"/>
+            <result column="CQSJ" jdbcType="TIMESTAMP" property="cqsj"/>
+            <result column="GA_OWNER_DEPT_1" jdbcType="VARCHAR" property="gaOwnerDept1"/>
+            <result column="GA_OWNER_DEPT_2" jdbcType="VARCHAR" property="gaOwnerDept2"/>
+            <result column="GA_OWNER_DEPT_3" jdbcType="VARCHAR" property="gaOwnerDept3"/>
+            <result column="GA_OWNER_DEPT_4" jdbcType="VARCHAR" property="gaOwnerDept4"/>
+            <result column="GA_OWNER_DEPT_5" jdbcType="VARCHAR" property="gaOwnerDept5"/>
+
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        CJDBH,JJDBH,MEMO,CJDWDM,CJDWMC,STATUS,FKRGH,FKRXM,CJSJ,DCSJ,FKSJ,SFSJ,CJRDM,CJRXM,XQDM,XQMC,CJJGMC,FKJGMC,FKJGBM,CJJGBM,CJCZSJ,REPORTER_SOURCE,CQSJ,GA_OWNER_DEPT_1,GA_OWNER_DEPT_2,GA_OWNER_DEPT_3,GA_OWNER_DEPT_4,GA_OWNER_DEPT_5
+    </sql>
+
+    <!-- user-defined -->
+
+</mapper>
