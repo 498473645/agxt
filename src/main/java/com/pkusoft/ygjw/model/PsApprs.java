@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * @author 
@@ -84,6 +85,13 @@ public class PsApprs {
     @Column(name = "HANDLER_NAME")
     @ApiModelProperty(value = "处理者姓名")
     private String handlerName;
+
+    /**
+     * 处理时间
+     */
+    @Column(name = "HANDLE_TIME")
+    @ApiModelProperty(value = "处理时间")
+    private java.util.Date handleTime;
 
     /**
      * 处理结果
@@ -649,5 +657,13 @@ public class PsApprs {
 
     public void setTransCode(String transCode) {
         this.transCode = transCode;
+    }
+
+    public Date getHandleTime() {
+        return handleTime;
+    }
+
+    public void setHandleTime(Date handleTime) {
+        this.handleTime = handleTime;
     }
 }
