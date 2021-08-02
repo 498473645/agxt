@@ -38,9 +38,16 @@ public interface PsTransTypeService {
 
     /**
     * 根据主键ID查看规则信息详情
-    * @param id
+    * @param psTransType
     * @return
     */
+    PsTransType getPsTransTypeByParam(PsTransType psTransType);
+
+    /**
+     * 根据条件查寻规则信息详情
+     * @param id
+     * @return
+     */
     PsTransType getPsTransType(String id);
 
     /**

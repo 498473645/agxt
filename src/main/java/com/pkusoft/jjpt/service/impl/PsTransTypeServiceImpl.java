@@ -58,6 +58,22 @@ public class PsTransTypeServiceImpl implements PsTransTypeService {
         return num;
     }
 
+    @Override
+    public PsTransType getPsTransTypeByParam(PsTransType psTransType) {
+        PsTransType transType = new PsTransType();
+        Example example = new Example(PsTransType.class);
+        Example.Criteria criteria = example.createCriteria();
+        //The query conditions are edited here
+        if (StringUtils.hasText(psTransType.getCode())){
+            criteria.andEqualTo("code",psTransType.getCode());
+        }
+        List<PsTransType> t = psTransTypeMapper.selectByExample(example);
+        if (null != t && t.size()>0){
+            transType = t.get(0);
+        }
+        return transType;
+    }
+
     public PsTransType getPsTransType(String id){
         return psTransTypeMapper.selectByPrimaryKey(id);
     }

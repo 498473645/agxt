@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.support.commons.springmvc.ResponseData;
 import pkubatis.common.utils.ChooseType;
+import pkubatis.common.utils.DicDept;
 import pkubatis.common.utils.DicPublicType;
 import pkubatis.toolkit.ServletUtils;
 
@@ -146,23 +147,18 @@ public class PortalController {
 				dept.setDeptId(user.get("deptId"));
 			}
 			List<SysDept> deptList = sysDeptService.getDeptListByOwnerDept(dept);
-			List<DicPublicType> dicPublicTypeList = new ArrayList<>();
+			List<DicDept> dicPublicTypeList = new ArrayList<>();
 			for (SysDept sysDept:deptList){
-				DicPublicType dicPublicType = new DicPublicType();
-				dicPublicType.setItemValue(sysDept.getDeptName());
-				dicPublicType.setItemCode(sysDept.getDeptId());
+				DicDept dicPublicType = new DicDept();
+				dicPublicType.setDeptValue(sysDept.getDeptName());
+				dicPublicType.setDeptId(sysDept.getDeptId());
+				dicPublicType.setDeptLevel(sysDept.getDeptLevel());
 				dicPublicTypeList.add(dicPublicType);
 			}
-			if(null!= dicPublicTypeList && dicPublicTypeList.size()>0){
-				dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
-				dto.setStatusMsg("获取单位字典成功");
-				dto.setData(dicPublicTypeList);
-				return dto;
-			}else{
-				dto.setStatusCode(ResponseData.STATUS_CODE_OTHER);
-				dto.setStatusMsg("获取单位字典为空");
-				return dto;
-			}
+			dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
+			dto.setStatusMsg("获取单位字典成功");
+			dto.setData(dicPublicTypeList);
+			return dto;
 		} catch (Exception e) {
 			e.printStackTrace();
 			dto.setStatusCode(ResponseData.STATUS_CODE_OTHER);

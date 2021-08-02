@@ -2,6 +2,8 @@ package com.pkusoft.jjpt.controller;
 
 import com.pkusoft.jjpt.po.PsTransType;
 import com.pkusoft.jjpt.service.PsTransTypeService;
+import com.pkusoft.usercenter.sysdicitem.SysDicItemValue;
+import com.pkusoft.usercenterproxy.vo.DicItemVo;
 import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -96,6 +98,34 @@ public class PsTransTypeController {
     public JsonResult PsTransTypeModel(String id) {
         PsTransType psTransType = psTransTypeService.getPsTransType(id);
         return new JsonResult(true,psTransType);
+    }
+
+    /**
+     * 查看业务类型字典
+     * @param sysDicItemValue
+     * @return
+     */
+    @RequestMapping("/psTransType/psTransTypeDic")
+    @ResponseBody
+    public ResponseData<SysDicItemValue> PsTransTypeModel(@RequestBody SysDicItemValue sysDicItemValue) {
+        ResponseData<SysDicItemValue> dto = new ResponseData<SysDicItemValue>();
+        try {
+            PsTransType transType = new PsTransType();
+            SysDicItemValue dicItem = new SysDicItemValue();
+            transType.setCode(sysDicItemValue.getDicCode());
+            PsTransType psTransType = psTransTypeService.getPsTransTypeByParam(transType);
+            dicItem.setDicCode(psTransType.getCode());
+            dicItem.setDicName(psTransType.getName());
+            dto.setData(dicItem);
+            dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
+            dto.setStatusMsg("查询字典成功");
+            return dto;
+        } catch (Exception e) {
+            dto.setStatusCode(ResponseData.STATUS_CODE_PARAM);
+            dto.setStatusMsg("请求失败!");
+            e.printStackTrace();
+            return dto;
+        }
     }
 
     /**

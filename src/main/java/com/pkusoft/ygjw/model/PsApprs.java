@@ -1,7 +1,9 @@
 package com.pkusoft.ygjw.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 import javax.persistence.*;
@@ -55,7 +57,9 @@ public class PsApprs {
      * 评价时间
      */
     @Column(name = "AP_TIME")
-    @ApiModelProperty(value = "评价时间")
+    @ApiModelProperty(value = "评议时间")
+    @DateTimeFormat(pattern="yyyy/MM/dd HH:mm")
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm", timezone = "GMT+8")
     private java.util.Date apTime; 
 
  	/**
@@ -91,6 +95,8 @@ public class PsApprs {
      */
     @Column(name = "HANDLE_TIME")
     @ApiModelProperty(value = "处理时间")
+    @DateTimeFormat(pattern="yyyy/MM/dd HH:mm")
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm", timezone = "GMT+8")
     private java.util.Date handleTime;
 
     /**

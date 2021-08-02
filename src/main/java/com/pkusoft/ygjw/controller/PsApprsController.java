@@ -1,6 +1,7 @@
 package com.pkusoft.ygjw.controller;
 
 
+import com.pkusoft.usercenterproxy.UserCenterProxyHelper;
 import com.pkusoft.ygjw.model.PsApprs;
 import com.pkusoft.ygjw.req.PsApprsReqParam;
 import com.pkusoft.ygjw.service.PsApprsService;
@@ -36,6 +37,10 @@ public class PsApprsController  {
 
     @Autowired
     private PsApprsService psApprsService ;
+
+    /***获取代理用户信息服务类*/
+    @Autowired
+    private UserCenterProxyHelper userCenterProxyHelper;
 
     /**
     * 查询
@@ -74,7 +79,7 @@ public class PsApprsController  {
         try {
             int num = 0;
             //获取当前操作用户信息
-            Map<String, String> user = new HashMap<>();
+            Map<String, String> user = userCenterProxyHelper.getUser(request);
             if(!StringUtils.hasText(psApprs.getId())) {
                 //添加评议监督业务数据
                 num = psApprsService.psApprsSave(psApprs, user);
@@ -158,7 +163,7 @@ public class PsApprsController  {
         try {
             int num = 0;
             //获取当前操作用户信息
-            Map<String, String> user = new HashMap<>();
+            Map<String, String> user = userCenterProxyHelper.getUser(request);
             PsApprs oldPsApprs = psApprsService.getPsApprs(psApprs.getId());
             if(oldPsApprs==null) {
                 //添加评议监督业务数据

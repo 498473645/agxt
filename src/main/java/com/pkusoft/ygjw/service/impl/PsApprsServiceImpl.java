@@ -56,6 +56,22 @@ public class PsApprsServiceImpl implements PsApprsService {
         if(StringUtils.hasText(psApprsReqParam.getTransId())){
             criteria.andEqualTo("transId",psApprsReqParam.getTransId());
         }
+        if(StringUtils.hasText(psApprsReqParam.getOrgCode())){
+            criteria.andEqualTo("orgCode",psApprsReqParam.getOrgCode());
+        }
+        if(StringUtils.hasText(psApprsReqParam.getStatus())){
+            criteria.andEqualTo("status",psApprsReqParam.getStatus());
+        }
+        if(StringUtils.hasText(psApprsReqParam.getDataType())){
+            criteria.andEqualTo("dataType",psApprsReqParam.getDataType());
+        }
+        if(StringUtils.hasText(psApprsReqParam.getScore())){
+            criteria.andEqualTo("score",psApprsReqParam.getScore());
+        }
+        if( StringUtils.hasText(psApprsReqParam.getStartApTime()) && StringUtils.hasText(psApprsReqParam.getEndApTime()) ){
+            //开始截止时间
+            criteria.andCondition("AP_TIME between to_date('"+psApprsReqParam.getStartApTime()+"','yyyy-MM-dd hh24:mi:ss') and to_date('"+psApprsReqParam.getEndApTime()+"','yyyy-MM-dd hh24:mi:ss')");
+        }
     }
 
     public int psApprsSave(PsApprs psApprs, Map<String,String> map){
@@ -69,16 +85,22 @@ public class PsApprsServiceImpl implements PsApprsService {
         psApprs.setCreateTime(date);
         psApprs.setModerTime(date);
         //根据设备唯一标识码获取设备信息
-        BdEquipment bdEquipment = bdEquipmentService.getBdEquipmentByEId(psApprs.getCreateId());//字段接口调用将eid放在CreateId中
-        if (bdEquipment != null) {
-            psApprs.setOrgCode(bdEquipment.getOrgCode());
-            psApprs.setOrgName(bdEquipment.getOrgName());
-            psApprs.setOwnOrg1(bdEquipment.getGaOwnerDept1());
-            psApprs.setOwnOrg2(bdEquipment.getGaOwnerDept2());
-            psApprs.setOwnOrg3(bdEquipment.getGaOwnerDept3());
-            psApprs.setOwnOrg4(bdEquipment.getGaOwnerDept4());
-            psApprs.setOwnOrg5(bdEquipment.getGaOwnerDept5());
+        if (StringUtils.hasText(psApprs.getCreateId())){
+            BdEquipment bdEquipment = bdEquipmentService.getBdEquipmentByEId(psApprs.getCreateId());//字段接口调用将eid放在CreateId中
+            if (bdEquipment != null) {
+                psApprs.setOrgCode(bdEquipment.getOrgCode());
+                psApprs.setOrgName(bdEquipment.getOrgName());
+                psApprs.setOwnOrg1(bdEquipment.getGaOwnerDept1());
+                psApprs.setOwnOrg2(bdEquipment.getGaOwnerDept2());
+                psApprs.setOwnOrg3(bdEquipment.getGaOwnerDept3());
+                psApprs.setOwnOrg4(bdEquipment.getGaOwnerDept4());
+                psApprs.setOwnOrg5(bdEquipment.getGaOwnerDept5());
+            }
+        }else{
+            psApprs.setCreateId(map.get("userId"));
+            psApprs.setCreateName(map.get("userName"));
         }
+
         int num = psApprsMapper.insertSelective(psApprs);
         return num;
     }
@@ -86,6 +108,9 @@ public class PsApprsServiceImpl implements PsApprsService {
     public int psApprsUpdate(PsApprs psApprs, Map<String,String> map){
         Date date = new Date();
         psApprs.setModerTime(date);
+        psApprs.setHandlerId(map.get("userId"));
+        psApprs.setHandlerName(map.get("userName"));
+        psApprs.setHandleTime(date);
         int num = psApprsMapper.updateByPrimaryKeySelective(psApprs);
         return num;
     }

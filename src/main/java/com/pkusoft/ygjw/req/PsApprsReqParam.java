@@ -4,182 +4,148 @@ import io.swagger.annotations.ApiModelProperty;
 import pkubatis.common.base.YgjwPage;
 
 import javax.persistence.Column;
+import java.util.Date;
 
 public class PsApprsReqParam  extends YgjwPage {
 
  	/**
      * 主键ID
      */
-    @Column(name = "ID")
-    @ApiModelProperty(value = "主键ID")
     private String id; 
 
  	/**
      * 类型
      */
-    @Column(name = "TYPE")
-    @ApiModelProperty(value = "类型")
     private String type; 
 
  	/**
      * 名称
      */
-    @Column(name = "NAME")
-    @ApiModelProperty(value = "名称")
     private String name; 
 
  	/**
      * 事务表主键id，ps_trans.id
      */
-    @Column(name = "TRANS_ID")
-    @ApiModelProperty(value = "事务表主键id，ps_trans.id")
     private String transId; 
 
  	/**
-     * 评价时间
+     * 查询评价开始时间
      */
-    @Column(name = "AP_TIME")
-    @ApiModelProperty(value = "评价时间")
-    private java.util.Date apTime; 
+    private String startApTime;
 
- 	/**
+    /**
+     * 查询评价截止时间
+     */
+    private String endApTime;
+
+    /**
+     * 处理开始时间
+     */
+    private Date startHandleTime;
+
+    /**
+     * 处理截止时间
+     */
+    private Date endHandleTime;
+
+    /**
      * 评分
      */
-    @Column(name = "SCORE")
-    @ApiModelProperty(value = "评分")
     private String score; 
 
  	/**
      * 评价详情
      */
-    @Column(name = "DESCR")
-    @ApiModelProperty(value = "评价详情")
     private String descr; 
 
  	/**
      * 数据类型（0：自助机，1：微信）
      */
-    @Column(name = "DATA_TYPE")
-    @ApiModelProperty(value = "数据类型（0：自助机，1：微信）")
     private String dataType; 
 
  	/**
      * 所属机构编码
      */
-    @Column(name = "ORG_CODE")
-    @ApiModelProperty(value = "所属机构编码")
     private String orgCode; 
 
  	/**
      * 所属机构名称
      */
-    @Column(name = "ORG_NAME")
-    @ApiModelProperty(value = "所属机构名称")
     private String orgName; 
 
  	/**
      * 状态
      */
-    @Column(name = "STATUS")
-    @ApiModelProperty(value = "状态")
     private String status; 
 
  	/**
      * 备注
      */
-    @Column(name = "MEMO")
-    @ApiModelProperty(value = "备注")
     private String memo; 
 
  	/**
      * 创建者ID
      */
-    @Column(name = "CREATE_ID")
-    @ApiModelProperty(value = "创建者ID")
     private String createId; 
 
  	/**
      * 创建者名称
      */
-    @Column(name = "CREATE_NAME")
-    @ApiModelProperty(value = "创建者名称")
     private String createName; 
 
  	/**
      * 创建时间
      */
-    @Column(name = "CREATE_TIME")
-    @ApiModelProperty(value = "创建时间")
     private java.util.Date createTime; 
 
  	/**
      * 最后修改者ID
      */
-    @Column(name = "MODER_ID")
-    @ApiModelProperty(value = "最后修改者ID")
     private String moderId; 
 
  	/**
      * 最后修改者名称
      */
-    @Column(name = "MODER_NAME")
-    @ApiModelProperty(value = "最后修改者名称")
     private String moderName; 
 
  	/**
      * 最后修改时间
      */
-    @Column(name = "MODER_TIME")
-    @ApiModelProperty(value = "最后修改时间")
     private java.util.Date moderTime; 
 
  	/**
      * 公安一级归属单位
      */
-    @Column(name = "OWN_ORG_1")
-    @ApiModelProperty(value = "公安一级归属单位")
     private String ownOrg1; 
 
  	/**
      * 公安二级归属单位
      */
-    @Column(name = "OWN_ORG_2")
-    @ApiModelProperty(value = "公安二级归属单位")
     private String ownOrg2; 
 
  	/**
      * 公安三级归属单位
      */
-    @Column(name = "OWN_ORG_3")
-    @ApiModelProperty(value = "公安三级归属单位")
     private String ownOrg3; 
 
  	/**
      * 公安四级归属单位
      */
-    @Column(name = "OWN_ORG_4")
-    @ApiModelProperty(value = "公安四级归属单位")
     private String ownOrg4; 
 
  	/**
      * 公安五级归属单位
      */
-    @Column(name = "OWN_ORG_5")
-    @ApiModelProperty(value = "公安五级归属单位")
     private String ownOrg5; 
 
  	/**
      * 预留字段1
      */
-    @Column(name = "RESERVE1")
-    @ApiModelProperty(value = "预留字段1")
     private String reserve1; 
 
  	/**
      * 预留字段2
      */
-    @Column(name = "RESERVE2")
-    @ApiModelProperty(value = "预留字段2")
     private String reserve2; 
 
 
@@ -245,22 +211,6 @@ public class PsApprsReqParam  extends YgjwPage {
     */
     public void setTransId(String transId) {
         this.transId = transId;
-    }
-
-    /**
-    * 获得评价时间
-    * @return AP_TIME
-    */
-    public java.util.Date getApTime() {
-        return this.apTime;
-    }
-
-    /**
-    * 设置评价时间
-    * @param apTime
-    */
-    public void setApTime(java.util.Date apTime) {
-        this.apTime = apTime;
     }
 
     /**
@@ -583,5 +533,35 @@ public class PsApprsReqParam  extends YgjwPage {
         this.reserve2 = reserve2;
     }
 
+    public String getStartApTime() {
+        return startApTime;
+    }
 
+    public void setStartApTime(String startApTime) {
+        this.startApTime = startApTime;
+    }
+
+    public String getEndApTime() {
+        return endApTime;
+    }
+
+    public void setEndApTime(String endApTime) {
+        this.endApTime = endApTime;
+    }
+
+    public Date getStartHandleTime() {
+        return startHandleTime;
+    }
+
+    public void setStartHandleTime(Date startHandleTime) {
+        this.startHandleTime = startHandleTime;
+    }
+
+    public Date getEndHandleTime() {
+        return endHandleTime;
+    }
+
+    public void setEndHandleTime(Date endHandleTime) {
+        this.endHandleTime = endHandleTime;
+    }
 }
