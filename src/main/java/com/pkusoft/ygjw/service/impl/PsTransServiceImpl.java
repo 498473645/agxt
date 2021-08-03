@@ -53,7 +53,32 @@ public class PsTransServiceImpl implements PsTransService {
     }
 
     public void setCommonCondition(Example.Criteria criteria, PsTransReqParam psTransReqParam, Map<String, String> map){
-
+        if(StringUtils.hasText(psTransReqParam.getRepName())){
+            criteria.andLike("repName","%"+psTransReqParam.getRepName()+"%");
+        }
+        if(StringUtils.hasText(psTransReqParam.getRepSex())){
+            criteria.andEqualTo("repSex",psTransReqParam.getRepSex());
+        }
+        if(StringUtils.hasText(psTransReqParam.getType())){
+            criteria.andEqualTo("type",psTransReqParam.getType());
+        }
+        if(StringUtils.hasText(psTransReqParam.getStatus())){
+            criteria.andEqualTo("status",psTransReqParam.getStatus());
+        }
+        if(StringUtils.hasText(psTransReqParam.getOrgCode())){
+            criteria.andEqualTo("orgCode",psTransReqParam.getOrgCode());
+        }
+        if(StringUtils.hasText(psTransReqParam.getDataType())){
+            criteria.andEqualTo("dataType",psTransReqParam.getDataType());
+        }
+        if( StringUtils.hasText(psTransReqParam.getStartOccTime()) && StringUtils.hasText(psTransReqParam.getEndOccTime()) ){
+            //开始截止时间
+            criteria.andCondition("OCC_TIME between to_date('"+psTransReqParam.getStartOccTime()+"','yyyy-MM-dd hh24:mi:ss') and to_date('"+psTransReqParam.getEndOccTime()+"','yyyy-MM-dd hh24:mi:ss')");
+        }
+        if( StringUtils.hasText(psTransReqParam.getStartRepTime()) && StringUtils.hasText(psTransReqParam.getEndRepTime()) ){
+            //开始截止时间
+            criteria.andCondition("REP_TIME between to_date('"+psTransReqParam.getStartRepTime()+"','yyyy-MM-dd hh24:mi:ss') and to_date('"+psTransReqParam.getEndRepTime()+"','yyyy-MM-dd hh24:mi:ss')");
+        }
     }
 
     public int psTransSave(PsTrans psTrans, Map<String,String> map){

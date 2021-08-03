@@ -103,11 +103,16 @@ public class PsTransReqParam  extends YgjwPage {
     private String endRepTime;
 
     /**
-     * 案发时间
+     * 案发时间-开始
      */
-    private java.util.Date occTime; 
+    private String startOccTime;
 
- 	/**
+    /**
+     * 案发时间-截止
+     */
+    private String endOccTime;
+
+    /**
      * 案发地点
      */
     private String occAddr; 
@@ -175,7 +180,7 @@ public class PsTransReqParam  extends YgjwPage {
  	/**
      * 最后修改时间
      */
-    private java.util.Date moderTime; 
+    private String moderTime;
 
  	/**
      * 公安一级归属单位
@@ -502,22 +507,6 @@ public class PsTransReqParam  extends YgjwPage {
     }
 
     /**
-    * 获得案发时间
-    * @return OCC_TIME
-    */
-    public java.util.Date getOccTime() {
-        return this.occTime;
-    }
-
-    /**
-    * 设置案发时间
-    * @param occTime
-    */
-    public void setOccTime(java.util.Date occTime) {
-        this.occTime = occTime;
-    }
-
-    /**
     * 获得案发地点
     * @return OCC_ADDR
     */
@@ -726,22 +715,6 @@ public class PsTransReqParam  extends YgjwPage {
     }
 
     /**
-    * 获得最后修改时间
-    * @return MODER_TIME
-    */
-    public java.util.Date getModerTime() {
-        return this.moderTime;
-    }
-
-    /**
-    * 设置最后修改时间
-    * @param moderTime
-    */
-    public void setModerTime(java.util.Date moderTime) {
-        this.moderTime = moderTime;
-    }
-
-    /**
     * 获得公安一级归属单位
     * @return OWN_ORG_1
     */
@@ -853,5 +826,27 @@ public class PsTransReqParam  extends YgjwPage {
         this.reserve2 = reserve2;
     }
 
+    public String getStartOccTime() {
+        return startOccTime;
+    }
 
+    public void setStartOccTime(String startOccTime) {
+        this.startOccTime = startOccTime;
+    }
+
+    public String getEndOccTime() {
+        return endOccTime;
+    }
+
+    public void setEndOccTime(String endOccTime) {
+        this.endOccTime = endOccTime;
+    }
+
+    public String getModerTime() {
+        return moderTime;
+    }
+
+    public void setModerTime(String moderTime) {
+        this.moderTime = moderTime;
+    }
 }
