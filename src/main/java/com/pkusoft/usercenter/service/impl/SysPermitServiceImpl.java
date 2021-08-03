@@ -61,6 +61,9 @@ public class SysPermitServiceImpl implements SysPermitService {
     @Autowired
     private SysDeptService sysDeptService ;
 
+    @Autowired
+    private SysPermitService sysPermitService;
+
 
     /**
      * 根据当前用户id和权限类型获取用户角色下的权限信息的值
@@ -383,7 +386,7 @@ public class SysPermitServiceImpl implements SysPermitService {
         Map<String,String> retData = new HashMap<>();
         //查询当前登录人的权限级别
         //获取用户的查询权限（0-查询所有单位数据；1-查询所属省级及下级单位数据；2-查询所属县级以及下级单位数据；3-查询所属分局以及下级单位数据；4-查询所属派出所及其下级单位的单位数据；8-本单位办理的；9-本人办理的；）
-        String permitValue = SpringContextHolder.getBean(SysPermitService.class).getUserPermitValue(user.get("userId"), permitsType);
+        String permitValue = sysPermitService.getUserPermitValue(user.get("userId"), permitsType);
         if (org.springframework.util.StringUtils.hasText(permitValue)) {
             //查询权限单位id
             String permitDeptId = sysDeptService.getDeptIdBypermit(user,permitValue);

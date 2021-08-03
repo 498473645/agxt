@@ -41,12 +41,12 @@ public class PsApprsReqParam  extends YgjwPage {
     /**
      * 处理开始时间
      */
-    private Date startHandleTime;
+    private String startHandleTime;
 
     /**
      * 处理截止时间
      */
-    private Date endHandleTime;
+    private String endHandleTime;
 
     /**
      * 评分
@@ -549,19 +549,19 @@ public class PsApprsReqParam  extends YgjwPage {
         this.endApTime = endApTime;
     }
 
-    public Date getStartHandleTime() {
+    public String getStartHandleTime() {
         return startHandleTime;
     }
 
-    public void setStartHandleTime(Date startHandleTime) {
+    public void setStartHandleTime(String startHandleTime) {
         this.startHandleTime = startHandleTime;
     }
 
-    public Date getEndHandleTime() {
+    public String getEndHandleTime() {
         return endHandleTime;
     }
 
-    public void setEndHandleTime(Date endHandleTime) {
+    public void setEndHandleTime(String endHandleTime) {
         this.endHandleTime = endHandleTime;
     }
 }

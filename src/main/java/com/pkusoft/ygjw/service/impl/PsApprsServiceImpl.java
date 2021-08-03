@@ -72,6 +72,10 @@ public class PsApprsServiceImpl implements PsApprsService {
             //开始截止时间
             criteria.andCondition("AP_TIME between to_date('"+psApprsReqParam.getStartApTime()+"','yyyy-MM-dd hh24:mi:ss') and to_date('"+psApprsReqParam.getEndApTime()+"','yyyy-MM-dd hh24:mi:ss')");
         }
+        if( StringUtils.hasText(psApprsReqParam.getStartHandleTime()) && StringUtils.hasText(psApprsReqParam.getEndHandleTime()) ){
+            //开始截止时间
+            criteria.andCondition("HANDLE_TIME between to_date('"+psApprsReqParam.getStartHandleTime()+"','yyyy-MM-dd hh24:mi:ss') and to_date('"+psApprsReqParam.getEndHandleTime()+"','yyyy-MM-dd hh24:mi:ss')");
+        }
     }
 
     public int psApprsSave(PsApprs psApprs, Map<String,String> map){

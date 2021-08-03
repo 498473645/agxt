@@ -10,281 +10,206 @@ public class PsTransReqParam  extends YgjwPage {
  	/**
      * 主键ID
      */
-    @Column(name = "ID")
-    @ApiModelProperty(value = "主键ID")
     private String id; 
 
  	/**
      * 报案/办事编号
      */
-    @Column(name = "CODE")
-    @ApiModelProperty(value = "报案/办事编号")
     private String code; 
 
  	/**
      * 报案/办事名称
      */
-    @Column(name = "NAME")
-    @ApiModelProperty(value = "报案/办事名称")
     private String name; 
 
  	/**
      * 报案/办事类型(1010 被殴打, 1020 被盗 , 1030 被骗, 1040 被抢劫, 1050 邻里纠纷, 1060 家庭暴力, 1099 其他；2010 出生登记入户，2020 户口簿补领，2030 户籍证明，2040 跨市迁入， 2050 市县内移居， 2060 准迁证办理)
      */
-    @Column(name = "TYPE")
-    @ApiModelProperty(value = "报案/办事类型(1010 被殴打, 1020 被盗 , 1030 被骗, 1040 被抢劫, 1050 邻里纠纷, 1060 家庭暴力, 1099 其他；2010 出生登记入户，2020 户口簿补领，2030 户籍证明，2040 跨市迁入， 2050 市县内移居， 2060 准迁证办理)")
-    private String type; 
+ 	private String type;
 
  	/**
      * 报案/办事人姓名
      */
-    @Column(name = "REP_NAME")
-    @ApiModelProperty(value = "报案/办事人姓名")
     private String repName; 
 
  	/**
      * 报案/办事人证件类型
      */
-    @Column(name = "REP_CARD_TYPE")
-    @ApiModelProperty(value = "报案/办事人证件类型")
     private String repCardType; 
 
  	/**
      * 报案/办事人证件号码
      */
-    @Column(name = "REP_IDCARD")
-    @ApiModelProperty(value = "报案/办事人证件号码")
     private String repIdcard; 
 
  	/**
      * 报案/办事人照片（照片数据存入SP_PIC表）
      */
-    @Column(name = "REP_PHOTO")
-    @ApiModelProperty(value = "报案/办事人照片（照片数据存入SP_PIC表）")
     private String repPhoto; 
 
  	/**
      * 报案/办事人性别
      */
-    @Column(name = "REP_SEX")
-    @ApiModelProperty(value = "报案/办事人性别")
     private String repSex; 
 
  	/**
      * 报案/办事人出生日期
      */
-    @Column(name = "REP_BRITHDAY")
-    @ApiModelProperty(value = "报案/办事人出生日期")
     private String repBrithday; 
 
  	/**
      * 报案/办事人联系方式
      */
-    @Column(name = "REP_TEL")
-    @ApiModelProperty(value = "报案/办事人联系方式")
     private String repTel; 
 
  	/**
      * 报案/办事人民族
      */
-    @Column(name = "REP_NATION")
-    @ApiModelProperty(value = "报案/办事人民族")
     private String repNation; 
 
  	/**
      * 报案/办事人工作单位
      */
-    @Column(name = "REP_WORKUNIT")
-    @ApiModelProperty(value = "报案/办事人工作单位")
     private String repWorkunit; 
 
  	/**
      * 报案/办事人户籍地行政区划编码. 关联字典DIC_NATIONAL_REGION
      */
-    @Column(name = "REP_REG_CODE")
-    @ApiModelProperty(value = "报案/办事人户籍地行政区划编码. 关联字典DIC_NATIONAL_REGION")
     private String repRegCode; 
 
  	/**
      * 报案/办事人户籍地详情
      */
-    @Column(name = "REP_REG_ADDR")
-    @ApiModelProperty(value = "报案/办事人户籍地详情")
     private String repRegAddr; 
 
  	/**
      * 报案/办事人现住址行政区划编码. 关联字典DIC_NATIONAL_REGION
      */
-    @Column(name = "REP_ADDR_CODE")
-    @ApiModelProperty(value = "报案/办事人现住址行政区划编码. 关联字典DIC_NATIONAL_REGION")
     private String repAddrCode; 
 
  	/**
      * 报案/办事人现住址详情
      */
-    @Column(name = "REP_ADDR")
-    @ApiModelProperty(value = "报案/办事人现住址详情")
     private String repAddr; 
 
  	/**
-     * 报案/办事时间
+     * 报案/办事开始时间
      */
-    @Column(name = "REP_TIME")
-    @ApiModelProperty(value = "报案/办事时间")
-    private java.util.Date repTime; 
+    private String startRepTime;
 
- 	/**
+    /**
+     * 报案/办事截止时间
+     */
+    private String endRepTime;
+
+    /**
      * 案发时间
      */
-    @Column(name = "OCC_TIME")
-    @ApiModelProperty(value = "案发时间")
     private java.util.Date occTime; 
 
  	/**
      * 案发地点
      */
-    @Column(name = "OCC_ADDR")
-    @ApiModelProperty(value = "案发地点")
     private String occAddr; 
 
  	/**
      * 案发原因
      */
-    @Column(name = "OCC_REASON")
-    @ApiModelProperty(value = "案发原因")
     private String occReason; 
 
  	/**
      * 简要案情
      */
-    @Column(name = "OCC_DESCR")
-    @ApiModelProperty(value = "简要案情")
     private String occDescr; 
 
  	/**
      * 数据类型（0：自助机，1：微信）
      */
-    @Column(name = "DATA_TYPE")
-    @ApiModelProperty(value = "数据类型（0：自助机，1：微信）")
     private String dataType; 
 
  	/**
      * 所属机构编码
      */
-    @Column(name = "ORG_CODE")
-    @ApiModelProperty(value = "所属机构编码")
     private String orgCode; 
 
  	/**
      * 所属机构名称
      */
-    @Column(name = "ORG_NAME")
-    @ApiModelProperty(value = "所属机构名称")
     private String orgName; 
 
  	/**
      * 状态（1010：登记中，1020：登记完成，2010：已受理）
      */
-    @Column(name = "STATUS")
-    @ApiModelProperty(value = "状态（1010：登记中，1020：登记完成，2010：已受理）")
     private String status; 
 
  	/**
      * 备注
      */
-    @Column(name = "MEMO")
-    @ApiModelProperty(value = "备注")
     private String memo; 
 
  	/**
      * 创建者ID
      */
-    @Column(name = "CREATE_ID")
-    @ApiModelProperty(value = "创建者ID")
     private String createId; 
 
  	/**
      * 创建者名称
      */
-    @Column(name = "CREATE_NAME")
-    @ApiModelProperty(value = "创建者名称")
     private String createName; 
 
  	/**
      * 创建时间
      */
-    @Column(name = "CREATE_TIME")
-    @ApiModelProperty(value = "创建时间")
     private java.util.Date createTime; 
 
  	/**
      * 最后修改者ID
      */
-    @Column(name = "MODER_ID")
-    @ApiModelProperty(value = "最后修改者ID")
     private String moderId; 
 
  	/**
      * 最后修改者名称
      */
-    @Column(name = "MODER_NAME")
-    @ApiModelProperty(value = "最后修改者名称")
     private String moderName; 
 
  	/**
      * 最后修改时间
      */
-    @Column(name = "MODER_TIME")
-    @ApiModelProperty(value = "最后修改时间")
     private java.util.Date moderTime; 
 
  	/**
      * 公安一级归属单位
      */
-    @Column(name = "OWN_ORG_1")
-    @ApiModelProperty(value = "公安一级归属单位")
     private String ownOrg1; 
 
  	/**
      * 公安二级归属单位
      */
-    @Column(name = "OWN_ORG_2")
-    @ApiModelProperty(value = "公安二级归属单位")
     private String ownOrg2; 
 
  	/**
      * 公安三级归属单位
      */
-    @Column(name = "OWN_ORG_3")
-    @ApiModelProperty(value = "公安三级归属单位")
     private String ownOrg3; 
 
  	/**
      * 公安四级归属单位
      */
-    @Column(name = "OWN_ORG_4")
-    @ApiModelProperty(value = "公安四级归属单位")
     private String ownOrg4; 
 
  	/**
      * 公安五级归属单位
      */
-    @Column(name = "OWN_ORG_5")
-    @ApiModelProperty(value = "公安五级归属单位")
     private String ownOrg5; 
 
  	/**
      * 预留字段1
      */
-    @Column(name = "RESERVE1")
-    @ApiModelProperty(value = "预留字段1")
     private String reserve1; 
 
  	/**
      * 预留字段2
      */
-    @Column(name = "RESERVE2")
-    @ApiModelProperty(value = "预留字段2")
     private String reserve2; 
 
 
@@ -560,20 +485,20 @@ public class PsTransReqParam  extends YgjwPage {
         this.repAddr = repAddr;
     }
 
-    /**
-    * 获得报案/办事时间
-    * @return REP_TIME
-    */
-    public java.util.Date getRepTime() {
-        return this.repTime;
+    public String getStartRepTime() {
+        return startRepTime;
     }
 
-    /**
-    * 设置报案/办事时间
-    * @param repTime
-    */
-    public void setRepTime(java.util.Date repTime) {
-        this.repTime = repTime;
+    public void setStartRepTime(String startRepTime) {
+        this.startRepTime = startRepTime;
+    }
+
+    public String getEndRepTime() {
+        return endRepTime;
+    }
+
+    public void setEndRepTime(String endRepTime) {
+        this.endRepTime = endRepTime;
     }
 
     /**
