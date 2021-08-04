@@ -12,6 +12,8 @@
             <result column="STATUS" jdbcType="VARCHAR" property="status"/>
             <result column="BJRXM" jdbcType="VARCHAR" property="bjrxm"/>
             <result column="JQLY" jdbcType="VARCHAR" property="jqly"/>
+            <result column="JQTYPEID1" jdbcType="VARCHAR" property="jqtypeid1"/>
+            <result column="JQTYPE_NAME1" jdbcType="VARCHAR" property="jqtypeName1"/>
             <result column="BJLB" jdbcType="VARCHAR" property="bjlb"/>
             <result column="BJSJ" jdbcType="TIMESTAMP" property="bjsj"/>
             <result column="BJRGMSFHM" jdbcType="VARCHAR" property="bjrgmsfhm"/>
