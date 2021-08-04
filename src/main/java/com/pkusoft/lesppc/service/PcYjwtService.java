@@ -1,5 +1,6 @@
 package com.pkusoft.lesppc.service;
 
+import com.pkusoft.lesppc.model.PcWtmx;
 import com.pkusoft.lesppc.req.*;
 import com.pkusoft.lesppc.model.PcYjwt;
 
@@ -48,6 +49,9 @@ public interface PcYjwtService {
      * @return
      */
     Map<String,Object> getWtmxCount(String deptId, String deptLevel);
+
+
+    int getYjwtCountByWtmx(PcWtmx pcWtmx);
 
     /**
      * 监督---获取问题模型统计总数

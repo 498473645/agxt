@@ -2,6 +2,8 @@ package com.pkusoft.lesppc.service;
 
 import com.pkusoft.lesppc.req.*;
 
+import java.util.Map;
+
 /**
 * @author
 * @title: PcWtmxService
@@ -15,6 +17,9 @@ public interface PcWtmxService {
      * @return
      */
     ModelCountVo getModelCount(String wtLyBh);
+
+
+    Map<String,Object> getJbjWtmxAndCount(String wtLyBh);
 
 
 

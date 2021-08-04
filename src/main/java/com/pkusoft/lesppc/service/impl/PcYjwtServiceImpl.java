@@ -1,5 +1,6 @@
 package com.pkusoft.lesppc.service.impl;
 
+import com.pkusoft.lesppc.model.PcWtmx;
 import com.pkusoft.lesppc.req.*;
 import com.pkusoft.lesp.po.StatisticsData;
 import com.pkusoft.lesppc.mapper.PcYjwtMapper;
@@ -83,6 +84,14 @@ public class PcYjwtServiceImpl implements PcYjwtService {
         StatisticsData sd = stasticMapper.getWtmxCount(deptId,deptLevel);
         data.put("countData",sd);
         return data;
+    }
+
+    @Override
+    public int getYjwtCountByWtmx(PcWtmx pcWtmx) {
+        Example example = new Example(PcYjwt.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("wtmxBh",pcWtmx.getWtmxBh());
+        return pcYjwtMapper.selectCountByExample(example);
     }
 
     @Override
