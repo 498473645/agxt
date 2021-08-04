@@ -41,7 +41,7 @@ public interface PsTransTypeService {
     * @param psTransType
     * @return
     */
-    PsTransType getPsTransTypeByParam(PsTransType psTransType);
+    List<PsTransType> getPsTransTypeByParam(PsTransType psTransType);
 
     /**
      * 根据条件查寻规则信息详情

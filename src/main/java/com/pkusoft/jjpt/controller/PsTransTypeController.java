@@ -18,6 +18,7 @@ import pkubatis.model.GridResult;
 import pkubatis.model.JsonResult;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -107,16 +108,51 @@ public class PsTransTypeController {
      */
     @RequestMapping("/psTransType/psTransTypeDic")
     @ResponseBody
-    public ResponseData<SysDicItemValue> PsTransTypeModel(@RequestBody SysDicItemValue sysDicItemValue) {
+    public ResponseData<SysDicItemValue> psTransTypeDic(@RequestBody SysDicItemValue sysDicItemValue) {
         ResponseData<SysDicItemValue> dto = new ResponseData<SysDicItemValue>();
         try {
             PsTransType transType = new PsTransType();
             SysDicItemValue dicItem = new SysDicItemValue();
             transType.setCode(sysDicItemValue.getDicCode());
-            PsTransType psTransType = psTransTypeService.getPsTransTypeByParam(transType);
-            dicItem.setDicCode(psTransType.getCode());
-            dicItem.setDicName(psTransType.getName());
+            List<PsTransType> psTransTypes = psTransTypeService.getPsTransTypeByParam(transType);
+            if (null != psTransTypes && psTransTypes.size()>0){
+                transType = psTransTypes.get(0);
+            }
+            dicItem.setDicCode(transType.getCode());
+            dicItem.setDicName(transType.getName());
             dto.setData(dicItem);
+            dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
+            dto.setStatusMsg("查询字典成功");
+            return dto;
+        } catch (Exception e) {
+            dto.setStatusCode(ResponseData.STATUS_CODE_PARAM);
+            dto.setStatusMsg("请求失败!");
+            e.printStackTrace();
+            return dto;
+        }
+    }
+
+    /**
+     * 查看业务类型字典
+     * @param psTransType
+     * @return
+     */
+    @RequestMapping("/psTransType/psTransTypeDicList")
+    @ResponseBody
+    public ResponseData<List<SysDicItemValue>> psTransTypeDicList(@RequestBody PsTransType psTransType) {
+        ResponseData<List<SysDicItemValue>> dto = new ResponseData<List<SysDicItemValue>>();
+        try {
+            PsTransType transType = new PsTransType();
+            List<SysDicItemValue> dicItems = new ArrayList<>();
+            transType.setType(psTransType.getType());
+            List<PsTransType> psTransTypes = psTransTypeService.getPsTransTypeByParam(transType);
+            for(PsTransType t : psTransTypes){
+                SysDicItemValue dicItem = new SysDicItemValue();
+                dicItem.setDicCode(t.getCode());
+                dicItem.setDicName(t.getName());
+                dicItems.add(dicItem);
+            }
+            dto.setData(dicItems);
             dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
             dto.setStatusMsg("查询字典成功");
             return dto;
