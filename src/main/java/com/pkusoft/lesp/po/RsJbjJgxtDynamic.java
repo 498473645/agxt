@@ -32,6 +32,9 @@ public class RsJbjJgxtDynamic {
     @Column(name = "STATUS")
     private String status;     //
 
+    @Column(name = "YBJ_STATUS")
+    private String ybjStatus;     //
+
     @Id
     @Column(name = "JJDBH")
     private String jjdbh;     //
@@ -87,6 +90,14 @@ public class RsJbjJgxtDynamic {
 
     @Column(name = "GA_OWNER_DEPT_5")
     private String gaOwnerDept5;     //
+
+    public String getYbjStatus() {
+        return ybjStatus;
+    }
+
+    public void setYbjStatus(String ybjStatus) {
+        this.ybjStatus = ybjStatus;
+    }
 
     public String getJqtypeid1() {
         return jqtypeid1;
