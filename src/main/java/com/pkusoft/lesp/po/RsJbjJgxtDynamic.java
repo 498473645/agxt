@@ -39,6 +39,12 @@ public class RsJbjJgxtDynamic {
     @Column(name = "JQLY")
     private String jqly;     //
 
+    @Column(name = "JQTYPEID1")
+    private String jqtypeid1;     //
+
+    @Column(name = "JQTYPE_NAME1")
+    private String jqtypeName1;     //
+
     @Column(name = "BJLB")
     private String bjlb;     //
 
@@ -82,6 +88,21 @@ public class RsJbjJgxtDynamic {
     @Column(name = "GA_OWNER_DEPT_5")
     private String gaOwnerDept5;     //
 
+    public String getJqtypeid1() {
+        return jqtypeid1;
+    }
+
+    public void setJqtypeid1(String jqtypeid1) {
+        this.jqtypeid1 = jqtypeid1;
+    }
+
+    public String getJqtypeName1() {
+        return jqtypeName1;
+    }
+
+    public void setJqtypeName1(String jqtypeName1) {
+        this.jqtypeName1 = jqtypeName1;
+    }
 
     /**
     * 获得
