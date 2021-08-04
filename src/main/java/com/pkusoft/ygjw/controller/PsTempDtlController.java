@@ -79,6 +79,32 @@ public class PsTempDtlController  {
     }
 
     /**
+     * 查询材料模板明细表
+     * @param psTempDtlReqParam
+     * @return
+     */
+    @ApiOperation(value="查询材料模板明细表", notes="查询材料模板明细表", httpMethod="POST")
+    @RequestMapping(value = "/psTempDtl/getAllPsTempDtlList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    public ResponseData<List<PsTempDtl>> getAllPsTempDtlList(HttpServletRequest request, @RequestBody PsTempDtlReqParam psTempDtlReqParam){
+        ResponseDto<List<PsTempDtl>> dto = new ResponseDto<List<PsTempDtl>>();
+        try{
+            Map<String, String> user = new HashMap<>();
+            List<PsTempDtl> list = psTempDtlService.getAllPsTempDtlList(psTempDtlReqParam,user);
+//            int count = psTempDtlService.getPsTempDtlCount(psTempDtlReqParam,user);
+            dto.setData(list);
+//            dto.setCount(count);
+            dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
+            dto.setStatusMsg("查询材料模板明细表数据成功");
+            return dto;
+        }catch(Exception e){
+            logger.error("查询材料模板明细表数据错误",e);
+            e.printStackTrace();
+            return new ResponseData<>(ResponseData.STATUS_CODE_OTHER,"查询材料模板明细表数据错误"+e.getMessage());
+        }
+    }
+
+    /**
      * 新增或修改材料模板明细表数据
      * @return
      */

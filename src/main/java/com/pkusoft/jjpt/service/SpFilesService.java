@@ -18,6 +18,14 @@ public interface SpFilesService {
     List<SpFiles> getSpFilesList(SpFilesReqParam spFiles,Map<String, String> map);
 
     /**
+     * 根据预报警信息查询接警平台材料
+     * @param spFiles
+     * @param map
+     * @return
+     */
+    List<SpFiles> getSpFilesListByYbj(SpFilesReqParam spFiles,Map<String, String> map);
+
+    /**
      * 根据
      * @param spFiles
      * @return

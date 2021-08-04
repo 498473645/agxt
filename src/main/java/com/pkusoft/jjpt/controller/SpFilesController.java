@@ -109,6 +109,32 @@ public class SpFilesController  {
     }
 
     /**
+     * 根据预报警信息查询接警平台材料
+     * @param request  txtQuery
+     * @return
+     */
+    @ApiOperation(value = "根据预报警信息查询接警平台材料", notes = "根据预报警信息查询接警平台材料", httpMethod = "POST")
+    @RequestMapping("/spFiles/getSpFilesListByYbj")
+    @ResponseBody
+    public ResponseData<List<SpFiles>> getSpFilesListByYbj(HttpServletRequest request, @RequestBody SpFilesReqParam spFiles){
+        ResponseDto<List<SpFiles>> dto = new ResponseDto<List<SpFiles>>();
+        try{
+            Map<String, String> user = userCenterProxyHelper.getUser(request);
+            List<SpFiles> list = spFilesService.getSpFilesListByYbj(spFiles,user);
+//            int count = spFilesService.getSpFilesCount(spFiles,user);
+            dto.setData(list);
+//            dto.setCount(count);
+            dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
+            dto.setStatusMsg("根据预报警信息查询接警平台材料成功");
+            return dto;
+        }catch(Exception e){
+            logger.error("根据预报警信息查询接警平台材料错误",e);
+            e.printStackTrace();
+            return new ResponseData<>(ResponseData.STATUS_CODE_OTHER,"根据预报警信息查询接警平台材料错误"+e.getMessage());
+        }
+    }
+
+    /**
      * 新增或修改接警平台材料信息表
      * @return
      */

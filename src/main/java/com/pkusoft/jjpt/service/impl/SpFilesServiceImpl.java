@@ -47,6 +47,17 @@ public class SpFilesServiceImpl implements SpFilesService {
     @Autowired
     private BdEquipmentService bdEquipmentService;
 
+    public List<SpFiles> getSpFilesListByYbj(SpFilesReqParam spFiles, Map<String, String> map) {
+
+        Example example = new Example(SpFiles.class);
+        example.setOrderByClause("CREATE_TIME desc");
+        Example.Criteria criteria = example.createCriteria();
+        //The query conditions are edited here
+        this.setCommonCondition(criteria,spFiles);
+
+        return spFilesMapper.selectByExample(example);
+    }
+
     public List<SpFiles> getSpFilesList(SpFilesReqParam spFiles, Map<String, String> map) {
 
         RowBounds rowBounds = new RowBounds(spFiles.getStart(),spFiles.getPageSize());

@@ -47,6 +47,16 @@ public class PsTempDtlServiceImpl implements PsTempDtlService {
         return psTempDtlMapper.selectByExampleAndRowBounds(example,rowBounds);
     }
 
+    public List<PsTempDtl> getAllPsTempDtlList(PsTempDtlReqParam psTempDtlReqParam, Map<String, String> map) {
+
+        Example example = new Example(PsTempDtl.class);
+        Example.Criteria criteria = example.createCriteria();
+        //The query conditions are edited here
+        this.setCommonCondition(criteria,psTempDtlReqParam,map);
+        example.setOrderByClause("CREATE_TIME DESC");
+        return psTempDtlMapper.selectByExample(example);
+    }
+
     public int getPsTempDtlCount(PsTempDtlReqParam psTempDtlReqParam,Map<String, String> map) {
 
         Example example = new Example(PsTempDtl.class);

@@ -19,6 +19,9 @@ public interface PsTempDtlService {
     */
     List<PsTempDtl> getPsTempDtlList(PsTempDtlReqParam psTempDtlReqParam, Map<String, String> map);
 
+
+    List<PsTempDtl> getAllPsTempDtlList(PsTempDtlReqParam psTempDtlReqParam, Map<String, String> map);
+
     /**
     * 查询总数
     * @param map	查询条件集合
