@@ -99,7 +99,9 @@ public class SpFilesServiceImpl implements SpFilesService {
         if (StringUtils.hasText(spFiles.getObjtype())){
             criteria.andEqualTo("objtype",spFiles.getObjtype());
         }
-
+        if (StringUtils.hasText(spFiles.getTransId())){
+            criteria.andEqualTo("transId",spFiles.getTransId());
+        }
     }
 
     public int doSpFilesSave(SpFiles spFiles, Map<String,String> map){
