@@ -111,4 +111,20 @@ public class PcYjwtServiceImpl implements PcYjwtService {
 
         return pcYjwtMapper.selectByExampleAndRowBounds(example,rowBounds);
     }
+
+    @Override
+    public int getYjxxListCount(String deptId, String deptLevel, String wtmxBh) {
+        Example example = new Example(PcYjwt.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("wtmxBh",wtmxBh);
+        if ("2".equals(deptLevel)){
+            criteria.andEqualTo("gaOwnerDept2",deptId);
+        }else if ("3".equals(deptLevel)){
+            criteria.andEqualTo("gaOwnerDept3",deptId);
+        }else if ("4".equals(deptLevel)){
+            criteria.andEqualTo("gaOwnerDept4",deptId);
+        }
+
+        return pcYjwtMapper.selectCountByExample(example);
+    }
 }

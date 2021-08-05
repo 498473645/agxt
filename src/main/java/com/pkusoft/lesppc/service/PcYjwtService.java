@@ -59,4 +59,6 @@ public interface PcYjwtService {
      */
     List<PcYjwt> getYjxxListData(String deptId, String deptLevel, String wtmxBh);
 
+    int getYjxxListCount(String deptId, String deptLevel, String wtmxBh);
+
 }

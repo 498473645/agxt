@@ -90,6 +90,8 @@ public class SuperviseController {
 //            Map<String, String> userInfo = userCenterProxyHelper.getUser(request);
 
             List<PcYjwt> data = pcYjwtService.getYjxxListData(deptId,deptLevel,wtmxBh);
+            int count = pcYjwtService.getYjxxListCount(deptId,deptLevel,wtmxBh);
+            dto.setCount(count);
             return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS,"成功",data);
         }catch(Exception e){
             logger.error("查询统计_最近受理数据错误",e);
