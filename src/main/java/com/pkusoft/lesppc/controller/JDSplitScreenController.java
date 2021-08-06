@@ -76,12 +76,20 @@ public class JDSplitScreenController {
     @ResponseBody
     public ResponseData<Map<String,Object>> getJbjWtmxAndCount(@RequestBody(required = false) Map<String, String> map) {
         try {
+            String deptId = map.get("deptId");
+            String deptLevel = map.get("deptLevel");
+            if (!StringUtils.hasText(deptId)){
+                return new ResponseData<>(ResponseData.STATUS_CODE_PARAM,"单位不能为空");
+            }
+            if (!StringUtils.hasText(deptLevel)){
+                return new ResponseData<>(ResponseData.STATUS_CODE_PARAM,"单位级别不能为空");
+            }
             String wtlyBh = userCenterProxyHelper.getPara("JJPT_WTLY_BH");
             wtlyBh = "LESP_PMS";
             if (!StringUtils.hasText(wtlyBh)){
                 return new ResponseData<>(ResponseData.STATUS_CODE_PARAM, "请配置接报警问题领域编号");
             }
-            Map<String,Object> ret = pcWtmxService.getJbjWtmxAndCount(wtlyBh);
+            Map<String,Object> ret = pcWtmxService.getJbjWtmxAndCount(deptId,deptLevel,wtlyBh);
             return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS, "成功",ret);
         } catch (Exception e) {
             logger.error("查询问题模型，并查询出总数出错；" + e.getMessage(), e);

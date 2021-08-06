@@ -18,8 +18,14 @@ public interface PcWtmxService {
      */
     ModelCountVo getModelCount(String wtLyBh);
 
-
-    Map<String,Object> getJbjWtmxAndCount(String wtLyBh);
+    /**
+     * 查询问题模型，并查询出总数
+     * @param deptId        单位id
+     * @param deptLevel     单位级别
+     * @param wtLyBh        问题领域编号
+     * @return
+     */
+    Map<String,Object> getJbjWtmxAndCount(String deptId,String deptLevel,String wtLyBh);
 
 
 
