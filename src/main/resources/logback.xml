@@ -63,7 +63,7 @@
 
     <logger name="dao" level="DEBUG"/>
 
-    <root level="ERROR">
+    <root level="DEBUG">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="ALL"/>
         <appender-ref ref="ERROR"/>

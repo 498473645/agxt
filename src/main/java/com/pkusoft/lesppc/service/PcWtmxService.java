@@ -25,7 +25,7 @@ public interface PcWtmxService {
      * @param wtLyBh        问题领域编号
      * @return
      */
-    Map<String,Object> getJbjWtmxAndCount(String deptId,String deptLevel,String wtLyBh);
+    Map<String,Object> getJbjWtmxAndCount(String deptId,String deptLevel,String wtLyBh,String wtwd1);
 
 
 

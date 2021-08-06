@@ -57,8 +57,10 @@ public interface PcYjwtService {
      * 监督---获取问题模型统计总数
      * @return
      */
-    List<PcYjwt> getYjxxListData(String deptId, String deptLevel, String wtmxBh);
+    List<PcYjwt> getYjxxListData(Map<String,String> map);
 
-    int getYjxxListCount(String deptId, String deptLevel, String wtmxBh);
+    int getYjxxListCount(Map<String,String> map);
+
+    int getYjxxListCount(String deptId, String deptLevel,String wtwd1, String wtmxBh);
 
 }

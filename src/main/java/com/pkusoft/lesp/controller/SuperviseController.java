@@ -89,8 +89,8 @@ public class SuperviseController {
             }
 //            Map<String, String> userInfo = userCenterProxyHelper.getUser(request);
 
-            List<PcYjwt> data = pcYjwtService.getYjxxListData(deptId,deptLevel,wtmxBh);
-            int count = pcYjwtService.getYjxxListCount(deptId,deptLevel,wtmxBh);
+            List<PcYjwt> data = pcYjwtService.getYjxxListData(map);
+            int count = pcYjwtService.getYjxxListCount(map);
             dto.setCount(count);
             dto.setData(data);
             dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);

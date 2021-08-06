@@ -42,7 +42,7 @@ public class PcWtmxServiceImpl implements PcWtmxService {
         return modelCount;
     }
 
-    public Map<String,Object> getJbjWtmxAndCount(String deptId,String deptLevel,String wtlyBh) {
+    public Map<String,Object> getJbjWtmxAndCount(String deptId,String deptLevel,String wtlyBh,String wtwd1) {
         Map<String,Object> retMap = new HashMap<>();
         Example example = new Example(PcWtmx.class);
         example.setOrderByClause("XH ASC");
@@ -50,7 +50,7 @@ public class PcWtmxServiceImpl implements PcWtmxService {
         criteria.andEqualTo("wtlyBh",wtlyBh);
         List<PcWtmx> pcWtmxList = pcWtmxMapper.selectByExample(example);
         for (PcWtmx pcWtmx:pcWtmxList){
-            int num = pcYjwtService.getYjxxListCount(deptId,deptLevel,pcWtmx.getWtmxBh());
+            int num = pcYjwtService.getYjxxListCount(deptId,deptLevel,wtwd1,pcWtmx.getWtmxBh());
             pcWtmx.setModifiedDeptName(num+"");
             retMap.put(pcWtmx.getWtmxBh(),pcWtmx);
         }
