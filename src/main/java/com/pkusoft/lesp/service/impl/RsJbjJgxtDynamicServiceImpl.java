@@ -48,7 +48,7 @@ public class RsJbjJgxtDynamicServiceImpl implements RsJbjJgxtDynamicService {
             criteria.andEqualTo("status",status);
         }
         if (StringUtils.hasText(ybabh)){
-            criteria.andEqualTo("bjid",ybabh);
+            criteria.andLike("bjid","%"+ybabh.trim()+"%");
         }
         if (StringUtils.hasText(reporterSource)){
             criteria.andEqualTo("reporterSource",reporterSource);
