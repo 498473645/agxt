@@ -92,7 +92,8 @@ public class SuperviseController {
             List<PcYjwt> data = pcYjwtService.getYjxxListData(deptId,deptLevel,wtmxBh);
             int count = pcYjwtService.getYjxxListCount(deptId,deptLevel,wtmxBh);
             dto.setCount(count);
-            return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS,"成功",data);
+            dto.setData(data);
+            return dto;
         }catch(Exception e){
             logger.error("查询统计_最近受理数据错误",e);
             e.printStackTrace();
