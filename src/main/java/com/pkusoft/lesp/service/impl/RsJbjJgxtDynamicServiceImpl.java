@@ -28,6 +28,7 @@ public class RsJbjJgxtDynamicServiceImpl implements RsJbjJgxtDynamicService {
         String reporterSource = map.get("reporterSource");
         String jjsjStart = map.get("jjsjStart");
         String jjsjEnd = map.get("jjsjEnd");
+        String ybabh = map.get("ybabh");
         int start = Integer.parseInt(map.get("start"));
         int pageSize = Integer.parseInt(map.get("pageSize"));
 
@@ -45,6 +46,9 @@ public class RsJbjJgxtDynamicServiceImpl implements RsJbjJgxtDynamicService {
         }
         if (StringUtils.hasText(status)){
             criteria.andEqualTo("status",status);
+        }
+        if (StringUtils.hasText(ybabh)){
+            criteria.andEqualTo("bjid",ybabh);
         }
         if (StringUtils.hasText(reporterSource)){
             criteria.andEqualTo("reporterSource",reporterSource);
