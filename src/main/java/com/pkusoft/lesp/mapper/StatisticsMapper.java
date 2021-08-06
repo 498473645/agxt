@@ -35,4 +35,11 @@ public interface StatisticsMapper extends Mapper<StatisticsData> {
 
 //    StatisticsData getZjqsJjData(@Param("deptId") String deptId);
 //    StatisticsData getZjqsYbjData(@Param("deptId") String deptId);
+
+    StatisticsData getSmbaData(@Param("deptId") String deptId,@Param("deptLevel") String deptLevel, @Param("year") String year, @Param("month") String month, @Param("day") String day);
+    List<StatisticsData> getYbafsdbData(@Param("deptId") String deptId,@Param("deptLevel") String deptLevel, @Param("year") String year, @Param("month") String month, @Param("day") String day);
+    List<StatisticsData> getYbaclztfxData(@Param("deptId") String deptId,@Param("deptLevel") String deptLevel, @Param("year") String year, @Param("month") String month, @Param("day") String day);
+    List<StatisticsData> getBalxData(@Param("deptId") String deptId,@Param("deptLevel") String deptLevel, @Param("year") String year, @Param("month") String month, @Param("day") String day);
+    List<StatisticsData> getPyzbData(@Param("deptId") String deptId,@Param("deptLevel") String deptLevel, @Param("year") String year, @Param("month") String month, @Param("day") String day);
+    List<StatisticsData> getPymydData(@Param("deptId") String deptId,@Param("deptLevel") String deptLevel, @Param("year") String year, @Param("month") String month, @Param("day") String day);
 }
