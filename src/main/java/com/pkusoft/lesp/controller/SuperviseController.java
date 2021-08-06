@@ -94,7 +94,7 @@ public class SuperviseController {
             dto.setCount(count);
             dto.setData(data);
             dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
-            dto.setStatusCode("成功");
+            dto.setStatusMsg("成功");
             return dto;
         }catch(Exception e){
             logger.error("获取预警问题列表错误",e);
