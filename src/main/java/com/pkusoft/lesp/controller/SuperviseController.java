@@ -93,11 +93,13 @@ public class SuperviseController {
             int count = pcYjwtService.getYjxxListCount(deptId,deptLevel,wtmxBh);
             dto.setCount(count);
             dto.setData(data);
+            dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
+            dto.setStatusCode("成功");
             return dto;
         }catch(Exception e){
-            logger.error("查询统计_最近受理数据错误",e);
+            logger.error("获取预警问题列表错误",e);
             e.printStackTrace();
-            return new ResponseData<>(ResponseData.STATUS_CODE_OTHER,"报案类型分析查询统计错误");
+            return new ResponseData<>(ResponseData.STATUS_CODE_OTHER,"获取预警问题列表错误");
         }
     }
 
