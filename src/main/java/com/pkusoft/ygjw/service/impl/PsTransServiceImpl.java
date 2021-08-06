@@ -62,6 +62,9 @@ public class PsTransServiceImpl implements PsTransService {
         if(StringUtils.hasText(psTransReqParam.getType())){
             criteria.andEqualTo("type",psTransReqParam.getType());
         }
+        if(StringUtils.hasText(psTransReqParam.getLy())){
+            criteria.andEqualTo("ly",psTransReqParam.getLy());
+        }
         if(StringUtils.hasText(psTransReqParam.getStatus())){
             criteria.andEqualTo("status",psTransReqParam.getStatus());
         }

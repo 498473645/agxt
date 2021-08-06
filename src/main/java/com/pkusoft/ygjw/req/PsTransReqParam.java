@@ -98,6 +98,11 @@ public class PsTransReqParam  extends YgjwPage {
     private String startRepTime;
 
     /**
+     *  领域
+     */
+    private String ly;
+
+    /**
      * 报案/办事截止时间
      */
     private String endRepTime;
@@ -848,5 +853,13 @@ public class PsTransReqParam  extends YgjwPage {
 
     public void setModerTime(String moderTime) {
         this.moderTime = moderTime;
+    }
+
+    public String getLy() {
+        return ly;
+    }
+
+    public void setLy(String ly) {
+        this.ly = ly;
     }
 }
