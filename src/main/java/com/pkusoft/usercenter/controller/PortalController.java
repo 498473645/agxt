@@ -287,6 +287,9 @@ public class PortalController {
 	@RequestMapping(value = "/getSysParaValue", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public ResponseData<String> getSysParaValue(@RequestBody String paraCode) throws IOException {
+		if (StringUtils.hasText(paraCode) && paraCode.endsWith("=")){
+			paraCode = paraCode.substring(0,paraCode.length()-1);
+		}
 		String paraValue = userCenterProxyHelper.getPara(paraCode);
 		return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS, "得到系统参数值缓存信息完毕", paraValue);
 	}
