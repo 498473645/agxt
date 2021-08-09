@@ -1,6 +1,8 @@
 package com.pkusoft.usercenter.mapper;
 
 import com.pkusoft.usercenter.po.SysDept;
+import com.pkusoft.usercenter.vo.DeptTree;
+import org.apache.ibatis.annotations.Param;
 import tk.mybatis.mapper.common.Mapper;
 
 import java.util.List;
@@ -26,4 +28,6 @@ public interface SysDeptMapper extends Mapper<SysDept> {
 	 * @return
 	 */
 	List<SysDept> getOnlyParentDeptId(String deptId);
+
+	List<DeptTree> getSysDeptList(@Param("deptLevel") String deptLevel, @Param("deptId") String deptId);
 }

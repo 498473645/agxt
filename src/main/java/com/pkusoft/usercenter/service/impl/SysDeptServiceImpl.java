@@ -1,10 +1,13 @@
 package com.pkusoft.usercenter.service.impl;
 import com.pkusoft.jjpt.po.SpAlarmType;
+import com.pkusoft.lesp.po.StatisticsData;
 import com.pkusoft.usercenter.mapper.SysDeptMapper;
 import com.pkusoft.usercenter.po.SysDataOwnerDept;
 import com.pkusoft.usercenter.po.SysDept;
 import com.pkusoft.usercenter.service.SysDataOwnerDeptService;
 import com.pkusoft.usercenter.service.SysDeptService;
+import com.pkusoft.usercenter.service.SysPermitService;
+import com.pkusoft.usercenter.vo.DeptTree;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +28,9 @@ public class SysDeptServiceImpl implements SysDeptService {
 	@Autowired
 	private SysDataOwnerDeptService sysDataOwnerDeptService;
 
+	@Autowired
+	private SysPermitService sysPermitService;
+
     public List<SysDept> getSysDeptList(Map<String, String> map) {
 
     	RowBounds rowBounds = new RowBounds(Integer.parseInt(map.get("start")),Integer.parseInt(map.get("pageSize")));
@@ -34,6 +40,74 @@ public class SysDeptServiceImpl implements SysDeptService {
 
         return sysDeptMapper.selectByExampleAndRowBounds(example,rowBounds);
     }
+
+	/**
+	 * 查询单位树形结构数据
+	 *
+	 * @return
+	 */
+	@Override
+	public List<DeptTree> getSysDeptTreeList(String deptId,String deptLevel,List<StatisticsData> curData) {
+//		Map<String,String> retData = sysPermitService.setUserDataPermits(map, PermitType.PERMIT_TYPE_CASE_QUERY);
+//		String deptLevel = retData.get("level");
+//		String deptId = retData.get("deptId");
+		if (!StringUtils.hasText(deptLevel) || !StringUtils.hasText(deptId)){
+			return new ArrayList<DeptTree>();
+		}
+		List<DeptTree> deptTreeList = sysDeptMapper.getSysDeptList(deptLevel,deptId);
+		// 最后的结果
+		List<DeptTree> resultList = new ArrayList<DeptTree>();
+		// 先找父节点
+		for (int i = 0; i < deptTreeList.size(); i++) {
+			// 市局单位的deptLevel是 2
+			if (deptTreeList.get(i).getDeptLevel().equals(deptLevel)) {
+				for(StatisticsData statisticsData : curData) {
+					if (statisticsData.getData15().equals(deptTreeList.get(i).getDeptId())) {
+						deptTreeList.get(i).setStatisticsData(statisticsData);
+					}
+				}
+				resultList.add(deptTreeList.get(i));
+			}else if ("8".equals(deptLevel)) {
+				// 查本单位
+				resultList.add(deptTreeList.get(i));
+			}
+		}
+		// 为父节点设置子节点，getChild是递归调用的
+		for (DeptTree tree : resultList) {
+			tree.setChildren(getChildren(tree.getDeptId(), deptTreeList, curData));
+		}
+		return resultList;
+	}
+
+	/**
+	 * 递归遍历
+	 * @param deptId
+	 * @param deptTreeList
+	 * @return
+	 */
+	private List<DeptTree> getChildren(String deptId, List<DeptTree> deptTreeList,List<StatisticsData> curData) {
+		// 子节点
+		List<DeptTree> childList = new ArrayList<>();
+		for (DeptTree tree : deptTreeList) {
+			// 遍历所有节点，将父节点id与传过来的id比较
+			if (tree.getParentDeptId().equals(deptId)) {
+				for(StatisticsData statisticsData : curData) {
+					if (statisticsData.getData15().equals(tree.getDeptId())) {
+						tree.setStatisticsData(statisticsData);
+					}
+				}
+				childList.add(tree);
+			}
+		}
+		// 循环查询子节点的下级单位
+		for (DeptTree tree : childList) {
+			tree.setChildren(getChildren(tree.getDeptId(), deptTreeList, curData));
+		} // 递归退出条件
+		if (childList.size() == 0) {
+			return null;
+		}
+		return childList;
+	}
 
     public int getSysDeptCount(Map<String, String> map) {
 

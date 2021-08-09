@@ -1,6 +1,8 @@
 package com.pkusoft.usercenter.service;
 
+import com.pkusoft.lesp.po.StatisticsData;
 import com.pkusoft.usercenter.po.SysDept;
+import com.pkusoft.usercenter.vo.DeptTree;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
@@ -15,6 +17,12 @@ public interface SysDeptService {
     * @return
     */
     List<SysDept> getSysDeptList(Map<String, String> map);
+
+	/**
+	 * 查询单位树形结构数据
+	 * @return
+	 */
+	List<DeptTree> getSysDeptTreeList(String deptId,String deptLevel,List<StatisticsData> curData);
 
     /**
     * 查询部门表总数

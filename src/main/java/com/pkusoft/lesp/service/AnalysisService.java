@@ -1,5 +1,8 @@
 package com.pkusoft.lesp.service;
 
+import com.pkusoft.usercenter.vo.DeptTree;
+
+import java.util.List;
 import java.util.Map;
 
 
@@ -105,7 +108,7 @@ public interface AnalysisService {
      * @param deptId
      * @return
      */
-    Map<String,Object> getBalxData(String deptId, String deptLevel, String dataType);
+    List<DeptTree> getBalxData(String deptId, String deptLevel, String dataType);
 
     /**
      * 评议占比分析

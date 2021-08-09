@@ -440,7 +440,10 @@
 
 	<select id="getBalxData" resultMap="ResultMap" >
 		select
-		COUNT(1) as  data01,t.BJLB as  data02
+		nvl(sum(decode (t.STATUS ,'1010',1,0)) ,'0') as  data01,
+		nvl(sum(decode (t.STATUS ,'1020',1,0)) ,'0') as  data02,
+		nvl(sum(decode (t.STATUS ,'1030',1,0)) ,'0') as  data03,
+		t.BJDWDM as  data15
 		from RS_JBJ_YBJXX t
 		where EXTRACT(YEAR FROM t.BJSJ) = #{year,jdbcType=VARCHAR}
 		<if test="month != null and month != ''">
@@ -449,16 +452,7 @@
 		<if test="day != null and day != ''">
 			AND EXTRACT(DAY FROM t.BJSJ) = #{day,jdbcType=VARCHAR}
 		</if>
-		<if test="deptLevel != null and deptLevel != '' and deptLevel == '2'.toString()">
-			AND GA_OWNER_DEPT_2 = #{deptId,jdbcType=VARCHAR}
-		</if>
-		<if test="deptLevel != null and deptLevel != '' and deptLevel == '3'.toString()">
-			AND GA_OWNER_DEPT_3 = #{deptId,jdbcType=VARCHAR}
-		</if>
-		<if test="deptLevel != null and deptLevel != '' and deptLevel == '4'.toString()">
-			AND GA_OWNER_DEPT_4 = #{deptId,jdbcType=VARCHAR}
-		</if>
-		GROUP BY t.BJLB
+		GROUP BY t.BJDWDM
 	</select>
 
 	<select id="getPyzbData" resultMap="ResultMap" >

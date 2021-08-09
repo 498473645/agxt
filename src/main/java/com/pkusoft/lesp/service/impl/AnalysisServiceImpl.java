@@ -3,6 +3,8 @@ package com.pkusoft.lesp.service.impl;
 import com.pkusoft.lesp.mapper.StatisticsMapper;
 import com.pkusoft.lesp.po.StatisticsData;
 import com.pkusoft.lesp.service.AnalysisService;
+import com.pkusoft.usercenter.service.SysDeptService;
+import com.pkusoft.usercenter.vo.DeptTree;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +18,9 @@ public class AnalysisServiceImpl implements AnalysisService {
 
     @Autowired
     private StatisticsMapper statisticsMapper;
+
+    @Autowired
+    private SysDeptService sysDeptService;
 
     public Map<String,Object> getYbjData(String deptId,String deptLevel,String dataType){
         Map<String,Object> data = new HashMap<>();
@@ -413,30 +418,35 @@ public class AnalysisServiceImpl implements AnalysisService {
     }
 
     @Override
-    public Map<String, Object> getBalxData(String deptId, String deptLevel, String dataType) {
+    public List<DeptTree> getBalxData(String deptId, String deptLevel, String dataType) {
         Map<String,Object> data = new HashMap<>();
         SimpleDateFormat sdfYear = new SimpleDateFormat("yyyy");
         SimpleDateFormat sdfMonth = new SimpleDateFormat("MM");
         SimpleDateFormat sdfDay = new SimpleDateFormat("dd");
         Date cur = new Date();
         //10-日，20-周，30-月，40-年
+        List<StatisticsData> curData = new ArrayList<>();
         if ("10".equals(dataType)){
             // 本日
-            List<StatisticsData> curData = statisticsMapper.getBalxData(deptId,deptLevel,sdfYear.format(cur),sdfMonth.format(cur),sdfDay.format(cur));
+            curData = statisticsMapper.getBalxData(deptId,deptLevel,sdfYear.format(cur),sdfMonth.format(cur),sdfDay.format(cur));
             data.put("curData",curData);
         }else if ("20".equals(dataType)){
             // 本周
 
         }else if ("30".equals(dataType)){
             // 本月
-            List<StatisticsData> curData = statisticsMapper.getBalxData(deptId,deptLevel,sdfYear.format(cur),sdfMonth.format(cur),null);
+            curData = statisticsMapper.getBalxData(deptId,deptLevel,sdfYear.format(cur),sdfMonth.format(cur),null);
             data.put("curData",curData);
         }else if ("40".equals(dataType)){
             // 本年
-            List<StatisticsData> curData = statisticsMapper.getBalxData(deptId,deptLevel,sdfYear.format(cur),null,null);
+            curData = statisticsMapper.getBalxData(deptId,deptLevel,sdfYear.format(cur),null,null);
             data.put("curData",curData);
         }
-        return data;
+        List<DeptTree> deptTreeList = new ArrayList<>();
+        if (!curData.isEmpty()) {
+            deptTreeList = sysDeptService.getSysDeptTreeList(deptId,deptLevel,curData);
+        }
+        return deptTreeList;
     }
 
     @Override

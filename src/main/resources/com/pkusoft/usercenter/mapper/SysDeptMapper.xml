@@ -102,4 +102,42 @@
         where PARENT_DEPT_ID = #{deptId}
         order by DEPT_ID
     </select>
+
+    <select id="getSysDeptList" resultType="com.pkusoft.usercenter.vo.DeptTree" parameterType="map">
+        SELECT
+        <include refid="Base_Column_List"></include>
+        FROM SYS_DEPT
+        WHERE
+        <if test="deptLevel != null and deptLevel != '' and deptLevel &lt;= '4'.toString()">
+            DEPT_LEVEL = '4' and RESERVE4='1'
+            AND DEPT_NAME like '%派出所%'
+            <if test="deptLevel == '2'.toString()">
+                AND CUNITID = #{deptId,jdbcType=VARCHAR}
+            </if>
+            <if test="deptLevel == '3'.toString()">
+                AND SUNITID = #{deptId,jdbcType=VARCHAR}
+            </if>
+            <if test="deptLevel == '4'.toString()">
+                AND TUNITID = #{deptId,jdbcType=VARCHAR}
+            </if>
+        </if>
+        <if test="deptLevel != null and deptLevel != '' and deptLevel &lt;= '2'.toString()">
+            OR DEPT_LEVEL = '2' AND RESERVE4='1'
+            <if test="deptLevel == '2'.toString()">
+                AND CUNITID = #{deptId,jdbcType=VARCHAR}
+            </if>
+        </if>
+        <if test="deptLevel != null and deptLevel != '' and deptLevel &lt;= '3'.toString()">
+            OR DEPT_LEVEL = '3' and RESERVE4='1'
+            AND DEPT_NAME like '%分局%'
+            <if test="deptLevel == '2'.toString()">
+                AND CUNITID = #{deptId,jdbcType=VARCHAR}
+            </if>
+            <if test="deptLevel == '3'.toString()">
+                AND SUNITID = #{deptId,jdbcType=VARCHAR}
+            </if>
+        </if>
+        ORDER BY TREE_LEVEL,DEPT_ID
+    </select>
+
 </mapper>

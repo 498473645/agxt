@@ -3,6 +3,7 @@ package com.pkusoft.lesp.controller;
 import com.pkusoft.lesp.service.AnalysisService;
 import com.pkusoft.lesp.service.RsJbjJjxxService;
 import com.pkusoft.lesp.service.RsJbjYbjxxService;
+import com.pkusoft.usercenter.vo.DeptTree;
 import com.pkusoft.usercenterproxy.UserCenterProxyHelper;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -17,6 +18,7 @@ import org.support.commons.springmvc.ResponseData;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -138,7 +140,7 @@ public class ScreenAnalysisController {
     @ApiOperation(value = "一屏查询----报案类型分析", notes = "一屏查询----报案类型分析", httpMethod = "POST")
     @RequestMapping("/analysis/getBalxData")
     @ResponseBody
-    public ResponseData<Map<String,Object>> getBalxData(@RequestBody Map<String,String> map, HttpServletRequest request){
+    public ResponseData<List> getBalxData(@RequestBody Map<String,String> map, HttpServletRequest request){
         try{
             String deptId = map.get("deptId");
             String deptLevel = map.get("deptLevel");// 2-市局，3-分局，4-派出所
@@ -152,7 +154,7 @@ public class ScreenAnalysisController {
             if (!StringUtils.hasText(dataType)){
                 return new ResponseData<>(ResponseData.STATUS_CODE_PARAM,"统计类型不能为空");
             }
-            Map<String,Object> data = analysisService.getBalxData(deptId,deptLevel,dataType);
+            List<DeptTree> data = analysisService.getBalxData(deptId,deptLevel,dataType);
             return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS,"成功",data);
         }catch(Exception e){
             logger.error("一屏查询----预报案处理状态分析",e);
