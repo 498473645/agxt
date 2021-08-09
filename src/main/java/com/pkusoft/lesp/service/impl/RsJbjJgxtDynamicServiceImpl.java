@@ -29,6 +29,8 @@ public class RsJbjJgxtDynamicServiceImpl implements RsJbjJgxtDynamicService {
         String jjsjStart = map.get("jjsjStart");
         String jjsjEnd = map.get("jjsjEnd");
         String ybabh = map.get("ybabh");
+        String jqly = map.get("jqly");
+        String ybjStatus = map.get("ybjStatus");
         int start = Integer.parseInt(map.get("start"));
         int pageSize = Integer.parseInt(map.get("pageSize"));
 
@@ -53,6 +55,12 @@ public class RsJbjJgxtDynamicServiceImpl implements RsJbjJgxtDynamicService {
         if (StringUtils.hasText(reporterSource)){
             criteria.andEqualTo("reporterSource",reporterSource);
         }
+        if (StringUtils.hasText(jqly)){
+            criteria.andEqualTo("jqly",jqly);
+        }
+        if (StringUtils.hasText(ybjStatus)){
+            criteria.andEqualTo("ybjStatus",ybjStatus);
+        }
         if(StringUtils.hasText(jjsjStart)&& StringUtils.hasText(jjsjStart)){
             criteria.andCondition("JJSJ BETWEEN to_date('"+jjsjStart+"', 'yyyy-mm-dd') and  to_date('"+jjsjEnd+"', 'yyyy-mm-dd')");
         }
@@ -70,6 +78,12 @@ public class RsJbjJgxtDynamicServiceImpl implements RsJbjJgxtDynamicService {
         String reporterSource = map.get("reporterSource");
         String jjsjStart = map.get("jjsjStart");
         String jjsjEnd = map.get("jjsjEnd");
+        String ybabh = map.get("ybabh");
+        if(StringUtils.hasText(ybabh)){
+            ybabh = "%"+ybabh.trim()+"%";
+        }
+        String jqly = map.get("jqly");
+        String ybjStatus = map.get("ybjStatus");
 
         //The query conditions are edited here
 //        String deptCon = "";
@@ -102,7 +116,7 @@ public class RsJbjJgxtDynamicServiceImpl implements RsJbjJgxtDynamicService {
 //        jjsjStart = "to_date('"+jjsjStart+"', 'yyyy-mm-dd')";
 //        jjsjEnd = "to_date('"+jjsjEnd+"', 'yyyy-mm-dd')";
 
-        return rsJbjJgxtDynamicMapper.getDynamicCount(deptId,deptLevel,status,reporterSource,jjsjStart,jjsjEnd);
+        return rsJbjJgxtDynamicMapper.getDynamicCount(deptId,deptLevel,status,reporterSource,ybabh,jqly,jjsjStart,jjsjEnd,ybjStatus);
     }
 
     public List<RsJbjJgxtDynamic> getRsJbjJgxtDynamicList(Map<String, String> map) {
