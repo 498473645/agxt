@@ -284,9 +284,9 @@ public class PortalController {
 	 * @throws IOException
 	 */
 	@ApiOperation(value="得到系统参数值缓存", notes="得到系统参数值缓存",httpMethod = "GET")
-	@RequestMapping(value = "/getSysParaValueList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "/getSysParaValue", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	public ResponseData<String> getSysParaValueList(@RequestBody String paraCode) throws IOException {
+	public ResponseData<String> getSysParaValue(@RequestBody String paraCode) throws IOException {
 		String paraValue = userCenterProxyHelper.getPara(paraCode);
 		return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS, "得到系统参数值缓存信息完毕", paraValue);
 	}
