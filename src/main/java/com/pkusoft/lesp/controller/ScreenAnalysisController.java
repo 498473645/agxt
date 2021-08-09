@@ -62,10 +62,8 @@ public class ScreenAnalysisController {
             if (!StringUtils.hasText(dataType)){
                 return new ResponseData<>(ResponseData.STATUS_CODE_PARAM,"统计类型不能为空");
             }
-            Map<String,Object> data = new HashMap<>();
             Map<String,Object> dataMap = analysisService.getSmbaData(deptId,deptLevel,dataType);
-            data.put("smba",dataMap);
-            return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS,"成功",data);
+            return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS,"成功",dataMap);
         }catch(Exception e){
             logger.error("查询统计_上门报案数据错误",e);
             e.printStackTrace();
@@ -94,9 +92,7 @@ public class ScreenAnalysisController {
             if (!StringUtils.hasText(dataType)){
                 return new ResponseData<>(ResponseData.STATUS_CODE_PARAM,"统计类型不能为空");
             }
-            Map<String,Object> data = new HashMap<>();
-            Map<String,Object> dataMap = analysisService.getYbafsdbData(deptId,deptLevel,dataType);
-            data.put("ybafsdb",dataMap);
+            Map<String,Object> data = analysisService.getYbafsdbData(deptId,deptLevel,dataType);
             return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS,"成功",data);
         }catch(Exception e){
             logger.error("查询统计_上门报案数据错误",e);
@@ -126,9 +122,7 @@ public class ScreenAnalysisController {
             if (!StringUtils.hasText(dataType)){
                 return new ResponseData<>(ResponseData.STATUS_CODE_PARAM,"统计类型不能为空");
             }
-            Map<String,Object> data = new HashMap<>();
-            Map<String,Object> dataMap = analysisService.getYbaclztfxData(deptId,deptLevel,dataType);
-            data.put("ybaclztfx",dataMap);
+            Map<String,Object> data = analysisService.getYbaclztfxData(deptId,deptLevel,dataType);
             return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS,"成功",data);
         }catch(Exception e){
             logger.error("一屏查询----预报案处理状态分析",e);
@@ -158,9 +152,7 @@ public class ScreenAnalysisController {
             if (!StringUtils.hasText(dataType)){
                 return new ResponseData<>(ResponseData.STATUS_CODE_PARAM,"统计类型不能为空");
             }
-            Map<String,Object> data = new HashMap<>();
-            Map<String,Object> dataMap = analysisService.getBalxData(deptId,deptLevel,dataType);
-            data.put("balx",dataMap);
+            Map<String,Object> data = analysisService.getBalxData(deptId,deptLevel,dataType);
             return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS,"成功",data);
         }catch(Exception e){
             logger.error("一屏查询----预报案处理状态分析",e);
@@ -190,9 +182,7 @@ public class ScreenAnalysisController {
             if (!StringUtils.hasText(dataType)){
                 return new ResponseData<>(ResponseData.STATUS_CODE_PARAM,"统计类型不能为空");
             }
-            Map<String,Object> data = new HashMap<>();
-            Map<String,Object> dataMap = analysisService.getPyzbData(deptId,deptLevel,dataType);
-            data.put("balx",dataMap);
+            Map<String,Object> data = analysisService.getPyzbData(deptId,deptLevel,dataType);
             return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS,"成功",data);
         }catch(Exception e){
             logger.error("一屏查询----评议占比分析",e);
@@ -222,8 +212,38 @@ public class ScreenAnalysisController {
             if (!StringUtils.hasText(dataType)){
                 return new ResponseData<>(ResponseData.STATUS_CODE_PARAM,"统计类型不能为空");
             }
+            Map<String,Object> data = analysisService.getPymydData(deptId,deptLevel,dataType);
+            return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS,"成功",data);
+        }catch(Exception e){
+            logger.error("一屏查询----评议占比分析",e);
+            e.printStackTrace();
+            return new ResponseData<>(ResponseData.STATUS_CODE_OTHER,"一屏查询----评议占比分析");
+        }
+    }
+
+    /**
+     * 一屏查询----单位实时数据
+     * @return
+     */
+    @ApiOperation(value = "一屏查询----评议满意度分析", notes = "一屏查询----评议满意度分析", httpMethod = "POST")
+    @RequestMapping("/analysis/getYbaclztfxDataByDept")
+    @ResponseBody
+    public ResponseData<Map<String,Object>> getYbaclztfxDataByDept(@RequestBody Map<String,String> map, HttpServletRequest request){
+        try{
+            String deptId = map.get("deptId");
+            String deptLevel = map.get("deptLevel");// 2-市局，3-分局，4-派出所
+            String dataType = map.get("dataType");//10-日，20-周，30-月，40-年
+            if (!StringUtils.hasText(deptId)){
+                return new ResponseData<>(ResponseData.STATUS_CODE_PARAM,"单位不能为空");
+            }
+            if (!StringUtils.hasText(deptLevel)){
+                return new ResponseData<>(ResponseData.STATUS_CODE_PARAM,"单位级别不能为空");
+            }
+            if (!StringUtils.hasText(dataType)){
+                return new ResponseData<>(ResponseData.STATUS_CODE_PARAM,"统计类型不能为空");
+            }
             Map<String,Object> data = new HashMap<>();
-            Map<String,Object> dataMap = analysisService.getPymydData(deptId,deptLevel,dataType);
+            Map<String,Object> dataMap = analysisService.getYbaclztfxData(deptId,deptLevel,dataType);
             data.put("balx",dataMap);
             return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS,"成功",data);
         }catch(Exception e){
