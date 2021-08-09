@@ -279,6 +279,19 @@ public class PortalController {
 	}
 
 	/**
+	 * @param paraCode
+	 * @return
+	 * @throws IOException
+	 */
+	@ApiOperation(value="得到系统参数值缓存", notes="得到系统参数值缓存",httpMethod = "GET")
+	@RequestMapping(value = "/getSysParaValueList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public ResponseData<String> getSysParaValueList(@RequestBody String paraCode) throws IOException {
+		String paraValue = userCenterProxyHelper.getPara(paraCode);
+		return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS, "得到系统参数值缓存信息完毕", paraValue);
+	}
+
+	/**
 	 * Acquire users, select people on multiple pages
 	 * @param deptId
 	 * @param req
