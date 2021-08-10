@@ -14,9 +14,8 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.pkusoft</groupId>
-    <artifactId>jjpt2</artifactId>
-    <version>2.1.11.0-SNAPSHOT</version>
-<!--    <packaging>war</packaging>-->
+    <artifactId>babsjd-backend</artifactId>
+    <version>1.0.0</version>
 
 
     <parent>
@@ -31,9 +30,6 @@
         <spring-cloud.version>Greenwich.SR4</spring-cloud.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
-        <!-- spring-cloud-config配置 -->
-        <spring.cloud.config.name>xxx</spring.cloud.config.name>
-        <spring.cloud.config.profile>prod</spring.cloud.config.profile>
     </properties>
 
 
@@ -56,10 +52,7 @@
             <url>http://27.17.3.62:8081/nexus/content/groups/public/</url>
         </pluginRepository>
     </pluginRepositories>
-
-
-    <!-- maven发布配置 -->
-    <!--<distributionManagement>
+    <distributionManagement>
         <repository>
             <id>releases</id>
             <url>http://27.17.3.62:8081/nexus/content/repositories/releases/</url>
@@ -68,11 +61,11 @@
             <id>snapshots</id>
             <url>http://27.17.3.62:8081/nexus/content/repositories/snapshots/</url>
         </snapshotRepository>
-    </distributionManagement>-->
+    </distributionManagement>
 
 
     <!-- springcloud配置 -->
-    <!--<dependencyManagement>
+    <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
@@ -82,11 +75,12 @@
                 <scope>import</scope>
             </dependency>
         </dependencies>
-    </dependencyManagement>-->
+    </dependencyManagement>
 
 
     <!-- lifecycle: http://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html -->
     <build>
+        <finalName>${project.artifactId}-${maven.build.timestamp}</finalName>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
@@ -121,37 +115,6 @@
                         <goals>
                             <goal>revision</goal>
                         </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <!-- spring-cloud-config配置 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                        <configuration>
-                            <skip>true</skip>
-                            <exportAntProperties>true</exportAntProperties>
-                            <target>
-                                <replaceregexp byline="true">
-                                    <regexp pattern="spring.cloud.config.name:.*"/>
-                                    <substitution expression="spring.cloud.config.name:${spring.cloud.config.name}"/>
-                                    <fileset dir="src/main/resources" includes="bootstrap.yml"/>
-                                </replaceregexp>
-                                <replaceregexp byline="true">
-                                    <regexp pattern="spring.cloud.config.profile:.*"/>
-                                    <substitution
-                                            expression="spring.cloud.config.profile:${spring.cloud.config.profile}"/>
-                                    <fileset dir="src/main/resources" includes="bootstrap.yml"/>
-                                </replaceregexp>
-                            </target>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
@@ -193,46 +156,12 @@
                 </configuration>
             </plugin>
 
-            <!-- 生成javadoc -->
-            <!--<plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <configuration>
-                    <encoding>UTF-8</encoding>
-                    <failOnError>false</failOnError>
-                    <additionalJOption>-Xdoclint:none</additionalJOption>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>-->
-
-            <!-- 生成源代码 -->
-            <!--<plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>-->
-
             <!-- 打springboot的jar包 -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.pkusoft.jjpt.Bootstrap</mainClass>
-                    <classifier>exec</classifier>
+                    <mainClass>com.pkusoft.blockchain.Bootstrap</mainClass>
                     <layout>ZIP</layout>
                     <attach>false</attach>
                 </configuration>
@@ -244,121 +173,11 @@
                     </execution>
                 </executions>
             </plugin>
-
-            <!-- 打war包 -->
-            <!--<plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <configuration>
-                    &lt;!&ndash; maven deploy时，必须启用该配置；发布war包，tomcat运行时，必须注释该配置 &ndash;&gt;
-                    &lt;!&ndash; <dependentWarExcludes>**</dependentWarExcludes> &ndash;&gt;
-
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-
-                    &lt;!&ndash; 打war包时排除文件 &ndash;&gt;
-                    <packagingExcludes>
-                        WEB-INF/lib/*tomcat*.jar,
-                    </packagingExcludes>
-
-                    &lt;!&ndash; 排除war中的类和jar包 &ndash;&gt;
-                    &lt;!&ndash; <overlays>
-                        <overlay>
-                            <groupId>org.support</groupId>
-                            <artifactId>support-web</artifactId>
-                            <excludes>
-                                <exclude>WEB-INF/web.xml</exclude>
-                                <exclude>WEB-INF/classes/**</exclude>
-                                <exclude>WEB-INF/lib/**</exclude>
-                            </excludes>
-                        </overlay>
-                    </overlays> &ndash;&gt;
-                </configuration>
-            </plugin>-->
-
-            <!-- 必须在其它插件后面声明maven-antrun-plugin插件，因为该插件会影响插件的执行顺序 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <executions>
-                    <!-- 代码混淆，参考：https://www.guardsquare.com/en/products/proguard -->
-                    <execution>
-                        <id>package</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                        <configuration>
-                            <skip>true</skip>
-                            <exportAntProperties>true</exportAntProperties>
-                            <target>
-                                <echo message="obfuscate java code"/>
-
-                                <property name="maven.dependency.classpath" refid="maven.dependency.classpath"/>
-
-                                <typedef resource="proguard/ant/task.properties"
-                                         classpathref="maven.dependency.classpath"/>
-                                <!--suppress UnresolvedMavenProperty -->
-                                <proguard>
-                                    -dontoptimize
-                                    -ignorewarnings
-                                    -keepdirectories
-                                    -keepparameternames
-
-                                    -libraryjars ${maven.dependency.classpath}
-                                    -libraryjars ${java.home}/lib/rt.jar
-                                    -libraryjars ${java.home}/lib/jce.jar
-                                    -injars ${project.build.directory}/${project.artifactId}-${project.version}.jar
-                                    -outjars ${project.build.directory}/${project.artifactId}-${project.version}-tmp.jar
-
-                                    -keepattributes Exceptions,InnerClasses,Signature,*Annotation*
-
-                                    -keep public class * {
-                                    public protected *;
-                                    }
-                                </proguard>
-
-                                <!-- 将混淆的jar包替换目标jar包 -->
-                                <move file="${project.build.directory}/${project.artifactId}-${project.version}-tmp.jar"
-                                      tofile="${project.build.directory}/${project.artifactId}-${project.version}.jar"/>
-                            </target>
-                        </configuration>
-                    </execution>
-                </executions>
-                <dependencies>
-                    <!-- 代码混淆 -->
-                    <dependency>
-                        <groupId>net.sf.proguard</groupId>
-                        <artifactId>proguard-anttask</artifactId>
-                        <version>6.1.1</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
         </plugins>
     </build>
 
 
     <dependencies>
-        <!-- 模块依赖 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>springboot-commons</artifactId>
-            <version>2.1.11.0-SNAPSHOT</version>
-        </dependency>
-        <!--<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>springboot-sso-proxy</artifactId>
-            <version>2.1.11.0-SNAPSHOT</version>
-        </dependency>-->
-        <!--<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>springboot-sso</artifactId>
-            <version>2.1.11.0-SNAPSHOT</version>
-        </dependency>-->
-        <!--<dependency>
-            <groupId>org.support</groupId>
-            <artifactId>support-net-resttemplate</artifactId>
-            <version>2.0.0-SNAPSHOT</version>
-        </dependency>-->
         <dependency>
             <groupId>org.support</groupId>
             <artifactId>support-mybatis</artifactId>
@@ -366,58 +185,25 @@
         </dependency>
         <dependency>
             <groupId>org.support</groupId>
-            <artifactId>support-commons</artifactId>
-            <version>2.0.1-SNAPSHOT</version>
-        </dependency>
-        <!--<dependency>
-            <groupId>org.support</groupId>
-            <artifactId>support-quartz</artifactId>
-            <version>2.1.1-SNAPSHOT</version>
-        </dependency>-->
-        <!--<dependency>
-            <groupId>org.support</groupId>
-            <artifactId>support-springcloud-eureka-client</artifactId>
-            <version>2.0.1-SNAPSHOT</version>
-        </dependency>-->
-        <dependency>
-            <groupId>org.support</groupId>
             <artifactId>support-swagger2</artifactId>
             <version>2.1.0-SNAPSHOT</version>
         </dependency>
-        <!--<dependency>
-            <groupId>org.support</groupId>
-            <artifactId>support-etl-kettle</artifactId>
-            <version>2.1.0-SNAPSHOT</version>
-        </dependency>-->
-        <!--<dependency>
-            <groupId>org.support</groupId>
-            <artifactId>encrypt-rsa</artifactId>
-            <version>2.1.0-SNAPSHOT</version>
-        </dependency>-->
-        <!--<dependency>
-            <groupId>org.support</groupId>
-            <artifactId>support-dfs</artifactId>
-            <version>2.1.0-SNAPSHOT</version>
-        </dependency>-->
-        <!--<dependency>
-            <groupId>org.support</groupId>
-            <artifactId>springboot-frondend-config</artifactId>
-            <version>2.1.0-SNAPSHOT</version>
-        </dependency>-->
-        <!-- websocket -->
-        <!--<dependency>
-            <groupId>org.support</groupId>
-            <artifactId>springboot-websocket</artifactId>
-            <version>2.1.0-SNAPSHOT</version>
-        </dependency>-->
-        <!--用户中心代理-->
         <dependency>
-            <groupId>com.pkusoft</groupId>
-            <artifactId>user-center-proxy</artifactId>
-            <version>2.1.0-SNAPSHOT</version>
+            <groupId>org.support</groupId>
+            <artifactId>support-quartz</artifactId>
+            <version>2.1.1-SNAPSHOT</version>
         </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.boot</groupId>-->
+        <!--            <artifactId>spring-boot-starter-amqp</artifactId>-->
+        <!--        </dependency>-->
 
 
+        <dependency>
+            <groupId>org.support</groupId>
+            <artifactId>support-commons</artifactId>
+            <version>2.0.1-SNAPSHOT</version>
+        </dependency>
         <!-- 第三方依赖 -->
         <!-- springboot -->
         <dependency>
@@ -444,168 +230,72 @@
             <artifactId>logstash-logback-encoder</artifactId>
             <version>6.1</version>
         </dependency>
-        <!-- redis -->
+        <!-- https://mvnrepository.com/artifact/joda-time/joda-time -->
         <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-redis</artifactId>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.3</version>
         </dependency>
+
         <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
-        </dependency>
-        <!-- spring-cloud-config -->
-        <!--<dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-config</artifactId>
+            <groupId>org.support</groupId>
+            <artifactId>support-net-resttemplate</artifactId>
+            <version>2.0.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>-->
+        </dependency>
         <!-- 分页插件PageHelper，参考：https://github.com/pagehelper/Mybatis-PageHelper -->
-        <!--<dependency>
+        <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <version>1.2.12</version>
-        </dependency>-->
+        </dependency>
         <!-- 通用Mapper，参考：https://github.com/abel533/Mapper -->
         <dependency>
             <groupId>tk.mybatis</groupId>
             <artifactId>mapper</artifactId>
             <version>4.1.5</version>
         </dependency>
-        <!-- jsp相关依赖 -->
-        <!-- <dependency>
-            <groupId>org.apache.tomcat.embed</groupId>
-            <artifactId>tomcat-embed-jasper</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-        </dependency> -->
-        <!-- spring -->
-        <!-- <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-tx</artifactId>
-        </dependency> -->
-
-        <!-- jdbc -->
-        <!-- mysql -->
-        <!--<dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.18</version>
-            &lt;!&ndash;<version>5.1.46</version>&ndash;&gt;
-        </dependency>-->
         <!-- oracle -->
         <dependency>
             <groupId>cn.easyproject</groupId>
             <artifactId>ojdbc6</artifactId>
             <version>12.1.0.2.0</version>
         </dependency>
-        <!-- 达梦 -->
-        <dependency>
-            <groupId>dm</groupId>
-            <artifactId>Dm7JdbcDriver</artifactId>
-            <version>17</version>
-        </dependency>
-        <!-- postgresql -->
-        <!--<dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>42.2.5</version>
-        </dependency>-->
-        <!-- 达梦 -->
-        <!--<dependency>
-            <groupId>dm</groupId>
-            <artifactId>Dm7JdbcDriver</artifactId>
-            <version>17</version>
-        </dependency>-->
-        <!-- h2 -->
-        <!-- <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-        </dependency> -->
-        <!-- sql server -->
-        <!--<dependency>
-            <groupId>net.sourceforge.jtds</groupId>
-            <artifactId>jtds</artifactId>
-            <version>1.3.1</version>
-        </dependency>-->
-
-        <!-- dom4j -->
-        <!-- <dependency>
-            <groupId>org.dom4j</groupId>
-            <artifactId>dom4j</artifactId>
-            <version>2.0.1</version>
-        </dependency> -->
-        <!-- 二维码 -->
-        <!-- <dependency>
-            <groupId>com.google.zxing</groupId>
-            <artifactId>core</artifactId>
-            <version>3.3.2</version>
-        </dependency> -->
-        <!-- mail -->
-        <!--<dependency>
-            <groupId>javax.mail</groupId>
-            <artifactId>mail</artifactId>
-            <version>1.4.7</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context-support</artifactId>
-        </dependency>-->
-        <!-- kafka -->
-        <!--<dependency>
-            <groupId>org.springframework.kafka</groupId>
-            <artifactId>spring-kafka</artifactId>
-            <version>1.3.10.RELEASE</version>
-        </dependency>-->
-        <!-- netty -->
-        <!--<dependency>
-            <groupId>io.netty</groupId>
-            <artifactId>netty-all</artifactId>
-            <version>4.1.23.Final</version>
-        </dependency>-->
-        <!-- httpclient -->
-        <!--<dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpmime</artifactId>
-        </dependency>-->
-        <!-- rabbitmq -->
-        <!--<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-amqp</artifactId>
-        </dependency>-->
-        <!-- 汉字转拼音 -->
-        <!--<dependency>
-            <groupId>io.github.biezhi</groupId>
-            <artifactId>TinyPinyin</artifactId>
-            <version>2.0.3.RELEASE</version>
-        </dependency>-->
-        <!-- apache commons -->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>1.2.31</version>
-        </dependency>
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
             <version>2.6</version>
         </dependency>
-
+        <!-- apache alibaba -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.58</version>
+        </dependency>
 
         <!-- 测试依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>provided</scope>
+        </dependency>
+        <!--用户中心代理-->
+        <dependency>
+            <groupId>com.pkusoft</groupId>
+            <artifactId>user-center-proxy</artifactId>
+            <version>2.1.0-SNAPSHOT</version>
+        </dependency>
+        <!-- spring-cloud-config -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
     </dependencies>
 </project>
