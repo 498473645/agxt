@@ -61,10 +61,10 @@ public class PsTempServiceImpl implements PsTempService {
     }
     public void setCommonCondition(Example.Criteria criteria, PsTempReqParam psTempReqParam, Map<String, String> map){
         if(StringUtils.isNotBlank(psTempReqParam.getCode())){
-            criteria.andEqualTo("code",psTempReqParam.getCode());
+            criteria.andLike("code","%"+psTempReqParam.getCode().trim()+"%");
         }
         if(StringUtils.isNotBlank(psTempReqParam.getName())){
-            criteria.andLike("name",psTempReqParam.getName()+"%");
+            criteria.andLike("name","%"+psTempReqParam.getName().trim()+"%");
         }
 
     }
