@@ -161,7 +161,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.pkusoft.blockchain.Bootstrap</mainClass>
+                    <mainClass>com.pkusoft.jjpt.Bootstrap</mainClass>
                     <layout>ZIP</layout>
                     <attach>false</attach>
                 </configuration>
