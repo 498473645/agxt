@@ -5,11 +5,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import com.pkusoft.lesp.until.PermitType;
 import com.pkusoft.pzzx.req.BdHandlingAreaReqParam;
 import com.pkusoft.usercenter.po.SysDataOwnerDept;
 import com.pkusoft.usercenter.po.SysDept;
 import com.pkusoft.usercenter.service.SysDataOwnerDeptService;
 import com.pkusoft.usercenter.service.SysDeptService;
+import com.pkusoft.usercenter.service.SysPermitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,6 +36,9 @@ public class BdHandlingAreaServiceImpl implements BdHandlingAreaService {
     @Autowired
     private SysDeptService sysDeptService;
 
+    @Autowired
+    private SysPermitService sysPermitService;
+
     public List<BdHandlingArea> getBdHandlingAreaList(BdHandlingAreaReqParam bdHandlingArea, Map<String, String> map) {
 
         RowBounds rowBounds = new RowBounds(bdHandlingArea.getStart(),bdHandlingArea.getPageSize());
@@ -57,17 +62,18 @@ public class BdHandlingAreaServiceImpl implements BdHandlingAreaService {
     }
 
     public void setCommonCondition(Example.Criteria criteria, BdHandlingAreaReqParam bdHandlingArea, Map<String, String> map){
-        if(StringUtils.hasText(bdHandlingArea.getOrgCode())){
-            criteria.andEqualTo("orgCode",bdHandlingArea.getOrgCode());
-        }else{
-            criteria.andEqualTo("orgCode",map.get("deptId"));
-        }
+//        if(StringUtils.hasText(bdHandlingArea.getOrgCode())){
+//            criteria.andEqualTo("orgCode",bdHandlingArea.getOrgCode());
+//        }else{
+//            criteria.andEqualTo("orgCode",map.get("deptId"));
+//        }
         if (StringUtils.hasText(bdHandlingArea.getObjtype())){
             criteria.andEqualTo("objtype",bdHandlingArea.getObjtype());
         }
         if (StringUtils.hasText(bdHandlingArea.getObjname())){
             criteria.andLike("objname","%"+bdHandlingArea.getObjname()+"%");
         }
+        sysPermitService.setUserDataPermits(criteria,map, PermitType.PERMIT_TYPE_DEPT_QUERY);
     }
 
     public int bdHandlingAreaSave(BdHandlingArea bdHandlingArea, Map<String,String> map){
