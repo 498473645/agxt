@@ -440,7 +440,7 @@
 
 	<select id="getBalxData" resultMap="ResultMap" >
 		select
-		COUNT(1) as  data01,t.BJLB as  data02
+		COUNT(1) as  data01,t.BJLB as  data15
 		from RS_JBJ_YBJXX t
 		where EXTRACT(YEAR FROM t.BJSJ) = #{year,jdbcType=VARCHAR}
 		<if test="month != null and month != ''">
