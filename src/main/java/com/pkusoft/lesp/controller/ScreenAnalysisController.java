@@ -140,7 +140,7 @@ public class ScreenAnalysisController {
     @ApiOperation(value = "一屏查询----报案类型分析", notes = "一屏查询----报案类型分析", httpMethod = "POST")
     @RequestMapping("/analysis/getBalxData")
     @ResponseBody
-    public ResponseData<List> getBalxData(@RequestBody Map<String,String> map, HttpServletRequest request){
+    public ResponseData<Map<String,Object>> getBalxData(@RequestBody Map<String,String> map, HttpServletRequest request){
         try{
             String deptId = map.get("deptId");
             String deptLevel = map.get("deptLevel");// 2-市局，3-分局，4-派出所
@@ -154,7 +154,7 @@ public class ScreenAnalysisController {
             if (!StringUtils.hasText(dataType)){
                 return new ResponseData<>(ResponseData.STATUS_CODE_PARAM,"统计类型不能为空");
             }
-            List<DeptTree> data = analysisService.getBalxData(deptId,deptLevel,dataType);
+            Map<String,Object> data = analysisService.getBalxData(deptId,deptLevel,dataType);
             return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS,"成功",data);
         }catch(Exception e){
             logger.error("一屏查询----预报案处理状态分析",e);
@@ -227,10 +227,10 @@ public class ScreenAnalysisController {
      * 一屏查询----单位实时数据
      * @return
      */
-    @ApiOperation(value = "一屏查询----评议满意度分析", notes = "一屏查询----评议满意度分析", httpMethod = "POST")
+    @ApiOperation(value = "一屏查询----单位实时数据", notes = "一屏查询----单位实时数据", httpMethod = "POST")
     @RequestMapping("/analysis/getYbaclztfxDataByDept")
     @ResponseBody
-    public ResponseData<Map<String,Object>> getYbaclztfxDataByDept(@RequestBody Map<String,String> map, HttpServletRequest request){
+    public ResponseData<List> getYbaclztfxDataByDept(@RequestBody Map<String,String> map, HttpServletRequest request){
         try{
             String deptId = map.get("deptId");
             String deptLevel = map.get("deptLevel");// 2-市局，3-分局，4-派出所
@@ -244,9 +244,7 @@ public class ScreenAnalysisController {
             if (!StringUtils.hasText(dataType)){
                 return new ResponseData<>(ResponseData.STATUS_CODE_PARAM,"统计类型不能为空");
             }
-            Map<String,Object> data = new HashMap<>();
-            Map<String,Object> dataMap = analysisService.getYbaclztfxData(deptId,deptLevel,dataType);
-            data.put("balx",dataMap);
+            List<DeptTree> data = analysisService.getYbaclztfxDataByDept(deptId,deptLevel,dataType);
             return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS,"成功",data);
         }catch(Exception e){
             logger.error("一屏查询----评议占比分析",e);

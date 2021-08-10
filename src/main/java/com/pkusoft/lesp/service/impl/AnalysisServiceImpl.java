@@ -418,35 +418,30 @@ public class AnalysisServiceImpl implements AnalysisService {
     }
 
     @Override
-    public List<DeptTree> getBalxData(String deptId, String deptLevel, String dataType) {
+    public Map<String, Object> getBalxData(String deptId, String deptLevel, String dataType) {
         Map<String,Object> data = new HashMap<>();
         SimpleDateFormat sdfYear = new SimpleDateFormat("yyyy");
         SimpleDateFormat sdfMonth = new SimpleDateFormat("MM");
         SimpleDateFormat sdfDay = new SimpleDateFormat("dd");
         Date cur = new Date();
         //10-日，20-周，30-月，40-年
-        List<StatisticsData> curData = new ArrayList<>();
         if ("10".equals(dataType)){
             // 本日
-            curData = statisticsMapper.getBalxData(deptId,deptLevel,sdfYear.format(cur),sdfMonth.format(cur),sdfDay.format(cur));
+            List<StatisticsData> curData = statisticsMapper.getBalxData(deptId,deptLevel,sdfYear.format(cur),sdfMonth.format(cur),sdfDay.format(cur));
             data.put("curData",curData);
         }else if ("20".equals(dataType)){
             // 本周
 
         }else if ("30".equals(dataType)){
             // 本月
-            curData = statisticsMapper.getBalxData(deptId,deptLevel,sdfYear.format(cur),sdfMonth.format(cur),null);
+            List<StatisticsData> curData = statisticsMapper.getBalxData(deptId,deptLevel,sdfYear.format(cur),sdfMonth.format(cur),null);
             data.put("curData",curData);
         }else if ("40".equals(dataType)){
             // 本年
-            curData = statisticsMapper.getBalxData(deptId,deptLevel,sdfYear.format(cur),null,null);
+            List<StatisticsData> curData = statisticsMapper.getBalxData(deptId,deptLevel,sdfYear.format(cur),null,null);
             data.put("curData",curData);
         }
-        List<DeptTree> deptTreeList = new ArrayList<>();
-        if (!curData.isEmpty()) {
-            deptTreeList = sysDeptService.getSysDeptTreeList(deptId,deptLevel,curData);
-        }
-        return deptTreeList;
+        return data;
     }
 
     @Override
@@ -501,5 +496,37 @@ public class AnalysisServiceImpl implements AnalysisService {
             data.put("curData",curData);
         }
         return data;
+    }
+
+    @Override
+    public List<DeptTree> getYbaclztfxDataByDept(String deptId, String deptLevel, String dataType) {
+        Map<String,Object> data = new HashMap<>();
+        SimpleDateFormat sdfYear = new SimpleDateFormat("yyyy");
+        SimpleDateFormat sdfMonth = new SimpleDateFormat("MM");
+        SimpleDateFormat sdfDay = new SimpleDateFormat("dd");
+        Date cur = new Date();
+        //10-日，20-周，30-月，40-年
+        List<StatisticsData> curData = new ArrayList<>();
+        if ("10".equals(dataType)){
+            // 本日
+            curData = statisticsMapper.getBalxData(deptId,deptLevel,sdfYear.format(cur),sdfMonth.format(cur),sdfDay.format(cur));
+            data.put("curData",curData);
+        }else if ("20".equals(dataType)){
+            // 本周
+
+        }else if ("30".equals(dataType)){
+            // 本月
+            curData = statisticsMapper.getBalxData(deptId,deptLevel,sdfYear.format(cur),sdfMonth.format(cur),null);
+            data.put("curData",curData);
+        }else if ("40".equals(dataType)){
+            // 本年
+            curData = statisticsMapper.getBalxData(deptId,deptLevel,sdfYear.format(cur),null,null);
+            data.put("curData",curData);
+        }
+        List<DeptTree> deptTreeList = new ArrayList<>();
+        if (!curData.isEmpty()) {
+            deptTreeList = sysDeptService.getSysDeptTreeList(deptId,deptLevel,curData);
+        }
+        return deptTreeList;
     }
 }

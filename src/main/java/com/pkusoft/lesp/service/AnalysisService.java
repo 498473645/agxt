@@ -108,7 +108,7 @@ public interface AnalysisService {
      * @param deptId
      * @return
      */
-    List<DeptTree> getBalxData(String deptId, String deptLevel, String dataType);
+    Map<String,Object> getBalxData(String deptId, String deptLevel, String dataType);
 
     /**
      * 评议占比分析
@@ -123,4 +123,11 @@ public interface AnalysisService {
      * @return
      */
     Map<String,Object> getPymydData(String deptId, String deptLevel, String dataType);
+
+    /**
+     * 单位实时数据
+     * @param deptId
+     * @return
+     */
+    List<DeptTree> getYbaclztfxDataByDept(String deptId, String deptLevel, String dataType);
 }
