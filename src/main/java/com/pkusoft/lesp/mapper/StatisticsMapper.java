@@ -40,6 +40,7 @@ public interface StatisticsMapper extends Mapper<StatisticsData> {
     List<StatisticsData> getYbafsdbData(@Param("deptId") String deptId,@Param("deptLevel") String deptLevel, @Param("year") String year, @Param("month") String month, @Param("day") String day);
     List<StatisticsData> getYbaclztfxData(@Param("deptId") String deptId,@Param("deptLevel") String deptLevel, @Param("year") String year, @Param("month") String month, @Param("day") String day);
     List<StatisticsData> getBalxData(@Param("deptId") String deptId,@Param("deptLevel") String deptLevel, @Param("year") String year, @Param("month") String month, @Param("day") String day);
+    List<StatisticsData> getYbaclztfxDataByDept(@Param("deptId") String deptId,@Param("deptLevel") String deptLevel, @Param("year") String year, @Param("month") String month, @Param("day") String day);
     List<StatisticsData> getPyzbData(@Param("deptId") String deptId,@Param("deptLevel") String deptLevel, @Param("year") String year, @Param("month") String month, @Param("day") String day);
     List<StatisticsData> getPymydData(@Param("deptId") String deptId,@Param("deptLevel") String deptLevel, @Param("year") String year, @Param("month") String month, @Param("day") String day);
 }

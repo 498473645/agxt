@@ -509,18 +509,18 @@ public class AnalysisServiceImpl implements AnalysisService {
         List<StatisticsData> curData = new ArrayList<>();
         if ("10".equals(dataType)){
             // 本日
-            curData = statisticsMapper.getBalxData(deptId,deptLevel,sdfYear.format(cur),sdfMonth.format(cur),sdfDay.format(cur));
+            curData = statisticsMapper.getYbaclztfxDataByDept(deptId,deptLevel,sdfYear.format(cur),sdfMonth.format(cur),sdfDay.format(cur));
             data.put("curData",curData);
         }else if ("20".equals(dataType)){
             // 本周
 
         }else if ("30".equals(dataType)){
             // 本月
-            curData = statisticsMapper.getBalxData(deptId,deptLevel,sdfYear.format(cur),sdfMonth.format(cur),null);
+            curData = statisticsMapper.getYbaclztfxDataByDept(deptId,deptLevel,sdfYear.format(cur),sdfMonth.format(cur),null);
             data.put("curData",curData);
         }else if ("40".equals(dataType)){
             // 本年
-            curData = statisticsMapper.getBalxData(deptId,deptLevel,sdfYear.format(cur),null,null);
+            curData = statisticsMapper.getYbaclztfxDataByDept(deptId,deptLevel,sdfYear.format(cur),null,null);
             data.put("curData",curData);
         }
         List<DeptTree> deptTreeList = new ArrayList<>();
