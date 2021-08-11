@@ -104,8 +104,15 @@ public class PsTransServiceImpl implements PsTransService {
             psTrans.setOwnOrg4(bdEquipment.getGaOwnerDept4());
             psTrans.setOwnOrg5(bdEquipment.getGaOwnerDept5());
         }
+        if (!StringUtils.hasText(psTrans.getCode())){
+            psTrans.setCode(this.generateJjdbh(psTrans.getOrgCode()));
+        }
         int num = psTransMapper.insertSelective(psTrans);
         return num;
+    }
+
+    public  String generateJjdbh(String orgCode){
+        return "YBJ"+orgCode + new Date().getTime();
     }
 
     public int psTransUpdate(PsTrans psTrans, Map<String,String> map){

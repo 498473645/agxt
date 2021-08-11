@@ -9,8 +9,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.support.commons.springmvc.ControllerUtil;
 import org.support.commons.springmvc.ResponseData;
@@ -139,12 +141,16 @@ public class PsTransTypeController {
      */
     @RequestMapping("/psTransType/psTransTypeDicList")
     @ResponseBody
-    public ResponseData<List<SysDicItemValue>> psTransTypeDicList(@RequestBody PsTransType psTransType) {
+    public ResponseData<List<SysDicItemValue>> psTransTypeDicList(@RequestBody PsTransType psTransType, @RequestParam String type) {
         ResponseData<List<SysDicItemValue>> dto = new ResponseData<List<SysDicItemValue>>();
         try {
             PsTransType transType = new PsTransType();
             List<SysDicItemValue> dicItems = new ArrayList<>();
-            transType.setType(psTransType.getType());
+            if (StringUtils.hasText(type)){
+                transType.setType(type);
+            }else if (StringUtils.hasText(psTransType.getType())){
+                transType.setType(psTransType.getType());
+            }
             List<PsTransType> psTransTypes = psTransTypeService.getPsTransTypeByParam(transType);
             for(PsTransType t : psTransTypes){
                 SysDicItemValue dicItem = new SysDicItemValue();
