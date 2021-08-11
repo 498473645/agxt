@@ -524,9 +524,9 @@ public class AnalysisServiceImpl implements AnalysisService {
             data.put("curData",curData);
         }
         List<DeptTree> deptTreeList = new ArrayList<>();
-        if (!curData.isEmpty()) {
+//        if (!curData.isEmpty()) {
             deptTreeList = sysDeptService.getSysDeptTreeList(deptId,deptLevel,curData);
-        }
+//        }
         return deptTreeList;
     }
 }

@@ -141,7 +141,7 @@ public class PsTransTypeController {
      */
     @RequestMapping("/psTransType/psTransTypeDicList")
     @ResponseBody
-    public ResponseData<List<SysDicItemValue>> psTransTypeDicList(@RequestBody PsTransType psTransType, @RequestParam String type) {
+    public ResponseData<List<SysDicItemValue>> psTransTypeDicList(@RequestBody PsTransType psTransType, @RequestParam(required = false) String type) {
         ResponseData<List<SysDicItemValue>> dto = new ResponseData<List<SysDicItemValue>>();
         try {
             PsTransType transType = new PsTransType();
