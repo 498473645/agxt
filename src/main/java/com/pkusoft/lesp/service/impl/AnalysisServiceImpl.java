@@ -1,5 +1,7 @@
 package com.pkusoft.lesp.service.impl;
 
+import com.pkusoft.jjpt.po.PsTransType;
+import com.pkusoft.jjpt.service.PsTransTypeService;
 import com.pkusoft.lesp.mapper.StatisticsMapper;
 import com.pkusoft.lesp.po.StatisticsData;
 import com.pkusoft.lesp.service.AnalysisService;
@@ -21,6 +23,9 @@ public class AnalysisServiceImpl implements AnalysisService {
 
     @Autowired
     private SysDeptService sysDeptService;
+
+    @Autowired
+    private PsTransTypeService psTransTypeService;
 
     public Map<String,Object> getYbjData(String deptId,String deptLevel,String dataType){
         Map<String,Object> data = new HashMap<>();
@@ -425,21 +430,35 @@ public class AnalysisServiceImpl implements AnalysisService {
         SimpleDateFormat sdfDay = new SimpleDateFormat("dd");
         Date cur = new Date();
         //10-日，20-周，30-月，40-年
+        List<StatisticsData> curData = new ArrayList<>();
         if ("10".equals(dataType)){
             // 本日
-            List<StatisticsData> curData = statisticsMapper.getBalxData(deptId,deptLevel,sdfYear.format(cur),sdfMonth.format(cur),sdfDay.format(cur));
+            curData = statisticsMapper.getBalxData(deptId,deptLevel,sdfYear.format(cur),sdfMonth.format(cur),sdfDay.format(cur));
             data.put("curData",curData);
         }else if ("20".equals(dataType)){
             // 本周
 
         }else if ("30".equals(dataType)){
             // 本月
-            List<StatisticsData> curData = statisticsMapper.getBalxData(deptId,deptLevel,sdfYear.format(cur),sdfMonth.format(cur),null);
+            curData = statisticsMapper.getBalxData(deptId,deptLevel,sdfYear.format(cur),sdfMonth.format(cur),null);
             data.put("curData",curData);
         }else if ("40".equals(dataType)){
             // 本年
-            List<StatisticsData> curData = statisticsMapper.getBalxData(deptId,deptLevel,sdfYear.format(cur),null,null);
+            curData = statisticsMapper.getBalxData(deptId,deptLevel,sdfYear.format(cur),null,null);
             data.put("curData",curData);
+        }
+        List<String> statisticsDataCodeList = new ArrayList<>();
+        for (StatisticsData statisticsData:curData){
+            statisticsDataCodeList.add(statisticsData.getData15());
+        }
+        List<PsTransType> psTransTypes = psTransTypeService.getPsTransTypeByType("01");
+        for (PsTransType psTransType:psTransTypes) {
+            if (!statisticsDataCodeList.contains(psTransType.getCode())){
+                StatisticsData sd = new StatisticsData();
+                sd.setData01(0);
+                sd.setData15(psTransType.getCode());
+                curData.add(sd);
+            }
         }
         return data;
     }

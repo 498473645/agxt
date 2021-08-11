@@ -1,9 +1,6 @@
 package com.pkusoft.jjpt.service.impl;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 import com.pkusoft.jjpt.mapper.PsTransTypeMapper;
 import com.pkusoft.jjpt.po.PsTransType;
@@ -75,6 +72,21 @@ public class PsTransTypeServiceImpl implements PsTransTypeService {
             transType = t.get(0);
         }
         return t;
+    }
+
+    @Override
+    public List<PsTransType> getPsTransTypeByType(String type) {
+        List<PsTransType> psTransTypeList = new ArrayList<>();
+        Example example = new Example(PsTransType.class);
+        Example.Criteria criteria = example.createCriteria();
+        //The query conditions are edited here
+        if (StringUtils.hasText(type)){
+            criteria.andEqualTo("type",type);
+        } else {
+            return psTransTypeList;
+        }
+        psTransTypeList = psTransTypeMapper.selectByExample(example);
+        return psTransTypeList;
     }
 
     public PsTransType getPsTransType(String id){

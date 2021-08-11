@@ -43,6 +43,8 @@ public interface PsTransTypeService {
     */
     List<PsTransType> getPsTransTypeByParam(PsTransType psTransType);
 
+    List<PsTransType> getPsTransTypeByType(String type);
+
     /**
      * 根据条件查寻规则信息详情
      * @param id
