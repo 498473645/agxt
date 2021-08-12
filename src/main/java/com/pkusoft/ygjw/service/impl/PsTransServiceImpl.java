@@ -91,7 +91,7 @@ public class PsTransServiceImpl implements PsTransService {
             String id = UUID.randomUUID().toString();
             psTrans.setId(id);
         }
-        psTrans.setStatus("2010");
+        psTrans.setStatus("1010");
         Date date = new Date();
         psTrans.setCreateTime(date);
         psTrans.setModerTime(date);
@@ -126,6 +126,68 @@ public class PsTransServiceImpl implements PsTransService {
     public int psTransDelete(String id){
         int num = psTransMapper.deleteByPrimaryKey(id);
         return num;
+    }
+
+    public List<PsTrans> getDynamicData(Map<String, String> map) {
+        int start = Integer.parseInt(map.get("start"));
+        int pageSize = Integer.parseInt(map.get("pageSize"));
+
+        RowBounds rowBounds = new RowBounds(start,pageSize);
+        Example example = new Example(PsTrans.class);
+        example.setOrderByClause("REP_TIME desc");
+        Example.Criteria criteria = example.createCriteria();
+        this.setCondition(criteria,map);
+
+        return psTransMapper.selectByExampleAndRowBounds(example,rowBounds);
+    }
+
+    public int getDynamicCount(Map<String, String> map) {
+        Example example = new Example(PsTrans.class);
+        Example.Criteria criteria = example.createCriteria();
+        this.setCondition(criteria,map);
+
+        return psTransMapper.selectCountByExample(example);
+    }
+
+    public void setCondition(Example.Criteria criteria, Map<String, String> map){
+        String deptId = map.get("deptId");
+        String deptLevel = map.get("deptLevel");// 2-市局，3-分局，4-派出所
+        String status = map.get("status");
+        String reporterSource = map.get("reporterSource");
+        String jjsjStart = map.get("jjsjStart");
+        String jjsjEnd = map.get("jjsjEnd");
+        String ybabh = map.get("ybabh");
+        String jqly = map.get("jqly");
+        String ybjStatus = map.get("ybjStatus");
+
+        //The query conditions are edited here
+        if ("2".equals(deptLevel)){
+            criteria.andEqualTo("ownOrg2",deptId);
+        }else if ("3".equals(deptLevel)){
+            criteria.andEqualTo("ownOrg3",deptId);
+        }else if ("4".equals(deptLevel)){
+            criteria.andEqualTo("ownOrg4",deptId);
+        }
+//        if (StringUtils.hasText(status)){
+//            criteria.andEqualTo("status",status);
+//        }
+        if (StringUtils.hasText(ybabh)){
+            criteria.andLike("code","%"+ybabh.trim()+"%");
+        }
+        if (StringUtils.hasText(reporterSource)){
+            criteria.andEqualTo("reporterSource",reporterSource);
+        }
+        if (StringUtils.hasText(jqly)){
+            criteria.andEqualTo("dataType",jqly);
+        }
+        if (StringUtils.hasText(ybjStatus)){
+            criteria.andEqualTo("status",ybjStatus);
+        }
+//        if(StringUtils.hasText(jjsjStart)&& StringUtils.hasText(jjsjStart)){
+//            criteria.andCondition("JJSJ BETWEEN to_date('"+jjsjStart+"', 'yyyy-mm-dd') and  to_date('"+jjsjEnd+"', 'yyyy-mm-dd')");
+//        }
+
+        criteria.andEqualTo("ly","01");
     }
 
 }

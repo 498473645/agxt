@@ -56,4 +56,12 @@ public interface PsTransService {
     */
     int psTransDelete(String id);
 
+    /**
+     * 动态----获取动态
+     * @return
+     */
+    List<PsTrans> getDynamicData(Map<String, String> map);
+
+    int getDynamicCount(Map<String, String> map);
+
 }

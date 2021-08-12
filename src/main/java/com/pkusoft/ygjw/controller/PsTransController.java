@@ -183,4 +183,29 @@ public class PsTransController  {
         }
     }
 
+    /**
+     * 动态----获取动态（演示用）
+     * @return
+     */
+    @ApiOperation(value="动态----获取动态（演示用）", notes="动态----获取动态（演示用）", httpMethod="POST")
+    @RequestMapping(value = "/psTrans/getDynamicData", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    public ResponseData<List<PsTrans>> getDynamicData(@RequestBody Map<String,String> map, HttpServletRequest request){
+        ResponseDto<List<PsTrans>> dto = new ResponseDto<List<PsTrans>>();
+        try{
+            Map<String, String> user = new HashMap<>();
+            List<PsTrans> list = psTransService.getDynamicData(map);
+            int count = psTransService.getDynamicCount(map);
+            dto.setData(list);
+            dto.setCount(count);
+            dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
+            dto.setStatusMsg("动态----获取动态（演示用）成功");
+            return dto;
+        }catch(Exception e){
+            logger.error("动态----获取动态（演示用）错误",e);
+            e.printStackTrace();
+            return new ResponseData<>(ResponseData.STATUS_CODE_OTHER,"动态----获取动态（演示用）错误"+e.getMessage());
+        }
+    }
+
 }

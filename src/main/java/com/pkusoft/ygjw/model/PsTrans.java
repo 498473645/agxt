@@ -1,7 +1,9 @@
 package com.pkusoft.ygjw.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 import javax.persistence.*;
@@ -146,6 +148,8 @@ public class PsTrans {
      */
     @Column(name = "REP_TIME")
     @ApiModelProperty(value = "报案/办事时间")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private java.util.Date repTime; 
 
  	/**
@@ -300,8 +304,29 @@ public class PsTrans {
      */
     @Column(name = "RESERVE2")
     @ApiModelProperty(value = "预留字段2")
-    private String reserve2; 
+    private String reserve2;
 
+    @Column(name = "JJD_OBJID")
+    private String jjdObjid;     //接警单id
+
+    @Column(name = "JJDBH")
+    private String jjdbh;     //接警单编号
+
+    public String getJjdbh() {
+        return jjdbh;
+    }
+
+    public void setJjdbh(String jjdbh) {
+        this.jjdbh = jjdbh;
+    }
+
+    public String getJjdObjid() {
+        return jjdObjid;
+    }
+
+    public void setJjdObjid(String jjdObjid) {
+        this.jjdObjid = jjdObjid;
+    }
 
     /**
     * 获得主键ID
