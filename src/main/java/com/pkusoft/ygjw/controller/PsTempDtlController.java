@@ -115,7 +115,8 @@ public class PsTempDtlController  {
         try {
             int num = 0;
             //获取当前操作用户信息
-            Map<String, String> user = new HashMap<>();
+//            Map<String, String> user = new HashMap<>();
+            Map<String, String> user = userCenterProxyHelper.getUser(request);
             if(!StringUtils.hasText(psTempDtl.getId())) {
                 //添加材料模板明细表数据
                 num = psTempDtlService.psTempDtlSave(psTempDtl, user);

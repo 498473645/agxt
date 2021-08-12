@@ -2,6 +2,8 @@ package com.pkusoft.ygjw.service.impl;
 
 import com.pkusoft.pzzx.po.BdEquipment;
 import com.pkusoft.pzzx.service.BdEquipmentService;
+import com.pkusoft.usercenter.po.SysDataOwnerDept;
+import com.pkusoft.usercenter.service.SysDataOwnerDeptService;
 import com.pkusoft.ygjw.mapper.PsTransMapper;
 import com.pkusoft.ygjw.model.PsTrans;
 import com.pkusoft.ygjw.req.PsTransReqParam;
@@ -26,7 +28,7 @@ public class PsTransServiceImpl implements PsTransService {
     private PsTransMapper psTransMapper;
 
     @Autowired
-    private BdEquipmentService bdEquipmentService;
+    private SysDataOwnerDeptService sysDataOwnerDeptService;
 
     public List<PsTrans> getPsTransList(PsTransReqParam psTransReqParam, Map<String, String> map) {
 
@@ -93,16 +95,13 @@ public class PsTransServiceImpl implements PsTransService {
         Date date = new Date();
         psTrans.setCreateTime(date);
         psTrans.setModerTime(date);
-        //根据设备唯一标识码获取设备信息
-        BdEquipment bdEquipment = bdEquipmentService.getBdEquipmentByEId(psTrans.getCreateId());//字段接口调用将eid放在CreateId中
-        if (bdEquipment != null) {
-            psTrans.setOrgCode(bdEquipment.getOrgCode());
-            psTrans.setOrgName(bdEquipment.getOrgName());
-            psTrans.setOwnOrg1(bdEquipment.getGaOwnerDept1());
-            psTrans.setOwnOrg2(bdEquipment.getGaOwnerDept2());
-            psTrans.setOwnOrg3(bdEquipment.getGaOwnerDept3());
-            psTrans.setOwnOrg4(bdEquipment.getGaOwnerDept4());
-            psTrans.setOwnOrg5(bdEquipment.getGaOwnerDept5());
+        SysDataOwnerDept sysDataOwnerDept = sysDataOwnerDeptService.selectByDeptId(psTrans.getOrgCode());
+        if (sysDataOwnerDept != null) {
+            psTrans.setOwnOrg1(sysDataOwnerDept.getOwnerDept1());
+            psTrans.setOwnOrg2(sysDataOwnerDept.getOwnerDept2());
+            psTrans.setOwnOrg3(sysDataOwnerDept.getOwnerDept3());
+            psTrans.setOwnOrg4(sysDataOwnerDept.getOwnerDept4());
+            psTrans.setOwnOrg5(sysDataOwnerDept.getOwnerDept5());
         }
         if (!StringUtils.hasText(psTrans.getCode())){
             psTrans.setCode(this.generateJjdbh(psTrans.getOrgCode()));

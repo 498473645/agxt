@@ -182,7 +182,8 @@ public class PsWindowController  {
         try {
             int num = 0;
             //获取当前操作用户信息
-            Map<String, String> user = new HashMap<>();
+//            Map<String, String> user = new HashMap<>();
+            Map<String, String> user = userCenterProxyHelper.getUser(request);
             PsWindow oldPsWindows = psWindowService.getPsWindow(psWindow.getId());
             if(oldPsWindows==null) {
                 //添加事务数据

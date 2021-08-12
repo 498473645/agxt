@@ -2,6 +2,8 @@ package com.pkusoft.ygjw.service.impl;
 
 import com.pkusoft.pzzx.po.BdEquipment;
 import com.pkusoft.pzzx.service.BdEquipmentService;
+import com.pkusoft.usercenter.po.SysDataOwnerDept;
+import com.pkusoft.usercenter.service.SysDataOwnerDeptService;
 import com.pkusoft.ygjw.mapper.PsApprsMapper;
 import com.pkusoft.ygjw.model.PsApprs;
 import com.pkusoft.ygjw.req.PsApprsReqParam;
@@ -27,6 +29,9 @@ public class PsApprsServiceImpl implements PsApprsService {
 
     @Autowired
     private BdEquipmentService bdEquipmentService;
+
+    @Autowired
+    private SysDataOwnerDeptService sysDataOwnerDeptService;
 
     public List<PsApprs> getPsApprsList(PsApprsReqParam psApprsReqParam, Map<String, String> map) {
 
@@ -88,23 +93,14 @@ public class PsApprsServiceImpl implements PsApprsService {
         psApprs.setApTime(date);
         psApprs.setCreateTime(date);
         psApprs.setModerTime(date);
-        //根据设备唯一标识码获取设备信息
-        if (StringUtils.hasText(psApprs.getCreateId())){
-            BdEquipment bdEquipment = bdEquipmentService.getBdEquipmentByEId(psApprs.getCreateId());//字段接口调用将eid放在CreateId中
-            if (bdEquipment != null) {
-                psApprs.setOrgCode(bdEquipment.getOrgCode());
-                psApprs.setOrgName(bdEquipment.getOrgName());
-                psApprs.setOwnOrg1(bdEquipment.getGaOwnerDept1());
-                psApprs.setOwnOrg2(bdEquipment.getGaOwnerDept2());
-                psApprs.setOwnOrg3(bdEquipment.getGaOwnerDept3());
-                psApprs.setOwnOrg4(bdEquipment.getGaOwnerDept4());
-                psApprs.setOwnOrg5(bdEquipment.getGaOwnerDept5());
-            }
-        }else{
-            psApprs.setCreateId(map.get("userId"));
-            psApprs.setCreateName(map.get("userName"));
+        SysDataOwnerDept sysDataOwnerDept = sysDataOwnerDeptService.selectByDeptId(psApprs.getOrgCode());
+        if (sysDataOwnerDept != null) {
+            psApprs.setOwnOrg1(sysDataOwnerDept.getOwnerDept1());
+            psApprs.setOwnOrg2(sysDataOwnerDept.getOwnerDept2());
+            psApprs.setOwnOrg3(sysDataOwnerDept.getOwnerDept3());
+            psApprs.setOwnOrg4(sysDataOwnerDept.getOwnerDept4());
+            psApprs.setOwnOrg5(sysDataOwnerDept.getOwnerDept5());
         }
-
         int num = psApprsMapper.insertSelective(psApprs);
         return num;
     }

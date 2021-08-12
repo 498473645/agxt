@@ -75,7 +75,7 @@ public class PsTransController  {
     @ApiOperation(value = "新增或修改事务数据", notes = "新增或修改事务数据", httpMethod = "POST")
     @RequestMapping("/psTrans/psTransSaveOrUpdate")
     @ResponseBody
-    public ResponseData<PsTrans> psTempDtlSaveOrUpdate(@RequestBody PsTrans psTrans, HttpServletRequest request){
+    public ResponseData<PsTrans> psTransSaveOrUpdate(@RequestBody PsTrans psTrans, HttpServletRequest request){
         try {
             int num = 0;
             //获取当前操作用户信息

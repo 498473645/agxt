@@ -9,6 +9,8 @@ import com.pkusoft.jjpt.req.SpFilesReqParam;
 import com.pkusoft.jjpt.service.*;
 import com.pkusoft.pzzx.po.BdEquipment;
 import com.pkusoft.pzzx.service.BdEquipmentService;
+import com.pkusoft.usercenter.po.SysDataOwnerDept;
+import com.pkusoft.usercenter.service.SysDataOwnerDeptService;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -46,6 +48,9 @@ public class SpFilesServiceImpl implements SpFilesService {
 
     @Autowired
     private BdEquipmentService bdEquipmentService;
+
+    @Autowired
+    private SysDataOwnerDeptService sysDataOwnerDeptService;
 
     public List<SpFiles> getSpFilesListByYbj(SpFilesReqParam spFiles, Map<String, String> map) {
 
@@ -214,18 +219,19 @@ public class SpFilesServiceImpl implements SpFilesService {
 
     public int spFilesSaveYGJW(SpFiles spFiles){
         Date date = new Date();
-//        String objid = UUID.randomUUID().toString();objid由客户端生成
+        if (!StringUtils.hasText(spFiles.getObjid())){
+            String id = UUID.randomUUID().toString();
+            spFiles.setObjid(id);
+        }
         SpFiles spFiles_old = spFilesMapper.selectByPrimaryKey(spFiles.getObjid());
         spFiles.setObjcode(spFiles.getObjid());
-        BdEquipment bdEquipment = bdEquipmentService.getBdEquipmentByEId(spFiles.getCreateId());//字段接口调用将eid放在CreateId中
-        if (bdEquipment != null) {
-            spFiles.setOrgCode(bdEquipment.getOrgCode());
-            spFiles.setOrgName(bdEquipment.getOrgName());
-            spFiles.setGaOwnerDept1(bdEquipment.getGaOwnerDept1());
-            spFiles.setGaOwnerDept2(bdEquipment.getGaOwnerDept2());
-            spFiles.setGaOwnerDept3(bdEquipment.getGaOwnerDept3());
-            spFiles.setGaOwnerDept4(bdEquipment.getGaOwnerDept4());
-            spFiles.setGaOwnerDept5(bdEquipment.getGaOwnerDept5());
+        SysDataOwnerDept sysDataOwnerDept = sysDataOwnerDeptService.selectByDeptId(spFiles.getOrgCode());
+        if (sysDataOwnerDept != null) {
+            spFiles.setGaOwnerDept1(sysDataOwnerDept.getOwnerDept1());
+            spFiles.setGaOwnerDept2(sysDataOwnerDept.getOwnerDept2());
+            spFiles.setGaOwnerDept3(sysDataOwnerDept.getOwnerDept3());
+            spFiles.setGaOwnerDept4(sysDataOwnerDept.getOwnerDept4());
+            spFiles.setGaOwnerDept5(sysDataOwnerDept.getOwnerDept5());
         }
         spFiles.setCreateTime(date);
         spFiles.setModerTime(date);

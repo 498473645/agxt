@@ -2,6 +2,8 @@ package com.pkusoft.ygjw.service.impl;
 
 import com.pkusoft.pzzx.po.BdEquipment;
 import com.pkusoft.pzzx.service.BdEquipmentService;
+import com.pkusoft.usercenter.po.SysDataOwnerDept;
+import com.pkusoft.usercenter.service.SysDataOwnerDeptService;
 import com.pkusoft.ygjw.mapper.PsTempDtlMapper;
 import com.pkusoft.ygjw.mapper.PsTempMapper;
 import com.pkusoft.ygjw.model.PsTemp;
@@ -32,6 +34,9 @@ public class PsTempDtlServiceImpl implements PsTempDtlService {
 
     @Autowired
     private BdEquipmentService bdEquipmentService;
+
+    @Autowired
+    private SysDataOwnerDeptService sysDataOwnerDeptService;
 
     public List<PsTempDtl> getPsTempDtlList(PsTempDtlReqParam psTempDtlReqParam, Map<String, String> map) {
 
@@ -82,16 +87,23 @@ public class PsTempDtlServiceImpl implements PsTempDtlService {
         Date date = new Date();
         psTempDtl.setCreateTime(date);
         psTempDtl.setModerTime(date);
-        //根据设备唯一标识码获取设备信息
-        BdEquipment bdEquipment = bdEquipmentService.getBdEquipmentByEId(psTempDtl.getCreateId());//字段接口调用将eid放在CreateId中
-        if (bdEquipment != null) {
-            psTempDtl.setOrgCode(bdEquipment.getOrgCode());
-            psTempDtl.setOrgName(bdEquipment.getOrgName());
-            psTempDtl.setOwnOrg1(bdEquipment.getGaOwnerDept1());
-            psTempDtl.setOwnOrg2(bdEquipment.getGaOwnerDept2());
-            psTempDtl.setOwnOrg3(bdEquipment.getGaOwnerDept3());
-            psTempDtl.setOwnOrg4(bdEquipment.getGaOwnerDept4());
-            psTempDtl.setOwnOrg5(bdEquipment.getGaOwnerDept5());
+        SysDataOwnerDept sysDataOwnerDept = sysDataOwnerDeptService.selectByDeptId(map.get("deptId"));
+        if (sysDataOwnerDept != null) {
+            if (org.springframework.util.StringUtils.hasText(sysDataOwnerDept.getOwnerDept1())) {
+                psTempDtl.setOwnOrg1(sysDataOwnerDept.getOwnerDept1());
+            }
+            if (org.springframework.util.StringUtils.hasText(sysDataOwnerDept.getOwnerDept2())) {
+                psTempDtl.setOwnOrg2(sysDataOwnerDept.getOwnerDept2());
+            }
+            if (org.springframework.util.StringUtils.hasText(sysDataOwnerDept.getOwnerDept3())) {
+                psTempDtl.setOwnOrg3(sysDataOwnerDept.getOwnerDept3());
+            }
+            if (org.springframework.util.StringUtils.hasText(sysDataOwnerDept.getOwnerDept4())) {
+                psTempDtl.setOwnOrg4(sysDataOwnerDept.getOwnerDept4());
+            }
+            if (org.springframework.util.StringUtils.hasText(sysDataOwnerDept.getOwnerDept5())) {
+                psTempDtl.setOwnOrg5(sysDataOwnerDept.getOwnerDept5());
+            }
         }
         int num = psTempDtlMapper.insertSelective(psTempDtl);
         return num;
