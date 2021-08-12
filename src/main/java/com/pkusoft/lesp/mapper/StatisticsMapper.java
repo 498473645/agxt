@@ -36,6 +36,9 @@ public interface StatisticsMapper extends Mapper<StatisticsData> {
 //    StatisticsData getZjqsJjData(@Param("deptId") String deptId);
 //    StatisticsData getZjqsYbjData(@Param("deptId") String deptId);
 
+    /**
+     ********************************************查询资源库的统计方法******************************************************
+     */
     StatisticsData getSmbaData(@Param("deptId") String deptId,@Param("deptLevel") String deptLevel, @Param("year") String year, @Param("month") String month, @Param("day") String day);
     List<StatisticsData> getYbafsdbData(@Param("deptId") String deptId,@Param("deptLevel") String deptLevel, @Param("year") String year, @Param("month") String month, @Param("day") String day);
     List<StatisticsData> getYbaclztfxData(@Param("deptId") String deptId,@Param("deptLevel") String deptLevel, @Param("year") String year, @Param("month") String month, @Param("day") String day);
