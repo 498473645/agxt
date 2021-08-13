@@ -4,6 +4,7 @@ package com.pkusoft.ygjw.controller;
 import com.pkusoft.usercenterproxy.UserCenterProxyHelper;
 import com.pkusoft.ygjw.model.PsApprs;
 import com.pkusoft.ygjw.req.PsApprsReqParam;
+import com.pkusoft.ygjw.req.PsApprsYgjwReqParam;
 import com.pkusoft.ygjw.service.PsApprsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -159,12 +160,15 @@ public class PsApprsController  {
     @ApiOperation(value = "新增或修改评议监督业务数据(阳光警务客户端调用)", notes = "新增或修改评议监督业务数据(阳光警务客户端调用)", httpMethod = "POST")
     @RequestMapping("/psApprs/psApprsSaveOrUpdateYGJW")
     @ResponseBody
-    public ResponseData<PsApprs> psApprsSaveOrUpdateYGJW(@RequestBody PsApprs psApprs, HttpServletRequest request){
+    public ResponseData<PsApprs> psApprsSaveOrUpdateYGJW(@RequestBody PsApprsYgjwReqParam psApprs, HttpServletRequest request){
         try {
             int num = 0;
             //获取当前操作用户信息
             Map<String, String> user = userCenterProxyHelper.getUser(request);
-            PsApprs oldPsApprs = psApprsService.getPsApprs(psApprs.getId());
+            PsApprs oldPsApprs = null;
+            if (StringUtils.hasText(psApprs.getId())){
+                oldPsApprs = psApprsService.getPsApprs(psApprs.getId());
+            }
             if(oldPsApprs==null) {
                 //添加评议监督业务数据
                 num = psApprsService.psApprsSave(psApprs, user);
@@ -180,6 +184,35 @@ public class PsApprsController  {
             logger.error("增加/修改评议监督业务数据错误",e);
             e.printStackTrace();
             return new ResponseData(ResponseData.STATUS_CODE_OTHER, "增加/修改评议监督业务数据错误"+e.getMessage(),null);
+        }
+    }
+
+    /**
+     * 根据身份证号查询评议监督业务数据
+     * @return
+     */
+    @ApiOperation(value="根据身份证号查询评议监督业务数据", notes="根据身份证号查询评议监督业务数据", httpMethod="POST")
+    @RequestMapping(value = "/psApprs/psApprsListByIdcard", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    public ResponseData<List<PsApprs>> psApprsListByIdcard(HttpServletRequest request, @RequestBody Map<String,String> map){
+        String idcard = map.get("idcard");
+        if (!StringUtils.hasText(idcard)){
+            return new ResponseData<>(ResponseData.STATUS_CODE_PARAM, "参数为空");
+        }
+        ResponseDto<List<PsApprs>> dto = new ResponseDto<List<PsApprs>>();
+        try{
+            Map<String, String> user = new HashMap<>();
+            List<PsApprs> list = psApprsService.psApprsListByIdcard(idcard);
+//            int count = psApprsService.getPsApprsCount(idcard,user);
+            dto.setData(list);
+//            dto.setCount(count);
+            dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
+            dto.setStatusMsg("根据身份证号查询评议监督业务数据成功");
+            return dto;
+        }catch(Exception e){
+            logger.error("根据身份证号查询评议监督业务数据错误",e);
+            e.printStackTrace();
+            return new ResponseData<>(ResponseData.STATUS_CODE_OTHER,"根据身份证号查询评议监督业务数据错误"+e.getMessage());
         }
     }
 

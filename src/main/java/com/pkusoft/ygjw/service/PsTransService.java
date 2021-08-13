@@ -19,6 +19,8 @@ public interface PsTransService {
     */
     List<PsTrans> getPsTransList(PsTransReqParam psTransReqParam, Map<String, String> map);
 
+    List<PsTrans> getPsTransListByIdcard(String idcard);
+
     /**
     * 查询总数
     * @param map	查询条件集合

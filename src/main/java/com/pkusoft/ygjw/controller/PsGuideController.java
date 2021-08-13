@@ -203,14 +203,14 @@ public class PsGuideController  {
     }
 
     /**
-     * 查询材料模板明细表
+     * 查询报案/办事指引表
      * @param psTempDtlReqParam
      * @return
      */
-    @ApiOperation(value="查询材料模板明细表", notes="查询材料模板明细表", httpMethod="POST")
+    @ApiOperation(value="查询报案/办事指引表", notes="查询报案/办事指引表", httpMethod="POST")
     @RequestMapping(value = "/psGuide/getPsGuideTypeList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public ResponseData<List<PsGuide>> psTempDtlList(HttpServletRequest request, @RequestBody PsGuideReqParam psTempDtlReqParam){
+    public ResponseData<List<PsGuide>> getPsGuideTypeList(HttpServletRequest request, @RequestBody PsGuideReqParam psTempDtlReqParam){
         ResponseDto<List<PsGuide>> dto = new ResponseDto<List<PsGuide>>();
         try{
             Map<String, String> user = userCenterProxyHelper.getUser(request);
@@ -219,12 +219,12 @@ public class PsGuideController  {
             dto.setData(list);
             dto.setCount(count);
             dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
-            dto.setStatusMsg("查询材料模板明细表数据成功");
+            dto.setStatusMsg("查询报案/办事指引表数据成功");
             return dto;
         }catch(Exception e){
-            logger.error("查询材料模板明细表数据错误",e);
+            logger.error("查询报案/办事指引表数据错误",e);
             e.printStackTrace();
-            return new ResponseData<>(ResponseData.STATUS_CODE_OTHER,"查询材料模板明细表数据错误"+e.getMessage());
+            return new ResponseData<>(ResponseData.STATUS_CODE_OTHER,"查询报案/办事指引表数据错误"+e.getMessage());
         }
     }
 

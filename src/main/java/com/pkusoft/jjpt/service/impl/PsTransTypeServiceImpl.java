@@ -4,6 +4,7 @@ import java.util.*;
 
 import com.pkusoft.jjpt.mapper.PsTransTypeMapper;
 import com.pkusoft.jjpt.po.PsTransType;
+import com.pkusoft.jjpt.req.PsTransTypeReqParam;
 import com.pkusoft.jjpt.service.PsTransTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,6 +41,29 @@ public class PsTransTypeServiceImpl implements PsTransTypeService {
         //The query conditions are edited here
         if (StringUtils.hasText(map.get("type"))){
             criteria.andEqualTo("type",map.get("type").toString());
+        }
+        return psTransTypeMapper.selectCountByExample(example);
+    }
+
+    public List<PsTransType> getPsTransTypeList(PsTransTypeReqParam psTransType, Map<String, String> map) {
+
+        RowBounds rowBounds = new RowBounds(psTransType.getStart(),psTransType.getPageSize());
+        Example example = new Example(PsTransType.class);
+        Example.Criteria criteria = example.createCriteria();
+        //The query conditions are edited here
+        if (StringUtils.hasText(psTransType.getCode())){
+            criteria.andEqualTo("code",psTransType.getCode());
+        }
+        return psTransTypeMapper.selectByExampleAndRowBounds(example,rowBounds);
+    }
+
+    public int getPsTransTypeCount(PsTransTypeReqParam psTransType,Map<String, String> map) {
+
+        Example example = new Example(PsTransType.class);
+        Example.Criteria criteria = example.createCriteria();
+        //The query conditions are edited here
+        if (StringUtils.hasText(psTransType.getCode())){
+            criteria.andEqualTo("code",psTransType.getCode());
         }
         return psTransTypeMapper.selectCountByExample(example);
     }

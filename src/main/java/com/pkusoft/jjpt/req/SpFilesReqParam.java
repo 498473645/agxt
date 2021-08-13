@@ -21,7 +21,7 @@ public class SpFilesReqParam extends Page {
     private String objname;     //材料名称
 
     @Column(name = "OBJTYPE")
-    private String objtype;     //材料类型编号：0001-报案图片材料，0002-指纹，0003-签名，0004-报案上传材料，0005-关联笔录，0009-现场笔录pdf文件
+    private String objtype;     //材料类型编号：0001-报案图片材料，0002-指纹，0003-签名，0004-报案上传材料，0005-关联笔录，0009-现场笔录pdf文件,0101-办理事务材料，0102-评议监督材料
 
     @Column(name = "FILETYPE")
     private String filetype;     //文件类型

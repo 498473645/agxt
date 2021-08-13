@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.pkusoft.jjpt.po.PsTransType;
+import com.pkusoft.jjpt.req.PsTransTypeReqParam;
 
 
 public interface PsTransTypeService {
@@ -21,6 +22,20 @@ public interface PsTransTypeService {
     * @return
     */
     int getPsTransTypeCount(Map<String, String> map);
+
+    /**
+     * 查询业务类型集合
+     * @param map	查询条件集合
+     * @return
+     */
+    List<PsTransType> getPsTransTypeList(PsTransTypeReqParam psTransType, Map<String, String> map);
+
+    /**
+     * 查询业务类型总数
+     * @param map	查询条件集合
+     * @return
+     */
+    int getPsTransTypeCount(PsTransTypeReqParam psTransType,Map<String, String> map);
 
     /**
     * 新增业务类型

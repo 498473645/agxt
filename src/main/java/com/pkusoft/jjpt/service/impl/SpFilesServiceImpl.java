@@ -12,6 +12,7 @@ import com.pkusoft.pzzx.service.BdEquipmentService;
 import com.pkusoft.usercenter.po.SysDataOwnerDept;
 import com.pkusoft.usercenter.service.SysDataOwnerDeptService;
 import org.apache.ibatis.session.RowBounds;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -215,6 +216,23 @@ public class SpFilesServiceImpl implements SpFilesService {
         }
         int num = this.doSpFilesSave(spFiles,map);
         return num;
+    }
+
+    public int spFilesSaveFromWechat(SpFilesReqParam spFilesReqParam){
+        SpFiles spFiles = new SpFiles();
+        BeanUtils.copyProperties(spFilesReqParam,spFiles);
+        if (StringUtils.hasText(spFilesReqParam.getContentBase64())){
+            String ret = hadoopService.hadoopFileUpload(spFilesReqParam.getContentBase64());
+            if (StringUtils.hasText(ret) && !"error".equals(ret) && !"exception".equals(ret)) {
+                spFiles.setPapersPhoto(ret);
+                spFilesReqParam.setPapersPhoto(ret);
+            }else {
+                return -1;
+            }
+        }else {
+            return -2;
+        }
+        return this.spFilesSaveYGJW(spFiles);
     }
 
     public int spFilesSaveYGJW(SpFiles spFiles){

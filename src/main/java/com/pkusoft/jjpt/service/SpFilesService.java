@@ -55,6 +55,13 @@ public interface SpFilesService {
     int spFilesSaveYGJW(SpFiles spFiles);
 
     /**
+     * 微信端单个材料上传
+     * @param spFiles
+     * @return
+     */
+    int spFilesSaveFromWechat(SpFilesReqParam spFiles);
+
+    /**
      * 基础保存
      * @param spFiles
      * @param map

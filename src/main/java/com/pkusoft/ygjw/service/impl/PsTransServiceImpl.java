@@ -30,6 +30,14 @@ public class PsTransServiceImpl implements PsTransService {
     @Autowired
     private SysDataOwnerDeptService sysDataOwnerDeptService;
 
+    public List<PsTrans> getPsTransListByIdcard(String idcard) {
+        Example example = new Example(PsTrans.class);
+        Example.Criteria criteria = example.createCriteria();
+        example.setOrderByClause("CREATE_TIME DESC");
+        criteria.andEqualTo("repIdcard",idcard);
+        return psTransMapper.selectByExample(example);
+    }
+
     public List<PsTrans> getPsTransList(PsTransReqParam psTransReqParam, Map<String, String> map) {
 
         RowBounds rowBounds = new RowBounds(psTransReqParam.getStart(),psTransReqParam.getPageSize());

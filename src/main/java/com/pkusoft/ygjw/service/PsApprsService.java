@@ -2,6 +2,7 @@ package com.pkusoft.ygjw.service;
 
 import com.pkusoft.ygjw.model.PsApprs;
 import com.pkusoft.ygjw.req.PsApprsReqParam;
+import com.pkusoft.ygjw.req.PsApprsYgjwReqParam;
 
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,13 @@ public interface PsApprsService {
     List<PsApprs> getPsApprsList(PsApprsReqParam psApprsReqParam, Map<String, String> map);
 
     /**
+     * 根据身份证号查询评议监督业务数据
+     * @param idcard
+     * @return
+     */
+    List<PsApprs> psApprsListByIdcard(String idcard);
+
+    /**
     * 查询总数
     * @param map	查询条件集合
     * @return
@@ -27,12 +35,28 @@ public interface PsApprsService {
     int getPsApprsCount(PsApprsReqParam psApprsReqParam, Map<String, String> map);
 
     /**
+     * 新增
+     * @param psApprs
+     * @param map	用户集合
+     * @return
+     */
+    int psApprsSave(PsApprs psApprs, Map<String, String> map);
+
+    /**
+     * 修改
+     * @param psApprs
+     * @param map	用户集合
+     * @return
+     */
+    int psApprsUpdate(PsApprs psApprs, Map<String, String> map);
+
+    /**
     * 新增
     * @param psApprs	
     * @param map	用户集合
     * @return
     */
-    int psApprsSave(PsApprs psApprs, Map<String, String> map);
+    int psApprsSave(PsApprsYgjwReqParam psApprs, Map<String, String> map);
 
     /**
     * 修改
@@ -40,7 +64,7 @@ public interface PsApprsService {
     * @param map	用户集合
     * @return
     */
-    int psApprsUpdate(PsApprs psApprs, Map<String, String> map);
+    int psApprsUpdate(PsApprsYgjwReqParam psApprs, Map<String, String> map);
 
     /**
     * 根据主键ID查看规则信息详情

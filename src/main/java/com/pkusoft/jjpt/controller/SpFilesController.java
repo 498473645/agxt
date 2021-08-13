@@ -211,6 +211,36 @@ public class SpFilesController  {
     }
 
     /**
+     * 新增材料信息表(阳光警务服务专用)
+     * @return
+     */
+    @ApiOperation(value = "新增材料信息表(阳光警务服务专用)", notes = "新增材料信息表(阳光警务服务专用)", httpMethod = "POST")
+    @RequestMapping("/spFiles/spFilesSaveFromWechat")
+    @ResponseBody
+    public ResponseData<String> spFilesSaveFromWechat(@RequestBody SpFilesReqParam spFilesReqParam, HttpServletRequest request){
+        try {
+            int num = 0;
+            //获取当前操作用户信息
+            SpFiles spFiles = new SpFiles();
+            BeanUtils.copyProperties(spFilesReqParam,spFiles);
+            //添加接警平台材料信息表
+            num = spFilesService.spFilesSaveFromWechat(spFilesReqParam);
+            if (num>0){
+                return new ResponseData<String>(ResponseData.STATUS_CODE_SUCCESS,"操作成功", spFilesReqParam.getPapersPhoto());
+            }else if (num==-1){
+                return new ResponseData<String>(ResponseData.STATUS_CODE_OTHER,"材料上传失败");
+            }else if (num==-2){
+                return new ResponseData<String>(ResponseData.STATUS_CODE_OTHER,"材料内容不能为空");
+            }
+            return new ResponseData<String>(ResponseData.STATUS_CODE_OTHER,"操作失败");
+        }catch (Exception e) {
+            logger.error("增加/修改接警平台材料信息表错误",e);
+            e.printStackTrace();
+            return new ResponseData(ResponseData.STATUS_CODE_OTHER, "增加/修改接警平台材料信息表错误"+e.getMessage());
+        }
+    }
+
+    /**
      * 查看接警平台材料信息表详情
      * @return
      */

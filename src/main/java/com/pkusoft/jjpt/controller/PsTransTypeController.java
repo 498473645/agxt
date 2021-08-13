@@ -1,13 +1,17 @@
 package com.pkusoft.jjpt.controller;
 
 import com.pkusoft.jjpt.po.PsTransType;
+import com.pkusoft.jjpt.req.PsTransTypeReqParam;
 import com.pkusoft.jjpt.service.PsTransTypeService;
 import com.pkusoft.usercenter.sysdicitem.SysDicItemValue;
+import com.pkusoft.usercenterproxy.UserCenterProxyHelper;
 import com.pkusoft.usercenterproxy.vo.DicItemVo;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.support.commons.springmvc.ControllerUtil;
 import org.support.commons.springmvc.ResponseData;
+import pkubatis.common.base.ResponseDto;
 import pkubatis.model.GridResult;
 import pkubatis.model.JsonResult;
 
@@ -34,9 +39,9 @@ public class PsTransTypeController {
     @Autowired
     private PsTransTypeService psTransTypeService;
 
-    /***获取代理用户信息服务类
+    /***获取代理用户信息服务类*/
      @Autowired
-     private UserCenterProxyHelper userCenterProxyHelper;*/
+     private UserCenterProxyHelper userCenterProxyHelper;
 
     /**
      * 查询业务类型
@@ -61,6 +66,31 @@ public class PsTransTypeController {
 
         }
         return dto;
+    }
+
+    /**
+     * 查询业务类型
+     * @return
+     */
+    @ApiOperation(value="查询业务类型", notes="查询业务类型", httpMethod="POST")
+    @RequestMapping(value = "/psTransType/getPsTransTypeList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    public ResponseData<List<PsTransType>> getPsTransTypeList(HttpServletRequest request, @RequestBody PsTransTypeReqParam psTransType){
+        ResponseDto<List<PsTransType>> dto = new ResponseDto<List<PsTransType>>();
+        try{
+            Map<String, String> user = userCenterProxyHelper.getUser(request);
+            List<PsTransType> list = psTransTypeService.getPsTransTypeList(psTransType,user);
+            int count = psTransTypeService.getPsTransTypeCount(psTransType,user);
+            dto.setData(list);
+            dto.setCount(count);
+            dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
+            dto.setStatusMsg("查询业务类型数据成功");
+            return dto;
+        }catch(Exception e){
+            logger.error("查询业务类型数据错误",e);
+            e.printStackTrace();
+            return new ResponseData<>(ResponseData.STATUS_CODE_OTHER,"查询业务类型");
+        }
     }
 
     /**

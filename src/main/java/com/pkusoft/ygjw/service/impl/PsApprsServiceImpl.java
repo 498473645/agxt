@@ -1,24 +1,27 @@
 package com.pkusoft.ygjw.service.impl;
 
+import com.pkusoft.jjpt.po.SpFiles;
+import com.pkusoft.jjpt.service.SpFilesService;
 import com.pkusoft.pzzx.po.BdEquipment;
 import com.pkusoft.pzzx.service.BdEquipmentService;
 import com.pkusoft.usercenter.po.SysDataOwnerDept;
 import com.pkusoft.usercenter.service.SysDataOwnerDeptService;
 import com.pkusoft.ygjw.mapper.PsApprsMapper;
 import com.pkusoft.ygjw.model.PsApprs;
+import com.pkusoft.ygjw.model.PsTrans;
 import com.pkusoft.ygjw.req.PsApprsReqParam;
+import com.pkusoft.ygjw.req.PsApprsYgjwReqParam;
 import com.pkusoft.ygjw.service.PsApprsService;
+import com.pkusoft.ygjw.service.PsTransService;
 import org.apache.ibatis.session.RowBounds;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import tk.mybatis.mapper.entity.Example;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @Transactional
@@ -33,6 +36,12 @@ public class PsApprsServiceImpl implements PsApprsService {
     @Autowired
     private SysDataOwnerDeptService sysDataOwnerDeptService;
 
+    @Autowired
+    private PsTransService psTransService;
+
+    @Autowired
+    private SpFilesService spFilesService;
+
     public List<PsApprs> getPsApprsList(PsApprsReqParam psApprsReqParam, Map<String, String> map) {
 
         RowBounds rowBounds = new RowBounds(psApprsReqParam.getStart(),psApprsReqParam.getPageSize());
@@ -45,6 +54,23 @@ public class PsApprsServiceImpl implements PsApprsService {
             return psApprsMapper.selectByExample(example);
         }
         return psApprsMapper.selectByExampleAndRowBounds(example,rowBounds);
+    }
+
+    public List<PsApprs> psApprsListByIdcard(String idcard) {
+        List<PsTrans> psTransList = psTransService.getPsTransListByIdcard(idcard);
+        List<String> tranIdList = new ArrayList<>();
+        for (PsTrans psTrans:psTransList){
+            tranIdList.add(psTrans.getId());
+        }
+        if (!tranIdList.isEmpty()){
+            Example example = new Example(PsApprs.class);
+            Example.Criteria criteria = example.createCriteria();
+            //The query conditions are edited here
+            example.setOrderByClause("CREATE_TIME DESC");
+            criteria.andIn("transId",tranIdList);
+            return psApprsMapper.selectByExample(example);
+        }
+        return new ArrayList<>();
     }
 
     public int getPsApprsCount(PsApprsReqParam psApprsReqParam, Map<String, String> map) {
@@ -93,6 +119,7 @@ public class PsApprsServiceImpl implements PsApprsService {
         psApprs.setApTime(date);
         psApprs.setCreateTime(date);
         psApprs.setModerTime(date);
+
         SysDataOwnerDept sysDataOwnerDept = sysDataOwnerDeptService.selectByDeptId(psApprs.getOrgCode());
         if (sysDataOwnerDept != null) {
             psApprs.setOwnOrg1(sysDataOwnerDept.getOwnerDept1());
@@ -106,6 +133,56 @@ public class PsApprsServiceImpl implements PsApprsService {
     }
 
     public int psApprsUpdate(PsApprs psApprs, Map<String,String> map){
+        Date date = new Date();
+        psApprs.setModerTime(date);
+        psApprs.setHandlerId(map.get("userId"));
+        psApprs.setHandlerName(map.get("userName"));
+        psApprs.setHandleTime(date);
+        int num = psApprsMapper.updateByPrimaryKeySelective(psApprs);
+        return num;
+    }
+
+    public int psApprsSave(PsApprsYgjwReqParam psApprsYgjwReqParam, Map<String,String> map){
+        PsApprs psApprs = new PsApprs();
+        BeanUtils.copyProperties(psApprsYgjwReqParam,psApprs);
+        if (!StringUtils.hasText(psApprs.getId())){
+            String id = UUID.randomUUID().toString();
+            psApprs.setId(id);
+        }
+        psApprs.setStatus("2010");
+        Date date = new Date();
+        psApprs.setApTime(date);
+        psApprs.setCreateTime(date);
+        psApprs.setModerTime(date);
+        PsTrans psTrans = psTransService.getPsTrans(psApprs.getTransId());
+        if (psTrans!=null){
+            psApprs.setOrgCode(psTrans.getOrgCode());
+            psApprs.setOrgName(psTrans.getOrgName());
+            psApprs.setOwnOrg1(psTrans.getOwnOrg1());
+            psApprs.setOwnOrg2(psTrans.getOwnOrg2());
+            psApprs.setOwnOrg3(psTrans.getOwnOrg3());
+            psApprs.setOwnOrg4(psTrans.getOwnOrg4());
+            psApprs.setOwnOrg5(psTrans.getOwnOrg5());
+            psApprs.setDataType(psTrans.getDataType());
+            psApprs.setType(psTrans.getType());
+            psApprs.setName(psTrans.getName());
+            psApprs.setTransCode(psTrans.getCode());
+        }
+        int num = psApprsMapper.insertSelective(psApprs);
+        if (num>0 && "1".equals(psApprs.getDataType()) && !psApprsYgjwReqParam.getMultiFilePaths().isEmpty()){
+            // 关联材料
+            List<String> files = psApprsYgjwReqParam.getMultiFilePaths();
+            for (String fileId:files) {
+                SpFiles spFiles = spFilesService.getSpFiles(fileId);
+                spFiles.setTempDtlId(psApprs.getId());
+            }
+        }
+        return num;
+    }
+
+    public int psApprsUpdate(PsApprsYgjwReqParam psApprsYgjwReqParam, Map<String,String> map){
+        PsApprs psApprs = new PsApprs();
+        BeanUtils.copyProperties(psApprsYgjwReqParam,psApprs);
         Date date = new Date();
         psApprs.setModerTime(date);
         psApprs.setHandlerId(map.get("userId"));
