@@ -202,6 +202,31 @@ public class PsGuideController  {
         }
     }
 
+    /**
+     * 查询材料模板明细表
+     * @param psTempDtlReqParam
+     * @return
+     */
+    @ApiOperation(value="查询材料模板明细表", notes="查询材料模板明细表", httpMethod="POST")
+    @RequestMapping(value = "/psGuide/getPsGuideTypeList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    public ResponseData<List<PsGuide>> psTempDtlList(HttpServletRequest request, @RequestBody PsGuideReqParam psTempDtlReqParam){
+        ResponseDto<List<PsGuide>> dto = new ResponseDto<List<PsGuide>>();
+        try{
+            Map<String, String> user = userCenterProxyHelper.getUser(request);
+            List<PsGuide> list = psGuideService.getPsGuideList(psTempDtlReqParam,user);
+            int count = psGuideService.getPsGuideCount(psTempDtlReqParam,user);
+            dto.setData(list);
+            dto.setCount(count);
+            dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
+            dto.setStatusMsg("查询材料模板明细表数据成功");
+            return dto;
+        }catch(Exception e){
+            logger.error("查询材料模板明细表数据错误",e);
+            e.printStackTrace();
+            return new ResponseData<>(ResponseData.STATUS_CODE_OTHER,"查询材料模板明细表数据错误"+e.getMessage());
+        }
+    }
 
     /**
      * 查询报警办事类型集合
