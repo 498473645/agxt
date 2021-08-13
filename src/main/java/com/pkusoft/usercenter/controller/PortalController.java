@@ -109,6 +109,23 @@ public class PortalController {
 	}
 
 	/**
+	 * Get system user information
+	 * @param request
+	 * @return
+	 */
+	@ApiOperation(value="获取单位信息", notes="获取单位信息",httpMethod = "POST")
+	@RequestMapping(value = "/getDeptInfo", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseData<SysDept> getDeptInfo(@RequestBody(required = false) SysDept dept,HttpServletRequest request) {
+		try {
+			SysDept sysDept = sysDeptService.getSysDept(dept.getDeptId());
+			return new ResponseData<SysDept>(ResponseData.STATUS_CODE_SUCCESS,"操作成功", sysDept);
+		}catch(Exception e) {
+			log.error("获取系统用户单位信息出错", e.getMessage());
+			return new ResponseData<SysDept>(ResponseData.STATUS_CODE_BIZ,"获取系统用户单位信息失败", null);
+		}
+	}
+
+	/**
 	 * Get system user role
 	 * @param request
 	 * @return

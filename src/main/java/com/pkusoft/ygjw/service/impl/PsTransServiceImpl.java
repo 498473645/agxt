@@ -95,6 +95,7 @@ public class PsTransServiceImpl implements PsTransService {
         Date date = new Date();
         psTrans.setCreateTime(date);
         psTrans.setModerTime(date);
+        psTrans.setRepTime(date);
         SysDataOwnerDept sysDataOwnerDept = sysDataOwnerDeptService.selectByDeptId(psTrans.getOrgCode());
         if (sysDataOwnerDept != null) {
             psTrans.setOwnOrg1(sysDataOwnerDept.getOwnerDept1());

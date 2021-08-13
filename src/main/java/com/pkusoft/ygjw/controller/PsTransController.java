@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author 
+ * @author
  *  相关操作
  */
 @Api(value="",tags={"阳光警务相关业务"})
@@ -97,7 +97,7 @@ public class PsTransController  {
             return new ResponseData<>(ResponseData.STATUS_CODE_OTHER, "增加/修改事务数据错误"+e.getMessage(),null);
         }
     }
-    
+
     /**
     * 查看事务数据
     * @param map
@@ -164,13 +164,18 @@ public class PsTransController  {
             int num = 0;
             //获取当前操作用户信息
             Map<String, String> user = new HashMap<>();
-            PsTrans oldPsTrans = psTransService.getPsTrans(psTrans.getId());
-            if(oldPsTrans==null) {
+            if(StringUtils.hasText(psTrans.getId())){
+                PsTrans oldPsTrans = psTransService.getPsTrans(psTrans.getId());
+                if(oldPsTrans==null) {
+                    //添加事务数据
+                    num = psTransService.psTransSave(psTrans, user);
+                }else{
+                    //修改事务数据
+                    num = psTransService.psTransUpdate(psTrans, user);
+                }
+            }else{
                 //添加事务数据
                 num = psTransService.psTransSave(psTrans, user);
-            }else{
-                //修改事务数据
-                num = psTransService.psTransUpdate(psTrans, user);
             }
             if (num>0){
                 return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS,"操作成功");
