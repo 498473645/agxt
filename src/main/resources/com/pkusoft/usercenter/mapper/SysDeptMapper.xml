@@ -129,7 +129,7 @@
         </if>
         <if test="deptLevel != null and deptLevel != '' and deptLevel &lt;= '3'.toString()">
             OR DEPT_LEVEL = '3' and RESERVE4='1'
-            AND DEPT_NAME like '%分局%'
+            AND DEPT_NAME not like '%支队%'
             <if test="deptLevel == '2'.toString()">
                 AND CUNITID = #{deptId,jdbcType=VARCHAR}
             </if>
