@@ -230,7 +230,10 @@ public class SpFilesServiceImpl implements SpFilesService {
         BeanUtils.copyProperties(spFilesReqParam,spFiles);
         // 上传材料至dfs，并保存地址
         if (StringUtils.hasText(spFilesReqParam.getContentBase64())){
-            String ret = hadoopService.hadoopFileUpload(spFilesReqParam.getContentBase64());
+            String base64Str = spFilesReqParam.getContentBase64().replace("data:image/jpeg;base64,","")
+                    .replace("data:image/png;base64,","").replace("data:image/jpg;base64,","")
+                    .replace("data:image/bmp;base64,","");
+            String ret = hadoopService.hadoopFileUpload(base64Str);
             if (StringUtils.hasText(ret) && !"error".equals(ret) && !"exception".equals(ret)) {
                 spFiles.setPapersPhoto(ret);
 //                spFilesReqParam.setPapersPhoto(ret);
