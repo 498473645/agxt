@@ -2,10 +2,12 @@ package com.pkusoft.ygjw.service.impl;
 
 import com.pkusoft.jjpt.po.SpFiles;
 import com.pkusoft.jjpt.service.SpFilesService;
+import com.pkusoft.lesp.until.PermitType;
 import com.pkusoft.pzzx.po.BdEquipment;
 import com.pkusoft.pzzx.service.BdEquipmentService;
 import com.pkusoft.usercenter.po.SysDataOwnerDept;
 import com.pkusoft.usercenter.service.SysDataOwnerDeptService;
+import com.pkusoft.usercenter.service.SysPermitService;
 import com.pkusoft.ygjw.mapper.PsApprsMapper;
 import com.pkusoft.ygjw.model.PsApprs;
 import com.pkusoft.ygjw.model.PsTrans;
@@ -42,6 +44,9 @@ public class PsApprsServiceImpl implements PsApprsService {
     @Autowired
     private SpFilesService spFilesService;
 
+    @Autowired
+    private SysPermitService sysPermitService;
+
     public List<PsApprs> getPsApprsList(PsApprsReqParam psApprsReqParam, Map<String, String> map) {
 
         RowBounds rowBounds = new RowBounds(psApprsReqParam.getStart(),psApprsReqParam.getPageSize());
@@ -50,6 +55,7 @@ public class PsApprsServiceImpl implements PsApprsService {
         //The query conditions are edited here
         this.setCommonCondition(criteria,psApprsReqParam,map);
         example.setOrderByClause("CREATE_TIME DESC");
+        sysPermitService.setUserDataPermits(criteria,map, PermitType.PERMIT_TYPE_DEPT_QUERY);
         if(0 == psApprsReqParam.getPageSize()){
             return psApprsMapper.selectByExample(example);
         }
@@ -79,6 +85,7 @@ public class PsApprsServiceImpl implements PsApprsService {
         Example.Criteria criteria = example.createCriteria();
         //The query conditions are edited here
         this.setCommonCondition(criteria,psApprsReqParam,map);
+        sysPermitService.setUserDataPermits(criteria,map, PermitType.PERMIT_TYPE_DEPT_QUERY);
         example.setOrderByClause("CREATE_TIME DESC");
         return psApprsMapper.selectCountByExample(example);
     }
@@ -114,7 +121,7 @@ public class PsApprsServiceImpl implements PsApprsService {
             String id = UUID.randomUUID().toString();
             psApprs.setId(id);
         }
-        psApprs.setStatus("2010");
+        psApprs.setStatus("1001");
         Date date = new Date();
         psApprs.setApTime(date);
         psApprs.setCreateTime(date);
@@ -149,7 +156,7 @@ public class PsApprsServiceImpl implements PsApprsService {
             String id = UUID.randomUUID().toString();
             psApprs.setId(id);
         }
-        psApprs.setStatus("2010");
+        psApprs.setStatus("1001");
         Date date = new Date();
         psApprs.setApTime(date);
         psApprs.setCreateTime(date);
@@ -184,9 +191,7 @@ public class PsApprsServiceImpl implements PsApprsService {
         PsApprs psApprs = new PsApprs();
         BeanUtils.copyProperties(psApprsYgjwReqParam,psApprs);
         Date date = new Date();
-        psApprs.setModerTime(date);
-        psApprs.setHandlerId(map.get("userId"));
-        psApprs.setHandlerName(map.get("userName"));
+//        psApprs.setModerTime(date);
         psApprs.setHandleTime(date);
         int num = psApprsMapper.updateByPrimaryKeySelective(psApprs);
         return num;

@@ -54,7 +54,7 @@ public class PsApprsController  {
     public ResponseData<List<PsApprs>> psApprsList(HttpServletRequest request, @RequestBody PsApprsReqParam psApprsReqParam){
         ResponseDto<List<PsApprs>> dto = new ResponseDto<List<PsApprs>>();
         try{
-            Map<String, String> user = new HashMap<>();
+            Map<String, String> user = userCenterProxyHelper.getUser(request);
             List<PsApprs> list = psApprsService.getPsApprsList(psApprsReqParam,user);
             int count = psApprsService.getPsApprsCount(psApprsReqParam,user);
             dto.setData(list);
@@ -141,7 +141,7 @@ public class PsApprsController  {
         try {
             PsApprs psApprs = psApprsService.getPsApprsDetailsByTranId(transId);
             if (null == psApprs.getId()) {
-                return new ResponseData<PsApprs>(ResponseData.STATUS_CODE_SUCCESS, "未查询到数据", null);
+                return new ResponseData<PsApprs>(ResponseData.STATUS_CODE_OTHER, "未查询到数据", null);
             }
             return new ResponseData<PsApprs>(ResponseData.STATUS_CODE_SUCCESS,"操作成功",psApprs);
         }catch (Exception e){
@@ -190,7 +190,7 @@ public class PsApprsController  {
         try {
             int num = 0;
             //获取当前操作用户信息
-            Map<String, String> user = userCenterProxyHelper.getUser(request);
+            Map<String, String> user = new HashMap<>();
             PsApprs oldPsApprs = null;
             if (StringUtils.hasText(psApprs.getId())){
                 oldPsApprs = psApprsService.getPsApprs(psApprs.getId());

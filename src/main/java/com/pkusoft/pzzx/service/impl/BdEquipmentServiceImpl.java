@@ -66,7 +66,7 @@ public class BdEquipmentServiceImpl implements BdEquipmentService {
         if (StringUtils.hasText(bdEquipment.getEId())){
             criteria.andLike("eId","%"+bdEquipment.getEId()+"%");
         }
-        criteria.andEqualTo("orgCode",map.get("deptId"));
+//        criteria.andEqualTo("orgCode",map.get("deptId"));
     }
 
     public int bdEquipmentSave(BdEquipment bdEquipment, Map<String,String> map){
