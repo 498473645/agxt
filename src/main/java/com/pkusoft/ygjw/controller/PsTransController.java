@@ -213,4 +213,33 @@ public class PsTransController  {
         }
     }
 
+    /**
+     * 查询事务列表数据
+     * @return
+     */
+    @ApiOperation(value="查询事务列表数据", notes="查询事务列表数据", httpMethod="POST")
+    @RequestMapping(value = "/psTrans/getPsTransListByIdcard", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    public ResponseData<List<PsTrans>> getPsTransListByIdcard(HttpServletRequest request, @RequestBody Map<String,String> map){
+        ResponseDto<List<PsTrans>> dto = new ResponseDto<List<PsTrans>>();
+        try{
+            String idcard = map.get("idcard");
+            if (!StringUtils.hasText(idcard)){
+                return new ResponseData<>(ResponseData.STATUS_CODE_PARAM, "参数为空");
+            }
+            Map<String, String> user = new HashMap<>();
+            List<PsTrans> list = psTransService.getPsTransListByIdcard(idcard);
+//            int count = psTransService.getPsTransCount(psTransReqParam,user);
+            dto.setData(list);
+//            dto.setCount(count);
+            dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
+            dto.setStatusMsg("查询事务数据成功");
+            return dto;
+        }catch(Exception e){
+            logger.error("查询事务数据错误",e);
+            e.printStackTrace();
+            return new ResponseData<>(ResponseData.STATUS_CODE_OTHER,"查询事务数据错误"+e.getMessage());
+        }
+    }
+
 }

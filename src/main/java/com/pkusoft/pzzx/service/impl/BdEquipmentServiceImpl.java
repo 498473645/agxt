@@ -1,11 +1,13 @@
 package com.pkusoft.pzzx.service.impl;
 
+import com.pkusoft.lesp.until.PermitType;
 import com.pkusoft.pzzx.mapper.BdEquipmentMapper;
 import com.pkusoft.pzzx.po.BdEquipment;
 import com.pkusoft.pzzx.req.BdEquipmentReqParam;
 import com.pkusoft.pzzx.service.BdEquipmentService;
 import com.pkusoft.usercenter.po.SysDataOwnerDept;
 import com.pkusoft.usercenter.service.SysDataOwnerDeptService;
+import com.pkusoft.usercenter.service.SysPermitService;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +30,9 @@ public class BdEquipmentServiceImpl implements BdEquipmentService {
     @Autowired
     private SysDataOwnerDeptService sysDataOwnerDeptService;
 
+    @Autowired
+    private SysPermitService sysPermitService;
+
     public List<BdEquipment> getBdEquipmentList(BdEquipmentReqParam bdEquipment, Map<String, String> map) {
 
         RowBounds rowBounds = new RowBounds(bdEquipment.getStart(),bdEquipment.getPageSize());
@@ -36,6 +41,7 @@ public class BdEquipmentServiceImpl implements BdEquipmentService {
         //The query conditions are edited here
         this.setCommonCondition(criteria,bdEquipment,map);
         example.setOrderByClause("CREATE_TIME DESC");
+        sysPermitService.setUserDataPermits(criteria,map, PermitType.PERMIT_TYPE_DEPT_QUERY);
 
         return bdEquipmentMapper.selectByExampleAndRowBounds(example,rowBounds);
     }
@@ -46,6 +52,7 @@ public class BdEquipmentServiceImpl implements BdEquipmentService {
         Example.Criteria criteria = example.createCriteria();
         //The query conditions are edited here
         this.setCommonCondition(criteria,bdEquipment,map);
+        sysPermitService.setUserDataPermits(criteria,map, PermitType.PERMIT_TYPE_DEPT_QUERY);
         return bdEquipmentMapper.selectCountByExample(example);
     }
 

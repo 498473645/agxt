@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * @author 
@@ -311,6 +312,23 @@ public class PsTrans {
 
     @Column(name = "JJDBH")
     private String jjdbh;     //接警单编号
+
+    /**
+     * 接警时间
+     */
+    @Column(name = "JJSJ")
+    @ApiModelProperty(value = "报案/办事时间")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    private java.util.Date jjsj;
+
+    public Date getJjsj() {
+        return jjsj;
+    }
+
+    public void setJjsj(Date jjsj) {
+        this.jjsj = jjsj;
+    }
 
     public String getJjdbh() {
         return jjdbh;

@@ -226,11 +226,13 @@ public class SpFilesController  {
             //添加接警平台材料信息表
             num = spFilesService.spFilesSaveFromWechat(spFilesReqParam);
             if (num>0){
-                return new ResponseData<String>(ResponseData.STATUS_CODE_SUCCESS,"操作成功", spFilesReqParam.getPapersPhoto());
+                return new ResponseData<String>(ResponseData.STATUS_CODE_SUCCESS,"操作成功", spFilesReqParam.getObjid());
             }else if (num==-1){
                 return new ResponseData<String>(ResponseData.STATUS_CODE_OTHER,"材料上传失败");
             }else if (num==-2){
                 return new ResponseData<String>(ResponseData.STATUS_CODE_OTHER,"材料内容不能为空");
+            }else if (num==-3){
+                return new ResponseData<String>(ResponseData.STATUS_CODE_OTHER,"未能找到材料相关的预报警信息");
             }
             return new ResponseData<String>(ResponseData.STATUS_CODE_OTHER,"操作失败");
         }catch (Exception e) {

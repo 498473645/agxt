@@ -169,14 +169,14 @@ public class PsApprsServiceImpl implements PsApprsService {
             psApprs.setTransCode(psTrans.getCode());
         }
         int num = psApprsMapper.insertSelective(psApprs);
-        if (num>0 && "1".equals(psApprs.getDataType()) && !psApprsYgjwReqParam.getMultiFilePaths().isEmpty()){
-            // 关联材料
-            List<String> files = psApprsYgjwReqParam.getMultiFilePaths();
-            for (String fileId:files) {
-                SpFiles spFiles = spFilesService.getSpFiles(fileId);
-                spFiles.setTempDtlId(psApprs.getId());
-            }
-        }
+//        if (num>0 && "1".equals(psApprs.getDataType()) && !psApprsYgjwReqParam.getMultiFilePaths().isEmpty()){
+//            // 关联材料
+//            List<String> files = psApprsYgjwReqParam.getMultiFilePaths();
+//            for (String fileId:files) {
+//                SpFiles spFiles = spFilesService.getSpFiles(fileId);
+//                spFiles.setTempDtlId(psApprs.getId());
+//            }
+//        }
         return num;
     }
 

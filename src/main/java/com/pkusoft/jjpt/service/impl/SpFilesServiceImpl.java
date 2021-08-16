@@ -11,6 +11,8 @@ import com.pkusoft.pzzx.po.BdEquipment;
 import com.pkusoft.pzzx.service.BdEquipmentService;
 import com.pkusoft.usercenter.po.SysDataOwnerDept;
 import com.pkusoft.usercenter.service.SysDataOwnerDeptService;
+import com.pkusoft.ygjw.model.PsTrans;
+import com.pkusoft.ygjw.service.PsTransService;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +54,9 @@ public class SpFilesServiceImpl implements SpFilesService {
 
     @Autowired
     private SysDataOwnerDeptService sysDataOwnerDeptService;
+
+    @Autowired
+    private PsTransService psTransService;
 
     public List<SpFiles> getSpFilesListByYbj(SpFilesReqParam spFiles, Map<String, String> map) {
 
@@ -220,18 +225,30 @@ public class SpFilesServiceImpl implements SpFilesService {
 
     public int spFilesSaveFromWechat(SpFilesReqParam spFilesReqParam){
         SpFiles spFiles = new SpFiles();
+        String id = UUID.randomUUID().toString();
+        spFilesReqParam.setObjid(id);
         BeanUtils.copyProperties(spFilesReqParam,spFiles);
+        // 上传材料至dfs，并保存地址
         if (StringUtils.hasText(spFilesReqParam.getContentBase64())){
             String ret = hadoopService.hadoopFileUpload(spFilesReqParam.getContentBase64());
             if (StringUtils.hasText(ret) && !"error".equals(ret) && !"exception".equals(ret)) {
                 spFiles.setPapersPhoto(ret);
-                spFilesReqParam.setPapersPhoto(ret);
+//                spFilesReqParam.setPapersPhoto(ret);
             }else {
                 return -1;
             }
         }else {
             return -2;
         }
+        // 设置单位数据
+        PsTrans psTrans = psTransService.getPsTrans(spFilesReqParam.getTransId());
+        if (psTrans!=null){
+            spFiles.setOrgCode(psTrans.getOrgCode());
+            spFiles.setOrgName(psTrans.getOrgName());
+        }else {
+            return -3;
+        }
+        // 保存材料
         return this.spFilesSaveYGJW(spFiles);
     }
 
