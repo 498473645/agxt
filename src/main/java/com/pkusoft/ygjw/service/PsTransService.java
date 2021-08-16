@@ -19,7 +19,7 @@ public interface PsTransService {
     */
     List<PsTrans> getPsTransList(PsTransReqParam psTransReqParam, Map<String, String> map);
 
-    List<PsTrans> getPsTransListByIdcard(String idcard);
+    List<PsTrans> getPsTransListByIdcard(String idcard,String ly);
 
     /**
     * 查询总数

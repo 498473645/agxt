@@ -30,11 +30,14 @@ public class PsTransServiceImpl implements PsTransService {
     @Autowired
     private SysDataOwnerDeptService sysDataOwnerDeptService;
 
-    public List<PsTrans> getPsTransListByIdcard(String idcard) {
+    public List<PsTrans> getPsTransListByIdcard(String idcard,String ly) {
         Example example = new Example(PsTrans.class);
         Example.Criteria criteria = example.createCriteria();
         example.setOrderByClause("CREATE_TIME DESC");
         criteria.andEqualTo("repIdcard",idcard);
+        if (StringUtils.hasText(ly)){
+            criteria.andEqualTo("ly",ly);
+        }
         return psTransMapper.selectByExample(example);
     }
 

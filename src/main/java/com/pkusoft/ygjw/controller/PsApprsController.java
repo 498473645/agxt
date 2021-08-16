@@ -125,6 +125,32 @@ public class PsApprsController  {
         }
     }
 
+    /**
+     * 根据预报警id获取评议内容
+     * @param map
+     * @return
+     */
+    @ApiOperation(value="根据预报警id获取评议内容", notes="根据预报警id获取评议内容", httpMethod="POST")
+    @RequestMapping(value = "/psApprs/getPsApprsDetailsByTranId", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    public ResponseData<PsApprs> getPsApprsDetailsByTranId(@RequestBody Map map){
+        String transId = (String) map.get("transId");
+        if (!StringUtils.hasText(transId)){
+            return new ResponseData(ResponseData.STATUS_CODE_PARAM, "参数不能为空");
+        }
+        try {
+            PsApprs psApprs = psApprsService.getPsApprsDetailsByTranId(transId);
+            if (null == psApprs.getId()) {
+                return new ResponseData<PsApprs>(ResponseData.STATUS_CODE_SUCCESS, "未查询到数据", null);
+            }
+            return new ResponseData<PsApprs>(ResponseData.STATUS_CODE_SUCCESS,"操作成功",psApprs);
+        }catch (Exception e){
+            logger.error("根据预报警id获取评议内容错误",e);
+            e.printStackTrace();
+            return new ResponseData(ResponseData.STATUS_CODE_OTHER, "根据预报警id获取评议内容错误:"+e.getMessage());
+        }
+    }
+
 
 	/**
     * 删除评议监督业务数据

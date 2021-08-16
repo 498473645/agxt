@@ -57,7 +57,7 @@ public class PsApprsServiceImpl implements PsApprsService {
     }
 
     public List<PsApprs> psApprsListByIdcard(String idcard) {
-        List<PsTrans> psTransList = psTransService.getPsTransListByIdcard(idcard);
+        List<PsTrans> psTransList = psTransService.getPsTransListByIdcard(idcard,"");
         List<String> tranIdList = new ArrayList<>();
         for (PsTrans psTrans:psTransList){
             tranIdList.add(psTrans.getId());
@@ -194,6 +194,18 @@ public class PsApprsServiceImpl implements PsApprsService {
 
     public PsApprs getPsApprs(String id){
         return psApprsMapper.selectByPrimaryKey(id);
+    }
+
+    public PsApprs getPsApprsDetailsByTranId(String transId){
+        Example example = new Example(PsApprs.class);
+        example.setOrderByClause("AP_TIME desc");
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("transId",transId);
+        List<PsApprs> psApprsList = psApprsMapper.selectByExample(example);
+        if (psApprsList.isEmpty()){
+            return null;
+        }
+        return psApprsList.get(0);
     }
 
     public int psApprsDelete(String id){

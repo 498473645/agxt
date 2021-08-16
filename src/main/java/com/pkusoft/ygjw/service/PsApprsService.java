@@ -74,6 +74,13 @@ public interface PsApprsService {
     PsApprs getPsApprs(String id);
 
     /**
+     * 根据预报警id获取评议内容
+     * @param id
+     * @return
+     */
+    PsApprs getPsApprsDetailsByTranId(String id);
+
+    /**
     * 根据主键ID删除规则信息
     * @param id
     * @return

@@ -224,11 +224,12 @@ public class PsTransController  {
         ResponseDto<List<PsTrans>> dto = new ResponseDto<List<PsTrans>>();
         try{
             String idcard = map.get("idcard");
+            String ly = map.get("ly");
             if (!StringUtils.hasText(idcard)){
                 return new ResponseData<>(ResponseData.STATUS_CODE_PARAM, "参数为空");
             }
             Map<String, String> user = new HashMap<>();
-            List<PsTrans> list = psTransService.getPsTransListByIdcard(idcard);
+            List<PsTrans> list = psTransService.getPsTransListByIdcard(idcard,ly);
 //            int count = psTransService.getPsTransCount(psTransReqParam,user);
             dto.setData(list);
 //            dto.setCount(count);
