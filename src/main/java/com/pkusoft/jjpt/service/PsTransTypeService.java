@@ -80,6 +80,6 @@ public interface PsTransTypeService {
      * @param type
      * @return
      */
-    List<PsTransType> getPsTransTypeGroup(String type);
+    List<Map<String,String>> getPsTransTypeGroup(String type);
 
 }

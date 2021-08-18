@@ -227,18 +227,19 @@ public class PsTransTypeController {
      */
     @ApiOperation(value="获取报案/办事类型分组信息", notes="获取报案/办事类型分组信息",httpMethod = "POST")
     @RequestMapping(value = "/psTransType/getPsTransTypeGroup", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseData<List<DicItemVo>> getPsTransTypeGroup(@RequestBody Map map) {
+    @ResponseBody
+    public ResponseData<List<Map<String,String>>> getPsTransTypeGroup(@RequestBody Map map) {
         try {
             // 检查参数
             String type = (String) map.get("type");
             if (!StringUtils.hasText(type)){
                 return new ResponseData<>(ResponseData.STATUS_CODE_PARAM, "参数为空");
             }
-            List<PsTransType> psTransTypes = psTransTypeService.getPsTransTypeGroup(type);
-            return new ResponseData<List<DicItemVo>>(ResponseData.STATUS_CODE_SUCCESS,"操作成功", null);
+            List<Map<String,String>> psTransTypes = psTransTypeService.getPsTransTypeGroup(type);
+            return new ResponseData<List<Map<String,String>>>(ResponseData.STATUS_CODE_SUCCESS,"操作成功", psTransTypes);
         }catch(Exception e) {
             logger.error("获取报案/办事类型分组信息", e.getMessage());
-            return new ResponseData<List<DicItemVo>>(ResponseData.STATUS_CODE_BIZ,"获取报案/办事类型分组信息", null);
+            return new ResponseData<List<Map<String,String>>>(ResponseData.STATUS_CODE_BIZ,"获取报案/办事类型分组信息", null);
         }
     }
 

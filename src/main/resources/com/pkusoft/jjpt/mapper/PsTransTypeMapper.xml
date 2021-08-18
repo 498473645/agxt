@@ -36,7 +36,7 @@
 
     <!-- user-defined -->
 
-    <select id="getPsTransTypeGroup" resultType="com.pkusoft.jjpt.po.PsTransType">
-        SELECT T.* FROM PS_TRANS_TYPE T WHERE T.TYPE='02'
+    <select id="getPsTransTypeGroup" resultType="java.util.Map">
+        SELECT T.GROUP_NO,T.GROUP_NAME FROM PS_TRANS_TYPE T WHERE T.TYPE= #{type,jdbcType=VARCHAR} GROUP BY T.GROUP_NO,T.GROUP_NAME
     </select>
 </mapper>

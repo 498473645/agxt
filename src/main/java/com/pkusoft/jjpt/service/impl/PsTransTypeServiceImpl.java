@@ -127,8 +127,8 @@ public class PsTransTypeServiceImpl implements PsTransTypeService {
     }
 
     @Override
-    public List<PsTransType> getPsTransTypeGroup(String type) {
-        List<PsTransType> a = psTransTypeMapper.getPsTransTypeGroup();
+    public List<Map<String,String>> getPsTransTypeGroup(String type) {
+        List<Map<String,String>> a = psTransTypeMapper.getPsTransTypeGroup(type);
         return a;
     }
 
