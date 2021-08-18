@@ -6,6 +6,7 @@ import com.pkusoft.jjpt.mapper.PsTransTypeMapper;
 import com.pkusoft.jjpt.po.PsTransType;
 import com.pkusoft.jjpt.req.PsTransTypeReqParam;
 import com.pkusoft.jjpt.service.PsTransTypeService;
+import com.pkusoft.usercenterproxy.vo.DicItemVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -123,6 +124,12 @@ public class PsTransTypeServiceImpl implements PsTransTypeService {
         num = psTransTypeMapper.deleteByPrimaryKey(id[i]);
         }
         return num;
+    }
+
+    @Override
+    public List<PsTransType> getPsTransTypeGroup(String type) {
+        List<PsTransType> a = psTransTypeMapper.getPsTransTypeGroup();
+        return a;
     }
 
 }

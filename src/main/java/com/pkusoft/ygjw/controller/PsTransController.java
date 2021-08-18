@@ -178,7 +178,7 @@ public class PsTransController  {
                 num = psTransService.psTransSave(psTrans, user);
             }
             if (num>0){
-                return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS,"操作成功");
+                return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS,"操作成功",psTrans.getId());
             }
             return new ResponseData<>(ResponseData.STATUS_CODE_OTHER,"操作失败");
         }catch (Exception e) {

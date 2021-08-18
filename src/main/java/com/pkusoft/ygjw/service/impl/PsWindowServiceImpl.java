@@ -69,6 +69,9 @@ public class PsWindowServiceImpl implements PsWindowService {
         if(StringUtils.hasText(psWindowReqParam.getHandlingId())){
             criteria.andEqualTo("handlingId", psWindowReqParam.getHandlingId());
         }
+        if(StringUtils.hasText(psWindowReqParam.getOrgCode())){
+            criteria.andEqualTo("orgCode", psWindowReqParam.getOrgCode());
+        }
     }
 
     public int psWindowSave(PsWindow psWindow, Map<String,String> map){

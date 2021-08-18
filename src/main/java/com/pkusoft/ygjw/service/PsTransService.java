@@ -30,7 +30,7 @@ public interface PsTransService {
 
     /**
     * 新增
-    * @param psTrans	
+    * @param psTrans
     * @param map	用户集合
     * @return
     */
@@ -38,7 +38,7 @@ public interface PsTransService {
 
     /**
     * 修改
-    * @param psTrans	
+    * @param psTrans
     * @param map	用户集合
     * @return
     */

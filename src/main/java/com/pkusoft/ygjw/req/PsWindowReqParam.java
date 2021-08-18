@@ -8,8 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Table;
 
 /**
- * @author 
- * @title: PsWindow 
+ * @author
+ * @title: PsWindow
  */
 @ApiModel("业务数据_窗口表")
 public class PsWindowReqParam  extends YgjwPage {
@@ -19,140 +19,147 @@ public class PsWindowReqParam  extends YgjwPage {
      */
     @Column(name = "ID")
     @ApiModelProperty(value = "主键ID")
-    private String id; 
+    private String id;
 
  	/**
      * 编号
      */
     @Column(name = "CODE")
     @ApiModelProperty(value = "编号")
-    private String code; 
+    private String code;
 
  	/**
      * 名称
      */
     @Column(name = "NAME")
     @ApiModelProperty(value = "名称")
-    private String name; 
+    private String name;
 
  	/**
      * 主办业务(a;b;c)
      */
     @Column(name = "HOST_BUSINESS")
     @ApiModelProperty(value = "主办业务(a;b;c)")
-    private String hostBusiness; 
+    private String hostBusiness;
 
  	/**
      * 办事地址
      */
     @Column(name = "ADDRESS")
     @ApiModelProperty(value = "办事地址")
-    private String address; 
+    private String address;
 
  	/**
      * 排序序号
      */
     @Column(name = "SN")
     @ApiModelProperty(value = "排序序号")
-    private Integer sn; 
+    private Integer sn;
 
  	/**
      * 状态（1010：登记中，1020：登记完）
      */
     @Column(name = "STATUS")
     @ApiModelProperty(value = "状态（1010：登记中，1020：登记完）")
-    private String status; 
+    private String status;
+
+    /**
+     * 所属机构编码
+     */
+    @Column(name = "ORG_CODE")
+    @ApiModelProperty(value = "所属机构编码")
+    private String orgCode;
 
  	/**
      * 备注
      */
     @Column(name = "MEMO")
     @ApiModelProperty(value = "备注")
-    private String memo; 
+    private String memo;
 
  	/**
      * 创建者ID
      */
     @Column(name = "CREATE_ID")
     @ApiModelProperty(value = "创建者ID")
-    private String createId; 
+    private String createId;
 
  	/**
      * 创建者名称
      */
     @Column(name = "CREATE_NAME")
     @ApiModelProperty(value = "创建者名称")
-    private String createName; 
+    private String createName;
 
  	/**
      * 创建时间
      */
     @Column(name = "CREATE_TIME")
     @ApiModelProperty(value = "创建时间")
-    private java.util.Date createTime; 
+    private java.util.Date createTime;
 
  	/**
      * 最后修改者ID
      */
     @Column(name = "MODER_ID")
     @ApiModelProperty(value = "最后修改者ID")
-    private String moderId; 
+    private String moderId;
 
  	/**
      * 最后修改者名称
      */
     @Column(name = "MODER_NAME")
     @ApiModelProperty(value = "最后修改者名称")
-    private String moderName; 
+    private String moderName;
 
  	/**
      * 最后修改时间
      */
     @Column(name = "MODER_TIME")
     @ApiModelProperty(value = "最后修改时间")
-    private java.util.Date moderTime; 
+    private java.util.Date moderTime;
 
  	/**
      * 公安一级归属单位
      */
     @Column(name = "OWN_ORG_1")
     @ApiModelProperty(value = "公安一级归属单位")
-    private String ownOrg1; 
+    private String ownOrg1;
 
  	/**
      * 公安二级归属单位
      */
     @Column(name = "OWN_ORG_2")
     @ApiModelProperty(value = "公安二级归属单位")
-    private String ownOrg2; 
+    private String ownOrg2;
 
  	/**
      * 公安三级归属单位
      */
     @Column(name = "OWN_ORG_3")
     @ApiModelProperty(value = "公安三级归属单位")
-    private String ownOrg3; 
+    private String ownOrg3;
 
  	/**
      * 公安四级归属单位
      */
     @Column(name = "OWN_ORG_4")
     @ApiModelProperty(value = "公安四级归属单位")
-    private String ownOrg4; 
+    private String ownOrg4;
 
  	/**
      * 公安五级归属单位
      */
     @Column(name = "OWN_ORG_5")
     @ApiModelProperty(value = "公安五级归属单位")
-    private String ownOrg5; 
+    private String ownOrg5;
 
  	/**
      * 预留字段1
      */
     @Column(name = "RESERVE1")
     @ApiModelProperty(value = "预留字段1")
-    private String reserve1; 
+    private String reserve1;
 
  	/**
      * 预留字段2
@@ -535,5 +542,11 @@ public class PsWindowReqParam  extends YgjwPage {
         this.reserve2 = reserve2;
     }
 
+    public String getOrgCode() {
+        return orgCode;
+    }
 
+    public void setOrgCode(String orgCode) {
+        this.orgCode = orgCode;
+    }
 }

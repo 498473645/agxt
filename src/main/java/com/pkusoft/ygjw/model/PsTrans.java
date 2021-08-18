@@ -157,6 +157,7 @@ public class PsTrans {
      */
     @Column(name = "OCC_TIME")
     @ApiModelProperty(value = "案发时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private java.util.Date occTime;
 
  	/**

@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author 
+ * @author
  *  相关操作
  */
 @Api(value="",tags={"阳光警务相关业务"})
@@ -134,7 +134,7 @@ public class PsTempDtlController  {
             return new ResponseData(ResponseData.STATUS_CODE_OTHER, "增加/修改材料模板明细表数据错误"+e.getMessage());
         }
     }
-    
+
     /**
     * 查看材料模板明细表
     * @param map

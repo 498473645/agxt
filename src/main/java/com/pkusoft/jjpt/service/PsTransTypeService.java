@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.pkusoft.jjpt.po.PsTransType;
 import com.pkusoft.jjpt.req.PsTransTypeReqParam;
+import com.pkusoft.usercenterproxy.vo.DicItemVo;
 
 
 public interface PsTransTypeService {
@@ -73,5 +74,12 @@ public interface PsTransTypeService {
     * @return
     */
     int psTransTypeDelete(String[] id);
+
+    /**
+     * 获取报案/办事类型分组信息
+     * @param type
+     * @return
+     */
+    List<PsTransType> getPsTransTypeGroup(String type);
 
 }
