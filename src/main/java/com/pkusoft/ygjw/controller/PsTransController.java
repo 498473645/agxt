@@ -53,7 +53,7 @@ public class PsTransController  {
     public ResponseData<List<PsTrans>> psTransList(HttpServletRequest request, @RequestBody PsTransReqParam psTransReqParam){
         ResponseDto<List<PsTrans>> dto = new ResponseDto<List<PsTrans>>();
         try{
-            Map<String, String> user = new HashMap<>();
+            Map<String, String> user = userCenterProxyHelper.getUser(request);
             List<PsTrans> list = psTransService.getPsTransList(psTransReqParam,user);
             int count = psTransService.getPsTransCount(psTransReqParam,user);
             dto.setData(list);

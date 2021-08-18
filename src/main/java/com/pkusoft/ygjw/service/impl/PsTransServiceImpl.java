@@ -1,9 +1,11 @@
 package com.pkusoft.ygjw.service.impl;
 
+import com.pkusoft.lesp.until.PermitType;
 import com.pkusoft.pzzx.po.BdEquipment;
 import com.pkusoft.pzzx.service.BdEquipmentService;
 import com.pkusoft.usercenter.po.SysDataOwnerDept;
 import com.pkusoft.usercenter.service.SysDataOwnerDeptService;
+import com.pkusoft.usercenter.service.SysPermitService;
 import com.pkusoft.ygjw.mapper.PsTransMapper;
 import com.pkusoft.ygjw.model.PsTrans;
 import com.pkusoft.ygjw.req.PsTransReqParam;
@@ -30,6 +32,9 @@ public class PsTransServiceImpl implements PsTransService {
     @Autowired
     private SysDataOwnerDeptService sysDataOwnerDeptService;
 
+    @Autowired
+    private SysPermitService sysPermitService;
+
     public List<PsTrans> getPsTransListByIdcard(String idcard,String ly) {
         Example example = new Example(PsTrans.class);
         Example.Criteria criteria = example.createCriteria();
@@ -49,6 +54,7 @@ public class PsTransServiceImpl implements PsTransService {
         //The query conditions are edited here
         this.setCommonCondition(criteria,psTransReqParam,map);
         example.setOrderByClause("CREATE_TIME DESC");
+        sysPermitService.setUserDataPermits(criteria,map, PermitType.PERMIT_TYPE_DEPT_QUERY);
         if(0 == psTransReqParam.getPageSize()){
             return psTransMapper.selectByExample(example);
         }
@@ -62,6 +68,7 @@ public class PsTransServiceImpl implements PsTransService {
         //The query conditions are edited here
         this.setCommonCondition(criteria,psTransReqParam,map);
         example.setOrderByClause("CREATE_TIME DESC");
+        sysPermitService.setUserDataPermits(criteria,map, PermitType.PERMIT_TYPE_DEPT_QUERY);
         return psTransMapper.selectCountByExample(example);
     }
 
