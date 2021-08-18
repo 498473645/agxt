@@ -34,7 +34,7 @@ public interface PsTransService {
     * @param map	用户集合
     * @return
     */
-    int psTransSave(PsTrans psTrans, Map<String, String> map);
+    String psTransSave(PsTrans psTrans, Map<String, String> map);
 
     /**
     * 修改

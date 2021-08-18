@@ -78,11 +78,13 @@ public class PsTransController  {
     public ResponseData<PsTrans> psTransSaveOrUpdate(@RequestBody PsTrans psTrans, HttpServletRequest request){
         try {
             int num = 0;
+            String id;
             //获取当前操作用户信息
             Map<String, String> user = new HashMap<>();
             if(!StringUtils.hasText(psTrans.getId())) {
                 //添加事务数据
-                num = psTransService.psTransSave(psTrans, user);
+                id = psTransService.psTransSave(psTrans, user);
+                psTrans.setId(id);
             }else{
                 //修改事务数据
                 num = psTransService.psTransUpdate(psTrans, user);
@@ -162,20 +164,23 @@ public class PsTransController  {
     public ResponseData<String> psTransSaveOrUpdateYGJW(@RequestBody PsTrans psTrans, HttpServletRequest request){
         try {
             int num = 0;
+            String id;
             //获取当前操作用户信息
             Map<String, String> user = new HashMap<>();
             if(StringUtils.hasText(psTrans.getId())){
                 PsTrans oldPsTrans = psTransService.getPsTrans(psTrans.getId());
                 if(oldPsTrans==null) {
                     //添加事务数据
-                    num = psTransService.psTransSave(psTrans, user);
+                    id = psTransService.psTransSave(psTrans, user);
+                    psTrans.setId(id);
                 }else{
                     //修改事务数据
                     num = psTransService.psTransUpdate(psTrans, user);
                 }
             }else{
                 //添加事务数据
-                num = psTransService.psTransSave(psTrans, user);
+                id = psTransService.psTransSave(psTrans, user);
+                psTrans.setId(id);
             }
             if (num>0){
                 return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS,"操作成功",psTrans.getId());

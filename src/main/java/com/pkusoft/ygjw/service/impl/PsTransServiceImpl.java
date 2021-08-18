@@ -104,7 +104,7 @@ public class PsTransServiceImpl implements PsTransService {
         }
     }
 
-    public int psTransSave(PsTrans psTrans, Map<String,String> map){
+    public String psTransSave(PsTrans psTrans, Map<String,String> map){
         if (!StringUtils.hasText(psTrans.getId())){
             String id = UUID.randomUUID().toString();
             psTrans.setId(id);
@@ -126,7 +126,7 @@ public class PsTransServiceImpl implements PsTransService {
             psTrans.setCode(this.generateJjdbh(psTrans.getOrgCode()));
         }
         int num = psTransMapper.insertSelective(psTrans);
-        return num;
+        return psTrans.getId();
     }
 
     public  String generateJjdbh(String orgCode){
