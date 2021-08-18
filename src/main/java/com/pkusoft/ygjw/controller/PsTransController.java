@@ -182,10 +182,7 @@ public class PsTransController  {
                 id = psTransService.psTransSave(psTrans, user);
                 psTrans.setId(id);
             }
-            if (num>0){
-                return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS,"操作成功",psTrans.getId());
-            }
-            return new ResponseData<>(ResponseData.STATUS_CODE_OTHER,"操作失败");
+           return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS,"操作成功",psTrans.getId());
         }catch (Exception e) {
             logger.error("增加/修改事务数据错误",e);
             e.printStackTrace();
