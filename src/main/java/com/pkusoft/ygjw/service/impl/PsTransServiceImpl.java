@@ -39,7 +39,9 @@ public class PsTransServiceImpl implements PsTransService {
         Example example = new Example(PsTrans.class);
         Example.Criteria criteria = example.createCriteria();
         example.setOrderByClause("CREATE_TIME DESC");
-        criteria.andEqualTo("repIdcard",idcard);
+        if (StringUtils.hasText(idcard)) {
+            criteria.andEqualTo("repIdcard", idcard);
+        }
         if (StringUtils.hasText(ly)){
             criteria.andEqualTo("ly",ly);
         }
