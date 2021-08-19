@@ -320,8 +320,8 @@ public class PsTrans {
      */
     @Column(name = "JJSJ")
     @ApiModelProperty(value = "报案/办事时间")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "PRC")
+    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss",timezone = "PRC")
     private java.util.Date jjsj;
 
     public Date getJjsj() {
