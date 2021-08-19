@@ -49,7 +49,7 @@ public class ZzjbjBjxxReqParam  extends Page {
     private String bjyy;     //报警原因
 
     @Column(name = "BJSJ")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "PRC")
     private Date bjsj;     //报警时间
 
     @Column(name = "AFSJ")
@@ -111,7 +111,7 @@ public class ZzjbjBjxxReqParam  extends Page {
 
     @Column(name = "CLSJ")
     @DateTimeFormat(pattern="yyyy/MM/dd HH:mm")
-    @JsonFormat(pattern = "yyyy/MM/dd HH:mm", timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm", timezone = "PRC")
     private java.util.Date clsj;     //预报警处理时间，即接警表接警时间
 
     @Column(name = "RESERVE1")

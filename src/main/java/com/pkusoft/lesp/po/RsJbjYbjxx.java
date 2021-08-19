@@ -35,7 +35,7 @@ public class RsJbjYbjxx {
 
     @Column(name = "BJSJ")
     @DateTimeFormat(pattern="yyyy/MM/dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "PRC")
     private Date bjsj;     //报警时间
 
     @Column(name = "BJDZT")
@@ -60,7 +60,7 @@ public class RsJbjYbjxx {
     private Date cqsj;     //抽取时间
 
     @Column(name = "GA_OWNER_DEPT_1")
-    private String gaOwnerDept1;     //公安一级归属单位 
+    private String gaOwnerDept1;     //公安一级归属单位
 
     @Column(name = "GA_OWNER_DEPT_2")
     private String gaOwnerDept2;     //公安二级归属单位
@@ -316,7 +316,7 @@ public class RsJbjYbjxx {
     }
 
     /**
-    * 获得公安一级归属单位 
+    * 获得公安一级归属单位
     * @return GA_OWNER_DEPT_1
     */
     public String getGaOwnerDept1() {
@@ -324,7 +324,7 @@ public class RsJbjYbjxx {
     }
 
     /**
-    * 设置公安一级归属单位 
+    * 设置公安一级归属单位
     * @param gaOwnerDept1
     */
     public void setGaOwnerDept1(String gaOwnerDept1) {

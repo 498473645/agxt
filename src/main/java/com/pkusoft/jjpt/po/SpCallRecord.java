@@ -43,7 +43,7 @@ public class SpCallRecord {
 
     @Column(name = "CLSJ")
     @DateTimeFormat(pattern="yyyy/MM/dd HH:mm")
-    @JsonFormat(pattern = "yyyy/MM/dd HH:mm", timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm", timezone = "PRC")
     private java.util.Date clsj;     //处理时间
 
     @Column(name = "MEMO")
@@ -57,7 +57,7 @@ public class SpCallRecord {
 
     @Column(name = "CREATE_TIME")
     @DateTimeFormat(pattern="yyyy/MM/dd HH:mm")
-    @JsonFormat(pattern = "yyyy/MM/dd HH:mm", timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm", timezone = "PRC")
     private java.util.Date createTime;     //创建时间
 
     @Column(name = "MODER_ID")

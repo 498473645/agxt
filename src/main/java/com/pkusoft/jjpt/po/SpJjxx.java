@@ -61,22 +61,22 @@ public class SpJjxx {
 
     @Column(name = "BJSJ")
     @DateTimeFormat(pattern="yyyy/MM/dd HH:mm")
-    @JsonFormat(pattern = "yyyy/MM/dd HH:mm", timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm", timezone = "PRC")
     private java.util.Date bjsj;     //报警时间
 
     @Column(name = "JJSJ")
     @DateTimeFormat(pattern="yyyy/MM/dd HH:mm")
-    @JsonFormat(pattern = "yyyy/MM/dd HH:mm", timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm", timezone = "PRC")
     private java.util.Date jjsj;     //接警时间
 
     @Column(name = "CJSJ")
     @DateTimeFormat(pattern="yyyy/MM/dd HH:mm")
-    @JsonFormat(pattern = "yyyy/MM/dd HH:mm", timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm", timezone = "PRC")
     private java.util.Date cjsj;     //处警时间
 
     @Column(name = "FKSJ")
     @DateTimeFormat(pattern="yyyy/MM/dd HH:mm")
-    @JsonFormat(pattern = "yyyy/MM/dd HH:mm", timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm", timezone = "PRC")
     private java.util.Date fksj;     //反馈时间
 
     @Column(name = "JJY")

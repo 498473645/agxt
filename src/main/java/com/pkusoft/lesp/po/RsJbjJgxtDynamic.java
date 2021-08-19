@@ -26,7 +26,7 @@ public class RsJbjJgxtDynamic {
 
     @Column(name = "JJSJ")
     @DateTimeFormat(pattern="MM-dd HH:mm")
-    @JsonFormat(pattern = "MM-dd HH:mm", timezone = "GMT+8")
+    @JsonFormat(pattern = "MM-dd HH:mm", timezone = "PRC")
     private Date jjsj;     //
 
     @Column(name = "STATUS")
@@ -53,7 +53,7 @@ public class RsJbjJgxtDynamic {
 
     @Column(name = "BJSJ")
     @DateTimeFormat(pattern="MM-dd HH:mm")
-    @JsonFormat(pattern = "MM-dd HH:mm", timezone = "GMT+8")
+    @JsonFormat(pattern = "MM-dd HH:mm", timezone = "PRC")
     private Date bjsj;     //
 
     @Column(name = "BJRGMSFHM")
@@ -70,7 +70,7 @@ public class RsJbjJgxtDynamic {
 
     @Column(name = "CJSJ")
     @DateTimeFormat(pattern="MM-dd HH:mm")
-    @JsonFormat(pattern = "MM-dd HH:mm", timezone = "GMT+8")
+    @JsonFormat(pattern = "MM-dd HH:mm", timezone = "PRC")
     private Date cjsj;     //
 
     @Column(name = "CJDBH")

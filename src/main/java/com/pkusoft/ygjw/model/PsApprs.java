@@ -10,7 +10,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 /**
- * @author 
+ * @author
  * @title: PsApprsReqParam
  */
 @ApiModel("评议监督业务数据")
@@ -23,21 +23,21 @@ public class PsApprs {
     @Id
     @Column(name = "ID")
     @ApiModelProperty(value = "主键ID")
-    private String id; 
+    private String id;
 
  	/**
      * 类型
      */
     @Column(name = "TYPE")
     @ApiModelProperty(value = "类型")
-    private String type; 
+    private String type;
 
  	/**
      * 名称
      */
     @Column(name = "NAME")
     @ApiModelProperty(value = "名称")
-    private String name; 
+    private String name;
 
  	/**
      * 事务表主键id，ps_trans.id
@@ -59,15 +59,15 @@ public class PsApprs {
     @Column(name = "AP_TIME")
     @ApiModelProperty(value = "评议时间")
     @DateTimeFormat(pattern="yyyy/MM/dd HH:mm")
-    @JsonFormat(pattern = "yyyy/MM/dd HH:mm", timezone = "GMT+8")
-    private java.util.Date apTime; 
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm", timezone = "PRC")
+    private java.util.Date apTime;
 
  	/**
      * 评分
      */
     @Column(name = "SCORE")
     @ApiModelProperty(value = "评分")
-    private String score; 
+    private String score;
 
  	/**
      * 评价详情
@@ -96,7 +96,7 @@ public class PsApprs {
     @Column(name = "HANDLE_TIME")
     @ApiModelProperty(value = "处理时间")
     @DateTimeFormat(pattern="yyyy/MM/dd HH:mm")
-    @JsonFormat(pattern = "yyyy/MM/dd HH:mm", timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm", timezone = "PRC")
     private java.util.Date handleTime;
 
     /**
@@ -111,126 +111,126 @@ public class PsApprs {
      */
     @Column(name = "DATA_TYPE")
     @ApiModelProperty(value = "数据类型（0：自助机，1：微信）")
-    private String dataType; 
+    private String dataType;
 
  	/**
      * 所属机构编码
      */
     @Column(name = "ORG_CODE")
     @ApiModelProperty(value = "所属机构编码")
-    private String orgCode; 
+    private String orgCode;
 
  	/**
      * 所属机构名称
      */
     @Column(name = "ORG_NAME")
     @ApiModelProperty(value = "所属机构名称")
-    private String orgName; 
+    private String orgName;
 
  	/**
      * 状态
      */
     @Column(name = "STATUS")
     @ApiModelProperty(value = "状态")
-    private String status; 
+    private String status;
 
  	/**
      * 备注
      */
     @Column(name = "MEMO")
     @ApiModelProperty(value = "备注")
-    private String memo; 
+    private String memo;
 
  	/**
      * 创建者ID
      */
     @Column(name = "CREATE_ID")
     @ApiModelProperty(value = "创建者ID")
-    private String createId; 
+    private String createId;
 
  	/**
      * 创建者名称
      */
     @Column(name = "CREATE_NAME")
     @ApiModelProperty(value = "创建者名称")
-    private String createName; 
+    private String createName;
 
  	/**
      * 创建时间
      */
     @Column(name = "CREATE_TIME")
     @ApiModelProperty(value = "创建时间")
-    private java.util.Date createTime; 
+    private java.util.Date createTime;
 
  	/**
      * 最后修改者ID
      */
     @Column(name = "MODER_ID")
     @ApiModelProperty(value = "最后修改者ID")
-    private String moderId; 
+    private String moderId;
 
  	/**
      * 最后修改者名称
      */
     @Column(name = "MODER_NAME")
     @ApiModelProperty(value = "最后修改者名称")
-    private String moderName; 
+    private String moderName;
 
  	/**
      * 最后修改时间
      */
     @Column(name = "MODER_TIME")
     @ApiModelProperty(value = "最后修改时间")
-    private java.util.Date moderTime; 
+    private java.util.Date moderTime;
 
  	/**
      * 公安一级归属单位
      */
     @Column(name = "OWN_ORG_1")
     @ApiModelProperty(value = "公安一级归属单位")
-    private String ownOrg1; 
+    private String ownOrg1;
 
  	/**
      * 公安二级归属单位
      */
     @Column(name = "OWN_ORG_2")
     @ApiModelProperty(value = "公安二级归属单位")
-    private String ownOrg2; 
+    private String ownOrg2;
 
  	/**
      * 公安三级归属单位
      */
     @Column(name = "OWN_ORG_3")
     @ApiModelProperty(value = "公安三级归属单位")
-    private String ownOrg3; 
+    private String ownOrg3;
 
  	/**
      * 公安四级归属单位
      */
     @Column(name = "OWN_ORG_4")
     @ApiModelProperty(value = "公安四级归属单位")
-    private String ownOrg4; 
+    private String ownOrg4;
 
  	/**
      * 公安五级归属单位
      */
     @Column(name = "OWN_ORG_5")
     @ApiModelProperty(value = "公安五级归属单位")
-    private String ownOrg5; 
+    private String ownOrg5;
 
  	/**
      * 预留字段1
      */
     @Column(name = "RESERVE1")
     @ApiModelProperty(value = "预留字段1")
-    private String reserve1; 
+    private String reserve1;
 
  	/**
      * 预留字段2
      */
     @Column(name = "RESERVE2")
     @ApiModelProperty(value = "预留字段2")
-    private String reserve2; 
+    private String reserve2;
 
 
     /**

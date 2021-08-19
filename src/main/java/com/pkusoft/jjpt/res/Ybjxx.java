@@ -10,7 +10,7 @@ public class Ybjxx {
 
     private String bjdh;     //电话
 
-    @JsonFormat(pattern = "yyyy/MM/dd HH:mm",timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm",timezone = "PRC")
     private Date bjsj;     //报警时间
 
     private String bjlx;   // 报警方式：1001-微信预报警，1003-电话报警

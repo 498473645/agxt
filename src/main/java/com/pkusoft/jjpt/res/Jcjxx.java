@@ -17,7 +17,7 @@ public class Jcjxx {
 
     private String reporterSource; //报警形式，DIC_JJPT_BJXS，1001-现场接警，1002-110转警，1003-电话接警
 
-    @JsonFormat(pattern = "YY/MM/dd HH:mm:SS",timezone = "GMT+8")
+    @JsonFormat(pattern = "YY/MM/dd HH:mm:SS",timezone = "PRC")
     private Date bjsj;     //报警时间
 
     private String bjrxb;     //报警人性别 0:未知，1:男，2女，DIC_GENDER
@@ -38,10 +38,10 @@ public class Jcjxx {
 
     private String cjdObjid;     //处警单主键id
 
-    @JsonFormat(pattern = "YY/MM/dd HH:mm:SS",timezone = "GMT+8")
+    @JsonFormat(pattern = "YY/MM/dd HH:mm:SS",timezone = "PRC")
     private Date dcsj;     //到场时间
 
-    @JsonFormat(pattern = "YY/MM/dd HH:mm:SS",timezone = "GMT+8")
+    @JsonFormat(pattern = "YY/MM/dd HH:mm:SS",timezone = "PRC")
     private Date fksj;     //反馈时间
 
     private String cjjg;     //处警结果(详细处警结果)

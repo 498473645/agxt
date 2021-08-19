@@ -36,27 +36,27 @@ public class SpFkxxReqParam extends Page {
 
     @Column(name = "CJSJ")
     @DateTimeFormat(pattern="yyyy/MM/dd HH:mm")
-    @JsonFormat(pattern = "yyyy/MM/dd HH:mm", timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm", timezone = "PRC")
     private Date cjsj;     //处警时间
 
     @Column(name = "CJCZSJ")
     @DateTimeFormat(pattern="yyyy/MM/dd HH:mm")
-    @JsonFormat(pattern = "yyyy/MM/dd HH:mm", timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm", timezone = "PRC")
     private Date cjczsj;     //处警操作时间
 
     @Column(name = "DCSJ")
     @DateTimeFormat(pattern="yyyy/MM/dd HH:mm")
-    @JsonFormat(pattern = "yyyy/MM/dd HH:mm", timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm", timezone = "PRC")
     private Date dcsj;     //到场时间
 
     @Column(name = "FKSJ")
     @DateTimeFormat(pattern="yyyy/MM/dd HH:mm")
-    @JsonFormat(pattern = "yyyy/MM/dd HH:mm", timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm", timezone = "PRC")
     private Date fksj;     //反馈时间
 
     @Column(name = "SFSJ")
     @DateTimeFormat(pattern="yyyy/MM/dd HH:mm")
-    @JsonFormat(pattern = "yyyy/MM/dd HH:mm", timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm", timezone = "PRC")
     private Date sfsj;     //事发时间
 
     @Column(name = "CJRBM")

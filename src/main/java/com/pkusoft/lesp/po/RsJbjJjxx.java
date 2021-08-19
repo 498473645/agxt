@@ -65,7 +65,7 @@ public class RsJbjJjxx {
 
     @Column(name = "BJSJ")
     @DateTimeFormat(pattern="yyyy/MM/dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "PRC")
     private Date bjsj;     //报警时间
 
     @Column(name = "JJSJ")

@@ -9,8 +9,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 
 /**
- * @author 
- * @title: RsSypGlxx 
+ * @author
+ * @title: RsSypGlxx
  */
 @ApiModel("")
 @Table(name = "RS_SYP_GLXX")
@@ -22,147 +22,147 @@ public class RsSypGlxx {
     @Id
     @Column(name = "SYPBH")
     @ApiModelProperty(value = "主键")
-    private String sypbh; 
+    private String sypbh;
 
  	/**
      * 播放地址
      */
     @Column(name = "URL")
     @ApiModelProperty(value = "播放地址")
-    private String url; 
+    private String url;
 
  	/**
      * 接警编号
      */
     @Column(name = "JJBH")
     @ApiModelProperty(value = "接警编号")
-    private String jjbh; 
+    private String jjbh;
 
  	/**
      * 处警编号
      */
     @Column(name = "CJBH")
     @ApiModelProperty(value = "处警编号")
-    private String cjbh; 
+    private String cjbh;
 
  	/**
      * 案件编号
      */
     @Column(name = "AJBH")
     @ApiModelProperty(value = "案件编号")
-    private String ajbh; 
+    private String ajbh;
 
  	/**
      * 单位编码
      */
     @Column(name = "DWBH")
     @ApiModelProperty(value = "单位编码")
-    private String dwbh; 
+    private String dwbh;
 
  	/**
      * 单位名称
      */
     @Column(name = "DWMC")
     @ApiModelProperty(value = "单位名称")
-    private String dwmc; 
+    private String dwmc;
 
  	/**
      * 公安机构代码
      */
     @Column(name = "GA_OWNER_DEPT_1")
     @ApiModelProperty(value = "公安机构代码")
-    private String gaOwnerDept1; 
+    private String gaOwnerDept1;
 
  	/**
      * 公安机构代码
      */
     @Column(name = "GA_OWNER_DEPT_2")
     @ApiModelProperty(value = "公安机构代码")
-    private String gaOwnerDept2; 
+    private String gaOwnerDept2;
 
  	/**
      * 公安机构代码
      */
     @Column(name = "GA_OWNER_DEPT_3")
     @ApiModelProperty(value = "公安机构代码")
-    private String gaOwnerDept3; 
+    private String gaOwnerDept3;
 
  	/**
      * 公安机构代码
      */
     @Column(name = "GA_OWNER_DEPT_4")
     @ApiModelProperty(value = "公安机构代码")
-    private String gaOwnerDept4; 
+    private String gaOwnerDept4;
 
  	/**
      * 公安机构代码
      */
     @Column(name = "GA_OWNER_DEPT_5")
     @ApiModelProperty(value = "公安机构代码")
-    private String gaOwnerDept5; 
+    private String gaOwnerDept5;
 
  	/**
      * 公安机构代码
      */
     @Column(name = "BZ_OWNER_DEPT_1")
     @ApiModelProperty(value = "公安机构代码")
-    private String bzOwnerDept1; 
+    private String bzOwnerDept1;
 
  	/**
      * 公安机构代码
      */
     @Column(name = "BZ_OWNER_DEPT_2")
     @ApiModelProperty(value = "公安机构代码")
-    private String bzOwnerDept2; 
+    private String bzOwnerDept2;
 
  	/**
      * 公安机构代码
      */
     @Column(name = "BZ_OWNER_DEPT_3")
     @ApiModelProperty(value = "公安机构代码")
-    private String bzOwnerDept3; 
+    private String bzOwnerDept3;
 
  	/**
      * 公安机构代码
      */
     @Column(name = "BZ_OWNER_DEPT_4")
     @ApiModelProperty(value = "公安机构代码")
-    private String bzOwnerDept4; 
+    private String bzOwnerDept4;
 
  	/**
      * 公安机构代码
      */
     @Column(name = "BZ_OWNER_DEPT_5")
     @ApiModelProperty(value = "公安机构代码")
-    private String bzOwnerDept5; 
+    private String bzOwnerDept5;
 
  	/**
      * 类别
      */
     @Column(name = "LB")
     @ApiModelProperty(value = "类别")
-    private String lb; 
+    private String lb;
 
  	/**
      * 拍摄人身份证号码
      */
     @Column(name = "PSR_SFZHM")
     @ApiModelProperty(value = "拍摄人身份证号码")
-    private String psrSfzhm; 
+    private String psrSfzhm;
 
  	/**
      * 拍摄人姓名
      */
     @Column(name = "PSR_XM")
     @ApiModelProperty(value = "拍摄人姓名")
-    private String psrXm; 
+    private String psrXm;
 
  	/**
      * 拍摄人警号
      */
     @Column(name = "PSR_JH")
     @ApiModelProperty(value = "拍摄人警号")
-    private String psrJh; 
+    private String psrJh;
 
  	/**
      * 拍摄时间
@@ -170,36 +170,36 @@ public class RsSypGlxx {
     @Column(name = "PSSJ")
     @ApiModelProperty(value = "拍摄时间")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-    private java.util.Date pssj; 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "PRC")
+    private java.util.Date pssj;
 
  	/**
      * 上传时间
      */
     @Column(name = "SCSJ")
     @ApiModelProperty(value = "上传时间")
-    private java.util.Date scsj; 
+    private java.util.Date scsj;
 
  	/**
      * 关联时间
      */
     @Column(name = "GLSJ")
     @ApiModelProperty(value = "关联时间")
-    private java.util.Date glsj; 
+    private java.util.Date glsj;
 
  	/**
      * 修改时间
      */
     @Column(name = "XGSJ")
     @ApiModelProperty(value = "修改时间")
-    private java.util.Date xgsj; 
+    private java.util.Date xgsj;
 
  	/**
      * 视频时长
      */
     @Column(name = "SPSC")
     @ApiModelProperty(value = "视频时长")
-    private String spsc; 
+    private String spsc;
 
 
     /**
