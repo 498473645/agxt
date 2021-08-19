@@ -149,7 +149,8 @@ public class PsTrans {
      */
     @Column(name = "REP_TIME")
     @ApiModelProperty(value = "报案/办事时间")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss",timezone = "GMT+8")
     private java.util.Date repTime;
 
  	/**
@@ -157,7 +158,8 @@ public class PsTrans {
      */
     @Column(name = "OCC_TIME")
     @ApiModelProperty(value = "案发时间")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss",timezone = "GMT+8")
     private java.util.Date occTime;
 
  	/**

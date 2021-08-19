@@ -60,4 +60,6 @@ public interface BdHandlingAreaService {
      */
     BdHandlingArea getBdHandlingAreaByUser(Map<String, String> user);
 
+    List<BdHandlingArea> bdHandlingAreaByParam(BdHandlingAreaReqParam bdHandlingArea,Map<String, String> map);
+
 }

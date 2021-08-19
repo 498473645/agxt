@@ -47,7 +47,7 @@ public class BdHandlingAreaServiceImpl implements BdHandlingAreaService {
         example.setOrderByClause("CREATE_TIME DESC");
         //The query conditions are edited here
         this.setCommonCondition(criteria,bdHandlingArea, map);
-
+        sysPermitService.setUserDataPermits(criteria,map, PermitType.PERMIT_TYPE_DEPT_QUERY);
         return bdHandlingAreaMapper.selectByExampleAndRowBounds(example,rowBounds);
     }
 
@@ -57,23 +57,20 @@ public class BdHandlingAreaServiceImpl implements BdHandlingAreaService {
         Example.Criteria criteria = example.createCriteria();
         //The query conditions are edited
         this.setCommonCondition(criteria,bdHandlingArea, map);
-
+        sysPermitService.setUserDataPermits(criteria,map, PermitType.PERMIT_TYPE_DEPT_QUERY);
         return bdHandlingAreaMapper.selectCountByExample(example);
     }
 
     public void setCommonCondition(Example.Criteria criteria, BdHandlingAreaReqParam bdHandlingArea, Map<String, String> map){
-//        if(StringUtils.hasText(bdHandlingArea.getOrgCode())){
-//            criteria.andEqualTo("orgCode",bdHandlingArea.getOrgCode());
-//        }else{
-//            criteria.andEqualTo("orgCode",map.get("deptId"));
-//        }
+        if(StringUtils.hasText(bdHandlingArea.getOrgCode())){
+            criteria.andEqualTo("orgCode",bdHandlingArea.getOrgCode());
+        }
         if (StringUtils.hasText(bdHandlingArea.getObjtype())){
             criteria.andEqualTo("objtype",bdHandlingArea.getObjtype());
         }
         if (StringUtils.hasText(bdHandlingArea.getObjname())){
             criteria.andLike("objname","%"+bdHandlingArea.getObjname()+"%");
         }
-        sysPermitService.setUserDataPermits(criteria,map, PermitType.PERMIT_TYPE_DEPT_QUERY);
     }
 
     public int bdHandlingAreaSave(BdHandlingArea bdHandlingArea, Map<String,String> map){
@@ -149,6 +146,15 @@ public class BdHandlingAreaServiceImpl implements BdHandlingAreaService {
             return bdHandlingAreaList.get(0);
         }
         return null;
+    }
+
+    @Override
+    public List<BdHandlingArea> bdHandlingAreaByParam(BdHandlingAreaReqParam bdHandlingArea, Map<String, String> map) {
+        Example example = new Example(BdHandlingArea.class);
+        Example.Criteria criteria = example.createCriteria();
+        //The query conditions are edited
+        this.setCommonCondition(criteria,bdHandlingArea, map);
+        return bdHandlingAreaMapper.selectByExample(example);
     }
 
 }

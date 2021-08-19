@@ -147,4 +147,23 @@ public class BdHandlingAreaController  {
             return new ResponseData(ResponseData.STATUS_CODE_OTHER, "删除接处警功能场所记录表错误:"+e.getMessage());
         }
     }
+
+    /**
+     * 校验是否有重复场所
+     * @return
+     */
+    @ApiOperation(value = "校验是否有重复场所", notes = "校验是否有重复场所", httpMethod = "POST")
+    @RequestMapping("/bdHandlingArea/bdHandlingAreaByParam")
+    @ResponseBody
+    public ResponseData<List<BdHandlingArea>> bdHandlingAreaByParam(@RequestBody BdHandlingAreaReqParam bdHandlingArea) {
+        ResponseDto<List<BdHandlingArea>> dto = new ResponseDto<List<BdHandlingArea>>();
+        try{
+            List<BdHandlingArea> list = bdHandlingAreaService.bdHandlingAreaByParam(bdHandlingArea,null);
+            return new ResponseData<List<BdHandlingArea>>(ResponseData.STATUS_CODE_SUCCESS,"操作成功",list);
+        }catch (Exception e){
+            logger.error("查看接处警功能场所记录表详情错误",e);
+            e.printStackTrace();
+            return new ResponseData(ResponseData.STATUS_CODE_OTHER, "查看接处警功能场所记录表详情错误:"+e.getMessage());
+        }
+    }
 }
