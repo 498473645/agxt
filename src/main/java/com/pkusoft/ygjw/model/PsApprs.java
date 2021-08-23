@@ -58,8 +58,8 @@ public class PsApprs {
      */
     @Column(name = "AP_TIME")
     @ApiModelProperty(value = "评议时间")
-    @DateTimeFormat(pattern="yyyy/MM/dd HH:mm")
-    @JsonFormat(pattern = "yyyy/MM/dd HH:mm", timezone = "PRC")
+    @DateTimeFormat(pattern="yyyy/MM/dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "PRC")
     private java.util.Date apTime;
 
  	/**
@@ -95,8 +95,8 @@ public class PsApprs {
      */
     @Column(name = "HANDLE_TIME")
     @ApiModelProperty(value = "处理时间")
-    @DateTimeFormat(pattern="yyyy/MM/dd HH:mm")
-    @JsonFormat(pattern = "yyyy/MM/dd HH:mm", timezone = "PRC")
+    @DateTimeFormat(pattern="yyyy/MM/dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "PRC")
     private java.util.Date handleTime;
 
     /**
@@ -160,6 +160,8 @@ public class PsApprs {
      */
     @Column(name = "CREATE_TIME")
     @ApiModelProperty(value = "创建时间")
+    @DateTimeFormat(pattern="yyyy/MM/dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "PRC")
     private java.util.Date createTime;
 
  	/**
@@ -181,6 +183,8 @@ public class PsApprs {
      */
     @Column(name = "MODER_TIME")
     @ApiModelProperty(value = "最后修改时间")
+    @DateTimeFormat(pattern="yyyy/MM/dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "PRC")
     private java.util.Date moderTime;
 
  	/**

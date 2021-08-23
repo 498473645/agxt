@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author 
+ * @author
  *  相关操作
  */
 @Api(value="",tags={"阳光警务相关业务"})
@@ -98,7 +98,7 @@ public class PsApprsController  {
             return new ResponseData(ResponseData.STATUS_CODE_OTHER, "增加/修改评议监督业务数据错误"+e.getMessage(),null);
         }
     }
-    
+
     /**
     * 查看评议监督业务数据
     * @param map
@@ -140,8 +140,8 @@ public class PsApprsController  {
         }
         try {
             PsApprs psApprs = psApprsService.getPsApprsDetailsByTranId(transId);
-            if (null == psApprs.getId()) {
-                return new ResponseData<PsApprs>(ResponseData.STATUS_CODE_OTHER, "未查询到数据", null);
+            if (null == psApprs || null == psApprs.getId()) {
+                return new ResponseData<PsApprs>("90", "未查询到数据", null);
             }
             return new ResponseData<PsApprs>(ResponseData.STATUS_CODE_SUCCESS,"操作成功",psApprs);
         }catch (Exception e){
