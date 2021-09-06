@@ -1,7 +1,9 @@
 package com.pkusoft.ygjw.service.impl;
 
 import com.pkusoft.pzzx.po.BdEquipment;
+import com.pkusoft.pzzx.po.BdHandlingArea;
 import com.pkusoft.pzzx.service.BdEquipmentService;
+import com.pkusoft.pzzx.service.BdHandlingAreaService;
 import com.pkusoft.usercenter.po.SysDataOwnerDept;
 import com.pkusoft.usercenter.service.SysDataOwnerDeptService;
 import com.pkusoft.ygjw.mapper.PsWindowMapper;
@@ -29,6 +31,9 @@ public class PsWindowServiceImpl implements PsWindowService {
 
     @Autowired
     private SysDataOwnerDeptService sysDataOwnerDeptService;
+
+    @Autowired
+    private BdHandlingAreaService bdHandlingAreaService ;
 
     public List<PsWindow> getPsWindowList(PsWindowReqParam psWindowReqParam, Map<String, String> map) {
 
@@ -81,30 +86,31 @@ public class PsWindowServiceImpl implements PsWindowService {
         }
         psWindow.setStatus("2010");
         Date date = new Date();
-        psWindow.setOrgCode(map.get("deptId"));
-        psWindow.setOrgName(map.get("deptName"));
         psWindow.setCreateName(map.get("userName"));
         psWindow.setCreateId(map.get("userId"));
         psWindow.setCreateTime(date);
         psWindow.setModerName(map.get("userName"));
         psWindow.setModerId(map.get("userId"));
         psWindow.setModerTime(date);
-        SysDataOwnerDept sysDataOwnerDept = sysDataOwnerDeptService.selectByDeptId(map.get("deptId"));
-        if (sysDataOwnerDept != null) {
-            if (StringUtils.hasText(sysDataOwnerDept.getOwnerDept1())) {
-                psWindow.setOwnOrg1(sysDataOwnerDept.getOwnerDept1());
+        //查询场所信息,获取所属单位信息
+        BdHandlingArea bdHandlingArea = bdHandlingAreaService.getBdHandlingArea(psWindow.getHandlingId());
+        if(null != bdHandlingArea){
+            psWindow.setOrgCode(bdHandlingArea.getOrgCode());
+            psWindow.setOrgName(bdHandlingArea.getOrgName());
+            if (StringUtils.hasText(bdHandlingArea.getGaOwnerDept1())) {
+                psWindow.setOwnOrg1(bdHandlingArea.getGaOwnerDept1());
             }
-            if (StringUtils.hasText(sysDataOwnerDept.getOwnerDept2())) {
-                psWindow.setOwnOrg2(sysDataOwnerDept.getOwnerDept2());
+            if (StringUtils.hasText(bdHandlingArea.getGaOwnerDept2())) {
+                psWindow.setOwnOrg2(bdHandlingArea.getGaOwnerDept2());
             }
-            if (StringUtils.hasText(sysDataOwnerDept.getOwnerDept3())) {
-                psWindow.setOwnOrg3(sysDataOwnerDept.getOwnerDept3());
+            if (StringUtils.hasText(bdHandlingArea.getGaOwnerDept3())) {
+                psWindow.setOwnOrg3(bdHandlingArea.getGaOwnerDept3());
             }
-            if (StringUtils.hasText(sysDataOwnerDept.getOwnerDept4())) {
-                psWindow.setOwnOrg4(sysDataOwnerDept.getOwnerDept4());
+            if (StringUtils.hasText(bdHandlingArea.getGaOwnerDept4())) {
+                psWindow.setOwnOrg4(bdHandlingArea.getGaOwnerDept4());
             }
-            if (StringUtils.hasText(sysDataOwnerDept.getOwnerDept5())) {
-                psWindow.setOwnOrg5(sysDataOwnerDept.getOwnerDept5());
+            if (StringUtils.hasText(bdHandlingArea.getGaOwnerDept5())) {
+                psWindow.setOwnOrg5(bdHandlingArea.getGaOwnerDept5());
             }
         }
         int num = psWindowMapper.insertSelective(psWindow);
