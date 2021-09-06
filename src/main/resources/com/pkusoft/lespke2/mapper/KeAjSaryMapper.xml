@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pkusoft.lespke2.mapper.KeAjSaryMapper">
+    <!-- @codeGenerate -->
+    <resultMap id="BaseResultMap" type="com.pkusoft.lespke2.po.KeAjSary">
+            <id column="AJBH" jdbcType="VARCHAR" property="ajbh"/>
+            <result column="SARY_SFZHM" jdbcType="VARCHAR" property="sarySfzhm"/>
+            <result column="SARY_XM" jdbcType="VARCHAR" property="saryXm"/>
+            <result column="LB_BH" jdbcType="VARCHAR" property="lbBh"/>
+            <result column="LB_MC" jdbcType="VARCHAR" property="lbMc"/>
+            <result column="ZHSJ" jdbcType="DATE" property="zhsj"/>
+            <result column="XGSJ" jdbcType="DATE" property="xgsj"/>
+
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        AJBH,SARY_SFZHM,SARY_XM,LB_BH,LB_MC,ZHSJ,XGSJ
+    </sql>
+
+    <!-- user-defined -->
+
+</mapper>

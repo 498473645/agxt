@@ -15,7 +15,7 @@
 		<result column="DATA11" jdbcType="INTEGER" property="data11" />
 		<result column="DATA12" jdbcType="INTEGER" property="data12" />
 		<result column="DATA13" jdbcType="INTEGER" property="data13" />
-		<result column="DATA14" jdbcType="INTEGER" property="data14" />
+		<result column="DATA14" jdbcType="VARCHAR" property="data14" />
 		<result column="DATA15" jdbcType="VARCHAR" property="data15" />
 		<!-- <result column="DATA17" jdbcType="INTEGER" property="data17" />
 		<result column="DATA18" jdbcType="INTEGER" property="data18" />
@@ -44,7 +44,9 @@
 		<if test="deptLevel != null and deptLevel != '' and deptLevel == '4'.toString()">
 			AND OWN_ORG_4 = #{deptId,jdbcType=VARCHAR}
 		</if>
-		AND LY = '01'
+		<if test="ly != null and ly != ''">
+			AND LY = #{ly,jdbcType=VARCHAR}
+		</if>
 	</select>
 
 
@@ -68,7 +70,9 @@
 		<if test="deptLevel != null and deptLevel != '' and deptLevel == '4'.toString()">
 			AND OWN_ORG_4 = #{deptId,jdbcType=VARCHAR}
 		</if>
-		AND LY = '01'
+		<if test="ly != null and ly != ''">
+			AND LY = #{ly,jdbcType=VARCHAR}
+		</if>
 		GROUP BY t.DATA_TYPE
 	</select>
 
@@ -93,7 +97,9 @@
 		<if test="deptLevel != null and deptLevel != '' and deptLevel == '4'.toString()">
 			AND OWN_ORG_4 = #{deptId,jdbcType=VARCHAR}
 		</if>
-		AND LY = '01'
+		<if test="ly != null and ly != ''">
+			AND LY = #{ly,jdbcType=VARCHAR}
+		</if>
 		GROUP BY t.STATUS
 	</select>
 
@@ -118,7 +124,9 @@
 		<if test="deptLevel != null and deptLevel != '' and deptLevel == '4'.toString()">
 			AND OWN_ORG_4 = #{deptId,jdbcType=VARCHAR}
 		</if>
-		AND LY = '01'
+		<if test="ly != null and ly != ''">
+			AND LY = #{ly,jdbcType=VARCHAR}
+		</if>
 		GROUP BY t.TYPE
 	</select>
 
@@ -137,7 +145,9 @@
 		<if test="day != null and day != ''">
 			AND EXTRACT(DAY FROM t.REP_TIME) = #{day,jdbcType=VARCHAR}
 		</if>
-		AND LY = '01'
+		<if test="ly != null and ly != ''">
+			AND LY = #{ly,jdbcType=VARCHAR}
+		</if>
 		GROUP BY t.ORG_CODE
 	</select>
 

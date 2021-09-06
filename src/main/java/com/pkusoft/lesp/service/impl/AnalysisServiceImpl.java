@@ -307,7 +307,7 @@ public class AnalysisServiceImpl implements AnalysisService {
     }
 
     @Override
-    public Map<String, Object> getSmbaData(String deptId, String deptLevel, String dataType) {
+    public Map<String, Object> getSmbaData(String deptId, String deptLevel, String dataType, String ly) {
         Map<String,Object> data = new HashMap<>();
         SimpleDateFormat sdfYear = new SimpleDateFormat("yyyy");
         SimpleDateFormat sdfMonth = new SimpleDateFormat("MM");
@@ -316,17 +316,17 @@ public class AnalysisServiceImpl implements AnalysisService {
         //10-日，20-周，30-月，40-年
         if ("10".equals(dataType)){
             // 本日
-            StatisticsData curData = ywkStatisticsMapper.getSmbaData(deptId,deptLevel,sdfYear.format(cur),sdfMonth.format(cur),sdfDay.format(cur));
+            StatisticsData curData = ywkStatisticsMapper.getSmbaData(deptId,deptLevel,sdfYear.format(cur),sdfMonth.format(cur),sdfDay.format(cur),ly);
             // 环比
             Calendar hb = Calendar.getInstance();
             hb.add(Calendar.DATE,-1);
             Date lastDay = hb.getTime();
-            StatisticsData hbData = ywkStatisticsMapper.getSmbaData(deptId,deptLevel,sdfYear.format(lastDay),sdfMonth.format(lastDay),sdfDay.format(lastDay));
+            StatisticsData hbData = ywkStatisticsMapper.getSmbaData(deptId,deptLevel,sdfYear.format(lastDay),sdfMonth.format(lastDay),sdfDay.format(lastDay),ly);
             // 同比
             Calendar tb = Calendar.getInstance();
             tb.add(Calendar.YEAR,-1);
             Date lastYear = tb.getTime();
-            StatisticsData tbData = ywkStatisticsMapper.getSmbaData(deptId,deptLevel,sdfYear.format(lastYear),sdfMonth.format(lastYear),sdfDay.format(lastYear));
+            StatisticsData tbData = ywkStatisticsMapper.getSmbaData(deptId,deptLevel,sdfYear.format(lastYear),sdfMonth.format(lastYear),sdfDay.format(lastYear),ly);
 
             data.put("curData",curData);
             data.put("hbData",hbData);
@@ -336,34 +336,34 @@ public class AnalysisServiceImpl implements AnalysisService {
 
         }else if ("30".equals(dataType)){
             // 本月
-            StatisticsData curData = ywkStatisticsMapper.getSmbaData(deptId,deptLevel,sdfYear.format(cur),sdfMonth.format(cur),null);
+            StatisticsData curData = ywkStatisticsMapper.getSmbaData(deptId,deptLevel,sdfYear.format(cur),sdfMonth.format(cur),null,ly);
             // 环比
             Calendar hb = Calendar.getInstance();
             hb.add(Calendar.MONTH,-1);
             Date lastMonth = hb.getTime();
-            StatisticsData hbData = ywkStatisticsMapper.getSmbaData(deptId,deptLevel,sdfYear.format(lastMonth),sdfMonth.format(lastMonth),null);
+            StatisticsData hbData = ywkStatisticsMapper.getSmbaData(deptId,deptLevel,sdfYear.format(lastMonth),sdfMonth.format(lastMonth),null,ly);
             // 同比
             Calendar tb = Calendar.getInstance();
             tb.add(Calendar.YEAR,-1);
             Date lastYear = tb.getTime();
-            StatisticsData tbData = ywkStatisticsMapper.getSmbaData(deptId,deptLevel,sdfYear.format(lastYear),sdfMonth.format(lastYear),null);
+            StatisticsData tbData = ywkStatisticsMapper.getSmbaData(deptId,deptLevel,sdfYear.format(lastYear),sdfMonth.format(lastYear),null,ly);
 
             data.put("curData",curData);
             data.put("hbData",hbData);
             data.put("tbData",tbData);
         }else if ("40".equals(dataType)){
             // 本年
-            StatisticsData curData = ywkStatisticsMapper.getSmbaData(deptId,deptLevel,sdfYear.format(cur),null,null);
+            StatisticsData curData = ywkStatisticsMapper.getSmbaData(deptId,deptLevel,sdfYear.format(cur),null,null,ly);
             // 环比
             Calendar hb = Calendar.getInstance();
             hb.add(Calendar.YEAR,-1);
             Date lastYear = hb.getTime();
-            StatisticsData hbData = ywkStatisticsMapper.getSmbaData(deptId,deptLevel,sdfYear.format(lastYear),null,null);
+            StatisticsData hbData = ywkStatisticsMapper.getSmbaData(deptId,deptLevel,sdfYear.format(lastYear),null,null,ly);
             // 同比
 //            Calendar tb = Calendar.getInstance();
 //            tb.add(Calendar.YEAR,-1);
 //            Date lastYear = tb.getTime();
-            StatisticsData tbData = ywkStatisticsMapper.getSmbaData(deptId,deptLevel,sdfYear.format(lastYear),null,null);
+            StatisticsData tbData = ywkStatisticsMapper.getSmbaData(deptId,deptLevel,sdfYear.format(lastYear),null,null,ly);
 
             data.put("curData",curData);
             data.put("hbData",hbData);
@@ -373,7 +373,7 @@ public class AnalysisServiceImpl implements AnalysisService {
     }
 
     @Override
-    public Map<String, Object> getYbafsdbData(String deptId, String deptLevel, String dataType) {
+    public Map<String, Object> getYbafsdbData(String deptId, String deptLevel, String dataType, String ly) {
         Map<String,Object> data = new HashMap<>();
         SimpleDateFormat sdfYear = new SimpleDateFormat("yyyy");
         SimpleDateFormat sdfMonth = new SimpleDateFormat("MM");
@@ -382,25 +382,25 @@ public class AnalysisServiceImpl implements AnalysisService {
         //10-日，20-周，30-月，40-年
         if ("10".equals(dataType)){
             // 本日
-            List<StatisticsData> curData = ywkStatisticsMapper.getYbafsdbData(deptId,deptLevel,sdfYear.format(cur),sdfMonth.format(cur),sdfDay.format(cur));
+            List<StatisticsData> curData = ywkStatisticsMapper.getYbafsdbData(deptId,deptLevel,sdfYear.format(cur),sdfMonth.format(cur),sdfDay.format(cur),ly);
             data.put("curData",curData);
         }else if ("20".equals(dataType)){
             // 本周
 
         }else if ("30".equals(dataType)){
             // 本月
-            List<StatisticsData> curData = ywkStatisticsMapper.getYbafsdbData(deptId,deptLevel,sdfYear.format(cur),sdfMonth.format(cur),null);
+            List<StatisticsData> curData = ywkStatisticsMapper.getYbafsdbData(deptId,deptLevel,sdfYear.format(cur),sdfMonth.format(cur),null,ly);
             data.put("curData",curData);
         }else if ("40".equals(dataType)){
             // 本年
-            List<StatisticsData> curData = ywkStatisticsMapper.getYbafsdbData(deptId,deptLevel,sdfYear.format(cur),null,null);
+            List<StatisticsData> curData = ywkStatisticsMapper.getYbafsdbData(deptId,deptLevel,sdfYear.format(cur),null,null,ly);
             data.put("curData",curData);
         }
         return data;
     }
 
     @Override
-    public Map<String, Object> getYbaclztfxData(String deptId, String deptLevel, String dataType) {
+    public Map<String, Object> getYbaclztfxData(String deptId, String deptLevel, String dataType, String ly) {
         Map<String,Object> data = new HashMap<>();
         SimpleDateFormat sdfYear = new SimpleDateFormat("yyyy");
         SimpleDateFormat sdfMonth = new SimpleDateFormat("MM");
@@ -409,25 +409,25 @@ public class AnalysisServiceImpl implements AnalysisService {
         //10-日，20-周，30-月，40-年
         if ("10".equals(dataType)){
             // 本日
-            List<StatisticsData> curData = ywkStatisticsMapper.getYbaclztfxData(deptId,deptLevel,sdfYear.format(cur),sdfMonth.format(cur),sdfDay.format(cur));
+            List<StatisticsData> curData = ywkStatisticsMapper.getYbaclztfxData(deptId,deptLevel,sdfYear.format(cur),sdfMonth.format(cur),sdfDay.format(cur),ly);
             data.put("curData",curData);
         }else if ("20".equals(dataType)){
             // 本周
 
         }else if ("30".equals(dataType)){
             // 本月
-            List<StatisticsData> curData = ywkStatisticsMapper.getYbaclztfxData(deptId,deptLevel,sdfYear.format(cur),sdfMonth.format(cur),null);
+            List<StatisticsData> curData = ywkStatisticsMapper.getYbaclztfxData(deptId,deptLevel,sdfYear.format(cur),sdfMonth.format(cur),null,ly);
             data.put("curData",curData);
         }else if ("40".equals(dataType)){
             // 本年
-            List<StatisticsData> curData = ywkStatisticsMapper.getYbaclztfxData(deptId,deptLevel,sdfYear.format(cur),null,null);
+            List<StatisticsData> curData = ywkStatisticsMapper.getYbaclztfxData(deptId,deptLevel,sdfYear.format(cur),null,null,ly);
             data.put("curData",curData);
         }
         return data;
     }
 
     @Override
-    public Map<String, Object> getBalxData(String deptId, String deptLevel, String dataType) {
+    public Map<String, Object> getBalxData(String deptId, String deptLevel, String dataType, String ly) {
         Map<String,Object> data = new HashMap<>();
         SimpleDateFormat sdfYear = new SimpleDateFormat("yyyy");
         SimpleDateFormat sdfMonth = new SimpleDateFormat("MM");
@@ -437,29 +437,30 @@ public class AnalysisServiceImpl implements AnalysisService {
         List<StatisticsData> curData = new ArrayList<>();
         if ("10".equals(dataType)){
             // 本日
-            curData = ywkStatisticsMapper.getBalxData(deptId,deptLevel,sdfYear.format(cur),sdfMonth.format(cur),sdfDay.format(cur));
+            curData = ywkStatisticsMapper.getBalxData(deptId,deptLevel,sdfYear.format(cur),sdfMonth.format(cur),sdfDay.format(cur),ly);
             data.put("curData",curData);
         }else if ("20".equals(dataType)){
             // 本周
 
         }else if ("30".equals(dataType)){
             // 本月
-            curData = ywkStatisticsMapper.getBalxData(deptId,deptLevel,sdfYear.format(cur),sdfMonth.format(cur),null);
+            curData = ywkStatisticsMapper.getBalxData(deptId,deptLevel,sdfYear.format(cur),sdfMonth.format(cur),null,ly);
             data.put("curData",curData);
         }else if ("40".equals(dataType)){
             // 本年
-            curData = ywkStatisticsMapper.getBalxData(deptId,deptLevel,sdfYear.format(cur),null,null);
+            curData = ywkStatisticsMapper.getBalxData(deptId,deptLevel,sdfYear.format(cur),null,null,ly);
             data.put("curData",curData);
         }
         List<String> statisticsDataCodeList = new ArrayList<>();
         for (StatisticsData statisticsData:curData){
             statisticsDataCodeList.add(statisticsData.getData15());
         }
-        List<PsTransType> psTransTypes = psTransTypeService.getPsTransTypeByType("01");
+        List<PsTransType> psTransTypes = psTransTypeService.getPsTransTypeByType(ly);
         for (PsTransType psTransType:psTransTypes) {
             if (!statisticsDataCodeList.contains(psTransType.getCode())){
                 StatisticsData sd = new StatisticsData();
                 sd.setData01(0);
+                sd.setData14(psTransType.getName());
                 sd.setData15(psTransType.getCode());
                 curData.add(sd);
             }
@@ -522,7 +523,7 @@ public class AnalysisServiceImpl implements AnalysisService {
     }
 
     @Override
-    public List<DeptTree> getYbaclztfxDataByDept(String deptId, String deptLevel, String dataType) {
+    public List<DeptTree> getYbaclztfxDataByDept(String deptId, String deptLevel, String dataType, String ly) {
         Map<String,Object> data = new HashMap<>();
         SimpleDateFormat sdfYear = new SimpleDateFormat("yyyy");
         SimpleDateFormat sdfMonth = new SimpleDateFormat("MM");
@@ -532,18 +533,18 @@ public class AnalysisServiceImpl implements AnalysisService {
         List<StatisticsData> curData = new ArrayList<>();
         if ("10".equals(dataType)){
             // 本日
-            curData = ywkStatisticsMapper.getYbaclztfxDataByDept(deptId,deptLevel,sdfYear.format(cur),sdfMonth.format(cur),sdfDay.format(cur));
+            curData = ywkStatisticsMapper.getYbaclztfxDataByDept(deptId,deptLevel,sdfYear.format(cur),sdfMonth.format(cur),sdfDay.format(cur),ly);
             data.put("curData",curData);
         }else if ("20".equals(dataType)){
             // 本周
 
         }else if ("30".equals(dataType)){
             // 本月
-            curData = ywkStatisticsMapper.getYbaclztfxDataByDept(deptId,deptLevel,sdfYear.format(cur),sdfMonth.format(cur),null);
+            curData = ywkStatisticsMapper.getYbaclztfxDataByDept(deptId,deptLevel,sdfYear.format(cur),sdfMonth.format(cur),null,ly);
             data.put("curData",curData);
         }else if ("40".equals(dataType)){
             // 本年
-            curData = ywkStatisticsMapper.getYbaclztfxDataByDept(deptId,deptLevel,sdfYear.format(cur),null,null);
+            curData = ywkStatisticsMapper.getYbaclztfxDataByDept(deptId,deptLevel,sdfYear.format(cur),null,null,ly);
             data.put("curData",curData);
         }
         List<DeptTree> deptTreeList = new ArrayList<>();

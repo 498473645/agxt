@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pkusoft.lespke2.mapper.KeAjxxMapper">
+    <!-- @codeGenerate -->
+    <resultMap id="BaseResultMap" type="com.pkusoft.lespke2.po.KeAjxx">
+            <id column="AJBH" jdbcType="VARCHAR" property="ajbh"/>
+            <result column="JJBH" jdbcType="VARCHAR" property="jjbh"/>
+            <result column="AJMC" jdbcType="VARCHAR" property="ajmc"/>
+            <result column="AJMC_PYM" jdbcType="VARCHAR" property="ajmcPym"/>
+            <result column="BADW_BH" jdbcType="VARCHAR" property="badwBh"/>
+            <result column="BADW_MC" jdbcType="VARCHAR" property="badwMc"/>
+            <result column="GA_OWNER_DEPT_1" jdbcType="VARCHAR" property="gaOwnerDept1"/>
+            <result column="GA_OWNER_DEPT_2" jdbcType="VARCHAR" property="gaOwnerDept2"/>
+            <result column="GA_OWNER_DEPT_3" jdbcType="VARCHAR" property="gaOwnerDept3"/>
+            <result column="GA_OWNER_DEPT_4" jdbcType="VARCHAR" property="gaOwnerDept4"/>
+            <result column="GA_OWNER_DEPT_5" jdbcType="VARCHAR" property="gaOwnerDept5"/>
+            <result column="BZ_OWNER_DEPT_1" jdbcType="VARCHAR" property="bzOwnerDept1"/>
+            <result column="BZ_OWNER_DEPT_2" jdbcType="VARCHAR" property="bzOwnerDept2"/>
+            <result column="BZ_OWNER_DEPT_3" jdbcType="VARCHAR" property="bzOwnerDept3"/>
+            <result column="BZ_OWNER_DEPT_4" jdbcType="VARCHAR" property="bzOwnerDept4"/>
+            <result column="BZ_OWNER_DEPT_5" jdbcType="VARCHAR" property="bzOwnerDept5"/>
+            <result column="ZBR_SFZHM" jdbcType="VARCHAR" property="zbrSfzhm"/>
+            <result column="ZBR_JH" jdbcType="VARCHAR" property="zbrJh"/>
+            <result column="ZBR_XM" jdbcType="VARCHAR" property="zbrXm"/>
+            <result column="ZBR_XM_PYM" jdbcType="VARCHAR" property="zbrXmPym"/>
+            <result column="AJLB" jdbcType="VARCHAR" property="ajlb"/>
+            <result column="AJLB2_BH" jdbcType="VARCHAR" property="ajlb2Bh"/>
+            <result column="AJLB2_MC" jdbcType="VARCHAR" property="ajlb2Mc"/>
+            <result column="AJSX_BH" jdbcType="VARCHAR" property="ajsxBh"/>
+            <result column="AJSX_MC" jdbcType="VARCHAR" property="ajsxMc"/>
+            <result column="SASJ" jdbcType="DATE" property="sasj"/>
+            <result column="LASJ" jdbcType="DATE" property="lasj"/>
+            <result column="JASJ" jdbcType="DATE" property="jasj"/>
+            <result column="AJZT" jdbcType="VARCHAR" property="ajzt"/>
+            <result column="JYAQ" jdbcType="VARCHAR" property="jyaq"/>
+            <result column="BACX_BH" jdbcType="VARCHAR" property="bacxBh"/>
+            <result column="BACX_MC" jdbcType="VARCHAR" property="bacxMc"/>
+            <result column="SJZT" jdbcType="VARCHAR" property="sjzt"/>
+            <result column="XGSJ" jdbcType="DATE" property="xgsj"/>
+
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        AJBH,JJBH,AJMC,AJMC_PYM,BADW_BH,BADW_MC,GA_OWNER_DEPT_1,GA_OWNER_DEPT_2,GA_OWNER_DEPT_3,GA_OWNER_DEPT_4,GA_OWNER_DEPT_5,BZ_OWNER_DEPT_1,BZ_OWNER_DEPT_2,BZ_OWNER_DEPT_3,BZ_OWNER_DEPT_4,BZ_OWNER_DEPT_5,ZBR_SFZHM,ZBR_JH,ZBR_XM,ZBR_XM_PYM,AJLB,AJLB2_BH,AJLB2_MC,AJSX_BH,AJSX_MC,SASJ,LASJ,JASJ,AJZT,JYAQ,BACX_BH,BACX_MC,SJZT,XGSJ
+    </sql>
+
+    <!-- user-defined -->
+
+</mapper>

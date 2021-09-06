@@ -29,7 +29,7 @@ public class StatisticsData {
 
     private Integer data13;
 
-    private Integer data14;
+    private String data14;
 
     private String data15;
 
@@ -137,11 +137,11 @@ public class StatisticsData {
         this.data13 = data13;
     }
 
-    public Integer getData14() {
+    public String getData14() {
         return data14;
     }
 
-    public void setData14(Integer data14) {
+    public void setData14(String data14) {
         this.data14 = data14;
     }
 

@@ -15,7 +15,7 @@
 		<result column="DATA11" jdbcType="INTEGER" property="data11" />
 		<result column="DATA12" jdbcType="INTEGER" property="data12" />
 		<result column="DATA13" jdbcType="INTEGER" property="data13" />
-		<result column="DATA14" jdbcType="INTEGER" property="data14" />
+		<result column="DATA14" jdbcType="VARCHAR" property="data14" />
 		<result column="DATA15" jdbcType="VARCHAR" property="data15" />
 		<!-- <result column="DATA17" jdbcType="INTEGER" property="data17" />
 		<result column="DATA18" jdbcType="INTEGER" property="data18" />

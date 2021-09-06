@@ -55,6 +55,7 @@ public class ScreenAnalysisController {
             String deptId = map.get("deptId");
             String deptLevel = map.get("deptLevel");// 2-市局，3-分局，4-派出所
             String dataType = map.get("dataType");//10-日，20-周，30-月，40-年
+            String ly = map.get("ly");
             if (!StringUtils.hasText(deptId)){
                 return new ResponseData<>(ResponseData.STATUS_CODE_PARAM,"单位不能为空");
             }
@@ -64,7 +65,10 @@ public class ScreenAnalysisController {
             if (!StringUtils.hasText(dataType)){
                 return new ResponseData<>(ResponseData.STATUS_CODE_PARAM,"统计类型不能为空");
             }
-            Map<String,Object> dataMap = analysisService.getSmbaData(deptId,deptLevel,dataType);
+            if (!StringUtils.hasText(ly)){
+                return new ResponseData<>(ResponseData.STATUS_CODE_PARAM,"领域不能为空");
+            }
+            Map<String,Object> dataMap = analysisService.getSmbaData(deptId,deptLevel,dataType,ly);
             return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS,"成功",dataMap);
         }catch(Exception e){
             logger.error("查询统计_上门报案数据错误",e);
@@ -85,6 +89,7 @@ public class ScreenAnalysisController {
             String deptId = map.get("deptId");
             String deptLevel = map.get("deptLevel");// 2-市局，3-分局，4-派出所
             String dataType = map.get("dataType");//10-日，20-周，30-月，40-年
+            String ly = map.get("ly");
             if (!StringUtils.hasText(deptId)){
                 return new ResponseData<>(ResponseData.STATUS_CODE_PARAM,"单位不能为空");
             }
@@ -94,7 +99,10 @@ public class ScreenAnalysisController {
             if (!StringUtils.hasText(dataType)){
                 return new ResponseData<>(ResponseData.STATUS_CODE_PARAM,"统计类型不能为空");
             }
-            Map<String,Object> data = analysisService.getYbafsdbData(deptId,deptLevel,dataType);
+            if (!StringUtils.hasText(ly)){
+                return new ResponseData<>(ResponseData.STATUS_CODE_PARAM,"领域不能为空");
+            }
+            Map<String,Object> data = analysisService.getYbafsdbData(deptId,deptLevel,dataType,ly);
             return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS,"成功",data);
         }catch(Exception e){
             logger.error("查询统计_上门报案数据错误",e);
@@ -115,6 +123,7 @@ public class ScreenAnalysisController {
             String deptId = map.get("deptId");
             String deptLevel = map.get("deptLevel");// 2-市局，3-分局，4-派出所
             String dataType = map.get("dataType");//10-日，20-周，30-月，40-年
+            String ly = map.get("ly");
             if (!StringUtils.hasText(deptId)){
                 return new ResponseData<>(ResponseData.STATUS_CODE_PARAM,"单位不能为空");
             }
@@ -124,7 +133,10 @@ public class ScreenAnalysisController {
             if (!StringUtils.hasText(dataType)){
                 return new ResponseData<>(ResponseData.STATUS_CODE_PARAM,"统计类型不能为空");
             }
-            Map<String,Object> data = analysisService.getYbaclztfxData(deptId,deptLevel,dataType);
+            if (!StringUtils.hasText(dataType)){
+                return new ResponseData<>(ResponseData.STATUS_CODE_PARAM,"领域不能为空");
+            }
+            Map<String,Object> data = analysisService.getYbaclztfxData(deptId,deptLevel,dataType,ly);
             return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS,"成功",data);
         }catch(Exception e){
             logger.error("一屏查询----预报案处理状态分析",e);
@@ -145,6 +157,7 @@ public class ScreenAnalysisController {
             String deptId = map.get("deptId");
             String deptLevel = map.get("deptLevel");// 2-市局，3-分局，4-派出所
             String dataType = map.get("dataType");//10-日，20-周，30-月，40-年
+            String ly = map.get("ly");
             if (!StringUtils.hasText(deptId)){
                 return new ResponseData<>(ResponseData.STATUS_CODE_PARAM,"单位不能为空");
             }
@@ -154,12 +167,15 @@ public class ScreenAnalysisController {
             if (!StringUtils.hasText(dataType)){
                 return new ResponseData<>(ResponseData.STATUS_CODE_PARAM,"统计类型不能为空");
             }
-            Map<String,Object> data = analysisService.getBalxData(deptId,deptLevel,dataType);
+            if (!StringUtils.hasText(ly)){
+                return new ResponseData<>(ResponseData.STATUS_CODE_PARAM,"领域不能为空");
+            }
+            Map<String,Object> data = analysisService.getBalxData(deptId,deptLevel,dataType,ly);
             return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS,"成功",data);
         }catch(Exception e){
-            logger.error("一屏查询----预报案处理状态分析",e);
+            logger.error("一屏查询----办事类型分析",e);
             e.printStackTrace();
-            return new ResponseData<>(ResponseData.STATUS_CODE_OTHER,"一屏查询----预报案处理状态分析");
+            return new ResponseData<>(ResponseData.STATUS_CODE_OTHER,"一屏查询----办事类型分析");
         }
     }
 
@@ -235,6 +251,7 @@ public class ScreenAnalysisController {
             String deptId = map.get("deptId");
             String deptLevel = map.get("deptLevel");// 2-市局，3-分局，4-派出所
             String dataType = map.get("dataType");//10-日，20-周，30-月，40-年
+            String ly = map.get("ly");
             if (!StringUtils.hasText(deptId)){
                 return new ResponseData<>(ResponseData.STATUS_CODE_PARAM,"单位不能为空");
             }
@@ -244,7 +261,10 @@ public class ScreenAnalysisController {
             if (!StringUtils.hasText(dataType)){
                 return new ResponseData<>(ResponseData.STATUS_CODE_PARAM,"统计类型不能为空");
             }
-            List<DeptTree> data = analysisService.getYbaclztfxDataByDept(deptId,deptLevel,dataType);
+            if (!StringUtils.hasText(ly)){
+                return new ResponseData<>(ResponseData.STATUS_CODE_PARAM,"领域不能为空");
+            }
+            List<DeptTree> data = analysisService.getYbaclztfxDataByDept(deptId,deptLevel,dataType,ly);
             return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS,"成功",data);
         }catch(Exception e){
             logger.error("一屏查询----评议占比分析",e);
