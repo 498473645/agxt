@@ -138,16 +138,16 @@ public class PcWtmx {
  	/**
      * 来源的报警问题编号
      */
-    @Column(name = "LY_BJWT_BH")
+    @Column(name = "LY_BJWTBH")
     @ApiModelProperty(value = "来源的报警问题编号")
-    private String lyBjwtBh;
+    private String lyBjwtbh;
 
  	/**
      * 来源的预警问题编号
      */
-    @Column(name = "LY_YJWT_BH")
+    @Column(name = "LY_YJWTBH")
     @ApiModelProperty(value = "来源的预警问题编号")
-    private String lyYjwtBh;
+    private String lyYjwtbh;
 
  	/**
      * 修改用户编号
@@ -450,36 +450,20 @@ public class PcWtmx {
         this.lyWtbh = lyWtbh;
     }
 
-    /**
-    * 获得来源的报警问题编号
-    * @return LY_BJWT_BH
-    */
-    public String getLyBjwtBh() {
-        return this.lyBjwtBh;
+    public String getLyBjwtbh() {
+        return lyBjwtbh;
     }
 
-    /**
-    * 设置来源的报警问题编号
-    * @param lyBjwtBh
-    */
-    public void setLyBjwtBh(String lyBjwtBh) {
-        this.lyBjwtBh = lyBjwtBh;
+    public void setLyBjwtbh(String lyBjwtbh) {
+        this.lyBjwtbh = lyBjwtbh;
     }
 
-    /**
-    * 获得来源的预警问题编号
-    * @return LY_YJWT_BH
-    */
-    public String getLyYjwtBh() {
-        return this.lyYjwtBh;
+    public String getLyYjwtbh() {
+        return lyYjwtbh;
     }
 
-    /**
-    * 设置来源的预警问题编号
-    * @param lyYjwtBh
-    */
-    public void setLyYjwtBh(String lyYjwtBh) {
-        this.lyYjwtBh = lyYjwtBh;
+    public void setLyYjwtbh(String lyYjwtbh) {
+        this.lyYjwtbh = lyYjwtbh;
     }
 
     /**

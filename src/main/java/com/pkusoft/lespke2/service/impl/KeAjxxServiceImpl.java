@@ -36,10 +36,8 @@ public class KeAjxxServiceImpl implements KeAjxxService {
     }
 
     @Override
-    public List<KeAjxx> getKeAjxxListBySfz(String sfz) {
+    public List<KeAjxx> getKeAjxxListBySfz(Map<String, String> map) {
         //根据身份证查询涉案人员信息
-        Map<String,String> map = new HashMap<String,String>();
-        map.put("sfz",sfz);
         List<KeAjSary> saryList = keAjSaryService.getKeAjSaryList(map);
         if(null == saryList|| saryList.size()<1){
             return null;

@@ -20,8 +20,8 @@
             <result column="LX" jdbcType="DECIMAL" property="lx"/>
             <result column="LY" jdbcType="VARCHAR" property="ly"/>
             <result column="LY_WTBH" jdbcType="VARCHAR" property="lyWtbh"/>
-            <result column="LY_BJWT_BH" jdbcType="VARCHAR" property="lyBjwtBh"/>
-            <result column="LY_YJWT_BH" jdbcType="VARCHAR" property="lyYjwtBh"/>
+            <result column="LY_BJWTBH" jdbcType="VARCHAR" property="lyBjwtbh"/>
+            <result column="LY_YJWTBH" jdbcType="VARCHAR" property="lyYjwtbh"/>
             <result column="MODIFIED_USER_ID" jdbcType="VARCHAR" property="modifiedUserId"/>
             <result column="MODIFIED_DATE" jdbcType="DATE" property="modifiedDate"/>
             <result column="MODIFIED_DEPT_ID" jdbcType="VARCHAR" property="modifiedDeptId"/>
@@ -30,7 +30,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        WTMX_BH,WTMX_MC,WTMX_JC,WTLY_BH,WTLY_MC,WTLY_JC,BJWT_MS,YJWT_MS,WTWD1,WTWD2,WTWD3,WTWD4,WTWD5,XH,LX,LY,LY_WTBH,LY_BJWT_BH,LY_YJWT_BH,MODIFIED_USER_ID,MODIFIED_DATE,MODIFIED_DEPT_ID,MODIFIED_DEPT_NAME
+        WTMX_BH,WTMX_MC,WTMX_JC,WTLY_BH,WTLY_MC,WTLY_JC,BJWT_MS,YJWT_MS,WTWD1,WTWD2,WTWD3,WTWD4,WTWD5,XH,LX,LY,LY_WTBH,LY_BJWTBH,LY_YJWTBH,MODIFIED_USER_ID,MODIFIED_DATE,MODIFIED_DEPT_ID,MODIFIED_DEPT_NAME
     </sql>
 
     <!-- user-defined -->

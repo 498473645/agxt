@@ -13,9 +13,9 @@ public interface KeAjxxService {
 
     /**
     * 根据身份证查询案件涉案人员信息
-    * @param sfz	身份证
+    * @param map	身份证
     * @return
     */
-    List<KeAjxx> getKeAjxxListBySfz(String sfz);
+    List<KeAjxx> getKeAjxxListBySfz(Map<String, String> map);
 
 }
