@@ -56,7 +56,7 @@ public class PsTransServiceImpl implements PsTransService {
         //The query conditions are edited here
         this.setCommonCondition(criteria,psTransReqParam,map);
         example.setOrderByClause("CREATE_TIME DESC");
-        sysPermitService.setUserDataPermits(criteria,map, PermitType.PERMIT_TYPE_DEPT_QUERY);
+        sysPermitService.setUserDataPermitsBabs(criteria,map, PermitType.PERMIT_TYPE_BABS_QUERY);
         if(0 == psTransReqParam.getPageSize()){
             return psTransMapper.selectByExample(example);
         }
@@ -70,7 +70,7 @@ public class PsTransServiceImpl implements PsTransService {
         //The query conditions are edited here
         this.setCommonCondition(criteria,psTransReqParam,map);
         example.setOrderByClause("CREATE_TIME DESC");
-        sysPermitService.setUserDataPermits(criteria,map, PermitType.PERMIT_TYPE_DEPT_QUERY);
+        sysPermitService.setUserDataPermitsBabs(criteria,map, PermitType.PERMIT_TYPE_BABS_QUERY);
         return psTransMapper.selectCountByExample(example);
     }
 

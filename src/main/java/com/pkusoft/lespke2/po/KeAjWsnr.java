@@ -7,8 +7,8 @@ import io.swagger.annotations.ApiModelProperty;
 import javax.persistence.*;
 
 /**
- * @author 
- * @title: KeAjWsnr 
+ * @author
+ * @title: KeAjWsnr
  */
 @ApiModel("案件的文书内容")
 @Table(name = "KE_AJ_WSNR")
@@ -20,140 +20,140 @@ public class KeAjWsnr {
     @Id
     @Column(name = "FLWSBH")
     @ApiModelProperty(value = "文书编号")
-    private String flwsbh; 
+    private String flwsbh;
 
  	/**
      * 案件编号
      */
     @Column(name = "AJBH")
     @ApiModelProperty(value = "案件编号")
-    private String ajbh; 
+    private String ajbh;
 
  	/**
      * 关联编号
      */
     @Column(name = "GLBH")
     @ApiModelProperty(value = "关联编号")
-    private String glbh; 
+    private String glbh;
 
  	/**
      * 文书类型
      */
     @Column(name = "WSBT")
     @ApiModelProperty(value = "文书类型")
-    private String wsbt; 
+    private String wsbt;
 
  	/**
-     * 
+     *
      */
     @Column(name = "WSZ")
     @ApiModelProperty(value = "")
-    private String wsz; 
+    private String wsz;
 
  	/**
      * 文书内容
      */
     @Column(name = "WSNR")
     @ApiModelProperty(value = "文书内容")
-    private String wsnr; 
+    private byte[] wsnr;
 
  	/**
      * 填发单位
      */
     @Column(name = "TFDW")
     @ApiModelProperty(value = "填发单位")
-    private String tfdw; 
+    private String tfdw;
 
  	/**
      * 填发单位名称
      */
     @Column(name = "TFDW_MC")
     @ApiModelProperty(value = "填发单位名称")
-    private String tfdwMc; 
+    private String tfdwMc;
 
  	/**
      * 填发日期
      */
     @Column(name = "TFRQ")
     @ApiModelProperty(value = "填发日期")
-    private java.util.Date tfrq; 
+    private java.util.Date tfrq;
 
  	/**
      * 填发人
      */
     @Column(name = "TFR")
     @ApiModelProperty(value = "填发人")
-    private String tfr; 
+    private String tfr;
 
  	/**
      * 操作单位
      */
     @Column(name = "CZDW")
     @ApiModelProperty(value = "操作单位")
-    private String czdw; 
+    private String czdw;
 
  	/**
      * 操作单位名称
      */
     @Column(name = "CZDW_MC")
     @ApiModelProperty(value = "操作单位名称")
-    private String czdwMc; 
+    private String czdwMc;
 
  	/**
      * 操作人姓名
      */
     @Column(name = "CZR")
     @ApiModelProperty(value = "操作人姓名")
-    private String czr; 
+    private String czr;
 
  	/**
      * 操作时间
      */
     @Column(name = "CZSJ")
     @ApiModelProperty(value = "操作时间")
-    private java.util.Date czsj; 
+    private java.util.Date czsj;
 
  	/**
      * 操作标识
      */
     @Column(name = "CZBS")
     @ApiModelProperty(value = "操作标识")
-    private String czbs; 
+    private String czbs;
 
  	/**
-     * 
+     *
      */
     @Column(name = "FLWSQZBS")
     @ApiModelProperty(value = "")
-    private String flwsqzbs; 
+    private String flwsqzbs;
 
  	/**
      * 法律文书名称
      */
     @Column(name = "FLWSMC")
     @ApiModelProperty(value = "法律文书名称")
-    private String flwsmc; 
+    private String flwsmc;
 
  	/**
      * 文书编号
      */
     @Column(name = "WH")
     @ApiModelProperty(value = "文书编号")
-    private String wh; 
+    private String wh;
 
  	/**
      * 对象名称
      */
     @Column(name = "DXMC")
     @ApiModelProperty(value = "对象名称")
-    private String dxmc; 
+    private String dxmc;
 
  	/**
      * 修改时间
      */
     @Column(name = "XGSJ")
     @ApiModelProperty(value = "修改时间")
-    private java.util.Date xgsj; 
+    private java.util.Date xgsj;
 
 
     /**
@@ -236,19 +236,11 @@ public class KeAjWsnr {
         this.wsz = wsz;
     }
 
-    /**
-    * 获得文书内容
-    * @return WSNR
-    */
-    public String getWsnr() {
-        return this.wsnr;
+    public byte[] getWsnr() {
+        return wsnr;
     }
 
-    /**
-    * 设置文书内容
-    * @param wsnr
-    */
-    public void setWsnr(String wsnr) {
+    public void setWsnr(byte[] wsnr) {
         this.wsnr = wsnr;
     }
 

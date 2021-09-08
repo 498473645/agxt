@@ -55,7 +55,7 @@ public class PsApprsServiceImpl implements PsApprsService {
         //The query conditions are edited here
         this.setCommonCondition(criteria,psApprsReqParam,map);
         example.setOrderByClause("CREATE_TIME DESC");
-        sysPermitService.setUserDataPermits(criteria,map, PermitType.PERMIT_TYPE_DEPT_QUERY);
+        sysPermitService.setUserDataPermitsBabs(criteria,map, PermitType.PERMIT_TYPE_BABS_QUERY);
         if(0 == psApprsReqParam.getPageSize()){
             return psApprsMapper.selectByExample(example);
         }
@@ -85,7 +85,7 @@ public class PsApprsServiceImpl implements PsApprsService {
         Example.Criteria criteria = example.createCriteria();
         //The query conditions are edited here
         this.setCommonCondition(criteria,psApprsReqParam,map);
-        sysPermitService.setUserDataPermits(criteria,map, PermitType.PERMIT_TYPE_DEPT_QUERY);
+        sysPermitService.setUserDataPermitsBabs(criteria,map, PermitType.PERMIT_TYPE_BABS_QUERY);
         example.setOrderByClause("CREATE_TIME DESC");
         return psApprsMapper.selectCountByExample(example);
     }

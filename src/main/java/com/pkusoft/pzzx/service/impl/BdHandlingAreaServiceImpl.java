@@ -47,7 +47,7 @@ public class BdHandlingAreaServiceImpl implements BdHandlingAreaService {
         example.setOrderByClause("CREATE_TIME DESC");
         //The query conditions are edited here
         this.setCommonCondition(criteria,bdHandlingArea, map);
-        sysPermitService.setUserDataPermits(criteria,map, PermitType.PERMIT_TYPE_DEPT_QUERY);
+        sysPermitService.setUserDataPermits(criteria,map, PermitType.PERMIT_TYPE_BABS_QUERY);
         return bdHandlingAreaMapper.selectByExampleAndRowBounds(example,rowBounds);
     }
 
@@ -57,7 +57,7 @@ public class BdHandlingAreaServiceImpl implements BdHandlingAreaService {
         Example.Criteria criteria = example.createCriteria();
         //The query conditions are edited
         this.setCommonCondition(criteria,bdHandlingArea, map);
-        sysPermitService.setUserDataPermits(criteria,map, PermitType.PERMIT_TYPE_DEPT_QUERY);
+        sysPermitService.setUserDataPermits(criteria,map, PermitType.PERMIT_TYPE_BABS_QUERY);
         return bdHandlingAreaMapper.selectCountByExample(example);
     }
 

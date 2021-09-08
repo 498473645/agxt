@@ -26,11 +26,7 @@ public class RsJbjSxtxxServiceImpl implements RsJbjSxtxxService {
 
     public List<RsJbjSxtxx> getDeptList( Map<String, String> map) {
 
-//        Example example = new Example(RsJbjSxtxx.class);
-//        Example.Criteria criteria = example.createCriteria();
-//        sysPermitService.setUserDataPermits(criteria, map, PermitType.PERMIT_TYPE_CASE_QUERY);
-//        return rsJbjSxtxxMapper.selectByExample(example);
-        Map<String,String> retData = sysPermitService.setUserDataPermits(map, PermitType.PERMIT_TYPE_CASE_QUERY);
+        Map<String,String> retData = sysPermitService.setUserDataPermits(map, PermitType.PERMIT_TYPE_BABS_QUERY);
         String deptLevel = retData.get("level");
         String deptId = retData.get("deptId");
         if (StringUtils.hasText(deptLevel)&& StringUtils.hasText(deptId)){
