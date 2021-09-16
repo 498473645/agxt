@@ -1,5 +1,6 @@
 package com.pkusoft.lesppc.service.impl;
 
+import com.pkusoft.lesp.until.PermitType;
 import com.pkusoft.lesppc.model.PcWtmx;
 import com.pkusoft.lesppc.req.*;
 import com.pkusoft.lesp.po.StatisticsData;
@@ -7,6 +8,7 @@ import com.pkusoft.lesppc.mapper.PcYjwtMapper;
 import com.pkusoft.lesppc.mapper.StasticMapper;
 import com.pkusoft.lesppc.model.PcYjwt;
 import com.pkusoft.lesppc.service.PcYjwtService;
+import com.pkusoft.usercenter.service.SysPermitService;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +29,9 @@ public class PcYjwtServiceImpl implements PcYjwtService {
 
     @Autowired
     private StasticMapper stasticMapper;
+
+    @Autowired
+    private SysPermitService sysPermitService;
 
 
     /**
@@ -112,13 +117,14 @@ public class PcYjwtServiceImpl implements PcYjwtService {
         if (StringUtils.hasText(wtwd1)){
             criteria.andLike("wtwd1","%"+wtwd1.trim()+"%");
         }
-        if ("2".equals(deptLevel)){
-            criteria.andEqualTo("gaOwnerDept2",deptId);
-        }else if ("3".equals(deptLevel)){
-            criteria.andEqualTo("gaOwnerDept3",deptId);
-        }else if ("4".equals(deptLevel)){
-            criteria.andEqualTo("gaOwnerDept4",deptId);
-        }
+//        sysPermitService.setUserDataPermitsBabs(criteria,map, PermitType.PERMIT_TYPE_BABS_QUERY);
+//        if ("2".equals(deptLevel)){
+//            criteria.andEqualTo("gaOwnerDept2",deptId);
+//        }else if ("3".equals(deptLevel)){
+//            criteria.andEqualTo("gaOwnerDept3",deptId);
+//        }else if ("4".equals(deptLevel)){
+//            criteria.andEqualTo("gaOwnerDept4",deptId);
+//        }
 
         return pcYjwtMapper.selectByExampleAndRowBounds(example,rowBounds);
     }
@@ -136,13 +142,13 @@ public class PcYjwtServiceImpl implements PcYjwtService {
         if (StringUtils.hasText(wtwd1)){
             criteria.andLike("wtwd1","%"+wtwd1.trim()+"%");
         }
-        if ("2".equals(deptLevel)){
-            criteria.andEqualTo("gaOwnerDept2",deptId);
-        }else if ("3".equals(deptLevel)){
-            criteria.andEqualTo("gaOwnerDept3",deptId);
-        }else if ("4".equals(deptLevel)){
-            criteria.andEqualTo("gaOwnerDept4",deptId);
-        }
+//        if ("2".equals(deptLevel)){
+//            criteria.andEqualTo("gaOwnerDept2",deptId);
+//        }else if ("3".equals(deptLevel)){
+//            criteria.andEqualTo("gaOwnerDept3",deptId);
+//        }else if ("4".equals(deptLevel)){
+//            criteria.andEqualTo("gaOwnerDept4",deptId);
+//        }
 
         return pcYjwtMapper.selectCountByExample(example);
     }
@@ -155,13 +161,13 @@ public class PcYjwtServiceImpl implements PcYjwtService {
         if (StringUtils.hasText(wtwd1)){
             criteria.andLike("wtwd1","%"+wtwd1.trim()+"%");
         }
-        if ("2".equals(deptLevel)){
-            criteria.andEqualTo("gaOwnerDept2",deptId);
-        }else if ("3".equals(deptLevel)){
-            criteria.andEqualTo("gaOwnerDept3",deptId);
-        }else if ("4".equals(deptLevel)){
-            criteria.andEqualTo("gaOwnerDept4",deptId);
-        }
+//        if ("2".equals(deptLevel)){
+//            criteria.andEqualTo("gaOwnerDept2",deptId);
+//        }else if ("3".equals(deptLevel)){
+//            criteria.andEqualTo("gaOwnerDept3",deptId);
+//        }else if ("4".equals(deptLevel)){
+//            criteria.andEqualTo("gaOwnerDept4",deptId);
+//        }
 
         return pcYjwtMapper.selectCountByExample(example);
     }

@@ -46,9 +46,9 @@ public class SysPermitServiceImpl implements SysPermitService {
         paraMap.put("permitType", permitType);
         paraMap.put("proxyId", proxyId);
         //获取数据权限
-        String permitValue = sysPermitMapper.getUserPermitValue(paraMap);
+//        String permitValue = sysPermitMapper.getUserPermitValue(paraMap);
         //获取数据权限（新版本）
-//        String permitValue = sysPermitMapper.getUserOwnerRuleValue(paraMap);
+        String permitValue = sysPermitMapper.getUserOwnerRuleValue(paraMap);
         return permitValue;
     }
 

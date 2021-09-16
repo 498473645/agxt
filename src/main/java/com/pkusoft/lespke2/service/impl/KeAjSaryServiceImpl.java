@@ -29,8 +29,8 @@ public class KeAjSaryServiceImpl implements KeAjSaryService {
         Example example = new Example(KeAjSary.class);
         Example.Criteria criteria = example.createCriteria();
         //The query conditions are edited here
-        if (StringUtils.hasText(map.get("sfz"))){
-            criteria.andLike("sarySfzhm",map.get("sfz"));
+        if (StringUtils.hasText(map.get("sfzh"))){
+            criteria.andEqualTo("sarySfzhm",map.get("sfzh"));
         }
         return keAjSaryMapper.selectByExample(example);
     }
