@@ -1,6 +1,7 @@
 package com.pkusoft.lespke2.controller;
 
 
+import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -26,6 +27,8 @@ import com.pkusoft.lespke2.service.KeAjWsnrService;
 
 
 import org.support.commons.springmvc.ResponseData;
+
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author
@@ -78,21 +81,25 @@ public class KeAjWsnrController  {
     * @return
     */
     @ApiOperation(value="查看案件的文书内容", notes="查看案件的文书内容",httpMethod = "POST")
-    @RequestMapping(value = "/keAjWsnr/keAjWsnrDetails", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "/keAjWsnr/getWsnr", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public ResponseData<Map> keAjWsnrDetails(@RequestBody(required = false) Map<String, String> requestBody){
+    public void getWsnr(@RequestBody(required = false) Map<String, String> requestBody, HttpServletResponse response){
         // 检查参数
-        if (requestBody == null) {
-            return new ResponseData<>(ResponseData.STATUS_CODE_PARAM, "参数为空");
+        if (requestBody == null|| !StringUtils.hasText(requestBody.get("flwsbh"))) {
+            return;
         }
         try {
             // TODO: 业务逻辑
-            Map responseData = null;
-            return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS, null, responseData);
+            KeAjWsnr wsnr = keAjWsnrService.getKeAjWsnr(requestBody.get("flwsbh"));
+            if(null != wsnr.getWsnr()){
+                response.reset();
+                response.setContentType("application/octet-stream");
+                OutputStream os = response.getOutputStream();
+                os.write(wsnr.getWsnr());
+                os.close();
+            }
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-            // TODO: 业务日志
-            return new ResponseData<>(ResponseData.STATUS_CODE_BIZ, "error：" + e.getMessage());
         }
     }
 
