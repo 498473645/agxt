@@ -1,6 +1,6 @@
 # ============================== 开始/配置中心/springcloud-config.yml.template ==========================================
 ## spring-cloud-config启用，默认值：true
-#spring.cloud.config.enabled: false
+spring.cloud.config.enabled: false
 
 # spring-cloud-config客户端配置
 spring.cloud.config.uri: http://27.17.3.62:8030/springcloud-config-server
