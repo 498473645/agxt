@@ -127,7 +127,7 @@ dfs.hadoopUrl: ""
 # mybatis[i]对应事务管理器为transactionManageri：transactionManager0, transactionManager1, ...
 mybatis:
   - datasource:
-      url: jdbc:oracle:thin:@10.73.89.201/lesp
+      url: jdbc:oracle:thin:@27.17.3.62:1521:orcl
       username: jjpt2
       password: a
       max-active: 100
@@ -150,7 +150,7 @@ mybatis:
       default-fetch-size: 100
 
   - datasource:
-      url: jdbc:oracle:thin:@10.73.89.201/lesp
+      url: jdbc:oracle:thin:@27.17.3.62:1521:orcl
       username: jjpt2
       password: a
       max-active: 100
@@ -173,7 +173,7 @@ mybatis:
       default-fetch-size: 100
 
   - datasource:
-      url: jdbc:oracle:thin:@10.73.89.201/lesp
+      url: jdbc:oracle:thin:@27.17.3.62:1521:orcl
       username: jjpt2
       password: a
       max-active: 100
@@ -195,33 +195,33 @@ mybatis:
       map-underscore-to-camel-case: true
       default-fetch-size: 100
 
-#  - datasource:
-#      url: jdbc:oracle:thin:@27.17.47.21:10001/orcl
-#      username: zfgk
-#      password: pkusoft2017
-#      max-active: 100
-#      validation-query: select 1 from dual
-#      filters: stat,log4j,config
-#      # （可选）删除超时连接，默认false
-#      remove-abandoned: true
-#      # （可选）超时时间，单位毫秒，默认300000毫秒
-#      remove-abandoned-timeout-millis: 300000
-#      # （可选）超时连接的日志，默认false
-#      log-abandoned: true
-#      # （可选）当数据库不可用时，获取数据库连接快速失败。true、抛出异常；false、柱塞获取数据库连接线程。默认false
-#      fail-fast: true
-#    mapper-locations:
-#    - classpath*:com/pkusoft/zfgk/mapper/*.xml
-#    base-package: com.pkusoft.zfgk.mapper
-#    mapper-scanner-configurer-type: tk.mybatis.spring.mapper.MapperScannerConfigurer
-#    configuration:
-#      map-underscore-to-camel-case: true
-#      default-fetch-size: 100
+  #- datasource:
+  #    url: jdbc:oracle:thin:@27.17.47.21:10001/orcl
+  #    username: zfgk
+  #    password: pkusoft2017
+  #    max-active: 100
+  #    validation-query: select 1 from dual
+  #    filters: stat,log4j,config
+  #    # （可选）删除超时连接，默认false
+  #    remove-abandoned: true
+  #    # （可选）超时时间，单位毫秒，默认300000毫秒
+  #    remove-abandoned-timeout-millis: 300000
+  #    # （可选）超时连接的日志，默认false
+  #    log-abandoned: true
+  #    # （可选）当数据库不可用时，获取数据库连接快速失败。true、抛出异常；false、柱塞获取数据库连接线程。默认false
+  #    fail-fast: true
+  #  mapper-locations:
+  #  - classpath*:com/pkusoft/zfgk/mapper/*.xml
+  #  base-package: com.pkusoft.zfgk.mapper
+  #  mapper-scanner-configurer-type: tk.mybatis.spring.mapper.MapperScannerConfigurer
+  #  configuration:
+  #    map-underscore-to-camel-case: true
+  #    default-fetch-size: 100
 
   - datasource:
-      url: jdbc:oracle:thin:@10.73.89.201/lesp
+      url: jdbc:oracle:thin:@27.17.3.62:1521:orcl
       username: user_center2
-      password: pkusoft2016
+      password: a
       max-active: 50
       validation-query: select 1 from dual
       filters: stat,log4j,config
@@ -242,9 +242,9 @@ mybatis:
       default-fetch-size: 100
 
   - datasource:
-      url: jdbc:oracle:thin:@10.73.89.201/lesp
+      url: jdbc:oracle:thin:@27.17.3.62:1521:orcl
       username: lesp_rs
-      password: pkusoft2016
+      password: a
       max-active: 50
       validation-query: select 1 from dual
       filters: stat,log4j
@@ -265,9 +265,9 @@ mybatis:
       default-fetch-size: 100
 
   - datasource:
-      url: jdbc:oracle:thin:@10.73.89.201/lesp
+      url: jdbc:oracle:thin:@27.17.3.62:1521:orcl
       username: lesp_pc
-      password: pkusoft2020
+      password: a
       max-active: 100
       validation-query: select 1 from dual
       # connection-properties: config.decrypt=true
@@ -289,9 +289,9 @@ mybatis:
       default-fetch-size: 100
 
   - datasource:
-      url: jdbc:oracle:thin:@10.73.89.201/lesp
+      url: jdbc:oracle:thin:@27.17.3.62:1521:orcl
       username: lesp_rs20
-      password: pkusoft2016
+      password: a
       max-active: 100
       validation-query: select 1 from dual
       # connection-properties: config.decrypt=true
@@ -313,9 +313,9 @@ mybatis:
       default-fetch-size: 100
 
   - datasource:
-      url: jdbc:oracle:thin:@10.73.89.201/lesp
+      url: jdbc:oracle:thin:@27.17.3.62:1521:orcl
       username: lesp_ke2
-      password: pkusoft2016
+      password: a
       max-active: 100
       validation-query: select 1 from dual
       # connection-properties: config.decrypt=true

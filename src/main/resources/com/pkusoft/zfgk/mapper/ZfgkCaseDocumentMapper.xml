@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pkusoft.zfgk.mapper.ZfgkCaseDocumentMapper">
+        <!-- @codeGenerate -->
+        <resultMap id="BaseResultMap" type="com.pkusoft.zfgk.model.ZfgkCaseDocument">
+                <id column="DOC_ID" jdbcType="VARCHAR" property="docId"/>
+                <result column="DOCXX" jdbcType="CLOB" property="docxx"/>
+                <result column="WSBH" jdbcType="VARCHAR" property="wsbh"/>
+                <result column="AJBH" jdbcType="VARCHAR" property="ajbh"/>
+                <result column="ZZJGMC" jdbcType="VARCHAR" property="zzjgmc"/>
+                <result column="WSMC" jdbcType="VARCHAR" property="wsmc"/>
+                <result column="FLWSH" jdbcType="VARCHAR" property="flwsh"/>
+                <result column="CQLY" jdbcType="CLOB" property="cqly"/>
+                <result column="SSYJ" jdbcType="VARCHAR" property="ssyj"/>
+                <result column="FLYJ" jdbcType="VARCHAR" property="flyj"/>
+                <result column="TFSJ" jdbcType="VARCHAR" property="tfsj"/>
+                <result column="DJSJ" jdbcType="VARCHAR" property="djsj"/>
+                <result column="XGSJ" jdbcType="VARCHAR" property="xgsj"/>
+                <result column="CSBH" jdbcType="VARCHAR" property="csbh"/>
+                <result column="JDDW" jdbcType="VARCHAR" property="jddw"/>
+                <result column="RESERVE1" jdbcType="VARCHAR" property="reserve1"/>
+                <result column="RESERVE2" jdbcType="VARCHAR" property="reserve2"/>
+                <result column="RESERVE3" jdbcType="VARCHAR" property="reserve3"/>
+                <result column="RESERVE4" jdbcType="VARCHAR" property="reserve4"/>
+                <result column="RESERVE5" jdbcType="VARCHAR" property="reserve5"/>
+                <result column="DOCPDF" jdbcType="BLOB" property="docpdf"/>
+                <result column="STATE" jdbcType="VARCHAR" property="state"/>
+                <result column="JSSJ" jdbcType="VARCHAR" property="jssj"/>
+                <result column="NORMAL" jdbcType="VARCHAR" property="normal"/>
+
+        </resultMap>
+
+        <sql id="Base_Column_List">
+        DOC_ID,DOCXX,WSBH,AJBH,ZZJGMC,WSMC,FLWSH,CQLY,SSYJ,FLYJ,TFSJ,DJSJ,XGSJ,CSBH,JDDW,RESERVE1,RESERVE2,RESERVE3,RESERVE4,RESERVE5,DOCPDF,STATE,JSSJ,NORMAL
+    </sql>
+
+        <!-- user-defined -->
+
+</mapper>

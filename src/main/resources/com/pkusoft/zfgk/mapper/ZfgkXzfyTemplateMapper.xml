@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pkusoft.zfgk.mapper.ZfgkXzfyTemplateMapper">
+        <!-- @codeGenerate -->
+        <resultMap id="BaseResultMap" type="com.pkusoft.zfgk.model.ZfgkXzfyTemplate">
+                <id column="XZFY_TID" jdbcType="VARCHAR" property="xzfyTid"/>
+                <result column="SQRXM" jdbcType="VARCHAR" property="sqrxm"/>
+                <result column="SQRZS" jdbcType="VARCHAR" property="sqrzs"/>
+                <result column="SQRLXDH" jdbcType="VARCHAR" property="sqrlxdh"/>
+                <result column="DSRXM" jdbcType="VARCHAR" property="dsrxm"/>
+                <result column="DSRZS" jdbcType="VARCHAR" property="dsrzs"/>
+                <result column="DSRLXDH" jdbcType="VARCHAR" property="dsrlxdh"/>
+                <result column="BSQRXM" jdbcType="VARCHAR" property="bsqrxm"/>
+                <result column="BSQRZS" jdbcType="VARCHAR" property="bsqrzs"/>
+                <result column="BSQRFRDB" jdbcType="VARCHAR" property="bsqrfrdb"/>
+                <result column="FRDBZW" jdbcType="VARCHAR" property="frdbzw"/>
+                <result column="WTRXM" jdbcType="VARCHAR" property="wtrxm"/>
+                <result column="WTRLXDH" jdbcType="VARCHAR" property="wtrlxdh"/>
+                <result column="CFRQ" jdbcType="VARCHAR" property="cfrq"/>
+                <result column="CFJDSBH" jdbcType="VARCHAR" property="cfjdsbh"/>
+                <result column="CFJDSMC" jdbcType="VARCHAR" property="cfjdsmc"/>
+                <result column="SQFYRQ" jdbcType="VARCHAR" property="sqfyrq"/>
+                <result column="SQRSQNR" jdbcType="CLOB" property="sqrsqnr"/>
+                <result column="BSQRCS" jdbcType="CLOB" property="bsqrcs"/>
+                <result column="DSRCCS" jdbcType="CLOB" property="dsrccs"/>
+                <result column="DCQK" jdbcType="CLOB" property="dcqk"/>
+                <result column="SSYJ" jdbcType="VARCHAR" property="ssyj"/>
+                <result column="FLYJ" jdbcType="VARCHAR" property="flyj"/>
+                <result column="JDNR" jdbcType="VARCHAR" property="jdnr"/>
+                <result column="JDDW" jdbcType="VARCHAR" property="jddw"/>
+                <result column="JDRQ" jdbcType="VARCHAR" property="jdrq"/>
+                <result column="JSRQ" jdbcType="VARCHAR" property="jsrq"/>
+                <result column="XZFYXX" jdbcType="CLOB" property="xzfyxx"/>
+                <result column="RESERVE1" jdbcType="VARCHAR" property="reserve1"/>
+                <result column="RESERVE2" jdbcType="VARCHAR" property="reserve2"/>
+                <result column="RESERVE3" jdbcType="VARCHAR" property="reserve3"/>
+                <result column="RESERVE4" jdbcType="VARCHAR" property="reserve4"/>
+                <result column="RESERVE5" jdbcType="VARCHAR" property="reserve5"/>
+                <result column="FYFLWSH" jdbcType="VARCHAR" property="fyflwsh"/>
+                <result column="SSDW" jdbcType="VARCHAR" property="ssdw"/>
+                <result column="AJMC" jdbcType="VARCHAR" property="ajmc"/>
+                <result column="AJBH" jdbcType="VARCHAR" property="ajbh"/>
+                <result column="ADD_TIME" jdbcType="DATE" property="addTime"/>
+
+        </resultMap>
+
+        <sql id="Base_Column_List">
+        XZFY_TID,SQRXM,SQRZS,SQRLXDH,DSRXM,DSRZS,DSRLXDH,BSQRXM,BSQRZS,BSQRFRDB,FRDBZW,WTRXM,WTRLXDH,CFRQ,CFJDSBH,CFJDSMC,SQFYRQ,SQRSQNR,BSQRCS,DSRCCS,DCQK,SSYJ,FLYJ,JDNR,JDDW,JDRQ,JSRQ,XZFYXX,RESERVE1,RESERVE2,RESERVE3,RESERVE4,RESERVE5,FYFLWSH,SSDW,AJMC,AJBH,ADD_TIME
+    </sql>
+
+        <!-- user-defined -->
+
+</mapper>

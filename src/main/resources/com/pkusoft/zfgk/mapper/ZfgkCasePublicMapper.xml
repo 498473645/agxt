@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pkusoft.zfgk.mapper.ZfgkCasePublicMapper">
+        <resultMap id="BaseResultMap" type="com.pkusoft.zfgk.model.ZfgkCasePublic">
+                <id column="PUBLIC_ID" jdbcType="VARCHAR" property="publicId"/>
+                <result column="AJBH" jdbcType="VARCHAR" property="ajbh"/>
+                <result column="AJM" jdbcType="VARCHAR" property="ajm"/>
+                <result column="SLSJ" jdbcType="VARCHAR" property="slsj"/>
+                <result column="JYAQ" jdbcType="VARCHAR" property="jyaq"/>
+                <result column="AJLB" jdbcType="VARCHAR" property="ajlb"/>
+                <result column="ZBRXX" jdbcType="VARCHAR" property="zbrxx"/>
+                <result column="ZBDW" jdbcType="VARCHAR" property="zbdw"/>
+                <result column="AJGSDW" jdbcType="VARCHAR" property="ajgsdw"/>
+                <result column="GKSJ" jdbcType="VARCHAR" property="gksj"/>
+                <result column="CZRXM" jdbcType="VARCHAR" property="czrxm"/>
+                <result column="GXSJ" jdbcType="VARCHAR" property="gxsj"/>
+                <result column="GXRXM" jdbcType="VARCHAR" property="gxrxm"/>
+                <result column="RESERVE1" jdbcType="VARCHAR" property="reserve1"/>
+                <result column="RESERVE2" jdbcType="VARCHAR" property="reserve2"/>
+                <result column="RESERVE3" jdbcType="VARCHAR" property="reserve3"/>
+                <result column="RESERVE4" jdbcType="VARCHAR" property="reserve4"/>
+                <result column="RESERVE5" jdbcType="VARCHAR" property="reserve5"/>
+                <result column="GKXX" jdbcType="CLOB" property="gkxx"/>
+                <result column="AJZT" jdbcType="VARCHAR" property="ajzt"/>
+                <result column="HGBH" jdbcType="VARCHAR" property="hgbh"/>
+        </resultMap>
+
+        <sql id="Base_Column_List">
+        PUBLIC_ID,AJBH,AJM,SLSJ,JYAQ,AJLB,ZBRXX,ZBDW,AJGSDW,GKSJ,CZRXM,GXSJ,GXRXM,RESERVE1,RESERVE2,RESERVE3,RESERVE4,RESERVE5,GKXX,AJZT,HGBH
+    </sql>
+
+        <select id="queryCasePublicByHgbh" parameterType="com.pkusoft.zfgk.req.ZfgkCasePublicReqParam" resultType="com.pkusoft.zfgk.model.ZfgkCasePublic">
+            select *
+      from (select a.*,
+                   row_number() over(partition by to_char(a.gkxx) order by a.gksj desc) su
+              from ZFGK_CASE_PUBLIC a
+             where a.hgbh = #{hgbh, jdbcType = VARCHAR}) b
+     where su = '1'
+       and b.hgbh = #{hgbh, jdbcType = VARCHAR}
+     ORDER BY b.gksj
+    </select>
+
+
+        <!-- 扩展映射 -->
+
+</mapper>
