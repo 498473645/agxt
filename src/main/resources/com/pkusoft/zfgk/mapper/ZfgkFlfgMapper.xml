@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pkusoft.zfgk.mapper.ZfgkFlfgMapper">
+    <!-- @codeGenerate -->
+    <resultMap id="BaseResultMap" type="com.pkusoft.zfgk.model.ZfgkFlfg">
+        <id column="LAW_ID" jdbcType="VARCHAR" property="lawId"/>
+        <result column="LAW_TITLE" jdbcType="VARCHAR" property="lawTitle"/>
+        <result column="THEME_CODE" jdbcType="VARCHAR" property="themeCode"/>
+        <result column="THEME_NAME" jdbcType="VARCHAR" property="themeName"/>
+        <result column="CLASS_CODE" jdbcType="VARCHAR" property="classCode"/>
+        <result column="CLASS_NAME" jdbcType="VARCHAR" property="className"/>
+        <result column="DIR_CODE" jdbcType="VARCHAR" property="dirCode"/>
+        <result column="DIR_NAME" jdbcType="VARCHAR" property="dirName"/>
+        <result column="ENACT_UNIT" jdbcType="VARCHAR" property="enactUnit"/>
+        <result column="ENACT_DATE" jdbcType="DATE" property="enactDate"/>
+        <result column="EFFECTIVE_DATE" jdbcType="DATE" property="effectiveDate"/>
+        <result column="EFFECTIVE_CODE" jdbcType="VARCHAR" property="effectiveCode"/>
+        <result column="EFFECTIVE_NAME" jdbcType="VARCHAR" property="effectiveName"/>
+        <result column="DISPATCH_NO" jdbcType="VARCHAR" property="dispatchNo"/>
+        <result column="LAW_DATASOURCE" jdbcType="VARCHAR" property="lawDataSource"/>
+        <result column="COLLECT_PERSON" jdbcType="VARCHAR" property="collectPerson"/>
+        <result column="COLLECT_DATE" jdbcType="DATE" property="collectDate"/>
+        <result column="RESERVE1" jdbcType="VARCHAR" property="reserve1"/>
+        <result column="RESERVE2" jdbcType="VARCHAR" property="reserve2"/>
+        <result column="RESERVE3" jdbcType="VARCHAR" property="reserve3"/>
+        <result column="RESERVE4" jdbcType="VARCHAR" property="reserve4"/>
+        <result column="RESERVE5" jdbcType="VARCHAR" property="reserve5"/>
+        <result column="LAW_TEXT" jdbcType="BLOB" property="lawText"/>
+        <result column="SFGK" jdbcType="VARCHAR" property="sfgk"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        LAW_ID,LAW_TITLE,THEME_CODE,THEME_NAME,CLASS_CODE,CLASS_NAME,DIR_CODE,DIR_NAME,ENACT_UNIT,ENACT_DATE,EFFECTIVE_DATE,EFFECTIVE_CODE,EFFECTIVE_NAME,DISPATCH_NO,LAW_DATASOURCE,COLLECT_PERSON,COLLECT_DATE,RESERVE1,RESERVE2,RESERVE3,RESERVE4,RESERVE5,LAW_TEXT,SFGK
+    </sql>
+
+    <!-- user-defined -->
+
+</mapper>
