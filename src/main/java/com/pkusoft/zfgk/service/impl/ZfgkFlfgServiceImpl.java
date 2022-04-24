@@ -113,13 +113,6 @@ public class ZfgkFlfgServiceImpl implements ZfgkFlfgService {
         if(StringUtils.hasText(zfgkFlfgReqParam.getLawTitle())){
             criteria.andLike("lawTitle","%"+zfgkFlfgReqParam.getLawTitle()+"%");
         }
-//        if( StringUtils.hasText(zfgkFlfgReqParam.getStartApTime()) && StringUtils.hasText(zfgkFlfgReqParam.getEndApTime()) ){
-//            //开始截止时间
-//            criteria.andCondition("AP_TIME between to_date('"+zfgkFlfgReqParam.getStartApTime()+"','yyyy-MM-dd hh24:mi:ss') and to_date('"+zfgkFlfgReqParam.getEndApTime()+"','yyyy-MM-dd hh24:mi:ss')");
-//        }
-//        if( StringUtils.hasText(zfgkFlfgReqParam.getStartHandleTime()) && StringUtils.hasText(zfgkFlfgReqParam.getEndHandleTime()) ){
-//            //开始截止时间
-//            criteria.andCondition("HANDLE_TIME between to_date('"+zfgkFlfgReqParam.getStartHandleTime()+"','yyyy-MM-dd hh24:mi:ss') and to_date('"+zfgkFlfgReqParam.getEndHandleTime()+"','yyyy-MM-dd hh24:mi:ss')");
-//        }
+
     }
 }
