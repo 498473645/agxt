@@ -180,6 +180,7 @@ public class PsTransServiceImpl implements PsTransService {
         String ybabh = map.get("ybabh");
         String jqly = map.get("jqly");
         String ybjStatus = map.get("ybjStatus");
+        String ly = map.get("ly");
 
         //The query conditions are edited here
         if ("2".equals(deptLevel)){
@@ -208,7 +209,7 @@ public class PsTransServiceImpl implements PsTransService {
 //            criteria.andCondition("JJSJ BETWEEN to_date('"+jjsjStart+"', 'yyyy-mm-dd') and  to_date('"+jjsjEnd+"', 'yyyy-mm-dd')");
 //        }
 
-        criteria.andEqualTo("ly","01");
+        criteria.andEqualTo("ly",ly);
     }
 
 }
