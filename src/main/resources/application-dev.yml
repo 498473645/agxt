@@ -210,13 +210,13 @@ mybatis:
       log-abandoned: true
       # （可选）当数据库不可用时，获取数据库连接快速失败。true、抛出异常；false、柱塞获取数据库连接线程。默认false
       fail-fast: true
-      mapper-locations:
-        - classpath*:com/pkusoft/zfgk/mapper/*.xml
-      base-package: com.pkusoft.zfgk.mapper
-      mapper-scanner-configurer-type: tk.mybatis.spring.mapper.MapperScannerConfigurer
-      configuration:
-        map-underscore-to-camel-case: true
-        default-fetch-size: 100
+    mapper-locations:
+      - classpath*:com/pkusoft/zfgk/mapper/*.xml
+    base-package: com.pkusoft.zfgk.mapper
+    mapper-scanner-configurer-type: tk.mybatis.spring.mapper.MapperScannerConfigurer
+    configuration:
+      map-underscore-to-camel-case: true
+      default-fetch-size: 100
 
   - datasource:
       url: jdbc:oracle:thin:@27.17.3.62:1521:orcl
