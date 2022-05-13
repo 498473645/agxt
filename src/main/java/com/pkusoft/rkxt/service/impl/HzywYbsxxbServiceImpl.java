@@ -30,4 +30,15 @@ public class HzywYbsxxbServiceImpl implements HzywYbsxxbService {
             return new ResponseData<>(ResponseData.STATUS_CODE_BIZ, "同步预办事数据至人口系统异常；" + e.getMessage());
         }
     }
+
+    @Override
+    public ResponseData<HzywYbsxxb> getHzywYbsxxb(HzywYbsxxb hzywYbsxxb) {
+        try {
+            ResponseData response = restTemplate.postForObject("192.168.1.160:8001/whz-ywzsjh-api/api/hzywYbsxxb/getHzywYbsxxb",hzywYbsxxb, ResponseData.class);
+            return response;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseData<>(ResponseData.STATUS_CODE_BIZ, "获取办事过程数据异常；" + e.getMessage());
+        }
+    }
 }

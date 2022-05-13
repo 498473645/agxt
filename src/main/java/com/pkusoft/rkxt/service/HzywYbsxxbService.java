@@ -13,4 +13,11 @@ public interface HzywYbsxxbService {
     */
     ResponseData hzywYbsxxbSave(HzywYbsxxb hzywYbsxxb);
 
+    /**
+     * 调用人口系统接口获取办事过程数据
+     * @param hzywYbsxxb
+     * @return
+     */
+    ResponseData<HzywYbsxxb> getHzywYbsxxb(HzywYbsxxb hzywYbsxxb);
+
 }

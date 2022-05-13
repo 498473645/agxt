@@ -34,17 +34,37 @@ public class HzywYbsxxbController {
     private HzywYbsxxbService hywYbsxxbService;
 
     /**
-     * 推送数据至
+     * 推送数据至户政服务
      *
      * @param hzywYbsxxb
      * @return
      */
-    @ApiOperation(value = "查询问题模型数量", notes = "查询问题模型数量", httpMethod = "POST")
-    @RequestMapping(value = "/getModelCount", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ApiOperation(value = "推送数据至户政服务", notes = "推送数据至户政服务", httpMethod = "POST")
+    @RequestMapping(value = "/hzywYbsxxbSave", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public ResponseData<ModelCountVo> getModelCount(@RequestBody(required = false) HzywYbsxxb hzywYbsxxb) {
+    public ResponseData<HzywYbsxxb> hzywYbsxxbSave(@RequestBody(required = false) HzywYbsxxb hzywYbsxxb) {
         try {
             hywYbsxxbService.hzywYbsxxbSave(hzywYbsxxb);
+            return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS, "同步预办事数据成功");
+        } catch (Exception e) {
+            logger.error("查询问题模型数量出错；" + e.getMessage(), e);
+            e.printStackTrace();
+            return new ResponseData<>(ResponseData.STATUS_CODE_BIZ, "查询问题模型数量出错；" + e.getMessage());
+        }
+    }
+
+    /**
+     * 调用人口系统接口获取办事过程数据
+     *
+     * @param hzywYbsxxb
+     * @return
+     */
+    @ApiOperation(value = "调用人口系统接口获取办事过程数据", notes = "调用人口系统接口获取办事过程数据", httpMethod = "POST")
+    @RequestMapping(value = "/getHzywYbsxxb", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    public ResponseData<HzywYbsxxb> getHzywYbsxxb(@RequestBody(required = false) HzywYbsxxb hzywYbsxxb) {
+        try {
+            hywYbsxxbService.getHzywYbsxxb(hzywYbsxxb);
             return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS, "同步预办事数据成功");
         } catch (Exception e) {
             logger.error("查询问题模型数量出错；" + e.getMessage(), e);
