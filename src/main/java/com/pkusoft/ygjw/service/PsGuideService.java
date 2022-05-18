@@ -1,7 +1,9 @@
 package com.pkusoft.ygjw.service;
 
 import com.pkusoft.ygjw.model.PsGuide;
+import com.pkusoft.ygjw.model.XtBizGuide;
 import com.pkusoft.ygjw.req.PsGuideReqParam;
+import org.support.commons.springmvc.ResponseData;
 
 import java.util.List;
 import java.util.Map;
@@ -64,4 +66,5 @@ public interface PsGuideService {
     PsGuide getPsGuidByType(PsGuide psGuide);
 
 
+    ResponseData<XtBizGuide> getXtBizTypeByBizCode(String sxbh, String ssxq);
 }

@@ -15,9 +15,9 @@ public interface HzywYbsxxbService {
 
     /**
      * 调用人口系统接口获取办事过程数据
-     * @param hzywYbsxxb
+     * @param code
      * @return
      */
-    ResponseData<HzywYbsxxb> getHzywYbsxxb(HzywYbsxxb hzywYbsxxb);
+    ResponseData<HzywYbsxxb> getHzywYbsxxb(String code);
 
 }

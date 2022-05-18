@@ -4,6 +4,8 @@ import com.pkusoft.pzzx.po.BdEquipment;
 import com.pkusoft.pzzx.service.BdEquipmentService;
 import com.pkusoft.ygjw.mapper.PsGuideMapper;
 import com.pkusoft.ygjw.model.PsGuide;
+import com.pkusoft.ygjw.model.XtBizGuide;
+import com.pkusoft.ygjw.req.GuideParamVo;
 import com.pkusoft.ygjw.req.PsGuideReqParam;
 import com.pkusoft.ygjw.service.PsGuideService;
 import org.apache.commons.lang.StringUtils;
@@ -11,6 +13,8 @@ import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
+import org.support.commons.springmvc.ResponseData;
 import pkubatis.common.utils.StringUtil;
 import tk.mybatis.mapper.entity.Example;
 
@@ -28,6 +32,9 @@ public class PsGuideServiceImpl implements PsGuideService {
 
     @Autowired
     private BdEquipmentService bdEquipmentService;
+
+    @Autowired
+    private RestTemplate restTemplate;
 
     public List<PsGuide> getPsGuideList(PsGuideReqParam psGuideReqParam, Map<String, String> map) {
 
@@ -98,6 +105,20 @@ public class PsGuideServiceImpl implements PsGuideService {
 
     public PsGuide getPsGuidByType(PsGuide psGuide){
         return psGuideMapper.selectOne(psGuide);
+    }
+
+    @Override
+    public ResponseData<XtBizGuide> getXtBizTypeByBizCode(String sxbh, String ssxq) {
+        GuideParamVo guideParamVo = new GuideParamVo();
+        guideParamVo.setSxbh(sxbh);
+        guideParamVo.setSsxqdm(ssxq);
+        try {
+            ResponseData<XtBizGuide> response = restTemplate.postForObject("http://192.168.1.120:8001/whz-ywzsjh-api/api/hzywYbsxxb/getXtBizTypeByBizCode",guideParamVo, ResponseData.class);
+            return response;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseData<>(ResponseData.STATUS_CODE_BIZ, "获取办事过程数据异常；" + e.getMessage());
+        }
     }
 
 

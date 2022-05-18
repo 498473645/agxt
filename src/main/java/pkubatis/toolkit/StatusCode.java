@@ -24,6 +24,11 @@ public class StatusCode {
      */
     public final static String STATUS_CODE_NOTHING ="91";//什么都没做
 
+    /**
+     * 	pC   1010- 全景摄像头
+     */
+    public final static String   BdCamera_pC_1010  = "1010";
+
 //
 //	/**
 //	 * BD_FUNCTION_ROOM.STATUS:1000-空闲

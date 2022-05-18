@@ -157,4 +157,19 @@ public class BdHandlingAreaServiceImpl implements BdHandlingAreaService {
         return bdHandlingAreaMapper.selectByExample(example);
     }
 
+    @Override
+    public BdHandlingArea getBdHandlingAreaByDeptId(String deptid) {
+        // TODO Auto-generated method stub
+        Example example = new Example(BdHandlingArea.class);
+        Example.Criteria criteria = example.createCriteria();
+        // The query conditions are edited here
+        criteria.andEqualTo("orgCode", deptid);
+        List<BdHandlingArea> list = bdHandlingAreaMapper
+                .selectByExample(example);
+        if (list.size() == 0) {
+            return null;
+        }
+        return list.get(0);
+    }
+
 }

@@ -48,6 +48,36 @@ public class RsJbjSxtxx {
     @Column(name = "GA_OWNER_DEPT_5")
     private String gaOwnerDept5;     //公安五级归属单位
 
+    /**
+     * 设备号/通道号 或 设备号|通道号|rtsp://admin:admin123456@127.0.0.1
+     */
+    @Column(name = "DEVICE_ID")
+    private String deviceId;
+
+    /**
+     * 流媒体服务IP
+     */
+    @Column(name = "SERVICE_IP")
+    private String serviceIp;
+
+    /**
+     * 秘钥
+     */
+    @Column(name = "SECRET")
+    private String secret;
+
+    /**
+     * 流媒体服务器版本（3.0或4.0）
+     */
+    @Column(name = "VERSION")
+    private String version;
+
+    /**
+     * 是否支持RTSP协议（非国标） 1.非国标
+     */
+    @Column(name = "IS_RTSP")
+    private String isRtsp;
+
 
     /**
     * 获得主键ID
@@ -257,5 +287,43 @@ public class RsJbjSxtxx {
         this.gaOwnerDept5 = gaOwnerDept5;
     }
 
+    public String getDeviceId() {
+        return deviceId;
+    }
 
+    public void setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
+    }
+
+    public String getServiceIp() {
+        return serviceIp;
+    }
+
+    public void setServiceIp(String serviceIp) {
+        this.serviceIp = serviceIp;
+    }
+
+    public String getSecret() {
+        return secret;
+    }
+
+    public void setSecret(String secret) {
+        this.secret = secret;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    public String getIsRtsp() {
+        return isRtsp;
+    }
+
+    public void setIsRtsp(String isRtsp) {
+        this.isRtsp = isRtsp;
+    }
 }

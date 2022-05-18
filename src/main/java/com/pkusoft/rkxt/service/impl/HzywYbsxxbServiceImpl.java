@@ -23,7 +23,7 @@ public class HzywYbsxxbServiceImpl implements HzywYbsxxbService {
     @Override
     public ResponseData hzywYbsxxbSave(HzywYbsxxb hzywYbsxxb) {
         try {
-            ResponseData response = restTemplate.postForObject("192.168.1.160:8001/whz-ywzsjh-api/api/hzywYbsxxb/hzywYbsxxbSave",hzywYbsxxb, ResponseData.class);
+            ResponseData response = restTemplate.postForObject("http://192.168.1.120:8001/whz-ywzsjh-api/api/hzywYbsxxb/hzywYbsxxbSave",hzywYbsxxb, ResponseData.class);
            return response;
         } catch (Exception e) {
             e.printStackTrace();
@@ -32,9 +32,9 @@ public class HzywYbsxxbServiceImpl implements HzywYbsxxbService {
     }
 
     @Override
-    public ResponseData<HzywYbsxxb> getHzywYbsxxb(HzywYbsxxb hzywYbsxxb) {
+    public ResponseData<HzywYbsxxb> getHzywYbsxxb(String code) {
         try {
-            ResponseData response = restTemplate.postForObject("192.168.1.160:8001/whz-ywzsjh-api/api/hzywYbsxxb/getHzywYbsxxb",hzywYbsxxb, ResponseData.class);
+            ResponseData response = restTemplate.postForObject("http://192.168.1.120:8001/whz-ywzsjh-api/api/hzywYbsxxb/getHzywYbsxxb",code, ResponseData.class);
             return response;
         } catch (Exception e) {
             e.printStackTrace();

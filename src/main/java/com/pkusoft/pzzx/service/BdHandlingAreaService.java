@@ -62,4 +62,12 @@ public interface BdHandlingAreaService {
 
     List<BdHandlingArea> bdHandlingAreaByParam(BdHandlingAreaReqParam bdHandlingArea,Map<String, String> map);
 
+    /**
+     * 根据单位id查询办案区
+     *
+     * @param request
+     * @return
+     */
+    BdHandlingArea getBdHandlingAreaByDeptId(String deptid);
+
 }

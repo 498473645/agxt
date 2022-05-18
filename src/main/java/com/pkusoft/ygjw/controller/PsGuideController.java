@@ -4,6 +4,7 @@ package com.pkusoft.ygjw.controller;
 import com.pkusoft.usercenterproxy.UserCenterProxyHelper;
 import com.pkusoft.usercenterproxy.vo.DicItemVo;
 import com.pkusoft.ygjw.model.PsGuide;
+import com.pkusoft.ygjw.model.XtBizGuide;
 import com.pkusoft.ygjw.req.PsGuideReqParam;
 import com.pkusoft.ygjw.service.PsGuideService;
 import io.swagger.annotations.Api;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -305,6 +307,28 @@ public class PsGuideController  {
         try {
             PsGuide psGuides = psGuideService.getPsGuidByType(psGuide);
             return new ResponseData<PsGuide>(ResponseData.STATUS_CODE_SUCCESS,"操作成功",psGuides);
+        }catch (Exception e){
+            logger.error("查看报案/办事指引表错误",e);
+            e.printStackTrace();
+            return new ResponseData(ResponseData.STATUS_CODE_OTHER, "查看报案/办事指引表详情错误:"+e.getMessage());
+        }
+    }
+
+    /**
+     * 办事维护办理流程
+     * @param sxbh,ssxq
+     * @return
+     */
+    @ApiOperation(value="办事维护办理流程", notes="办事维护办理流程", httpMethod="GET")
+    @GetMapping(value = "/psGuide/getXtBizTypeByBizCode", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    public ResponseData<XtBizGuide> getXtBizTypeByBizCode(String sxbh, String ssxq){
+        if (!StringUtils.hasText(sxbh)){
+            return new ResponseData(ResponseData.STATUS_CODE_PARAM, "参数不能为空");
+        }
+        try {
+            ResponseData<XtBizGuide> responseData = psGuideService.getXtBizTypeByBizCode(sxbh,ssxq);
+            return new ResponseData (ResponseData.STATUS_CODE_SUCCESS, "操作成功", responseData);
         }catch (Exception e){
             logger.error("查看报案/办事指引表错误",e);
             e.printStackTrace();

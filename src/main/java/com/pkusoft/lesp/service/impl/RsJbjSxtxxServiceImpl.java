@@ -51,7 +51,11 @@ public class RsJbjSxtxxServiceImpl implements RsJbjSxtxxService {
                 Map<String,String> sxt = new HashMap<>();
                 sxt.put("objid",sxtxx.getObjid());
                 sxt.put("name",sxtxx.getObjname());
-                sxt.put("url",sxtxx.getRtmp());
+                sxt.put("url",sxtxx.getRtmp());             //3.0流媒体播放地址 4.0流媒体接口地址
+                sxt.put("deviceId",sxtxx.getDeviceId());    //设备号通道号等流媒体配置信息
+                sxt.put("serviceIp",sxtxx.getServiceIp());  //流媒体服务器IP
+                sxt.put("secret",sxtxx.getSecret());        //秘钥
+                sxt.put("isRtsp",sxtxx.getIsRtsp());        // 是否新国标
                 dataList.add(sxt);
             }
             video.put("id",dept);
