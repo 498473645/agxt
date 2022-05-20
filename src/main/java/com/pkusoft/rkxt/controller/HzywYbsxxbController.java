@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.support.commons.springmvc.ResponseData;
 
+import java.text.SimpleDateFormat;
 import java.util.Map;
 
 /**
@@ -45,8 +46,8 @@ public class HzywYbsxxbController {
     @ResponseBody
     public ResponseData<HzywYbsxxb> hzywYbsxxbSave(@RequestBody(required = false) HzywYbsxxb hzywYbsxxb) {
         try {
-            hywYbsxxbService.hzywYbsxxbSave(hzywYbsxxb);
-            return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS, "同步预办事数据成功");
+            ResponseData responseData = hywYbsxxbService.hzywYbsxxbSave(hzywYbsxxb);
+            return responseData;
         } catch (Exception e) {
             logger.error("查询问题模型数量出错；" + e.getMessage(), e);
             e.printStackTrace();
@@ -65,8 +66,28 @@ public class HzywYbsxxbController {
     @ResponseBody
     public ResponseData<HzywYbsxxb> getHzywYbsxxb(String code) {
         try {
-            hywYbsxxbService.getHzywYbsxxb(code);
-            return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS, "同步预办事数据成功");
+            ResponseData responseData = hywYbsxxbService.getHzywYbsxxb(code);
+            return responseData;
+        } catch (Exception e) {
+            logger.error("查询问题模型数量出错；" + e.getMessage(), e);
+            e.printStackTrace();
+            return new ResponseData<>(ResponseData.STATUS_CODE_BIZ, "查询问题模型数量出错；" + e.getMessage());
+        }
+    }
+
+    /**
+     * 调用人口系统接口获取办事过程数据
+     *
+     * @param IdCard
+     * @return
+     */
+    @ApiOperation(value = "调用人口系统接口获取办事过程数据", notes = "调用人口系统接口获取办事过程数据", httpMethod = "GET")
+    @GetMapping(value = "/getHzywYbsxxbList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    public ResponseData<HzywYbsxxb> getHzywYbsxxbList(String name,String IdCard) {
+        try {
+            ResponseData responseData = hywYbsxxbService.getHzywYbsxxbList(IdCard,name);
+            return responseData;
         } catch (Exception e) {
             logger.error("查询问题模型数量出错；" + e.getMessage(), e);
             e.printStackTrace();

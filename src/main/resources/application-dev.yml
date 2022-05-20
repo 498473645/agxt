@@ -368,3 +368,6 @@ shiro-proxy.sso-server-logout-url: http://27.17.3.62:7100/user-center/logout.do
 shiro-proxy.sso-server-url: http://27.17.3.62:7100/user-center
 # （可选）成功页面。默认值：当前请求地址
 shiro-proxy.success-url: /swagger-ui.html
+
+#户政服务接口地址
+HzywIp: http://192.168.1.164:8001/whz-ywzsjh-api/api

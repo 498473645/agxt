@@ -1,7 +1,6 @@
 package com.pkusoft.ygjw.controller;
 
 
-import com.pkusoft.usercenter.po.SysDept;
 import com.pkusoft.usercenterproxy.UserCenterProxyHelper;
 import com.pkusoft.ygjw.model.PsTemp;
 import com.pkusoft.ygjw.model.PsTempDtl;
@@ -17,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -75,6 +75,28 @@ public class PsTempDtlController  {
             logger.error("查询材料模板明细表数据错误",e);
             e.printStackTrace();
             return new ResponseData<>(ResponseData.STATUS_CODE_OTHER,"查询材料模板明细表数据错误"+e.getMessage());
+        }
+    }
+
+    /**
+     * 办事维护添加材料
+     * @param sxbh,ssxq
+     * @return
+     */
+    @ApiOperation(value="办事维护添加材料", notes="办事维护添加材料", httpMethod="GET")
+    @GetMapping(value = "/psGuide/getMaterialsGroupList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    public ResponseData<Map<String, Object>> getMaterialsGroupList(String sxbh, String ssxq){
+        if (!StringUtils.hasText(sxbh)){
+            return new ResponseData(ResponseData.STATUS_CODE_PARAM, "参数不能为空");
+        }
+        try {
+            ResponseData<Map<String, Object>> responseData = psTempDtlService.getMaterialsGroupList(sxbh,ssxq);
+            return new ResponseData (ResponseData.STATUS_CODE_SUCCESS, "操作成功", responseData);
+        }catch (Exception e){
+            logger.error("查看报案/办事添加材料错误",e);
+            e.printStackTrace();
+            return new ResponseData(ResponseData.STATUS_CODE_OTHER, "查看报案/办事添加材料错误:"+e.getMessage());
         }
     }
 

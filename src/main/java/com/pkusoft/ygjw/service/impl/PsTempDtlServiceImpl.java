@@ -1,6 +1,5 @@
 package com.pkusoft.ygjw.service.impl;
 
-import com.pkusoft.pzzx.po.BdEquipment;
 import com.pkusoft.pzzx.service.BdEquipmentService;
 import com.pkusoft.usercenter.po.SysDataOwnerDept;
 import com.pkusoft.usercenter.service.SysDataOwnerDeptService;
@@ -13,14 +12,14 @@ import com.pkusoft.ygjw.service.PsTempDtlService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
+import org.support.commons.springmvc.ResponseData;
 import tk.mybatis.mapper.entity.Example;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @Transactional
@@ -37,6 +36,12 @@ public class PsTempDtlServiceImpl implements PsTempDtlService {
 
     @Autowired
     private SysDataOwnerDeptService sysDataOwnerDeptService;
+
+    @Autowired
+    private RestTemplate restTemplate;
+
+    @Value(value = "${HzywIp}")
+    private String hzywIp;
 
     public List<PsTempDtl> getPsTempDtlList(PsTempDtlReqParam psTempDtlReqParam, Map<String, String> map) {
 
@@ -129,6 +134,20 @@ public class PsTempDtlServiceImpl implements PsTempDtlService {
     public int psTempDtlDelete(String id){
         int num = psTempDtlMapper.deleteByPrimaryKey(id);
         return num;
+    }
+
+    @Override
+    public ResponseData<Map<String, Object>> getMaterialsGroupList(String sxbh, String ssxq) {
+        Map<String, String> requestBody = new HashMap<>();
+        requestBody.put("bizCode", sxbh);
+        requestBody.put("area", ssxq);
+        try {
+            ResponseData<Map<String, Object>> response = restTemplate.postForObject(hzywIp + "/hzywYbsxxb/dfmBizTemplate/getMaterialsGroupList",requestBody, ResponseData.class);
+            return response;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseData<>(ResponseData.STATUS_CODE_BIZ, "获取材料数据异常；" + e.getMessage());
+        }
     }
 
 }

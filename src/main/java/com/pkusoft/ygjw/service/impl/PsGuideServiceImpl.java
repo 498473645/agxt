@@ -11,6 +11,7 @@ import com.pkusoft.ygjw.service.PsGuideService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
@@ -35,6 +36,9 @@ public class PsGuideServiceImpl implements PsGuideService {
 
     @Autowired
     private RestTemplate restTemplate;
+
+    @Value(value = "${HzywIp}")
+    private String hzywIp;
 
     public List<PsGuide> getPsGuideList(PsGuideReqParam psGuideReqParam, Map<String, String> map) {
 
@@ -113,7 +117,7 @@ public class PsGuideServiceImpl implements PsGuideService {
         guideParamVo.setSxbh(sxbh);
         guideParamVo.setSsxqdm(ssxq);
         try {
-            ResponseData<XtBizGuide> response = restTemplate.postForObject("http://192.168.1.120:8001/whz-ywzsjh-api/api/hzywYbsxxb/getXtBizTypeByBizCode",guideParamVo, ResponseData.class);
+            ResponseData<XtBizGuide> response = restTemplate.postForObject(hzywIp + "/hzywYbsxxb/getXtBizTypeByBizCode",guideParamVo, ResponseData.class);
             return response;
         } catch (Exception e) {
             e.printStackTrace();

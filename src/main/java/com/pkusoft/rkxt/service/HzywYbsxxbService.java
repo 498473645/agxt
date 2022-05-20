@@ -20,4 +20,5 @@ public interface HzywYbsxxbService {
      */
     ResponseData<HzywYbsxxb> getHzywYbsxxb(String code);
 
+    ResponseData<HzywYbsxxb> getHzywYbsxxbList(String IdCard,String name);
 }

@@ -2,6 +2,7 @@ package com.pkusoft.ygjw.service;
 
 import com.pkusoft.ygjw.model.PsTempDtl;
 import com.pkusoft.ygjw.req.PsTempDtlReqParam;
+import org.support.commons.springmvc.ResponseData;
 
 import java.util.List;
 import java.util.Map;
@@ -66,4 +67,5 @@ public interface PsTempDtlService {
     */
     int psTempDtlDelete(String id);
 
+    ResponseData<Map<String, Object>> getMaterialsGroupList(String sxbh, String ssxq);
 }
