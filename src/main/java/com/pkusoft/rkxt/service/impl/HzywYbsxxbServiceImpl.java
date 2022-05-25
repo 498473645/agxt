@@ -4,8 +4,13 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.pkusoft.rkxt.model.HzywYbsxxb;
 import com.pkusoft.rkxt.service.HzywYbsxxbService;
+import com.pkusoft.usercenterproxy.UserCenterProxyHelper;
+import com.pkusoft.ygjw.model.PsTrans;
+import com.pkusoft.ygjw.service.PsTransService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
@@ -15,8 +20,9 @@ import pkubatis.common.utils.FieldNotNull;
 import org.support.commons.springmvc.ResponseData;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import java.net.URI;
+import java.util.*;
 
 @Service
 @Transactional
@@ -26,6 +32,10 @@ public class HzywYbsxxbServiceImpl implements HzywYbsxxbService {
     private String hzywIp;
     @Autowired
     private RestTemplate restTemplate;
+    @Autowired
+    private UserCenterProxyHelper userCenterProxyHelper;
+    @Autowired
+    private PsTransService psTransService;
 
     @Override
     public ResponseData hzywYbsxxbSave(HzywYbsxxb hzywYbsxxb) {
@@ -50,12 +60,27 @@ public class HzywYbsxxbServiceImpl implements HzywYbsxxbService {
     }
 
     @Override
-    public ResponseData<HzywYbsxxb> getHzywYbsxxbList(String IdCard,String name) {
+    public ResponseData<HzywYbsxxb> getHzywYbsxxbList(HzywYbsxxb hzywYbsxxb,HttpServletRequest request) {
         try {
+//            Map<String, String> userInfo =  userCenterProxyHelper.getUser(request);
+//
+//            HttpHeaders headers = new HttpHeaders();
+//            headers.add("Content-type", MediaType.APPLICATION_JSON_UTF8_VALUE);
+//            headers.add("appToken", "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcHBWZXJzaW9uIjoiMSIsImFwcFR5cGUiOiIyIiwiaXNzIjoiaGVibXBwLm9yZyIsImFwcEtleSI6IlRMekFubnNhIiwiZXhwIjoxNjE0MjE5Mzc4LCJpYXQiOjE2MTE1NDA5NzgsImFwcFpvbmUiOiIxIiwianRpIjoiZDI3NzhhMDQtYzM1OS00NGE0LTlhYjItODBkZjIwMDg0M2Y3IiwidXNlcm5hbWUiOiJsaXVjaGFvIn0.72t15EMtBmElwh7yKfbWNxPUwTgXFFI2ItRXbW3kJTA");
             Map<String, String> params = new HashMap<>();
-            params.put("gmsfhm", IdCard);
-            params.put("name", name);
+            params.put("gmsfhm", hzywYbsxxb.getRepIdcard());
+            params.put("name", hzywYbsxxb.getName());
+            params.put("sjgsdwdm",hzywYbsxxb.getOrgCode());
+//            HttpEntity<Map<String, String>> httpEntity = new HttpEntity<Map<String, String>>(params,headers);
             ResponseData response = restTemplate.postForObject(hzywIp + "/hzywYbsxxb/getHzywYbsxxbList",params, ResponseData.class);
+//            List<Map<String,String>> list = (List<Map<String, String>>) response.getData();
+//            PsTrans psTrans = null;
+//            for (Map<String,String> s : list) {
+//                psTrans = psTransService.getPsTrans(s.get("code"));
+//                if (psTrans!=null) {
+//                    s.put("code",psTrans.getCode());
+//                }
+//            }
             return response;
         } catch (Exception e) {
             e.printStackTrace();

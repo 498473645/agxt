@@ -4,6 +4,8 @@ package com.pkusoft.rkxt.service;
 import com.pkusoft.rkxt.model.HzywYbsxxb;
 import org.support.commons.springmvc.ResponseData;
 
+import javax.servlet.http.HttpServletRequest;
+
 public interface HzywYbsxxbService {
 
     /**
@@ -20,5 +22,5 @@ public interface HzywYbsxxbService {
      */
     ResponseData<HzywYbsxxb> getHzywYbsxxb(String code);
 
-    ResponseData<HzywYbsxxb> getHzywYbsxxbList(String IdCard,String name);
+    ResponseData<HzywYbsxxb> getHzywYbsxxbList(HzywYbsxxb hzywYbsxxb,HttpServletRequest request);
 }

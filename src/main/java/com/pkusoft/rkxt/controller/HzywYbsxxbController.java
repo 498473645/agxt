@@ -11,13 +11,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.support.commons.springmvc.ResponseData;
 
+import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Map;
 
@@ -78,15 +76,15 @@ public class HzywYbsxxbController {
     /**
      * 调用人口系统接口获取办事过程数据
      *
-     * @param IdCard
+     * @param hzywYbsxxb
      * @return
      */
-    @ApiOperation(value = "调用人口系统接口获取办事过程数据", notes = "调用人口系统接口获取办事过程数据", httpMethod = "GET")
-    @GetMapping(value = "/getHzywYbsxxbList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ApiOperation(value = "调用人口系统接口获取办事过程数据", notes = "调用人口系统接口获取办事过程数据", httpMethod = "POST")
+    @PostMapping(value = "/getHzywYbsxxbList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public ResponseData<HzywYbsxxb> getHzywYbsxxbList(String name,String IdCard) {
+    public ResponseData<HzywYbsxxb> getHzywYbsxxbList(@RequestBody(required = false) HzywYbsxxb hzywYbsxxb,HttpServletRequest request) {
         try {
-            ResponseData responseData = hywYbsxxbService.getHzywYbsxxbList(IdCard,name);
+            ResponseData responseData = hywYbsxxbService.getHzywYbsxxbList(hzywYbsxxb,request);
             return responseData;
         } catch (Exception e) {
             logger.error("查询问题模型数量出错；" + e.getMessage(), e);
