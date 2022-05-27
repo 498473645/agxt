@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
 * @author
-* @title: RsSypGlxxService
+* @title: XcbaService
 */
 public interface RsSypGlxxService {
 
