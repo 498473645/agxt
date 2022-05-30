@@ -2,6 +2,8 @@ package com.pkusoft.rkxt.service;
 
 
 import com.pkusoft.rkxt.model.HzywYbsxxb;
+import com.pkusoft.rkxt.model.XtBizType;
+import com.pkusoft.rkxt.model.XtBizTypeVo;
 import org.support.commons.springmvc.ResponseData;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,4 +25,8 @@ public interface HzywYbsxxbService {
     ResponseData<HzywYbsxxb> getHzywYbsxxb(String code);
 
     ResponseData<HzywYbsxxb> getHzywYbsxxbList(HzywYbsxxb hzywYbsxxb,HttpServletRequest request);
+
+    ResponseData getHomeBizTypeListByCity(XtBizType bizType, HttpServletRequest request);
+
+    ResponseData getBizList(XtBizTypeVo xtBizTypeVo, HttpServletRequest request);
 }

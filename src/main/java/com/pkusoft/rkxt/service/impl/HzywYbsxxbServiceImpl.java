@@ -3,6 +3,8 @@ package com.pkusoft.rkxt.service.impl;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.pkusoft.rkxt.model.HzywYbsxxb;
+import com.pkusoft.rkxt.model.XtBizType;
+import com.pkusoft.rkxt.model.XtBizTypeVo;
 import com.pkusoft.rkxt.service.HzywYbsxxbService;
 import com.pkusoft.usercenterproxy.UserCenterProxyHelper;
 import com.pkusoft.ygjw.model.PsTrans;
@@ -81,6 +83,28 @@ public class HzywYbsxxbServiceImpl implements HzywYbsxxbService {
 //                    s.put("code",psTrans.getCode());
 //                }
 //            }
+            return response;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseData<>(ResponseData.STATUS_CODE_BIZ, "获取办事过程数据异常；" + e.getMessage());
+        }
+    }
+
+    @Override
+    public ResponseData getHomeBizTypeListByCity(XtBizType bizType, HttpServletRequest request) {
+        try {
+            ResponseData response = restTemplate.postForObject(hzywIp + "/hzywYbsxxb/getHomeBizTypeListByCity",bizType, ResponseData.class);
+            return response;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseData<>(ResponseData.STATUS_CODE_BIZ, "获取办事过程数据异常；" + e.getMessage());
+        }
+    }
+
+    @Override
+    public ResponseData getBizList(XtBizTypeVo xtBizTypeVo, HttpServletRequest request) {
+        try {
+            ResponseData response = restTemplate.postForObject(hzywIp + "/hzywYbsxxb/getBizList",xtBizTypeVo, ResponseData.class);
             return response;
         } catch (Exception e) {
             e.printStackTrace();

@@ -3,6 +3,8 @@ package com.pkusoft.rkxt.controller;
 import com.pkusoft.lesp.controller.RsJbjJjxxController;
 import com.pkusoft.lesppc.req.ModelCountVo;
 import com.pkusoft.rkxt.model.HzywYbsxxb;
+import com.pkusoft.rkxt.model.XtBizType;
+import com.pkusoft.rkxt.model.XtBizTypeVo;
 import com.pkusoft.rkxt.service.HzywYbsxxbService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -93,4 +95,43 @@ public class HzywYbsxxbController {
         }
     }
 
+    /**
+     * 获取办事父级业务编码
+     *
+     * @param bizType
+     * @return
+     */
+    @ApiOperation(value = "获取办事父级业务编码", notes = "获取办事父级业务编码", httpMethod = "POST")
+    @PostMapping(value = "/getHomeBizTypeListByCity", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    public ResponseData<HzywYbsxxb> getHomeBizTypeListByCity(@RequestBody(required = false) XtBizType bizType, HttpServletRequest request) {
+        try {
+            ResponseData responseData = hywYbsxxbService.getHomeBizTypeListByCity(bizType,request);
+            return responseData;
+        } catch (Exception e) {
+            logger.error("查询问题模型数量出错；" + e.getMessage(), e);
+            e.printStackTrace();
+            return new ResponseData<>(ResponseData.STATUS_CODE_BIZ, "查询问题模型数量出错；" + e.getMessage());
+        }
+    }
+
+    /**
+     * 根据父级获取办事子级业务编码
+     *
+     * @param xtBizTypeVo
+     * @return
+     */
+    @ApiOperation(value = "根据父级获取办事子级业务编码", notes = "根据父级获取办事子级业务编码", httpMethod = "POST")
+    @PostMapping(value = "/getBizList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    public ResponseData<HzywYbsxxb> getBizList(@RequestBody(required = false) XtBizTypeVo xtBizTypeVo, HttpServletRequest request) {
+        try {
+            ResponseData responseData = hywYbsxxbService.getBizList(xtBizTypeVo,request);
+            return responseData;
+        } catch (Exception e) {
+            logger.error("查询问题模型数量出错；" + e.getMessage(), e);
+            e.printStackTrace();
+            return new ResponseData<>(ResponseData.STATUS_CODE_BIZ, "查询问题模型数量出错；" + e.getMessage());
+        }
+    }
 }
