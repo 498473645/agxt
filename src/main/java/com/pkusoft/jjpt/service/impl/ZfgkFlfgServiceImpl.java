@@ -1,9 +1,9 @@
-package com.pkusoft.zfgk.service.impl;
+package com.pkusoft.jjpt.service.impl;
 
-import com.pkusoft.zfgk.mapper.ZfgkFlfgMapper;
-import com.pkusoft.zfgk.model.ZfgkFlfg;
+import com.pkusoft.jjpt.mapper.ZfgkFlfgMapper;
+import com.pkusoft.jjpt.po.ZfgkFlfg;
 import com.pkusoft.zfgk.req.ZfgkFlfgReqParam;
-import com.pkusoft.zfgk.service.ZfgkFlfgService;
+import com.pkusoft.jjpt.service.ZfgkFlfgService;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

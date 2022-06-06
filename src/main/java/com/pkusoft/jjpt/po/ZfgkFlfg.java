@@ -1,4 +1,4 @@
-package com.pkusoft.zfgk.model;
+package com.pkusoft.jjpt.po;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;

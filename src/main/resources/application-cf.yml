@@ -195,28 +195,28 @@ mybatis:
       map-underscore-to-camel-case: true
       default-fetch-size: 100
 
-  #- datasource:
-  #    url: jdbc:oracle:thin:@27.17.47.21:10001/syrkga
-  #    username: zfgk
-  #    password: pkusoft2017
-  #    max-active: 100
-  #    validation-query: select 1 from dual
-  #    filters: stat,log4j,config
-  #    # （可选）删除超时连接，默认false
-  #    remove-abandoned: true
-  #    # （可选）超时时间，单位毫秒，默认300000毫秒
-  #    remove-abandoned-timeout-millis: 300000
-  #    # （可选）超时连接的日志，默认false
-  #    log-abandoned: true
-  #    # （可选）当数据库不可用时，获取数据库连接快速失败。true、抛出异常；false、柱塞获取数据库连接线程。默认false
-  #    fail-fast: true
-  #  mapper-locations:
-  #  - classpath*:com/pkusoft/zfgk/mapper/*.xml
-  #  base-package: com.pkusoft.zfgk.mapper
-  #  mapper-scanner-configurer-type: tk.mybatis.spring.mapper.MapperScannerConfigurer
-  #  configuration:
-  #    map-underscore-to-camel-case: true
-  #    default-fetch-size: 100
+#  - datasource:
+#      url: jdbc:oracle:thin:@27.17.47.21:10001/syrkga
+#      username: zfgk
+#      password: pkusoft2017
+#      max-active: 100
+#      validation-query: select 1 from dual
+#      filters: stat,log4j,config
+#      # （可选）删除超时连接，默认false
+#      remove-abandoned: true
+#      # （可选）超时时间，单位毫秒，默认300000毫秒
+#      remove-abandoned-timeout-millis: 300000
+#      # （可选）超时连接的日志，默认false
+#      log-abandoned: true
+#      # （可选）当数据库不可用时，获取数据库连接快速失败。true、抛出异常；false、柱塞获取数据库连接线程。默认false
+#      fail-fast: true
+#    mapper-locations:
+#    - classpath*:com/pkusoft/zfgk/mapper/*.xml
+#    base-package: com.pkusoft.zfgk.mapper
+#    mapper-scanner-configurer-type: tk.mybatis.spring.mapper.MapperScannerConfigurer
+#    configuration:
+#      map-underscore-to-camel-case: true
+#      default-fetch-sizee: 100
 
   - datasource:
       url: jdbc:oracle:thin:@26.65.16.1:1521:syrkga
