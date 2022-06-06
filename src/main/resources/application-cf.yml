@@ -127,9 +127,9 @@ dfs.hadoopUrl: ""
 # mybatis[i]对应事务管理器为transactionManageri：transactionManager0, transactionManager1, ...
 mybatis:
   - datasource:
-      url: jdbc:oracle:thin:@27.17.3.62:1521:orcl
-      username: jjpt2
-      password: a
+      url: jdbc:oracle:thin:@26.65.16.1:1521:syrkga
+      username: jjpt
+      password: jjpt
       max-active: 100
       validation-query: select 1 from dual
       filters: stat,log4j,config
@@ -150,9 +150,9 @@ mybatis:
       default-fetch-size: 100
 
   - datasource:
-      url: jdbc:oracle:thin:@27.17.3.62:1521:orcl
-      username: jjpt2
-      password: a
+      url: jdbc:oracle:thin:@26.65.16.1:1521:syrkga
+      username: jjpt
+      password: jjpt
       max-active: 100
       validation-query: select 1 from dual
       filters: stat,log4j,config
@@ -173,9 +173,9 @@ mybatis:
       default-fetch-size: 100
 
   - datasource:
-      url: jdbc:oracle:thin:@27.17.3.62:1521:orcl
-      username: jjpt2
-      password: a
+      url: jdbc:oracle:thin:@26.65.16.1:1521:syrkga
+      username: jjpt
+      password: jjpt
       max-active: 100
       validation-query: select 1 from dual
       filters: stat,log4j,config
@@ -196,7 +196,7 @@ mybatis:
       default-fetch-size: 100
 
   #- datasource:
-  #    url: jdbc:oracle:thin:@27.17.47.21:10001/orcl
+  #    url: jdbc:oracle:thin:@27.17.47.21:10001/syrkga
   #    username: zfgk
   #    password: pkusoft2017
   #    max-active: 100
@@ -219,9 +219,9 @@ mybatis:
   #    default-fetch-size: 100
 
   - datasource:
-      url: jdbc:oracle:thin:@27.17.3.62:1521:orcl
+      url: jdbc:oracle:thin:@26.65.16.1:1521:syrkga
       username: user_center2
-      password: a
+      password: user_center2
       max-active: 50
       validation-query: select 1 from dual
       filters: stat,log4j,config
@@ -242,9 +242,9 @@ mybatis:
       default-fetch-size: 100
 
   - datasource:
-      url: jdbc:oracle:thin:@27.17.3.62:1521:orcl
+      url: jdbc:oracle:thin:@26.65.16.1:1521:syrkga
       username: lesp_rs
-      password: a
+      password: lesp_rs
       max-active: 50
       validation-query: select 1 from dual
       filters: stat,log4j
@@ -265,9 +265,9 @@ mybatis:
       default-fetch-size: 100
 
   - datasource:
-      url: jdbc:oracle:thin:@27.17.3.62:1521:orcl
-      username: lesp_pc
-      password: a
+      url: jdbc:oracle:thin:@26.65.16.1:1521:syrkga
+      username: lesp_pc2
+      password: lesp_pc2
       max-active: 100
       validation-query: select 1 from dual
       # connection-properties: config.decrypt=true
@@ -289,9 +289,9 @@ mybatis:
       default-fetch-size: 100
 
   - datasource:
-      url: jdbc:oracle:thin:@27.17.3.62:1521:orcl
-      username: lesp_rs20
-      password: a
+      url: jdbc:oracle:thin:@26.65.16.1:1521:syrkga
+      username: lesp3
+      password: lesp3
       max-active: 100
       validation-query: select 1 from dual
       # connection-properties: config.decrypt=true
@@ -313,9 +313,9 @@ mybatis:
       default-fetch-size: 100
 
   - datasource:
-      url: jdbc:oracle:thin:@27.17.3.62:1521:orcl
+      url: jdbc:oracle:thin:@26.65.16.1:1521:syrkga
       username: lesp_ke2
-      password: a
+      password: lesp_ke2
       max-active: 100
       validation-query: select 1 from dual
       # connection-properties: config.decrypt=true
@@ -335,13 +335,38 @@ mybatis:
     configuration:
       map-underscore-to-camel-case: true
       default-fetch-size: 100
-
+      
+  - datasource:
+      url: jdbc:oracle:thin:@10.100.55.127:1521:qjrkk1
+      username: pkuwh_rk
+      password: qjrkpkus0ft
+      max-active: 100
+      validation-query: select 1 from dual
+      filters: stat,log4j,config
+      # （可选）删除超时连接，默认false
+      remove-abandoned: true
+      # （可选）超时时间，单位毫秒，默认300000毫秒
+      remove-abandoned-timeout-millis: 300000
+      # （可选）超时连接的日志，默认false
+      log-abandoned: true
+      # （可选）当数据库不可用时，获取数据库连接快速失败。true、抛出异常；false、柱塞获取数据库连接线程。默认false
+      fail-fast: true
+    mapper-locations:
+      - classpath*:com/pkusoft/bazx/mapper/*.xml
+    base-package: com.pkusoft.bazx.mapper
+    mapper-scanner-configurer-type: tk.mybatis.spring.mapper.MapperScannerConfigurer
+    configuration:
+      map-underscore-to-camel-case: true
+      default-fetch-size: 100
 
 # 服务端的登录页面。不设置，则不启用过滤器sso-cookie-authc-proxy
-shiro-proxy.sso-server-login-url: http://27.17.3.62:7100/user-center/biz/login/zfjd/login.html
+shiro-proxy.sso-server-login-url: http://26.65.1.68:8080/user-center/biz/login/zfjd/login.html
 # 服务端的注销地址。不设置，则不启用过滤器sso-logout-proxy
-shiro-proxy.sso-server-logout-url: http://27.17.3.62:7100/user-center/logout.do
+shiro-proxy.sso-server-logout-url: http://26.65.1.68:8080/user-center/logout.do
 # 服务端地址
-shiro-proxy.sso-server-url: http://27.17.3.62:7100/user-center
+shiro-proxy.sso-server-url: http://26.65.1.68:8080/user-center
 # （可选）成功页面。默认值：当前请求地址
 shiro-proxy.success-url: /swagger-ui.html
+
+#户政服务接口地址
+HzywIp: http://59.2.2.108:8001/whz-ywzsjh-api/api
