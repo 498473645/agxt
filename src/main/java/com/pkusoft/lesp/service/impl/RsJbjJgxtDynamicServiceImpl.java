@@ -24,42 +24,26 @@ public class RsJbjJgxtDynamicServiceImpl implements RsJbjJgxtDynamicService {
     public List<RsJbjJgxtDynamic> getDynamicData(Map<String, String> map) {
         String deptId = map.get("deptId");
         String deptLevel = map.get("deptLevel");// 2-市局，3-分局，4-派出所
-        String status = map.get("status");
-        String reporterSource = map.get("reporterSource");
         String jjsjStart = map.get("jjsjStart");
         String jjsjEnd = map.get("jjsjEnd");
         String ybabh = map.get("ybabh");
-        String jqly = map.get("jqly");
-        String ybjStatus = map.get("ybjStatus");
         int start = Integer.parseInt(map.get("start"));
         int pageSize = Integer.parseInt(map.get("pageSize"));
 
         RowBounds rowBounds = new RowBounds(start,pageSize);
         Example example = new Example(RsJbjJgxtDynamic.class);
-        example.setOrderByClause("JJSJ desc,BJSJ desc");
+        example.setOrderByClause("JJSJ desc");
         Example.Criteria criteria = example.createCriteria();
         //The query conditions are edited here
-        if ("2".equals(deptLevel)){
-            criteria.andEqualTo("gaOwnerDept2",deptId);
-        }else if ("3".equals(deptLevel)){
-            criteria.andEqualTo("gaOwnerDept3",deptId);
-        }else if ("4".equals(deptLevel)){
-            criteria.andEqualTo("gaOwnerDept4",deptId);
-        }
-        if (StringUtils.hasText(status)){
-            criteria.andEqualTo("status",status);
-        }
+//        if ("2".equals(deptLevel)){
+//            criteria.andEqualTo("gaOwnerDept2",deptId);
+//        }else if ("3".equals(deptLevel)){
+//            criteria.andEqualTo("gaOwnerDept3",deptId);
+//        }else if ("4".equals(deptLevel)){
+//            criteria.andEqualTo("gaOwnerDept4",deptId);
+//        }
         if (StringUtils.hasText(ybabh)){
             criteria.andLike("bjid","%"+ybabh.trim()+"%");
-        }
-        if (StringUtils.hasText(reporterSource)){
-            criteria.andEqualTo("reporterSource",reporterSource);
-        }
-        if (StringUtils.hasText(jqly)){
-            criteria.andEqualTo("jqly",jqly);
-        }
-        if (StringUtils.hasText(ybjStatus)){
-            criteria.andEqualTo("ybjStatus",ybjStatus);
         }
         if(StringUtils.hasText(jjsjStart)&& StringUtils.hasText(jjsjStart)){
             criteria.andCondition("JJSJ BETWEEN to_date('"+jjsjStart+"', 'yyyy-mm-dd') and  to_date('"+jjsjEnd+"', 'yyyy-mm-dd')");
@@ -84,38 +68,6 @@ public class RsJbjJgxtDynamicServiceImpl implements RsJbjJgxtDynamicService {
         }
         String jqly = map.get("jqly");
         String ybjStatus = map.get("ybjStatus");
-
-        //The query conditions are edited here
-//        String deptCon = "";
-//        if ("2".equals(deptLevel)){
-////            criteria.andEqualTo("gaOwnerDept2",deptId);
-//            deptCon = "t.GA_OWNER_DEPT_2 = '"+deptId+"'";
-//        }else if ("3".equals(deptLevel)){
-////            criteria.andEqualTo("gaOwnerDept3",deptId);
-//            deptCon = "t.GA_OWNER_DEPT_3 = '"+deptId+"'";
-//        }else if ("4".equals(deptLevel)){
-////            criteria.andEqualTo("gaOwnerDept4",deptId);
-//            deptCon = "t.GA_OWNER_DEPT_4 = '"+deptId+"'";
-//        }
-//        String statusStr = "";
-//        if (StringUtils.hasText(status)){
-////            criteria.andEqualTo("status",status);
-//            statusStr = "t.STATUS = '"+status+"'";
-//        }
-//        String jqlyStr = "";
-//        if (StringUtils.hasText(jqly)){
-////            criteria.andEqualTo("jqly",jqly);
-//            statusStr = "t.JQLY = '"+jqly+"'";
-//        }
-//        String jjsjStr = "";
-//        if(StringUtils.hasText(jjsjStart)&&StringUtils.hasText(jjsjEnd)){
-////            criteria.andCondition("JJSJ BETWEEN to_char('"+jjsjStart+"', 'yyyy-mm-dd') and  to_char('"+jjsjStart+"', 'yyyy-mm-dd')");
-//            jjsjStr = "to_char('"+jjsjStart+"', 'yyyy-mm-dd') and  to_char('"+jjsjStart+"', 'yyyy-mm-dd')";
-//        }
-
-//        jjsjStart = "to_date('"+jjsjStart+"', 'yyyy-mm-dd')";
-//        jjsjEnd = "to_date('"+jjsjEnd+"', 'yyyy-mm-dd')";
-
         return rsJbjJgxtDynamicMapper.getDynamicCount(deptId,deptLevel,status,reporterSource,ybabh,jqly,jjsjStart,jjsjEnd,ybjStatus);
     }
 

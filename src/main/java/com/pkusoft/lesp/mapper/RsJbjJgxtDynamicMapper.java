@@ -11,4 +11,11 @@ public interface RsJbjJgxtDynamicMapper extends Mapper<RsJbjJgxtDynamic> {
                         @Param("jjsjStart") String jjsjStart, @Param("jjsjEnd") String jjsjEnd,
                         @Param("ybjStatus") String ybjStatus
     );
+
+    int getDynamic(@Param("deptId") String deptId, @Param("deptLevel") String deptLevel,
+                        @Param("status") String status, @Param("reporterSource") String reporterSource,
+                        @Param("ybabh") String ybabh, @Param("jqly") String jqly,
+                        @Param("jjsjStart") String jjsjStart, @Param("jjsjEnd") String jjsjEnd,
+                        @Param("ybjStatus") String ybjStatus
+    );
 }
