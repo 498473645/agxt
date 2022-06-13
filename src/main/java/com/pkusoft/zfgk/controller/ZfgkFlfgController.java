@@ -1,8 +1,8 @@
-package com.pkusoft.jjpt.controller;
+package com.pkusoft.zfgk.controller;
 
-import com.pkusoft.jjpt.po.ZfgkFlfg;
+import com.pkusoft.zfgk.model.ZfgkFlfg;
 import com.pkusoft.zfgk.req.ZfgkFlfgReqParam;
-import com.pkusoft.jjpt.service.ZfgkFlfgService;
+import com.pkusoft.zfgk.service.ZfgkFlfgService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;

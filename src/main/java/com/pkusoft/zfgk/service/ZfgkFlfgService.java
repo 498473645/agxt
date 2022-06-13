@@ -1,6 +1,6 @@
-package com.pkusoft.jjpt.service;
+package com.pkusoft.zfgk.service;
 
-import com.pkusoft.jjpt.po.ZfgkFlfg;
+import com.pkusoft.zfgk.model.ZfgkFlfg;
 import com.pkusoft.zfgk.req.ZfgkFlfgReqParam;
 
 import java.util.List;
