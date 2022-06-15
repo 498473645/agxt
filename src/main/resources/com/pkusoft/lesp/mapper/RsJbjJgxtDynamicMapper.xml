@@ -1,26 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pkusoft.lesp.mapper.RsJbjJgxtDynamicMapper">
+    <!-- @codeGenerate -->
     <resultMap id="BaseResultMap" type="com.pkusoft.lesp.po.RsJbjJgxtDynamic">
         <id column="JJBH" jdbcType="VARCHAR" property="jjbh"/>
         <result column="JJDBH" jdbcType="VARCHAR" property="jjdbh"/>
         <result column="AJBH" jdbcType="VARCHAR" property="ajbh"/>
+        <result column="JQLY" jdbcType="VARCHAR" property="jqly"/>
         <result column="BJRXM" jdbcType="VARCHAR" property="bjrxm"/>
         <result column="BJRGMSFHM" jdbcType="VARCHAR" property="bjrgmsfhm"/>
-        <result column="JJDW" jdbcType="VARCHAR" property="jjdw"/>
-        <result column="JJDWMC" jdbcType="VARCHAR" property="jjdwmc"/>
-        <result column="JJSJ" jdbcType="DATE" property="jjsj"/>
         <result column="SFDD" jdbcType="VARCHAR" property="sfdd"/>
         <result column="BJRXB" jdbcType="VARCHAR" property="bjrxb"/>
         <result column="BJRLXDH" jdbcType="VARCHAR" property="bjrlxdh"/>
         <result column="BJDH" jdbcType="VARCHAR" property="bjdh"/>
-        <result column="JQTYPEID" jdbcType="VARCHAR" property="jqtypeid"/>
-        <result column="JQTYPE_NAME" jdbcType="VARCHAR" property="jqtypeName"/>
-        <result column="JQLY" jdbcType="VARCHAR" property="jqly"/>
+        <result column="JYAQ" jdbcType="VARCHAR" property="jyaq"/>
+        <result column="JJRXM" jdbcType="VARCHAR" property="jjrxm"/>
+        <result column="JJDW" jdbcType="VARCHAR" property="jjdw"/>
+        <result column="JJDWMC" jdbcType="VARCHAR" property="jjdwmc"/>
+        <result column="JJSJ" jdbcType="DATE" property="jjsj"/>
+        <result column="JQTYPEID1" jdbcType="VARCHAR" property="jqtypeid1"/>
+        <result column="JQTYPE_NAME1" jdbcType="VARCHAR" property="jqtypeName1"/>
+        <result column="JQTYPEID2" jdbcType="VARCHAR" property="jqtypeid2"/>
+        <result column="JQTYPE_NAME2" jdbcType="VARCHAR" property="jqtypeName2"/>
+        <result column="JQTYPEID3" jdbcType="VARCHAR" property="jqtypeid3"/>
+        <result column="JQTYPE_NAME3" jdbcType="VARCHAR" property="jqtypeName3"/>
         <result column="BJNR" jdbcType="VARCHAR" property="bjnr"/>
+        <result column="CJR" jdbcType="VARCHAR" property="cjr"/>
         <result column="CJLBDM" jdbcType="VARCHAR" property="cjlbdm"/>
         <result column="CJLB" jdbcType="VARCHAR" property="cjlb"/>
-        <result column="CJR" jdbcType="VARCHAR" property="cjr"/>
         <result column="CJSJ" jdbcType="DATE" property="cjsj"/>
         <result column="CJJGNR" jdbcType="VARCHAR" property="cjjgnr"/>
         <result column="CJJG" jdbcType="VARCHAR" property="cjjg"/>
@@ -34,11 +41,12 @@
         <result column="GA_OWNER_DEPT_3" jdbcType="VARCHAR" property="gaOwnerDept3"/>
         <result column="GA_OWNER_DEPT_4" jdbcType="VARCHAR" property="gaOwnerDept4"/>
         <result column="GA_OWNER_DEPT_5" jdbcType="VARCHAR" property="gaOwnerDept5"/>
-        <result column="JJRXM" jdbcType="VARCHAR" property="jjrxm"/>
+        <result column="XGSJ" jdbcType="DATE" property="xgsj"/>
+
     </resultMap>
 
     <sql id="Base_Column_List">
-        JJBH,JJDBH,AJBH,BJRXM,BJRGMSFHM,JJDW,JJDWMC,JJSJ,SFDD,BJRXB,BJRLXDH,BJDH,JQTYPEID,JQTYPE_NAME,JQLY,BJNR,CJLBDM,CJLB,CJR,CJSJ,CJJGNR,CJJG,CJJGDM,CJDW,CJDWMC,SPRQ,SPYJ,GA_OWNER_DEPT_1,GA_OWNER_DEPT_2,GA_OWNER_DEPT_3,GA_OWNER_DEPT_4,GA_OWNER_DEPT_5,JJRXM
+        JJBH,JJDBH,AJBH,JQLY,BJRXM,BJRGMSFHM,SFDD,BJRXB,BJRLXDH,BJDH,JYAQ,JJRXM,JJDW,JJDWMC,JJSJ,JQTYPEID1,JQTYPE_NAME1,JQTYPEID2,JQTYPE_NAME2,JQTYPEID3,JQTYPE_NAME3,BJNR,CJR,CJLBDM,CJLB,CJSJ,CJJGNR,CJJG,CJJGDM,CJDW,CJDWMC,SPRQ,SPYJ,GA_OWNER_DEPT_1,GA_OWNER_DEPT_2,GA_OWNER_DEPT_3,GA_OWNER_DEPT_4,GA_OWNER_DEPT_5,XGSJ
     </sql>
 
     <!-- 扩展映射 -->
