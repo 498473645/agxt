@@ -229,6 +229,9 @@ public class SpJjxx {
     @Column(name = "JJY_CODE")
     private String jjyCode;     //接警员编号
 
+    @Column(name = "BJRSFZH")
+    private String bjrsfzh;     //报警人身份证号码
+
     public String getJjyCode() {
         return jjyCode;
     }
@@ -1307,5 +1310,13 @@ public class SpJjxx {
 
     public void setCjdObjid(String cjdObjid) {
         this.cjdObjid = cjdObjid;
+    }
+
+    public String getBjrsfzh() {
+        return bjrsfzh;
+    }
+
+    public void setBjrsfzh(String bjrsfzh) {
+        this.bjrsfzh = bjrsfzh;
     }
 }
