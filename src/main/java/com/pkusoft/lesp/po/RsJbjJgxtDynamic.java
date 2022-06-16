@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * @author
@@ -63,6 +64,13 @@ public class RsJbjJgxtDynamic {
     @Column(name = "SFDD")
     @ApiModelProperty(value = "事发地点*")
     private String sfdd;
+
+    /**
+     * 报警时间*
+     */
+    @Column(name = "BJSJ")
+    @ApiModelProperty(value = "报警时间*")
+    private java.util.Date bjsj;
 
     /**
      * 报警人性别*
@@ -913,5 +921,11 @@ public class RsJbjJgxtDynamic {
         this.xgsj = xgsj;
     }
 
+    public Date getBjsj() {
+        return bjsj;
+    }
 
+    public void setBjsj(Date bjsj) {
+        this.bjsj = bjsj;
+    }
 }

@@ -10,6 +10,7 @@
         <result column="BJRXM" jdbcType="VARCHAR" property="bjrxm"/>
         <result column="BJRGMSFHM" jdbcType="VARCHAR" property="bjrgmsfhm"/>
         <result column="SFDD" jdbcType="VARCHAR" property="sfdd"/>
+        <result column="BJSJ" jdbcType="VARCHAR" property="bjsj"/>
         <result column="BJRXB" jdbcType="VARCHAR" property="bjrxb"/>
         <result column="BJRLXDH" jdbcType="VARCHAR" property="bjrlxdh"/>
         <result column="BJDH" jdbcType="VARCHAR" property="bjdh"/>
@@ -46,7 +47,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        JJBH,JJDBH,AJBH,JQLY,BJRXM,BJRGMSFHM,SFDD,BJRXB,BJRLXDH,BJDH,JYAQ,JJRXM,JJDW,JJDWMC,JJSJ,JQTYPEID1,JQTYPE_NAME1,JQTYPEID2,JQTYPE_NAME2,JQTYPEID3,JQTYPE_NAME3,BJNR,CJR,CJLBDM,CJLB,CJSJ,CJJGNR,CJJG,CJJGDM,CJDW,CJDWMC,SPRQ,SPYJ,GA_OWNER_DEPT_1,GA_OWNER_DEPT_2,GA_OWNER_DEPT_3,GA_OWNER_DEPT_4,GA_OWNER_DEPT_5,XGSJ
+        JJBH,JJDBH,AJBH,JQLY,BJRXM,BJRGMSFHM,SFDD,SFDD,BJRXB,BJRLXDH,BJDH,JYAQ,JJRXM,JJDW,JJDWMC,JJSJ,JQTYPEID1,JQTYPE_NAME1,JQTYPEID2,JQTYPE_NAME2,JQTYPEID3,JQTYPE_NAME3,BJNR,CJR,CJLBDM,CJLB,CJSJ,CJJGNR,CJJG,CJJGDM,CJDW,CJDWMC,SPRQ,SPYJ,GA_OWNER_DEPT_1,GA_OWNER_DEPT_2,GA_OWNER_DEPT_3,GA_OWNER_DEPT_4,GA_OWNER_DEPT_5,XGSJ
     </sql>
 
     <!-- 扩展映射 -->
