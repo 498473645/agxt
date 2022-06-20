@@ -78,6 +78,19 @@ public class RsJbjSxtxx {
     @Column(name = "IS_RTSP")
     private String isRtsp;
 
+    /**
+     * 区分办案办事 0 办案  1 办事
+     */
+    @Column(name = "IS_BABS")
+    private String isBabs;
+
+    public String getIsBabs() {
+        return isBabs;
+    }
+
+    public void setIsBabs(String isBabs) {
+        this.isBabs = isBabs;
+    }
 
     /**
     * 获得主键ID
@@ -208,7 +221,7 @@ public class RsJbjSxtxx {
     }
 
     /**
-    * 获得公安一级归属单位 
+    * 获得公安一级归属单位
     * @return GA_OWNER_DEPT_1
     */
     public String getGaOwnerDept1() {
@@ -216,7 +229,7 @@ public class RsJbjSxtxx {
     }
 
     /**
-    * 设置公安一级归属单位 
+    * 设置公安一级归属单位
     * @param gaOwnerDept1
     */
     public void setGaOwnerDept1(String gaOwnerDept1) {

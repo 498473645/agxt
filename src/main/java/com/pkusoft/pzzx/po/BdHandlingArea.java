@@ -146,6 +146,19 @@ public class BdHandlingArea {
     @Column(name = "RESERVE10")
     private String reserve10;     //预留字段10
 
+    /**
+     * 区分办案办事 0 办案  1 办事
+     */
+    @Column(name = "IS_BABS")
+    private String isBabs;
+
+    public String getIsBabs() {
+        return isBabs;
+    }
+
+    public void setIsBabs(String isBabs) {
+        this.isBabs = isBabs;
+    }
 
     /**
     * 获得主键ID

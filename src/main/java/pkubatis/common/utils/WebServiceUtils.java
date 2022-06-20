@@ -66,6 +66,7 @@ public class WebServiceUtils {
         Client client = dcf.createClient(url);
         QName name = new QName(nameSpaceUri, methodName);
         try {
+            client.getEndpoint().getEndpointInfo().setAddress("http://26.13.100.132:9086/tcwebservice/services/ServiceImpl");
             Object[] invoke = client.invoke(name ,strData);
             return invoke[0].toString();
         } catch (Exception e) {

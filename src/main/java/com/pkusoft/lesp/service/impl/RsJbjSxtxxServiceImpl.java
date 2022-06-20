@@ -35,7 +35,7 @@ public class RsJbjSxtxxServiceImpl implements RsJbjSxtxxService {
         return new ArrayList<RsJbjSxtxx>();
     }
 
-    public List<Map<String,Object>> getCameraList(String deptId) {
+    public List<Map<String,Object>> getCameraList(String deptId, String isBabs) {
         List<Map<String,Object>> videoList = new ArrayList<>();
 
         String[] deptArr = deptId.split(",");
@@ -44,6 +44,7 @@ public class RsJbjSxtxxServiceImpl implements RsJbjSxtxxService {
             Example example = new Example(RsJbjSxtxx.class);
             Example.Criteria criteria = example.createCriteria();
             criteria.andEqualTo("orgCode",dept);
+            criteria.andEqualTo("isBabs", isBabs);
             List<Map<String,String>> dataList = new ArrayList<>();
             example.orderBy("orgCode");
             List<RsJbjSxtxx> rsJbjSxtxxList = rsJbjSxtxxMapper.selectByExample(example);

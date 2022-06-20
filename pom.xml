@@ -37,7 +37,7 @@
     <repositories>
         <repository>
             <id>public</id>
-            <url>http://27.17.3.62:8081/nexus/content/groups/public/</url>
+            <url>http://192.168.1.2:8081/nexus/content/groups/public/</url>
             <!-- mvn install，会根据更新策略，更新SNAPSHOT版本的依赖到最新版 -->
             <snapshots>
                 <enabled>true</enabled>
@@ -49,17 +49,17 @@
     <pluginRepositories>
         <pluginRepository>
             <id>public</id>
-            <url>http://27.17.3.62:8081/nexus/content/groups/public/</url>
+            <url>http://192.168.1.2:8081/nexus/content/groups/public/</url>
         </pluginRepository>
     </pluginRepositories>
     <distributionManagement>
         <repository>
             <id>releases</id>
-            <url>http://27.17.3.62:8081/nexus/content/repositories/releases/</url>
+            <url>http://192.168.1.2:8081/nexus/content/repositories/releases/</url>
         </repository>
         <snapshotRepository>
             <id>snapshots</id>
-            <url>http://27.17.3.62:8081/nexus/content/repositories/snapshots/</url>
+            <url>http://192.168.1.2:8081/nexus/content/repositories/snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
 
@@ -306,10 +306,6 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-config</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
     </dependencies>
 </project>

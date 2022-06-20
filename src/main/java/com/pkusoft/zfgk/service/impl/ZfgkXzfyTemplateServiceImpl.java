@@ -18,11 +18,11 @@ import java.util.Map;
 @Service
 @Transactional
 public class ZfgkXzfyTemplateServiceImpl implements ZfgkXzfyTemplateService {
-    
-    @Autowired
+
+    @Autowired(required=false)
     private ZfgkXzfyTemplateMapper zfgkXzfyTemplateMapper;
 
-    @Autowired
+    @Autowired(required=false)
     private SysPermitService sysPermitService;
 
     @Override

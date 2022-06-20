@@ -3,40 +3,55 @@
 <mapper namespace="com.pkusoft.lesp.mapper.RsJbjJgxtDynamicMapper">
     <!-- @codeGenerate -->
     <resultMap id="BaseResultMap" type="com.pkusoft.lesp.po.RsJbjJgxtDynamic">
-            <!--<result column="BJRXM" jdbcType="VARCHAR" property="bjrxm"/>-->
-            <id column="JJDBH" jdbcType="VARCHAR" property="jjdbh"/>
-            <result column="LLDH" jdbcType="VARCHAR" property="lldh"/>
-            <result column="REPORTER_SOURCE" jdbcType="VARCHAR" property="reporterSource"/>
-            <result column="JJDWMC" jdbcType="VARCHAR" property="jjdwmc"/>
-            <result column="JJSJ" jdbcType="TIMESTAMP" property="jjsj"/>
-            <result column="STATUS" jdbcType="VARCHAR" property="status"/>
-            <result column="YBJ_STATUS" jdbcType="VARCHAR" property="ybjStatus"/>
-            <result column="BJRXM" jdbcType="VARCHAR" property="bjrxm"/>
-            <result column="JQLY" jdbcType="VARCHAR" property="jqly"/>
-            <result column="JQTYPEID1" jdbcType="VARCHAR" property="jqtypeid1"/>
-            <result column="JQTYPE_NAME1" jdbcType="VARCHAR" property="jqtypeName1"/>
-            <result column="BJLB" jdbcType="VARCHAR" property="bjlb"/>
-            <result column="BJSJ" jdbcType="TIMESTAMP" property="bjsj"/>
-            <result column="BJRGMSFHM" jdbcType="VARCHAR" property="bjrgmsfhm"/>
-            <result column="BJRLXDH" jdbcType="VARCHAR" property="bjrlxdh"/>
-            <result column="BJID" jdbcType="VARCHAR" property="bjid"/>
-            <result column="CJJGMC" jdbcType="VARCHAR" property="cjjgmc"/>
-            <result column="CJSJ" jdbcType="TIMESTAMP" property="cjsj"/>
-            <result column="CJDBH" jdbcType="VARCHAR" property="cjdbh"/>
-            <result column="GA_OWNER_DEPT_1" jdbcType="VARCHAR" property="gaOwnerDept1"/>
-            <result column="GA_OWNER_DEPT_2" jdbcType="VARCHAR" property="gaOwnerDept2"/>
-            <result column="GA_OWNER_DEPT_3" jdbcType="VARCHAR" property="gaOwnerDept3"/>
-            <result column="GA_OWNER_DEPT_4" jdbcType="VARCHAR" property="gaOwnerDept4"/>
-            <result column="GA_OWNER_DEPT_5" jdbcType="VARCHAR" property="gaOwnerDept5"/>
+        <id column="JJBH" jdbcType="VARCHAR" property="jjbh"/>
+        <result column="JJDBH" jdbcType="VARCHAR" property="jjdbh"/>
+        <result column="AJBH" jdbcType="VARCHAR" property="ajbh"/>
+        <result column="JQLY" jdbcType="VARCHAR" property="jqly"/>
+        <result column="BJRXM" jdbcType="VARCHAR" property="bjrxm"/>
+        <result column="BJRGMSFHM" jdbcType="VARCHAR" property="bjrgmsfhm"/>
+        <result column="SFDD" jdbcType="VARCHAR" property="sfdd"/>
+        <result column="BJSJ" jdbcType="VARCHAR" property="bjsj"/>
+        <result column="BJRXB" jdbcType="VARCHAR" property="bjrxb"/>
+        <result column="BJRLXDH" jdbcType="VARCHAR" property="bjrlxdh"/>
+        <result column="BJDH" jdbcType="VARCHAR" property="bjdh"/>
+        <result column="JYAQ" jdbcType="VARCHAR" property="jyaq"/>
+        <result column="JJRXM" jdbcType="VARCHAR" property="jjrxm"/>
+        <result column="JJDW" jdbcType="VARCHAR" property="jjdw"/>
+        <result column="JJDWMC" jdbcType="VARCHAR" property="jjdwmc"/>
+        <result column="JJSJ" jdbcType="DATE" property="jjsj"/>
+        <result column="JQTYPEID1" jdbcType="VARCHAR" property="jqtypeid1"/>
+        <result column="JQTYPE_NAME1" jdbcType="VARCHAR" property="jqtypeName1"/>
+        <result column="JQTYPEID2" jdbcType="VARCHAR" property="jqtypeid2"/>
+        <result column="JQTYPE_NAME2" jdbcType="VARCHAR" property="jqtypeName2"/>
+        <result column="JQTYPEID3" jdbcType="VARCHAR" property="jqtypeid3"/>
+        <result column="JQTYPE_NAME3" jdbcType="VARCHAR" property="jqtypeName3"/>
+        <result column="BJNR" jdbcType="VARCHAR" property="bjnr"/>
+        <result column="CJR" jdbcType="VARCHAR" property="cjr"/>
+        <result column="CJLBDM" jdbcType="VARCHAR" property="cjlbdm"/>
+        <result column="CJLB" jdbcType="VARCHAR" property="cjlb"/>
+        <result column="CJSJ" jdbcType="DATE" property="cjsj"/>
+        <result column="CJJGNR" jdbcType="VARCHAR" property="cjjgnr"/>
+        <result column="CJJG" jdbcType="VARCHAR" property="cjjg"/>
+        <result column="CJJGDM" jdbcType="VARCHAR" property="cjjgdm"/>
+        <result column="CJDW" jdbcType="VARCHAR" property="cjdw"/>
+        <result column="CJDWMC" jdbcType="VARCHAR" property="cjdwmc"/>
+        <result column="SPRQ" jdbcType="DATE" property="sprq"/>
+        <result column="SPYJ" jdbcType="VARCHAR" property="spyj"/>
+        <result column="GA_OWNER_DEPT_1" jdbcType="VARCHAR" property="gaOwnerDept1"/>
+        <result column="GA_OWNER_DEPT_2" jdbcType="VARCHAR" property="gaOwnerDept2"/>
+        <result column="GA_OWNER_DEPT_3" jdbcType="VARCHAR" property="gaOwnerDept3"/>
+        <result column="GA_OWNER_DEPT_4" jdbcType="VARCHAR" property="gaOwnerDept4"/>
+        <result column="GA_OWNER_DEPT_5" jdbcType="VARCHAR" property="gaOwnerDept5"/>
+        <result column="XGSJ" jdbcType="DATE" property="xgsj"/>
 
     </resultMap>
 
     <sql id="Base_Column_List">
-        JJDBH,BJRXM,LLDH,REPORTER_SOURCE,JJDWMC,YBJ_STATUS,JQTYPEID1,JQTYPE_NAME1,JJSJ,STATUS,JQLY,BJLB,BJSJ,BJRGMSFHM,BJRLXDH,BJID,CJJGMC,CJSJ,CJDBH,GA_OWNER_DEPT_1,GA_OWNER_DEPT_2,GA_OWNER_DEPT_3,GA_OWNER_DEPT_4,GA_OWNER_DEPT_5
+        JJBH,JJDBH,AJBH,JQLY,BJRXM,BJRGMSFHM,SFDD,BJSJ,BJRXB,BJRLXDH,BJDH,JYAQ,JJRXM,JJDW,JJDWMC,JJSJ,JQTYPEID1,JQTYPE_NAME1,JQTYPEID2,JQTYPE_NAME2,JQTYPEID3,JQTYPE_NAME3,BJNR,CJR,CJLBDM,CJLB,CJSJ,CJJGNR,CJJG,CJJGDM,CJDW,CJDWMC,SPRQ,SPYJ,GA_OWNER_DEPT_1,GA_OWNER_DEPT_2,GA_OWNER_DEPT_3,GA_OWNER_DEPT_4,GA_OWNER_DEPT_5,XGSJ
     </sql>
 
-    <!-- user-defined -->
-    <select id="getDynamicCount" resultType="int" >
+    <!-- 扩展映射 -->
+<select id="getDynamicCount" resultType="int" >
         select count(*)
         from RS_JBJ_JGXT_DYNAMIC t
         where 1=1
@@ -49,21 +64,6 @@
         <if test="deptLevel != null and deptLevel != '' and deptLevel == '4'.toString()">
             AND GA_OWNER_DEPT_4 = #{deptId,jdbcType=VARCHAR}
         </if>
-        <if test="status != null and status != ''">
-            AND STATUS = #{status,jdbcType=VARCHAR}
-        </if>
-        <if test="reporterSource != null and reporterSource != '' ">
-            AND REPORTER_SOURCE = #{reporterSource,jdbcType=VARCHAR}
-        </if>
-        <if test="ybabh != null and ybabh != '' ">
-            AND BJID like #{ybabh,jdbcType=VARCHAR}
-        </if>
-        <if test="jqly != null and jqly != '' ">
-            AND JQLY = #{jqly,jdbcType=VARCHAR}
-        </if>
-        <if test="ybjStatus != null and ybjStatus != '' ">
-            AND YBJ_STATUS = #{ybjStatus,jdbcType=VARCHAR}
-        </if>
         <!--<if test="jjsjEnd != null and jjsjEnd != '' ">
             AND JJSJ > #{jjsjStart,jdbcType=VARCHAR} and JJSJ < #{jjsjEnd,jdbcType=VARCHAR}
         </if>-->
@@ -73,5 +73,4 @@
         </if>
 
     </select>
-
 </mapper>

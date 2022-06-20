@@ -33,6 +33,9 @@ public class DateTimeUtils {
 
 	public static final String MILL_TIME_PATTERN = "yyyy-MM-dd HH:mm:ss.SSS";
 
+	public static final String TIME_PATTERN_YYYYMMDD = "yyyyMMdd";
+	public static final String TIME_PATTERN_HHMMSS= "HHmmss";
+
 	/**
 	 * 得到当前日期的前几天
 	 *
@@ -814,4 +817,20 @@ public class DateTimeUtils {
 		calendar.setTime(date);
 		return calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
 	}
+
+	/**
+	 *
+	 * 将Date转换成相应的yyyyMMddtHHmmssz字符串
+	 *
+	 * @return
+	 */
+	public static String dateToStrTz(Date date) {
+		SimpleDateFormat sdfy = new SimpleDateFormat(TIME_PATTERN_YYYYMMDD);
+		SimpleDateFormat sdfh = new SimpleDateFormat(TIME_PATTERN_HHMMSS);
+		String y = sdfy.format(date);
+		String h = sdfh.format(date);
+
+		return y+"t"+h+"z";
+	}
+
 }

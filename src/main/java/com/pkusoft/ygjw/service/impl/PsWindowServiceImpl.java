@@ -67,6 +67,9 @@ public class PsWindowServiceImpl implements PsWindowService {
                 criteria.andEqualTo("orgCode", bdEquipment.getOrgCode());
             }
         }
+        if (StringUtils.hasText(psWindowReqParam.getName())){
+            criteria.andLike("name","%"+psWindowReqParam.getName()+"%");
+        }
         if (StringUtils.hasText(psWindowReqParam.getHostBusiness())){
             criteria.andLike("hostBusiness","%"+psWindowReqParam.getHostBusiness()+"%");
         }

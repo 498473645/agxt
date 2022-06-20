@@ -370,4 +370,4 @@ shiro-proxy.sso-server-url: http://27.17.3.62:7100/user-center
 shiro-proxy.success-url: /swagger-ui.html
 
 #户政服务接口地址
-HzywIp: http://192.168.1.164:8001/whz-ywzsjh-api/api
+HzywIp: http://192.168.1.56:8096/whz-ywzsjh-api/api

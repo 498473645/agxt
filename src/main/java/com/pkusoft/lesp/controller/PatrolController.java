@@ -78,11 +78,12 @@ public class PatrolController {
 //        ResponseDto<Map<String,Object>> dto = new ResponseDto<Map<String,Object>>();
         try{
             String deptId = map.get("depts");
+            String isBabs = map.get("isBabs");
             if (!StringUtils.hasText(deptId)){
                 return new ResponseData<>(ResponseData.STATUS_CODE_PARAM,"单位不能为空");
             }
 
-            List<Map<String,Object>> data = rsJbjSxtxxService.getCameraList(deptId);
+            List<Map<String,Object>> data = rsJbjSxtxxService.getCameraList(deptId, isBabs);
             return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS,"成功",data);
         }catch(Exception e){
             logger.error("查询统计_最近受理数据错误",e);

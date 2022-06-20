@@ -18,7 +18,7 @@ public interface RsJbjSxtxxService {
      * 巡查_列出摄像头信息
      * @return
      */
-    List<Map<String,Object>> getCameraList(String deptId);
+    List<Map<String,Object>> getCameraList(String deptId, String isBabs);
 
     /**
      * 查询要素数据_派出所摄像头基本信息集合
