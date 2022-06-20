@@ -65,6 +65,9 @@ public class BdHandlingAreaServiceImpl implements BdHandlingAreaService {
         if(StringUtils.hasText(bdHandlingArea.getOrgCode())){
             criteria.andEqualTo("orgCode",bdHandlingArea.getOrgCode());
         }
+        if(StringUtils.hasText(bdHandlingArea.getIsBabs())){
+            criteria.andEqualTo("isBabs",bdHandlingArea.getIsBabs());
+        }
         if (StringUtils.hasText(bdHandlingArea.getObjtype())){
             criteria.andEqualTo("objtype",bdHandlingArea.getObjtype());
         }
