@@ -75,6 +75,9 @@ public class PsTransServiceImpl implements PsTransService {
     }
 
     public void setCommonCondition(Example.Criteria criteria, PsTransReqParam psTransReqParam, Map<String, String> map){
+        if (StringUtils.hasText(psTransReqParam.getJjdbh())){
+            criteria.andLike("jjdbh","%"+psTransReqParam.getJjdbh()+"%");
+        }
         if(StringUtils.hasText(psTransReqParam.getRepName())){
             criteria.andLike("repName","%"+psTransReqParam.getRepName()+"%");
         }
@@ -181,6 +184,7 @@ public class PsTransServiceImpl implements PsTransService {
         String jqly = map.get("jqly");
         String ybjStatus = map.get("ybjStatus");
         String ly = map.get("ly");
+        String jjdbh = map.get("jjdbh");
 
         //The query conditions are edited here
         if ("2".equals(deptLevel)){
@@ -195,6 +199,9 @@ public class PsTransServiceImpl implements PsTransService {
 //        }
         if (StringUtils.hasText(ybabh)){
             criteria.andLike("code","%"+ybabh.trim()+"%");
+        }
+        if (StringUtils.hasText(jjdbh)){
+            criteria.andLike("jjdbh","%"+jjdbh.trim()+"%");
         }
         if (StringUtils.hasText(reporterSource)){
             criteria.andEqualTo("reporterSource",reporterSource);

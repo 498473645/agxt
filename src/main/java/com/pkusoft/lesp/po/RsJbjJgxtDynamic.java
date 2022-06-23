@@ -1,5 +1,6 @@
 package com.pkusoft.lesp.po;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -70,6 +71,7 @@ public class RsJbjJgxtDynamic {
      */
     @Column(name = "BJSJ")
     @ApiModelProperty(value = "报警时间*")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "PRC")
     private java.util.Date bjsj;
 
     /**
@@ -126,6 +128,7 @@ public class RsJbjJgxtDynamic {
      */
     @Column(name = "JJSJ")
     @ApiModelProperty(value = "接警时间*")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "PRC")
     private java.util.Date jjsj;
 
     /**
@@ -203,6 +206,7 @@ public class RsJbjJgxtDynamic {
      */
     @Column(name = "CJSJ")
     @ApiModelProperty(value = "处警时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "PRC")
     private java.util.Date cjsj;
 
     /**
@@ -245,6 +249,7 @@ public class RsJbjJgxtDynamic {
      */
     @Column(name = "SPRQ")
     @ApiModelProperty(value = "审批日期")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "PRC")
     private java.util.Date sprq;
 
     /**
@@ -294,8 +299,39 @@ public class RsJbjJgxtDynamic {
      */
     @Column(name = "XGSJ")
     @ApiModelProperty(value = "修改时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "PRC")
     private java.util.Date xgsj;
 
+    /**
+     * 案发时间
+     */
+    @Column(name = "AFSJ")
+    @ApiModelProperty(value = "案发时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "PRC")
+    private java.util.Date afsj;
+
+    /**
+     * 案件类型
+     */
+    @Column(name = "AJLX")
+    @ApiModelProperty(value = "案件类型")
+    private String ajlx;
+
+    public String getAjlx() {
+        return ajlx;
+    }
+
+    public void setAjlx(String ajlx) {
+        this.ajlx = ajlx;
+    }
+
+    public Date getAfsj() {
+        return afsj;
+    }
+
+    public void setAfsj(Date afsj) {
+        this.afsj = afsj;
+    }
 
     /**
      * 获得接警编号*

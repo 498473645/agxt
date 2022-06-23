@@ -12,9 +12,9 @@ public interface RsJbjJgxtDynamicService {
      * 动态----获取动态
      * @return
      */
-    List<RsJbjJgxtDynamic> getDynamicData(Map<String, String> map);
+    List<RsJbjJgxtDynamic> getDynamicData(Map<String, String> map, Map<String, String> userInfo);
 
-    int getDynamicCount(Map<String, String> map);
+    int getDynamicCount(Map<String, String> map, Map<String, String> userInfo);
 
     /**
     * 查询集合
@@ -32,7 +32,7 @@ public interface RsJbjJgxtDynamicService {
 
     /**
     * 新增
-    * @param rsJbjJgxtDynamic	
+    * @param rsJbjJgxtDynamic
     * @param map	用户集合
     * @return
     */

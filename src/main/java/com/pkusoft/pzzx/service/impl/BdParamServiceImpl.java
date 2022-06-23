@@ -8,12 +8,14 @@ import java.util.UUID;
 import com.pkusoft.pzzx.req.BdParamReqParam;
 import com.pkusoft.usercenter.po.SysDataOwnerDept;
 import com.pkusoft.usercenter.service.SysDataOwnerDeptService;
+import com.pkusoft.usercenter.service.SysPermitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.util.StringUtils;
+import pkubatis.common.utils.PermitType;
 import tk.mybatis.mapper.entity.Example;
 
 import com.pkusoft.pzzx.po.BdParam;
@@ -30,6 +32,9 @@ public class BdParamServiceImpl implements BdParamService {
     @Autowired
     private SysDataOwnerDeptService sysDataOwnerDeptService;
 
+    @Autowired
+    private SysPermitService sysPermitService;
+
     public List<BdParam> getBdParamList(BdParamReqParam bdParam, Map<String, String> map) {
 
         RowBounds rowBounds = new RowBounds(bdParam.getStart(),bdParam.getPageSize());
@@ -38,7 +43,7 @@ public class BdParamServiceImpl implements BdParamService {
         example.setOrderByClause("CREATE_TIME DESC");
         //The query conditions are edited here
         this.setCommonCondition(criteria,bdParam);
-
+        sysPermitService.setUserDataPermits_2(criteria, map, PermitType.PERMITTYPE_100002);
         return bdParamMapper.selectByExampleAndRowBounds(example,rowBounds);
     }
 
@@ -48,7 +53,7 @@ public class BdParamServiceImpl implements BdParamService {
         Example.Criteria criteria = example.createCriteria();
         //The query conditions are edited here
         this.setCommonCondition(criteria,bdParam);
-
+        sysPermitService.setUserDataPermits_2(criteria, map, PermitType.PERMITTYPE_100002);
         return bdParamMapper.selectCountByExample(example);
     }
 

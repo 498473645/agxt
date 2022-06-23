@@ -125,10 +125,10 @@ public class DynamicController {
             if (!StringUtils.hasText(deptLevel)){
                 return new ResponseData<>(ResponseData.STATUS_CODE_PARAM,"单位级别不能为空");
             }
-//            Map<String, String> userInfo = userCenterProxyHelper.getUser(request);
+            Map<String, String> userInfo = userCenterProxyHelper.getUser(request);
 
-            List<RsJbjJgxtDynamic> data = rsJbjJgxtDynamicService.getDynamicData(map);
-            int count = rsJbjJgxtDynamicService.getDynamicCount(map);
+            List<RsJbjJgxtDynamic> data = rsJbjJgxtDynamicService.getDynamicData(map, userInfo);
+            int count = rsJbjJgxtDynamicService.getDynamicCount(map, userInfo);
             dto.setData(data);
             dto.setCount(count);
             dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);

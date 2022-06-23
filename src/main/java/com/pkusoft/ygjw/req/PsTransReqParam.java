@@ -1,26 +1,29 @@
 package com.pkusoft.ygjw.req;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
+import org.springframework.format.annotation.DateTimeFormat;
 import pkubatis.common.base.YgjwPage;
 
 import javax.persistence.Column;
+import java.util.Date;
 
 public class PsTransReqParam  extends YgjwPage {
 
  	/**
      * 主键ID
      */
-    private String id; 
+    private String id;
 
  	/**
      * 报案/办事编号
      */
-    private String code; 
+    private String code;
 
  	/**
      * 报案/办事名称
      */
-    private String name; 
+    private String name;
 
  	/**
      * 报案/办事类型(1010 被殴打, 1020 被盗 , 1030 被骗, 1040 被抢劫, 1050 邻里纠纷, 1060 家庭暴力, 1099 其他；2010 出生登记入户，2020 户口簿补领，2030 户籍证明，2040 跨市迁入， 2050 市县内移居， 2060 准迁证办理)
@@ -30,67 +33,67 @@ public class PsTransReqParam  extends YgjwPage {
  	/**
      * 报案/办事人姓名
      */
-    private String repName; 
+    private String repName;
 
  	/**
      * 报案/办事人证件类型
      */
-    private String repCardType; 
+    private String repCardType;
 
  	/**
      * 报案/办事人证件号码
      */
-    private String repIdcard; 
+    private String repIdcard;
 
  	/**
      * 报案/办事人照片（照片数据存入SP_PIC表）
      */
-    private String repPhoto; 
+    private String repPhoto;
 
  	/**
      * 报案/办事人性别
      */
-    private String repSex; 
+    private String repSex;
 
  	/**
      * 报案/办事人出生日期
      */
-    private String repBrithday; 
+    private String repBrithday;
 
  	/**
      * 报案/办事人联系方式
      */
-    private String repTel; 
+    private String repTel;
 
  	/**
      * 报案/办事人民族
      */
-    private String repNation; 
+    private String repNation;
 
  	/**
      * 报案/办事人工作单位
      */
-    private String repWorkunit; 
+    private String repWorkunit;
 
  	/**
      * 报案/办事人户籍地行政区划编码. 关联字典DIC_NATIONAL_REGION
      */
-    private String repRegCode; 
+    private String repRegCode;
 
  	/**
      * 报案/办事人户籍地详情
      */
-    private String repRegAddr; 
+    private String repRegAddr;
 
  	/**
      * 报案/办事人现住址行政区划编码. 关联字典DIC_NATIONAL_REGION
      */
-    private String repAddrCode; 
+    private String repAddrCode;
 
  	/**
      * 报案/办事人现住址详情
      */
-    private String repAddr; 
+    private String repAddr;
 
  	/**
      * 报案/办事开始时间
@@ -120,67 +123,67 @@ public class PsTransReqParam  extends YgjwPage {
     /**
      * 案发地点
      */
-    private String occAddr; 
+    private String occAddr;
 
  	/**
      * 案发原因
      */
-    private String occReason; 
+    private String occReason;
 
  	/**
      * 简要案情
      */
-    private String occDescr; 
+    private String occDescr;
 
  	/**
      * 数据类型（0：自助机，1：微信）
      */
-    private String dataType; 
+    private String dataType;
 
  	/**
      * 所属机构编码
      */
-    private String orgCode; 
+    private String orgCode;
 
  	/**
      * 所属机构名称
      */
-    private String orgName; 
+    private String orgName;
 
  	/**
      * 状态（1010：登记中，1020：登记完成，2010：已受理）
      */
-    private String status; 
+    private String status;
 
  	/**
      * 备注
      */
-    private String memo; 
+    private String memo;
 
  	/**
      * 创建者ID
      */
-    private String createId; 
+    private String createId;
 
  	/**
      * 创建者名称
      */
-    private String createName; 
+    private String createName;
 
  	/**
      * 创建时间
      */
-    private java.util.Date createTime; 
+    private java.util.Date createTime;
 
  	/**
      * 最后修改者ID
      */
-    private String moderId; 
+    private String moderId;
 
  	/**
      * 最后修改者名称
      */
-    private String moderName; 
+    private String moderName;
 
  	/**
      * 最后修改时间
@@ -190,38 +193,70 @@ public class PsTransReqParam  extends YgjwPage {
  	/**
      * 公安一级归属单位
      */
-    private String ownOrg1; 
+    private String ownOrg1;
 
  	/**
      * 公安二级归属单位
      */
-    private String ownOrg2; 
+    private String ownOrg2;
 
  	/**
      * 公安三级归属单位
      */
-    private String ownOrg3; 
+    private String ownOrg3;
 
  	/**
      * 公安四级归属单位
      */
-    private String ownOrg4; 
+    private String ownOrg4;
 
  	/**
      * 公安五级归属单位
      */
-    private String ownOrg5; 
+    private String ownOrg5;
 
  	/**
      * 预留字段1
      */
-    private String reserve1; 
+    private String reserve1;
 
  	/**
      * 预留字段2
      */
-    private String reserve2; 
+    private String reserve2;
 
+    private String jjdObjid;     //接警单id
+
+    private String jjdbh;     //接警单编号
+
+    /**
+     * 接警时间
+     */
+    private java.util.Date jjsj;
+
+    public String getJjdObjid() {
+        return jjdObjid;
+    }
+
+    public void setJjdObjid(String jjdObjid) {
+        this.jjdObjid = jjdObjid;
+    }
+
+    public String getJjdbh() {
+        return jjdbh;
+    }
+
+    public void setJjdbh(String jjdbh) {
+        this.jjdbh = jjdbh;
+    }
+
+    public Date getJjsj() {
+        return jjsj;
+    }
+
+    public void setJjsj(Date jjsj) {
+        this.jjsj = jjsj;
+    }
 
     /**
     * 获得主键ID

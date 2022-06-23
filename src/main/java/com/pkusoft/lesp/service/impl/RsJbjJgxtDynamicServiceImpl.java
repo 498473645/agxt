@@ -3,11 +3,13 @@ package com.pkusoft.lesp.service.impl;
 import com.pkusoft.lesp.mapper.RsJbjJgxtDynamicMapper;
 import com.pkusoft.lesp.po.RsJbjJgxtDynamic;
 import com.pkusoft.lesp.service.RsJbjJgxtDynamicService;
+import com.pkusoft.usercenter.service.SysPermitService;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
+import pkubatis.common.utils.PermitType;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
@@ -21,7 +23,10 @@ public class RsJbjJgxtDynamicServiceImpl implements RsJbjJgxtDynamicService {
     @Autowired
     private RsJbjJgxtDynamicMapper rsJbjJgxtDynamicMapper;
 
-    public List<RsJbjJgxtDynamic> getDynamicData(Map<String, String> map) {
+    @Autowired
+    private SysPermitService sysPermitService;
+
+    public List<RsJbjJgxtDynamic> getDynamicData(Map<String, String> map, Map<String, String> userInfo) {
         String deptId = map.get("deptId");
         String deptLevel = map.get("deptLevel");// 2-市局，3-分局，4-派出所
         String jjsjStart = map.get("jjsjStart");
@@ -48,11 +53,11 @@ public class RsJbjJgxtDynamicServiceImpl implements RsJbjJgxtDynamicService {
         if(StringUtils.hasText(jjsjStart)&& StringUtils.hasText(jjsjStart)){
             criteria.andCondition("JJSJ BETWEEN to_date('"+jjsjStart+"', 'yyyy-mm-dd') and  to_date('"+jjsjEnd+"', 'yyyy-mm-dd')");
         }
-
+        sysPermitService.setUserDataPermits_2(criteria,userInfo, PermitType.PERMITTYPE_100002);
         return rsJbjJgxtDynamicMapper.selectByExampleAndRowBounds(example,rowBounds);
     }
 
-    public int getDynamicCount(Map<String, String> map) {
+    public int getDynamicCount(Map<String, String> map, Map<String, String> userInfo) {
 //        Example example = new Example(RsJbjJgxtDynamic.class);
 //        Example.Criteria criteria = example.createCriteria();
 

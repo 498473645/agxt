@@ -1,6 +1,5 @@
 package com.pkusoft.lesppc.service.impl;
 
-import com.pkusoft.lesp.until.PermitType;
 import com.pkusoft.lesppc.model.PcWtmx;
 import com.pkusoft.lesppc.req.*;
 import com.pkusoft.lesp.po.StatisticsData;
@@ -14,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
+import pkubatis.common.utils.PermitType;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.HashMap;

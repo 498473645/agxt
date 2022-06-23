@@ -232,6 +232,28 @@ public class SpJjxx {
     @Column(name = "BJRSFZH")
     private String bjrsfzh;     //报警人身份证号码
 
+    @Column(name = "AFSJ")
+    private String afsj;     //案发时间
+
+    @Column(name = "IS_PY")
+    private String isPy;     //是否评议
+
+    public String getAfsj() {
+        return afsj;
+    }
+
+    public void setAfsj(String afsj) {
+        this.afsj = afsj;
+    }
+
+    public String getIsPy() {
+        return isPy;
+    }
+
+    public void setIsPy(String isPy) {
+        this.isPy = isPy;
+    }
+
     public String getJjyCode() {
         return jjyCode;
     }
