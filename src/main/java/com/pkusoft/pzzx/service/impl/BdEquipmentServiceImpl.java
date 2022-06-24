@@ -66,6 +66,9 @@ public class BdEquipmentServiceImpl implements BdEquipmentService {
         if (StringUtils.hasText(bdEquipment.getEId())){
             criteria.andLike("eId","%"+bdEquipment.getEId()+"%");
         }
+        if (StringUtils.hasText(bdEquipment.getAreaId())){
+            criteria.andEqualTo("areaId",bdEquipment.getAreaId());
+        }
 //        criteria.andEqualTo("orgCode",map.get("deptId"));
     }
 

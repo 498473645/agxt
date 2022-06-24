@@ -19,6 +19,28 @@ public class BdEquipmentReqParam extends Page {
     @Column(name = "E_ID")
     private String eId;     //设备唯一标识码
 
+    @Column(name = "AREA_ID")
+    private String areaId;     //场所id
+
+    @Column(name = "AREA_NAME")
+    private String areaName;     //场所id
+
+    public String getAreaId() {
+        return areaId;
+    }
+
+    public void setAreaId(String areaId) {
+        this.areaId = areaId;
+    }
+
+    public String getAreaName() {
+        return areaName;
+    }
+
+    public void setAreaName(String areaName) {
+        this.areaName = areaName;
+    }
+
     /**
     * 获得设备名称
     * @return OBJNAME

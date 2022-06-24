@@ -101,6 +101,27 @@ public class BdEquipment {
     @Column(name = "RESERVE5")
     private String reserve5;     //预留字段5
 
+    @Column(name = "AREA_ID")
+    private String areaId;     //场所id
+
+    @Column(name = "AREA_NAME")
+    private String areaName;     //场所id
+
+    public String getAreaId() {
+        return areaId;
+    }
+
+    public void setAreaId(String areaId) {
+        this.areaId = areaId;
+    }
+
+    public String getAreaName() {
+        return areaName;
+    }
+
+    public void setAreaName(String areaName) {
+        this.areaName = areaName;
+    }
 
     /**
     * 获得主键ID
