@@ -24,6 +24,7 @@ import org.support.commons.springmvc.ResponseData;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.net.URI;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service
@@ -64,25 +65,24 @@ public class HzywYbsxxbServiceImpl implements HzywYbsxxbService {
     @Override
     public ResponseData<HzywYbsxxb> getHzywYbsxxbList(HzywYbsxxb hzywYbsxxb,HttpServletRequest request) {
         try {
-//            Map<String, String> userInfo =  userCenterProxyHelper.getUser(request);
-//
-//            HttpHeaders headers = new HttpHeaders();
-//            headers.add("Content-type", MediaType.APPLICATION_JSON_UTF8_VALUE);
-//            headers.add("appToken", "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcHBWZXJzaW9uIjoiMSIsImFwcFR5cGUiOiIyIiwiaXNzIjoiaGVibXBwLm9yZyIsImFwcEtleSI6IlRMekFubnNhIiwiZXhwIjoxNjE0MjE5Mzc4LCJpYXQiOjE2MTE1NDA5NzgsImFwcFpvbmUiOiIxIiwianRpIjoiZDI3NzhhMDQtYzM1OS00NGE0LTlhYjItODBkZjIwMDg0M2Y3IiwidXNlcm5hbWUiOiJsaXVjaGFvIn0.72t15EMtBmElwh7yKfbWNxPUwTgXFFI2ItRXbW3kJTA");
+            Map<String, String> userInfo =  userCenterProxyHelper.getUser(request);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
             Map<String, String> params = new HashMap<>();
             params.put("gmsfhm", hzywYbsxxb.getRepIdcard());
             params.put("name", hzywYbsxxb.getName());
             params.put("sjgsdwdm",hzywYbsxxb.getOrgCode());
-//            HttpEntity<Map<String, String>> httpEntity = new HttpEntity<Map<String, String>>(params,headers);
+            if (hzywYbsxxb.getOrgCode().equals(userInfo.get("deptId"))) {
+                params.put("deptLevel", userInfo.get("userLevel"));
+            }
+            params.put("orgCode",hzywYbsxxb.getOrgCode());
+            params.put("dataType", hzywYbsxxb.getDataType());
+            params.put("ywblzt", hzywYbsxxb.getYwblzt());
+            if (hzywYbsxxb.getSlsjStart() != null && hzywYbsxxb.getSlsjEnd() !=null) {
+                params.put("startDate", sdf.format(hzywYbsxxb.getSlsjStart()));
+                params.put("endDate", sdf.format(hzywYbsxxb.getSlsjEnd()));
+            }
             ResponseData response = restTemplate.postForObject(hzywIp + "/hzywYbsxxb/getHzywYbsxxbList",params, ResponseData.class);
-//            List<Map<String,String>> list = (List<Map<String, String>>) response.getData();
-//            PsTrans psTrans = null;
-//            for (Map<String,String> s : list) {
-//                psTrans = psTransService.getPsTrans(s.get("code"));
-//                if (psTrans!=null) {
-//                    s.put("code",psTrans.getCode());
-//                }
-//            }
+
             return response;
         } catch (Exception e) {
             e.printStackTrace();

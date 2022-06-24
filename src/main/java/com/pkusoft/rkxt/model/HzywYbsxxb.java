@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * @author
@@ -304,6 +305,25 @@ public class HzywYbsxxb {
     @ApiModelProperty(value = "预留字段5", required = false, example = "预留字段5")
     private String reserve5;
 
+    private Date slsjStart;
+
+    private Date slsjEnd;
+
+    public Date getSlsjStart() {
+        return slsjStart;
+    }
+
+    public void setSlsjStart(Date slsjStart) {
+        this.slsjStart = slsjStart;
+    }
+
+    public Date getSlsjEnd() {
+        return slsjEnd;
+    }
+
+    public void setSlsjEnd(Date slsjEnd) {
+        this.slsjEnd = slsjEnd;
+    }
 
     /**
     * 获得办事编号
