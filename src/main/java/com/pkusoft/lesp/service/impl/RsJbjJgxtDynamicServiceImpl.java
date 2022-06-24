@@ -47,11 +47,17 @@ public class RsJbjJgxtDynamicServiceImpl implements RsJbjJgxtDynamicService {
 //        }else if ("4".equals(deptLevel)){
 //            criteria.andEqualTo("gaOwnerDept4",deptId);
 //        }
+        if (StringUtils.hasText(deptId)){
+            criteria.andEqualTo("jjdw",deptId);
+        }
+        if (StringUtils.hasText(map.get("jqly"))){
+            criteria.andEqualTo("jqly",map.get("jqly"));
+        }
         if (StringUtils.hasText(ybabh)){
-            criteria.andLike("bjid","%"+ybabh.trim()+"%");
+            criteria.andLike("jjbh","%"+ybabh.trim()+"%");
         }
         if(StringUtils.hasText(jjsjStart)&& StringUtils.hasText(jjsjStart)){
-            criteria.andCondition("JJSJ BETWEEN to_date('"+jjsjStart+"', 'yyyy-mm-dd') and  to_date('"+jjsjEnd+"', 'yyyy-mm-dd')");
+            criteria.andCondition("jjsj BETWEEN to_date('"+jjsjStart+"', 'yyyy-mm-dd') and  to_date('"+jjsjEnd+"', 'yyyy-mm-dd')");
         }
         sysPermitService.setUserDataPermits_2(criteria,userInfo, PermitType.PERMITTYPE_100002);
         return rsJbjJgxtDynamicMapper.selectByExampleAndRowBounds(example,rowBounds);
