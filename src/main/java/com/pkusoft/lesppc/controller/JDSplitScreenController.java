@@ -79,14 +79,13 @@ public class JDSplitScreenController {
             String deptId = map.get("deptId");
             String deptLevel = map.get("deptLevel");
             String wtwd1 = map.get("ybabh");
+            String wtlyBh = map.get("wtlyBh");
             if (!StringUtils.hasText(deptId)){
                 return new ResponseData<>(ResponseData.STATUS_CODE_PARAM,"单位不能为空");
             }
             if (!StringUtils.hasText(deptLevel)){
                 return new ResponseData<>(ResponseData.STATUS_CODE_PARAM,"单位级别不能为空");
             }
-            String wtlyBh = userCenterProxyHelper.getPara("JJPT_WTLY_BH");
-            wtlyBh = "LESP_PMS";
             if (!StringUtils.hasText(wtlyBh)){
                 return new ResponseData<>(ResponseData.STATUS_CODE_PARAM, "请配置接报警问题领域编号");
             }
