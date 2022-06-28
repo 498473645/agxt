@@ -1,5 +1,7 @@
 package com.pkusoft.pzzx.po;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.*;
@@ -151,6 +153,21 @@ public class BdHandlingArea {
      */
     @Column(name = "IS_BABS")
     private String isBabs;
+
+    /**
+     * 附件上传路径
+     */
+    @Column(name = "SKETCH_MAP")
+    @ApiModelProperty(value = "附件上传路径")
+    private String sketchMap;
+
+    public String getSketchMap() {
+        return sketchMap;
+    }
+
+    public void setSketchMap(String sketchMap) {
+        this.sketchMap = sketchMap;
+    }
 
     public String getIsBabs() {
         return isBabs;
