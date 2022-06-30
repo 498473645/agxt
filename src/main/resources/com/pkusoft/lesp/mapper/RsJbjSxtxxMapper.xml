@@ -39,9 +39,6 @@
             <if test="deptLevel != null and deptLevel != '' and deptLevel == '4'.toString()">
                 AND GA_OWNER_DEPT_4 = #{deptId,jdbcType=VARCHAR}
             </if>
-            <if test="deptLevel != null and deptLevel != '' and deptLevel == '8'.toString()">
-                AND ORG_CODE = #{userDeptId,jdbcType=VARCHAR}
-            </if>
         group by ORG_CODE,ORG_NAME order by ORG_CODE
     </select>
 
