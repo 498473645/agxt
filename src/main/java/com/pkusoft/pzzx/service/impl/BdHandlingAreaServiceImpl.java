@@ -1,9 +1,6 @@
 package com.pkusoft.pzzx.service.impl;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 import com.pkusoft.lesp.until.PermitType;
 import com.pkusoft.pzzx.req.BdHandlingAreaReqParam;
@@ -47,7 +44,16 @@ public class BdHandlingAreaServiceImpl implements BdHandlingAreaService {
         example.setOrderByClause("CREATE_TIME DESC");
         //The query conditions are edited here
         this.setCommonCondition(criteria,bdHandlingArea, map);
-        sysPermitService.setUserDataPermits(criteria,map, PermitType.PERMIT_TYPE_BABS_QUERY);
+
+//        if (StringUtils.hasText(bdHandlingArea.getFlag())) {
+//            List<BdHandlingArea> list = new ArrayList<>();
+//            if (StringUtils.hasText(sysPermitService.getUserPermitValue(map.get("userId"),PermitType.PERMIT_TYPE_ZHTJCX))) {
+//                sysPermitService.setUserDataPermits_2(criteria,map, PermitType.PERMIT_TYPE_BABS_QUERY);
+//                return bdHandlingAreaMapper.selectByExampleAndRowBounds(example,rowBounds);
+//            }
+//            return list;
+//        }
+        sysPermitService.setUserDataPermits_2(criteria,map, PermitType.PERMIT_TYPE_BABS_QUERY);
         return bdHandlingAreaMapper.selectByExampleAndRowBounds(example,rowBounds);
     }
 
@@ -57,7 +63,7 @@ public class BdHandlingAreaServiceImpl implements BdHandlingAreaService {
         Example.Criteria criteria = example.createCriteria();
         //The query conditions are edited
         this.setCommonCondition(criteria,bdHandlingArea, map);
-        sysPermitService.setUserDataPermits(criteria,map, PermitType.PERMIT_TYPE_BABS_QUERY);
+        sysPermitService.setUserDataPermits_2(criteria,map, PermitType.PERMIT_TYPE_BABS_QUERY);
         return bdHandlingAreaMapper.selectCountByExample(example);
     }
 

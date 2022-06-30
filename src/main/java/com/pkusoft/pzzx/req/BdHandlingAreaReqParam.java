@@ -155,6 +155,16 @@ public class BdHandlingAreaReqParam extends Page {
     @Column(name = "IS_BABS")
     private String isBabs;
 
+    private String flag; //判断是否是统计数据
+
+    public String getFlag() {
+        return flag;
+    }
+
+    public void setFlag(String flag) {
+        this.flag = flag;
+    }
+
     public String getIsBabs() {
         return isBabs;
     }

@@ -14,5 +14,9 @@ public class PermitType {
      */
     public final static String PERMIT_TYPE_BABS_QUERY = "100002";
 
-
+    /**************************************************************数据权限类型*************************************************************/
+    /**
+     * 数据权限类型-综合统计查询权限
+     */
+    public final static String PERMIT_TYPE_ZHTJCX = "zhtjcx";
 }

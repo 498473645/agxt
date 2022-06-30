@@ -26,7 +26,7 @@
             <result column="OWN_ORG_5" jdbcType="VARCHAR" property="ownOrg5"/>
             <result column="RESERVE1" jdbcType="VARCHAR" property="reserve1"/>
             <result column="RESERVE2" jdbcType="VARCHAR" property="reserve2"/>
-
+            <result column="SKETCH_MAP" jdbcType="VARCHAR" property="sketchMap"/>
     </resultMap>
 
     <sql id="Base_Column_List">
