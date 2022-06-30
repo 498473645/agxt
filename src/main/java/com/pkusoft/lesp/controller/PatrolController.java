@@ -58,7 +58,7 @@ public class PatrolController {
 //                return new ResponseData<>(ResponseData.STATUS_CODE_PARAM,"单位不能为空");
 //            }
 
-            List<RsJbjSxtxx> data = rsJbjSxtxxService.getDeptList(userInfo);
+            List<RsJbjSxtxx> data = rsJbjSxtxxService.getDeptList(map);
             return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS,"成功",data);
         }catch(Exception e){
             logger.error("查询统计_最近受理数据错误",e);
