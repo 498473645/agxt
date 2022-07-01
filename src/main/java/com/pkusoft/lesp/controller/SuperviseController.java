@@ -1,5 +1,6 @@
 package com.pkusoft.lesp.controller;
 
+import com.pkusoft.lesp.po.RsJbjJjxx;
 import com.pkusoft.lesppc.model.PcYjwt;
 import com.pkusoft.lesppc.service.PcYjwtService;
 import com.pkusoft.usercenterproxy.UserCenterProxyHelper;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.support.commons.springmvc.ResponseData;
 import pkubatis.common.base.ResponseDto;
+import pkubatis.model.JsonResult;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -100,6 +102,28 @@ public class SuperviseController {
             logger.error("获取预警问题列表错误",e);
             e.printStackTrace();
             return new ResponseData<>(ResponseData.STATUS_CODE_OTHER,"获取预警问题列表错误");
+        }
+    }
+
+    /**
+     * 手动闭环
+     * @return
+     */
+    @RequestMapping("/supervise/updateSdbh")
+    @ResponseBody
+    public ResponseData<String> updateSdbh(@RequestBody PcYjwt pcYjwt, HttpServletRequest request){
+        try {
+            Map<String, String> userInfo = userCenterProxyHelper.getUser(request);
+            int num = pcYjwtService.updateSdbh(pcYjwt, userInfo);
+
+            if (num>0){
+                return new ResponseData<String>(ResponseData.STATUS_CODE_SUCCESS,"操作成功");
+            }
+            return new ResponseData<String>(ResponseData.STATUS_CODE_OTHER,"操作失败");
+        }catch (Exception e) {
+            logger.error("手动闭环修改信息错误",e);
+            e.printStackTrace();
+            return new ResponseData(ResponseData.STATUS_CODE_OTHER, "手动闭环修改信息错误"+e.getMessage());
         }
     }
 

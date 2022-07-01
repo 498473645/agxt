@@ -16,6 +16,7 @@ import org.springframework.util.StringUtils;
 import pkubatis.common.utils.PermitType;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -114,6 +115,7 @@ public class PcYjwtServiceImpl implements PcYjwtService {
         example.setOrderByClause("CREATED_DATE desc");
         Example.Criteria criteria = example.createCriteria();
         criteria.andEqualTo("wtmxBh",wtmxBh);
+        criteria.andEqualTo("wtzt","1");
         if (StringUtils.hasText(wtwd1)){
             criteria.andLike("wtwd1","%"+wtwd1.trim()+"%");
         }
@@ -138,6 +140,7 @@ public class PcYjwtServiceImpl implements PcYjwtService {
         Example example = new Example(PcYjwt.class);
         Example.Criteria criteria = example.createCriteria();
         criteria.andEqualTo("wtmxBh",wtmxBh);
+        criteria.andEqualTo("wtzt","1");
         if (StringUtils.hasText(wtwd1)){
             criteria.andLike("wtwd1","%"+wtwd1.trim()+"%");
         }
@@ -169,5 +172,16 @@ public class PcYjwtServiceImpl implements PcYjwtService {
         }
 
         return pcYjwtMapper.selectCountByExample(example);
+    }
+
+    @Override
+    public int updateSdbh(PcYjwt pcYjwt, Map<String,String> userInfo) {
+        pcYjwt.setWtzt("0");// 手动闭环更改问题状态
+        pcYjwt.setModifiedUserId(userInfo.get("userId"));
+        pcYjwt.setModifiedDeptId(userInfo.get("deptId"));
+        pcYjwt.setModifiedDeptName(userInfo.get("deptName"));
+        pcYjwt.setModifiedDate(new Date());
+        int num = pcYjwtMapper.updateByPrimaryKeySelective(pcYjwt);
+        return num;
     }
 }

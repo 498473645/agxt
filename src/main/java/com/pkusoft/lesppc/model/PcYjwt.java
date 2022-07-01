@@ -1,5 +1,6 @@
 package com.pkusoft.lesppc.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -231,6 +232,7 @@ public class PcYjwt {
      */
     @Column(name = "CREATED_DATE")
     @ApiModelProperty(value = "创建日期")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "PRC")
     private java.util.Date createdDate;
 
  	/**

@@ -63,4 +63,5 @@ public interface PcYjwtService {
 
     int getYjxxListCount(String deptId, String deptLevel,String wtwd1, String wtmxBh);
 
+    int updateSdbh(PcYjwt pcYjwt, Map<String,String> userInfo);
 }
