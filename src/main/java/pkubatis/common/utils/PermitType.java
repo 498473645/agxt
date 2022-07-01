@@ -25,6 +25,11 @@ public class PermitType {
     public final static String PERMIT_VALUE_AREA = "8";
 
     /**
+     * 数据权限值-本办案区办理的
+     */
+    public final static String PERMIT_VALUE_DEPT_SOLO = "6";
+
+    /**
      * 数据权限值-本派出所办理的
      */
     public final static String PERMIT_VALUE_DEPT_4 = "4";

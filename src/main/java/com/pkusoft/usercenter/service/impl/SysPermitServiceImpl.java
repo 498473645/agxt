@@ -95,8 +95,7 @@ public class SysPermitServiceImpl implements SysPermitService {
     public void setUserDataPermitsBabs(Example.Criteria criteria, Map<String, String> user, String permitsType) {
         //查询当前登录人的权限级别
         //获取用户的查询权限（9-本人办理的；8-本办案区办理的；4-全派出所办理的；3-全分局办理的；2-全市局办理的）
-//        String permitValue = SpringContextHolder.getBean(SysPermitService.class).getUserPermitValue(user.get("userId"), permitsType);
-        String permitValue ="2";
+        String permitValue = sysPermitService.getUserPermitValue(user.get("userId"), permitsType);
         if (StringUtils.hasText(permitValue)) {
             //查询权限单位id
             String permitDeptId = sysDeptService.getDeptIdBypermit(user,permitValue);
@@ -124,24 +123,42 @@ public class SysPermitServiceImpl implements SysPermitService {
         //默认查询启用的
 //        criteria.andEqualTo("rowStatus","1");
         //循环判断对应权限
+        SysDept dept = sysDeptService.getSysDept(user.get("deptId"));
+        String orgCode = "0";
         switch (permitValue){
             //市局单位数据查询权限
             case PermitType.PERMIT_VALUE_DEPT_2:
-                criteria.andEqualTo("ownOrg2", permitDeptId);
+                criteria.andEqualTo("gaOwnerDept2", permitDeptId);
                 break;
             //分局单位数据查询权限
             case PermitType.PERMIT_VALUE_DEPT_3:
-                criteria.andEqualTo("ownOrg3", permitDeptId);
+                criteria.andEqualTo("gaOwnerDept3", permitDeptId);
                 break;
             //派出所数据查询权限
             case PermitType.PERMIT_VALUE_DEPT_4:
-                criteria.andEqualTo("ownOrg4", permitDeptId);
+                criteria.andEqualTo("gaOwnerDept4", permitDeptId);
+                break;
+            //派出所数据查询权限
+            case PermitType.PERMIT_VALUE_DEPT_SOLO:
+                if (null!=dept||dept.getDeptId()!=null){
+                    orgCode = dept.getDeptId();
+                }
+                if("1".equals(dept.getDeptLevel()))
+                {
+                    criteria.andEqualTo("gaOwnerDept1", orgCode);
+                }else if("2".equals(dept.getDeptLevel())){
+                    criteria.andEqualTo("gaOwnerDept2", orgCode);
+                }else if("3".equals(dept.getDeptLevel())){
+                    criteria.andEqualTo("gaOwnerDept3", orgCode);
+                }else if("4".equals(dept.getDeptLevel())){
+                    criteria.andEqualTo("gaOwnerDept4", orgCode);
+                }else if("5".equals(dept.getDeptLevel())){
+                    criteria.andEqualTo("gaOwnerDept5", orgCode);
+                }
                 break;
             //所属办案区数据查询权限
             case PermitType.PERMIT_VALUE_AREA:
                 //根据登录人警号查询警员表的所属单位id
-                String orgCode = "0";
-                SysDept dept = sysDeptService.getSysDept(user.get("deptId"));
                 if (null!=dept||dept.getDeptId()!=null){
                     orgCode = dept.getDeptId();
                 }

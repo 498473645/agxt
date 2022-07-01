@@ -59,7 +59,7 @@ public class RsJbjJgxtDynamicServiceImpl implements RsJbjJgxtDynamicService {
         if(StringUtils.hasText(jjsjStart)&& StringUtils.hasText(jjsjStart)){
             criteria.andCondition("jjsj BETWEEN to_date('"+jjsjStart+"', 'yyyy-mm-dd') and  to_date('"+jjsjEnd+"', 'yyyy-mm-dd')");
         }
-        sysPermitService.setUserDataPermits_2(criteria,userInfo, PermitType.PERMITTYPE_100002);
+        sysPermitService.setUserDataPermitsBabs(criteria,userInfo, PermitType.PERMITTYPE_100002);
         return rsJbjJgxtDynamicMapper.selectByExampleAndRowBounds(example,rowBounds);
     }
 
