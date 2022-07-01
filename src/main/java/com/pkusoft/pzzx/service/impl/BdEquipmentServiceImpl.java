@@ -41,7 +41,7 @@ public class BdEquipmentServiceImpl implements BdEquipmentService {
         //The query conditions are edited here
         this.setCommonCondition(criteria,bdEquipment,map);
         example.setOrderByClause("CREATE_TIME DESC");
-        sysPermitService.setUserDataPermits(criteria,map, PermitType.PERMIT_TYPE_BABS_QUERY);
+        sysPermitService.setUserDataPermitsBabs(criteria,map, PermitType.PERMIT_TYPE_BABS_QUERY);
 
         return bdEquipmentMapper.selectByExampleAndRowBounds(example,rowBounds);
     }
@@ -52,7 +52,7 @@ public class BdEquipmentServiceImpl implements BdEquipmentService {
         Example.Criteria criteria = example.createCriteria();
         //The query conditions are edited here
         this.setCommonCondition(criteria,bdEquipment,map);
-        sysPermitService.setUserDataPermits(criteria,map, PermitType.PERMIT_TYPE_BABS_QUERY);
+        sysPermitService.setUserDataPermitsBabs(criteria,map, PermitType.PERMIT_TYPE_BABS_QUERY);
         return bdEquipmentMapper.selectCountByExample(example);
     }
 
