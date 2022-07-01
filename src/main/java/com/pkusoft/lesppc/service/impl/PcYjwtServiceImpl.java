@@ -117,14 +117,13 @@ public class PcYjwtServiceImpl implements PcYjwtService {
         if (StringUtils.hasText(wtwd1)){
             criteria.andLike("wtwd1","%"+wtwd1.trim()+"%");
         }
-//        sysPermitService.setUserDataPermitsBabs(criteria,map, PermitType.PERMIT_TYPE_BABS_QUERY);
-//        if ("2".equals(deptLevel)){
-//            criteria.andEqualTo("gaOwnerDept2",deptId);
-//        }else if ("3".equals(deptLevel)){
-//            criteria.andEqualTo("gaOwnerDept3",deptId);
-//        }else if ("4".equals(deptLevel)){
-//            criteria.andEqualTo("gaOwnerDept4",deptId);
-//        }
+        if ("2".equals(deptLevel)){
+            criteria.andEqualTo("gaOwnerDept2",deptId);
+        }else if ("3".equals(deptLevel)){
+            criteria.andEqualTo("gaOwnerDept3",deptId);
+        }else if ("4".equals(deptLevel)){
+            criteria.andEqualTo("gaOwnerDept4",deptId);
+        }
 
         return pcYjwtMapper.selectByExampleAndRowBounds(example,rowBounds);
     }
@@ -142,13 +141,13 @@ public class PcYjwtServiceImpl implements PcYjwtService {
         if (StringUtils.hasText(wtwd1)){
             criteria.andLike("wtwd1","%"+wtwd1.trim()+"%");
         }
-//        if ("2".equals(deptLevel)){
-//            criteria.andEqualTo("gaOwnerDept2",deptId);
-//        }else if ("3".equals(deptLevel)){
-//            criteria.andEqualTo("gaOwnerDept3",deptId);
-//        }else if ("4".equals(deptLevel)){
-//            criteria.andEqualTo("gaOwnerDept4",deptId);
-//        }
+        if ("2".equals(deptLevel)){
+            criteria.andEqualTo("gaOwnerDept2",deptId);
+        }else if ("3".equals(deptLevel)){
+            criteria.andEqualTo("gaOwnerDept3",deptId);
+        }else if ("4".equals(deptLevel)){
+            criteria.andEqualTo("gaOwnerDept4",deptId);
+        }
 
         return pcYjwtMapper.selectCountByExample(example);
     }
@@ -161,13 +160,13 @@ public class PcYjwtServiceImpl implements PcYjwtService {
         if (StringUtils.hasText(wtwd1)){
             criteria.andLike("wtwd1","%"+wtwd1.trim()+"%");
         }
-//        if ("2".equals(deptLevel)){
-//            criteria.andEqualTo("gaOwnerDept2",deptId);
-//        }else if ("3".equals(deptLevel)){
-//            criteria.andEqualTo("gaOwnerDept3",deptId);
-//        }else if ("4".equals(deptLevel)){
-//            criteria.andEqualTo("gaOwnerDept4",deptId);
-//        }
+        if ("2".equals(deptLevel)){
+            criteria.andEqualTo("gaOwnerDept2",deptId);
+        }else if ("3".equals(deptLevel)){
+            criteria.andEqualTo("gaOwnerDept3",deptId);
+        }else if ("4".equals(deptLevel)){
+            criteria.andEqualTo("gaOwnerDept4",deptId);
+        }
 
         return pcYjwtMapper.selectCountByExample(example);
     }
