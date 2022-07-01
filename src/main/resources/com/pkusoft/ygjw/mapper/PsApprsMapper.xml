@@ -26,11 +26,11 @@
             <result column="MODER_ID" jdbcType="VARCHAR" property="moderId"/>
             <result column="MODER_NAME" jdbcType="VARCHAR" property="moderName"/>
             <result column="MODER_TIME" jdbcType="DATE" property="moderTime"/>
-            <result column="OWN_ORG_1" jdbcType="VARCHAR" property="ownOrg1"/>
-            <result column="OWN_ORG_2" jdbcType="VARCHAR" property="ownOrg2"/>
-            <result column="OWN_ORG_3" jdbcType="VARCHAR" property="ownOrg3"/>
-            <result column="OWN_ORG_4" jdbcType="VARCHAR" property="ownOrg4"/>
-            <result column="OWN_ORG_5" jdbcType="VARCHAR" property="ownOrg5"/>
+            <result column="GA_OWNER_DEPT_1" jdbcType="VARCHAR" property="gaOwnerDept1"/>
+            <result column="GA_OWNER_DEPT_2" jdbcType="VARCHAR" property="gaOwnerDept2"/>
+            <result column="GA_OWNER_DEPT_3" jdbcType="VARCHAR" property="gaOwnerDept3"/>
+            <result column="GA_OWNER_DEPT_4" jdbcType="VARCHAR" property="gaOwnerDept4"/>
+            <result column="GA_OWNER_DEPT_5" jdbcType="VARCHAR" property="gaOwnerDept5"/>
             <result column="RESERVE1" jdbcType="VARCHAR" property="reserve1"/>
             <result column="RESERVE2" jdbcType="VARCHAR" property="reserve2"/>
 
