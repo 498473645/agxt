@@ -72,19 +72,19 @@ public class PiFaceMatchServiceImpl implements PiFaceMatchService {
         piFaceMatch.setOrgName(map.get("deptName"));
         if (sysDataOwnerDept != null) {
             if (StringUtils.hasText(sysDataOwnerDept.getOwnerDept1())) {
-                piFaceMatch.setOwnerDept1(sysDataOwnerDept.getOwnerDept1());
+                piFaceMatch.setGaOwnerDept1(sysDataOwnerDept.getOwnerDept1());
             }
             if (StringUtils.hasText(sysDataOwnerDept.getOwnerDept2())) {
-                piFaceMatch.setOwnerDept2(sysDataOwnerDept.getOwnerDept2());
+                piFaceMatch.setGaOwnerDept2(sysDataOwnerDept.getOwnerDept2());
             }
             if (StringUtils.hasText(sysDataOwnerDept.getOwnerDept3())) {
-                piFaceMatch.setOwnerDept3(sysDataOwnerDept.getOwnerDept3());
+                piFaceMatch.setGaOwnerDept3(sysDataOwnerDept.getOwnerDept3());
             }
             if (StringUtils.hasText(sysDataOwnerDept.getOwnerDept4())) {
-                piFaceMatch.setOwnerDept4(sysDataOwnerDept.getOwnerDept4());
+                piFaceMatch.setGaOwnerDept4(sysDataOwnerDept.getOwnerDept4());
             }
             if (StringUtils.hasText(sysDataOwnerDept.getOwnerDept5())) {
-                piFaceMatch.setOwnerDept5(sysDataOwnerDept.getOwnerDept5());
+                piFaceMatch.setGaOwnerDept5(sysDataOwnerDept.getOwnerDept5());
             }
         }
         int num = piFaceMatchMapper.insertSelective(piFaceMatch);

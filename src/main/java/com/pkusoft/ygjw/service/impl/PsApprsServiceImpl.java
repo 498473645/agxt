@@ -129,11 +129,11 @@ public class PsApprsServiceImpl implements PsApprsService {
 
         SysDataOwnerDept sysDataOwnerDept = sysDataOwnerDeptService.selectByDeptId(psApprs.getOrgCode());
         if (sysDataOwnerDept != null) {
-            psApprs.setOwnOrg1(sysDataOwnerDept.getOwnerDept1());
-            psApprs.setOwnOrg2(sysDataOwnerDept.getOwnerDept2());
-            psApprs.setOwnOrg3(sysDataOwnerDept.getOwnerDept3());
-            psApprs.setOwnOrg4(sysDataOwnerDept.getOwnerDept4());
-            psApprs.setOwnOrg5(sysDataOwnerDept.getOwnerDept5());
+            psApprs.setGaOwnerDept1(sysDataOwnerDept.getOwnerDept1());
+            psApprs.setGaOwnerDept2(sysDataOwnerDept.getOwnerDept2());
+            psApprs.setGaOwnerDept3(sysDataOwnerDept.getOwnerDept3());
+            psApprs.setGaOwnerDept4(sysDataOwnerDept.getOwnerDept4());
+            psApprs.setGaOwnerDept5(sysDataOwnerDept.getOwnerDept5());
         }
         int num = psApprsMapper.insertSelective(psApprs);
         return num;
@@ -165,11 +165,11 @@ public class PsApprsServiceImpl implements PsApprsService {
         if (psTrans!=null){
             psApprs.setOrgCode(psTrans.getOrgCode());
             psApprs.setOrgName(psTrans.getOrgName());
-            psApprs.setOwnOrg1(psTrans.getOwnOrg1());
-            psApprs.setOwnOrg2(psTrans.getOwnOrg2());
-            psApprs.setOwnOrg3(psTrans.getOwnOrg3());
-            psApprs.setOwnOrg4(psTrans.getOwnOrg4());
-            psApprs.setOwnOrg5(psTrans.getOwnOrg5());
+            psApprs.setGaOwnerDept1(psTrans.getGaOwnerDept1());
+            psApprs.setGaOwnerDept2(psTrans.getGaOwnerDept2());
+            psApprs.setGaOwnerDept3(psTrans.getGaOwnerDept3());
+            psApprs.setGaOwnerDept4(psTrans.getGaOwnerDept4());
+            psApprs.setGaOwnerDept5(psTrans.getGaOwnerDept5());
             psApprs.setDataType(psTrans.getDataType());
             psApprs.setType(psTrans.getType());
             psApprs.setName(psTrans.getName());

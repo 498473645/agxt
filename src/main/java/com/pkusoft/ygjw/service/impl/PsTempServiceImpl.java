@@ -80,11 +80,11 @@ public class PsTempServiceImpl implements PsTempService {
         if (sysDataOwnerDept != null) {
             psTemp.setOrgCode(map.get("deptId"));
             psTemp.setOrgName(map.get("deptName"));
-            psTemp.setOwnOrg1(sysDataOwnerDept.getOwnerDept1());
-            psTemp.setOwnOrg2(sysDataOwnerDept.getOwnerDept2());
-            psTemp.setOwnOrg3(sysDataOwnerDept.getOwnerDept3());
-            psTemp.setOwnOrg4(sysDataOwnerDept.getOwnerDept4());
-            psTemp.setOwnOrg5(sysDataOwnerDept.getOwnerDept5());
+            psTemp.setGaOwnerDept1(sysDataOwnerDept.getOwnerDept1());
+            psTemp.setGaOwnerDept2(sysDataOwnerDept.getOwnerDept2());
+            psTemp.setGaOwnerDept3(sysDataOwnerDept.getOwnerDept3());
+            psTemp.setGaOwnerDept4(sysDataOwnerDept.getOwnerDept4());
+            psTemp.setGaOwnerDept5(sysDataOwnerDept.getOwnerDept5());
         }
         int num = psTempMapper.insertSelective(psTemp);
         return num;

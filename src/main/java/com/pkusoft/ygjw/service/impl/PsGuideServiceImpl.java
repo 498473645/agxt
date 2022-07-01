@@ -83,11 +83,11 @@ public class PsGuideServiceImpl implements PsGuideService {
         if (bdEquipment != null) {
             psGuide.setOrgCode(bdEquipment.getOrgCode());
             psGuide.setOrgName(bdEquipment.getOrgName());
-            psGuide.setOwnOrg1(bdEquipment.getGaOwnerDept1());
-            psGuide.setOwnOrg2(bdEquipment.getGaOwnerDept2());
-            psGuide.setOwnOrg3(bdEquipment.getGaOwnerDept3());
-            psGuide.setOwnOrg4(bdEquipment.getGaOwnerDept4());
-            psGuide.setOwnOrg5(bdEquipment.getGaOwnerDept5());
+            psGuide.setGaOwnerDept1(bdEquipment.getGaOwnerDept1());
+            psGuide.setGaOwnerDept2(bdEquipment.getGaOwnerDept2());
+            psGuide.setGaOwnerDept3(bdEquipment.getGaOwnerDept3());
+            psGuide.setGaOwnerDept4(bdEquipment.getGaOwnerDept4());
+            psGuide.setGaOwnerDept5(bdEquipment.getGaOwnerDept5());
         }
         int num = psGuideMapper.insertSelective(psGuide);
         return num;

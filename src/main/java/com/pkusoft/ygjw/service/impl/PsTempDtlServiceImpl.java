@@ -95,19 +95,19 @@ public class PsTempDtlServiceImpl implements PsTempDtlService {
         SysDataOwnerDept sysDataOwnerDept = sysDataOwnerDeptService.selectByDeptId(map.get("deptId"));
         if (sysDataOwnerDept != null) {
             if (org.springframework.util.StringUtils.hasText(sysDataOwnerDept.getOwnerDept1())) {
-                psTempDtl.setOwnOrg1(sysDataOwnerDept.getOwnerDept1());
+                psTempDtl.setGaOwnerDept1(sysDataOwnerDept.getOwnerDept1());
             }
             if (org.springframework.util.StringUtils.hasText(sysDataOwnerDept.getOwnerDept2())) {
-                psTempDtl.setOwnOrg2(sysDataOwnerDept.getOwnerDept2());
+                psTempDtl.setGaOwnerDept2(sysDataOwnerDept.getOwnerDept2());
             }
             if (org.springframework.util.StringUtils.hasText(sysDataOwnerDept.getOwnerDept3())) {
-                psTempDtl.setOwnOrg3(sysDataOwnerDept.getOwnerDept3());
+                psTempDtl.setGaOwnerDept3(sysDataOwnerDept.getOwnerDept3());
             }
             if (org.springframework.util.StringUtils.hasText(sysDataOwnerDept.getOwnerDept4())) {
-                psTempDtl.setOwnOrg4(sysDataOwnerDept.getOwnerDept4());
+                psTempDtl.setGaOwnerDept4(sysDataOwnerDept.getOwnerDept4());
             }
             if (org.springframework.util.StringUtils.hasText(sysDataOwnerDept.getOwnerDept5())) {
-                psTempDtl.setOwnOrg5(sysDataOwnerDept.getOwnerDept5());
+                psTempDtl.setGaOwnerDept5(sysDataOwnerDept.getOwnerDept5());
             }
         }
         int num = psTempDtlMapper.insertSelective(psTempDtl);

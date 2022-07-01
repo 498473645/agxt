@@ -43,7 +43,7 @@ public class BdParamServiceImpl implements BdParamService {
         example.setOrderByClause("CREATE_TIME DESC");
         //The query conditions are edited here
         this.setCommonCondition(criteria,bdParam);
-        sysPermitService.setUserDataPermits_2(criteria, map, PermitType.PERMITTYPE_100002);
+        sysPermitService.setUserDataPermitsBabs(criteria, map, PermitType.PERMITTYPE_100002);
         return bdParamMapper.selectByExampleAndRowBounds(example,rowBounds);
     }
 
@@ -53,7 +53,7 @@ public class BdParamServiceImpl implements BdParamService {
         Example.Criteria criteria = example.createCriteria();
         //The query conditions are edited here
         this.setCommonCondition(criteria,bdParam);
-        sysPermitService.setUserDataPermits_2(criteria, map, PermitType.PERMITTYPE_100002);
+        sysPermitService.setUserDataPermitsBabs(criteria, map, PermitType.PERMITTYPE_100002);
         return bdParamMapper.selectCountByExample(example);
     }
 

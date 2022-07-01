@@ -121,11 +121,11 @@ public class PsTransServiceImpl implements PsTransService {
         psTrans.setRepTime(date);
         SysDataOwnerDept sysDataOwnerDept = sysDataOwnerDeptService.selectByDeptId(psTrans.getOrgCode());
         if (sysDataOwnerDept != null) {
-            psTrans.setOwnOrg1(sysDataOwnerDept.getOwnerDept1());
-            psTrans.setOwnOrg2(sysDataOwnerDept.getOwnerDept2());
-            psTrans.setOwnOrg3(sysDataOwnerDept.getOwnerDept3());
-            psTrans.setOwnOrg4(sysDataOwnerDept.getOwnerDept4());
-            psTrans.setOwnOrg5(sysDataOwnerDept.getOwnerDept5());
+            psTrans.setGaOwnerDept1(sysDataOwnerDept.getOwnerDept1());
+            psTrans.setGaOwnerDept2(sysDataOwnerDept.getOwnerDept2());
+            psTrans.setGaOwnerDept3(sysDataOwnerDept.getOwnerDept3());
+            psTrans.setGaOwnerDept4(sysDataOwnerDept.getOwnerDept4());
+            psTrans.setGaOwnerDept5(sysDataOwnerDept.getOwnerDept5());
         }
         if (!StringUtils.hasText(psTrans.getCode())){
             psTrans.setCode(this.generateJjdbh(psTrans.getOrgCode()));

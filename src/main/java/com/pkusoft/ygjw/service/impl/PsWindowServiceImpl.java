@@ -101,19 +101,19 @@ public class PsWindowServiceImpl implements PsWindowService {
             psWindow.setOrgCode(bdHandlingArea.getOrgCode());
             psWindow.setOrgName(bdHandlingArea.getOrgName());
             if (StringUtils.hasText(bdHandlingArea.getGaOwnerDept1())) {
-                psWindow.setOwnOrg1(bdHandlingArea.getGaOwnerDept1());
+                psWindow.setGaOwnerDept1(bdHandlingArea.getGaOwnerDept1());
             }
             if (StringUtils.hasText(bdHandlingArea.getGaOwnerDept2())) {
-                psWindow.setOwnOrg2(bdHandlingArea.getGaOwnerDept2());
+                psWindow.setGaOwnerDept2(bdHandlingArea.getGaOwnerDept2());
             }
             if (StringUtils.hasText(bdHandlingArea.getGaOwnerDept3())) {
-                psWindow.setOwnOrg3(bdHandlingArea.getGaOwnerDept3());
+                psWindow.setGaOwnerDept3(bdHandlingArea.getGaOwnerDept3());
             }
             if (StringUtils.hasText(bdHandlingArea.getGaOwnerDept4())) {
-                psWindow.setOwnOrg4(bdHandlingArea.getGaOwnerDept4());
+                psWindow.setGaOwnerDept4(bdHandlingArea.getGaOwnerDept4());
             }
             if (StringUtils.hasText(bdHandlingArea.getGaOwnerDept5())) {
-                psWindow.setOwnOrg5(bdHandlingArea.getGaOwnerDept5());
+                psWindow.setGaOwnerDept5(bdHandlingArea.getGaOwnerDept5());
             }
         }
         int num = psWindowMapper.insertSelective(psWindow);

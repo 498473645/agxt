@@ -33,13 +33,4 @@ public interface SysPermitService {
 	 */
 	String getUserPermitValue(String userId, String permitType);
 
-
-	/**
-	 * 权限控制
-	 * @param criteria    	查询条件
-	 * @param sysUser		用户信息
-	 * @param permitsType 	权限类型
-	 */
-	void setUserDataPermits_2(Example.Criteria criteria, Map<String, String> sysUser, String permitsType);
-
 }

@@ -105,20 +105,20 @@ public class PiFaceMatch {
     @Column(name = "MODER_TIME")
     private Date moderTime;     //最后修改时间
 
-    @Column(name = "OWNER_DEPT_1")
-    private String ownerDept1;     //公安一级归属单位 
+    @Column(name = "GA_OWNER_DEPT_1")
+    private String gaOwnerDept1;     //公安一级归属单位
 
-    @Column(name = "OWNER_DEPT_2")
-    private String ownerDept2;     //公安二级归属单位
+    @Column(name = "GA_OWNER_DEPT_2")
+    private String gaOwnerDept2;     //公安二级归属单位
 
-    @Column(name = "OWNER_DEPT_3")
-    private String ownerDept3;     //公安三级归属单位
+    @Column(name = "GA_OWNER_DEPT_3")
+    private String gaOwnerDept3;     //公安三级归属单位
 
-    @Column(name = "OWNER_DEPT_4")
-    private String ownerDept4;     //公安四级归属单位
+    @Column(name = "GA_OWNER_DEPT_4")
+    private String gaOwnerDept4;     //公安四级归属单位
 
-    @Column(name = "OWNER_DEPT_5")
-    private String ownerDept5;     //公安五级归属单位
+    @Column(name = "GA_OWNER_DEPT_5")
+    private String gaOwnerDept5;     //公安五级归属单位
 
     @Column(name = "RESERVE1")
     private String reserve1;     //预留字段1
@@ -642,84 +642,44 @@ public class PiFaceMatch {
         this.moderTime = moderTime;
     }
 
-    /**
-    * 获得公安一级归属单位 
-    * @return OWNER_DEPT_1
-    */
-    public String getOwnerDept1() {
-        return this.ownerDept1;
+    public String getGaOwnerDept1() {
+        return gaOwnerDept1;
     }
 
-    /**
-    * 设置公安一级归属单位 
-    * @param ownerDept1
-    */
-    public void setOwnerDept1(String ownerDept1) {
-        this.ownerDept1 = ownerDept1;
+    public void setGaOwnerDept1(String gaOwnerDept1) {
+        this.gaOwnerDept1 = gaOwnerDept1;
     }
 
-    /**
-    * 获得公安二级归属单位
-    * @return OWNER_DEPT_2
-    */
-    public String getOwnerDept2() {
-        return this.ownerDept2;
+    public String getGaOwnerDept2() {
+        return gaOwnerDept2;
     }
 
-    /**
-    * 设置公安二级归属单位
-    * @param ownerDept2
-    */
-    public void setOwnerDept2(String ownerDept2) {
-        this.ownerDept2 = ownerDept2;
+    public void setGaOwnerDept2(String gaOwnerDept2) {
+        this.gaOwnerDept2 = gaOwnerDept2;
     }
 
-    /**
-    * 获得公安三级归属单位
-    * @return OWNER_DEPT_3
-    */
-    public String getOwnerDept3() {
-        return this.ownerDept3;
+    public String getGaOwnerDept3() {
+        return gaOwnerDept3;
     }
 
-    /**
-    * 设置公安三级归属单位
-    * @param ownerDept3
-    */
-    public void setOwnerDept3(String ownerDept3) {
-        this.ownerDept3 = ownerDept3;
+    public void setGaOwnerDept3(String gaOwnerDept3) {
+        this.gaOwnerDept3 = gaOwnerDept3;
     }
 
-    /**
-    * 获得公安四级归属单位
-    * @return OWNER_DEPT_4
-    */
-    public String getOwnerDept4() {
-        return this.ownerDept4;
+    public String getGaOwnerDept4() {
+        return gaOwnerDept4;
     }
 
-    /**
-    * 设置公安四级归属单位
-    * @param ownerDept4
-    */
-    public void setOwnerDept4(String ownerDept4) {
-        this.ownerDept4 = ownerDept4;
+    public void setGaOwnerDept4(String gaOwnerDept4) {
+        this.gaOwnerDept4 = gaOwnerDept4;
     }
 
-    /**
-    * 获得公安五级归属单位
-    * @return OWNER_DEPT_5
-    */
-    public String getOwnerDept5() {
-        return this.ownerDept5;
+    public String getGaOwnerDept5() {
+        return gaOwnerDept5;
     }
 
-    /**
-    * 设置公安五级归属单位
-    * @param ownerDept5
-    */
-    public void setOwnerDept5(String ownerDept5) {
-        this.ownerDept5 = ownerDept5;
+    public void setGaOwnerDept5(String gaOwnerDept5) {
+        this.gaOwnerDept5 = gaOwnerDept5;
     }
 
     /**

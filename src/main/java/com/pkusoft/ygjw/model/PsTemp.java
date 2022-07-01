@@ -7,8 +7,8 @@ import io.swagger.annotations.ApiModelProperty;
 import javax.persistence.*;
 
 /**
- * @author 
- * @title: PsTemp 
+ * @author
+ * @title: PsTemp
  */
 @ApiModel("材料模板表")
 @Table(name = "PS_TEMP")
@@ -20,14 +20,14 @@ public class PsTemp {
     @Id
     @Column(name = "ID")
     @ApiModelProperty(value = "主键ID")
-    private String id; 
+    private String id;
 
  	/**
      * 材料编号
      */
     @Column(name = "CODE")
     @ApiModelProperty(value = "材料编号")
-    private String code; 
+    private String code;
 
  	/**
      * 材料名称
@@ -48,14 +48,14 @@ public class PsTemp {
      */
     @Column(name = "SN")
     @ApiModelProperty(value = "排序序号")
-    private Integer sn; 
+    private Integer sn;
 
  	/**
      * 状态（1010：登记中，1020：登记完）
      */
     @Column(name = "STATUS")
     @ApiModelProperty(value = "状态（1010：登记中，1020：登记完）")
-    private String status; 
+    private String status;
 
  	/**
      * 备注
@@ -83,91 +83,70 @@ public class PsTemp {
      */
     @Column(name = "CREATE_ID")
     @ApiModelProperty(value = "创建者ID")
-    private String createId; 
+    private String createId;
 
  	/**
      * 创建者名称
      */
     @Column(name = "CREATE_NAME")
     @ApiModelProperty(value = "创建者名称")
-    private String createName; 
+    private String createName;
 
  	/**
-     * 
+     *
      */
     @Column(name = "CREATE_TIME")
     @ApiModelProperty(value = "")
-    private java.util.Date createTime; 
+    private java.util.Date createTime;
 
  	/**
      * 最后修改者ID
      */
     @Column(name = "MODER_ID")
     @ApiModelProperty(value = "最后修改者ID")
-    private String moderId; 
+    private String moderId;
 
  	/**
      * 最后修改者名称
      */
     @Column(name = "MODER_NAME")
     @ApiModelProperty(value = "最后修改者名称")
-    private String moderName; 
+    private String moderName;
 
  	/**
      * 最后修改时间
      */
     @Column(name = "MODER_TIME")
     @ApiModelProperty(value = "最后修改时间")
-    private java.util.Date moderTime; 
+    private java.util.Date moderTime;
 
- 	/**
-     * 公安一级归属单位
-     */
-    @Column(name = "OWN_ORG_1")
-    @ApiModelProperty(value = "公安一级归属单位")
-    private String ownOrg1; 
+    @Column(name = "GA_OWNER_DEPT_1")
+    private String gaOwnerDept1;     //公安一级归属单位
 
- 	/**
-     * 公安二级归属单位
-     */
-    @Column(name = "OWN_ORG_2")
-    @ApiModelProperty(value = "公安二级归属单位")
-    private String ownOrg2; 
+    @Column(name = "GA_OWNER_DEPT_2")
+    private String gaOwnerDept2;     //公安二级归属单位
 
- 	/**
-     * 公安三级归属单位
-     */
-    @Column(name = "OWN_ORG_3")
-    @ApiModelProperty(value = "公安三级归属单位")
-    private String ownOrg3; 
+    @Column(name = "GA_OWNER_DEPT_3")
+    private String gaOwnerDept3;     //公安三级归属单位
 
- 	/**
-     * 公安四级归属单位
-     */
-    @Column(name = "OWN_ORG_4")
-    @ApiModelProperty(value = "公安四级归属单位")
-    private String ownOrg4; 
+    @Column(name = "GA_OWNER_DEPT_4")
+    private String gaOwnerDept4;     //公安四级归属单位
 
- 	/**
-     * 公安五级归属单位
-     */
-    @Column(name = "OWN_ORG_5")
-    @ApiModelProperty(value = "公安五级归属单位")
-    private String ownOrg5; 
-
+    @Column(name = "GA_OWNER_DEPT_5")
+    private String gaOwnerDept5;     //公安五级归属单位
  	/**
      * 预留字段1
      */
     @Column(name = "RESERVE1")
     @ApiModelProperty(value = "预留字段1")
-    private String reserve1; 
+    private String reserve1;
 
  	/**
      * 预留字段2
      */
     @Column(name = "RESERVE2")
     @ApiModelProperty(value = "预留字段2")
-    private String reserve2; 
+    private String reserve2;
 
 
     /**
@@ -362,84 +341,44 @@ public class PsTemp {
         this.moderTime = moderTime;
     }
 
-    /**
-    * 获得公安一级归属单位
-    * @return OWN_ORG_1
-    */
-    public String getOwnOrg1() {
-        return this.ownOrg1;
+    public String getGaOwnerDept1() {
+        return gaOwnerDept1;
     }
 
-    /**
-    * 设置公安一级归属单位
-    * @param ownOrg1
-    */
-    public void setOwnOrg1(String ownOrg1) {
-        this.ownOrg1 = ownOrg1;
+    public void setGaOwnerDept1(String gaOwnerDept1) {
+        this.gaOwnerDept1 = gaOwnerDept1;
     }
 
-    /**
-    * 获得公安二级归属单位
-    * @return OWN_ORG_2
-    */
-    public String getOwnOrg2() {
-        return this.ownOrg2;
+    public String getGaOwnerDept2() {
+        return gaOwnerDept2;
     }
 
-    /**
-    * 设置公安二级归属单位
-    * @param ownOrg2
-    */
-    public void setOwnOrg2(String ownOrg2) {
-        this.ownOrg2 = ownOrg2;
+    public void setGaOwnerDept2(String gaOwnerDept2) {
+        this.gaOwnerDept2 = gaOwnerDept2;
     }
 
-    /**
-    * 获得公安三级归属单位
-    * @return OWN_ORG_3
-    */
-    public String getOwnOrg3() {
-        return this.ownOrg3;
+    public String getGaOwnerDept3() {
+        return gaOwnerDept3;
     }
 
-    /**
-    * 设置公安三级归属单位
-    * @param ownOrg3
-    */
-    public void setOwnOrg3(String ownOrg3) {
-        this.ownOrg3 = ownOrg3;
+    public void setGaOwnerDept3(String gaOwnerDept3) {
+        this.gaOwnerDept3 = gaOwnerDept3;
     }
 
-    /**
-    * 获得公安四级归属单位
-    * @return OWN_ORG_4
-    */
-    public String getOwnOrg4() {
-        return this.ownOrg4;
+    public String getGaOwnerDept4() {
+        return gaOwnerDept4;
     }
 
-    /**
-    * 设置公安四级归属单位
-    * @param ownOrg4
-    */
-    public void setOwnOrg4(String ownOrg4) {
-        this.ownOrg4 = ownOrg4;
+    public void setGaOwnerDept4(String gaOwnerDept4) {
+        this.gaOwnerDept4 = gaOwnerDept4;
     }
 
-    /**
-    * 获得公安五级归属单位
-    * @return OWN_ORG_5
-    */
-    public String getOwnOrg5() {
-        return this.ownOrg5;
+    public String getGaOwnerDept5() {
+        return gaOwnerDept5;
     }
 
-    /**
-    * 设置公安五级归属单位
-    * @param ownOrg5
-    */
-    public void setOwnOrg5(String ownOrg5) {
-        this.ownOrg5 = ownOrg5;
+    public void setGaOwnerDept5(String gaOwnerDept5) {
+        this.gaOwnerDept5 = gaOwnerDept5;
     }
 
     /**
