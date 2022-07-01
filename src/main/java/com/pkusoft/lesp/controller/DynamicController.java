@@ -117,14 +117,6 @@ public class DynamicController {
     public ResponseData<List<RsJbjJgxtDynamic>> getDynamicData(@RequestBody Map<String,String> map, HttpServletRequest request){
         ResponseDto<List<RsJbjJgxtDynamic>> dto = new ResponseDto<List<RsJbjJgxtDynamic>>();
         try{
-            String deptId = map.get("deptId");
-            String deptLevel = map.get("deptLevel");// 2-市局，3-分局，4-派出所
-            if (!StringUtils.hasText(deptId)){
-                return new ResponseData<>(ResponseData.STATUS_CODE_PARAM,"单位不能为空");
-            }
-            if (!StringUtils.hasText(deptLevel)){
-                return new ResponseData<>(ResponseData.STATUS_CODE_PARAM,"单位级别不能为空");
-            }
             Map<String, String> userInfo = userCenterProxyHelper.getUser(request);
 
             List<RsJbjJgxtDynamic> data = rsJbjJgxtDynamicService.getDynamicData(map, userInfo);
