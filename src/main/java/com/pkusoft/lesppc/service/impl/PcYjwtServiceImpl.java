@@ -160,6 +160,7 @@ public class PcYjwtServiceImpl implements PcYjwtService {
         Example example = new Example(PcYjwt.class);
         Example.Criteria criteria = example.createCriteria();
         criteria.andEqualTo("wtmxBh",wtmxBh);
+        criteria.andEqualTo("wtzt","1");
         if (StringUtils.hasText(wtwd1)){
             criteria.andLike("wtwd1","%"+wtwd1.trim()+"%");
         }
