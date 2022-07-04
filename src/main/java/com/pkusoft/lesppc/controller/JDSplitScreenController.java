@@ -80,6 +80,7 @@ public class JDSplitScreenController {
             String deptLevel = map.get("deptLevel");
             String wtwd1 = map.get("ybabh");
             String wtlyBh = map.get("wtlyBh");
+            String lx = map.get("lx");
             if (!StringUtils.hasText(deptId)){
                 return new ResponseData<>(ResponseData.STATUS_CODE_PARAM,"单位不能为空");
             }
@@ -89,7 +90,7 @@ public class JDSplitScreenController {
             if (!StringUtils.hasText(wtlyBh)){
                 return new ResponseData<>(ResponseData.STATUS_CODE_PARAM, "请配置接报警问题领域编号");
             }
-            Map<String,Object> ret = pcWtmxService.getJbjWtmxAndCount(deptId,deptLevel,wtlyBh,wtwd1);
+            Map<String,Object> ret = pcWtmxService.getJbjWtmxAndCount(deptId,deptLevel,wtlyBh,wtwd1,lx);
             return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS, "成功",ret);
         } catch (Exception e) {
             logger.error("查询问题模型，并查询出总数出错；" + e.getMessage(), e);

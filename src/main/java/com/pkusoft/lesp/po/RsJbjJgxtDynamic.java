@@ -317,6 +317,18 @@ public class RsJbjJgxtDynamic {
     @ApiModelProperty(value = "案件类型")
     private String ajlx;
 
+    @Column(name = "YJJBM")
+    @ApiModelProperty(value = "预接警编码")
+    private String yjjbm;
+
+    public String getYjjbm() {
+        return yjjbm;
+    }
+
+    public void setYjjbm(String yjjbm) {
+        this.yjjbm = yjjbm;
+    }
+
     public String getAjlx() {
         return ajlx;
     }

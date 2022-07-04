@@ -42,12 +42,13 @@ public class PcWtmxServiceImpl implements PcWtmxService {
         return modelCount;
     }
 
-    public Map<String,Object> getJbjWtmxAndCount(String deptId,String deptLevel,String wtlyBh,String wtwd1) {
+    public Map<String,Object> getJbjWtmxAndCount(String deptId,String deptLevel,String wtlyBh,String wtwd1,String lx) {
         Map<String,Object> retMap = new HashMap<>();
         Example example = new Example(PcWtmx.class);
         example.setOrderByClause("XH ASC");
         Example.Criteria criteria = example.createCriteria();
         criteria.andEqualTo("wtlyBh",wtlyBh);
+        criteria.andEqualTo("lx",lx);
         List<PcWtmx> pcWtmxList = pcWtmxMapper.selectByExample(example);
         for (PcWtmx pcWtmx:pcWtmxList){
             int num = pcYjwtService.getYjxxListCount(deptId,deptLevel,wtwd1,pcWtmx.getWtmxBh());

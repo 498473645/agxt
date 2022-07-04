@@ -50,6 +50,9 @@ public class RsJbjJgxtDynamicServiceImpl implements RsJbjJgxtDynamicService {
         if (StringUtils.hasText(deptId)){
             criteria.andEqualTo("jjdw",deptId);
         }
+        if (StringUtils.hasText(map.get("yjjbm"))){
+            criteria.andEqualTo("yjjbm",map.get("yjjbm"));
+        }
         if (StringUtils.hasText(map.get("jqly"))){
             criteria.andEqualTo("jqly",map.get("jqly"));
         }
