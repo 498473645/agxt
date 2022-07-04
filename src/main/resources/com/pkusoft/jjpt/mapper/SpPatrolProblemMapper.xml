@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pkusoft.jjpt.mapper.SpPatrolProblemMapper">
+    <!-- @codeGenerate -->
+    <resultMap id="BaseResultMap" type="com.pkusoft.jjpt.po.SpPatrolProblem">
+            <id column="OBJID" jdbcType="VARCHAR" property="objid"/>
+            <result column="TITLE" jdbcType="VARCHAR" property="title"/>
+            <result column="RP_CODE" jdbcType="VARCHAR" property="rpCode"/>
+            <result column="RP_NAME" jdbcType="VARCHAR" property="rpName"/>
+            <result column="RP_ORG_CODE" jdbcType="VARCHAR" property="rpOrgCode"/>
+            <result column="RP_ORG_NAME" jdbcType="VARCHAR" property="rpOrgName"/>
+            <result column="IS_SYNC" jdbcType="VARCHAR" property="isSync"/>
+            <result column="SYNC_TIME" jdbcType="DATE" property="syncTime"/>
+            <result column="SAVE_PATH" jdbcType="VARCHAR" property="savePath"/>
+            <result column="ORG_CODE" jdbcType="VARCHAR" property="orgCode"/>
+            <result column="ORG_NAME" jdbcType="VARCHAR" property="orgName"/>
+            <result column="MEMO" jdbcType="VARCHAR" property="memo"/>
+            <result column="ROW_STATUS" jdbcType="VARCHAR" property="rowStatus"/>
+            <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+            <result column="CREATE_ID" jdbcType="VARCHAR" property="createId"/>
+            <result column="CREATE_NAME" jdbcType="VARCHAR" property="createName"/>
+            <result column="CREATE_TIME" jdbcType="DATE" property="createTime"/>
+            <result column="MODER_ID" jdbcType="VARCHAR" property="moderId"/>
+            <result column="MODER_NAME" jdbcType="VARCHAR" property="moderName"/>
+            <result column="MODER_TIME" jdbcType="DATE" property="moderTime"/>
+            <result column="GA_OWNER_DEPT_1" jdbcType="VARCHAR" property="gaOwnerDept1"/>
+            <result column="GA_OWNER_DEPT_2" jdbcType="VARCHAR" property="gaOwnerDept2"/>
+            <result column="GA_OWNER_DEPT_3" jdbcType="VARCHAR" property="gaOwnerDept3"/>
+            <result column="GA_OWNER_DEPT_4" jdbcType="VARCHAR" property="gaOwnerDept4"/>
+            <result column="GA_OWNER_DEPT_5" jdbcType="VARCHAR" property="gaOwnerDept5"/>
+            <result column="RESERVE1" jdbcType="VARCHAR" property="reserve1"/>
+            <result column="RESERVE2" jdbcType="VARCHAR" property="reserve2"/>
+            <result column="RESERVE3" jdbcType="VARCHAR" property="reserve3"/>
+
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        OBJID,TITLE,RP_CODE,RP_NAME,RP_ORG_CODE,RP_ORG_NAME,IS_SYNC,SYNC_TIME,SAVE_PATH,ORG_CODE,ORG_NAME,MEMO,ROW_STATUS,STATUS,CREATE_ID,CREATE_NAME,CREATE_TIME,MODER_ID,MODER_NAME,MODER_TIME,GA_OWNER_DEPT_1,GA_OWNER_DEPT_2,GA_OWNER_DEPT_3,GA_OWNER_DEPT_4,GA_OWNER_DEPT_5,RESERVE1,RESERVE2,RESERVE3
+    </sql>
+
+    <!-- user-defined -->
+
+</mapper>
