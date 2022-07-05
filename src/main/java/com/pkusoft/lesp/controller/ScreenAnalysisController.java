@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.support.commons.springmvc.ResponseData;
+import pkubatis.common.utils.DeptLevel;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -53,7 +54,8 @@ public class ScreenAnalysisController {
     public ResponseData<Map<String,Object>> getSmbaData(@RequestBody Map<String,String> map, HttpServletRequest request){
         try{
             String deptId = map.get("deptId");
-            String deptLevel = map.get("deptLevel");// 2-市局，3-分局，4-派出所
+            //String deptLevel = map.get("deptLevel");// 2-市局，3-分局，4-派出所
+            String deptLevel= DeptLevel.getDeptLevel(deptId);
             String dataType = map.get("dataType");//10-日，20-周，30-月，40-年
             String ly = map.get("ly");
             if (!StringUtils.hasText(deptId)){
@@ -87,7 +89,8 @@ public class ScreenAnalysisController {
     public ResponseData<Map<String,Object>> getYbafsdbData(@RequestBody Map<String,String> map, HttpServletRequest request){
         try{
             String deptId = map.get("deptId");
-            String deptLevel = map.get("deptLevel");// 2-市局，3-分局，4-派出所
+//            String deptLevel = map.get("deptLevel");// 2-市局，3-分局，4-派出所
+            String deptLevel= DeptLevel.getDeptLevel(deptId);
             String dataType = map.get("dataType");//10-日，20-周，30-月，40-年
             String ly = map.get("ly");
             if (!StringUtils.hasText(deptId)){
@@ -121,7 +124,8 @@ public class ScreenAnalysisController {
     public ResponseData<Map<String,Object>> getYbaclztfxData(@RequestBody Map<String,String> map, HttpServletRequest request){
         try{
             String deptId = map.get("deptId");
-            String deptLevel = map.get("deptLevel");// 2-市局，3-分局，4-派出所
+//            String deptLevel = map.get("deptLevel");// 2-市局，3-分局，4-派出所
+            String deptLevel= DeptLevel.getDeptLevel(deptId);
             String dataType = map.get("dataType");//10-日，20-周，30-月，40-年
             String ly = map.get("ly");
             if (!StringUtils.hasText(deptId)){
@@ -155,7 +159,8 @@ public class ScreenAnalysisController {
     public ResponseData<Map<String,Object>> getBalxData(@RequestBody Map<String,String> map, HttpServletRequest request){
         try{
             String deptId = map.get("deptId");
-            String deptLevel = map.get("deptLevel");// 2-市局，3-分局，4-派出所
+//            String deptLevel = map.get("deptLevel");// 2-市局，3-分局，4-派出所
+            String deptLevel= DeptLevel.getDeptLevel(deptId);
             String dataType = map.get("dataType");//10-日，20-周，30-月，40-年
             String ly = map.get("ly");
             if (!StringUtils.hasText(deptId)){
@@ -189,7 +194,8 @@ public class ScreenAnalysisController {
     public ResponseData<Map<String,Object>> getPyzbData(@RequestBody Map<String,String> map, HttpServletRequest request){
         try{
             String deptId = map.get("deptId");
-            String deptLevel = map.get("deptLevel");// 2-市局，3-分局，4-派出所
+//            String deptLevel = map.get("deptLevel");// 2-市局，3-分局，4-派出所
+            String deptLevel= DeptLevel.getDeptLevel(deptId);
             String dataType = map.get("dataType");//10-日，20-周，30-月，40-年
             if (!StringUtils.hasText(deptId)){
                 return new ResponseData<>(ResponseData.STATUS_CODE_PARAM,"单位不能为空");
@@ -219,7 +225,8 @@ public class ScreenAnalysisController {
     public ResponseData<Map<String,Object>> getPymydData(@RequestBody Map<String,String> map, HttpServletRequest request){
         try{
             String deptId = map.get("deptId");
-            String deptLevel = map.get("deptLevel");// 2-市局，3-分局，4-派出所
+//            String deptLevel = map.get("deptLevel");// 2-市局，3-分局，4-派出所
+            String deptLevel= DeptLevel.getDeptLevel(deptId);
             String dataType = map.get("dataType");//10-日，20-周，30-月，40-年
             if (!StringUtils.hasText(deptId)){
                 return new ResponseData<>(ResponseData.STATUS_CODE_PARAM,"单位不能为空");
@@ -249,7 +256,8 @@ public class ScreenAnalysisController {
     public ResponseData<List> getYbaclztfxDataByDept(@RequestBody Map<String,String> map, HttpServletRequest request){
         try{
             String deptId = map.get("deptId");
-            String deptLevel = map.get("deptLevel");// 2-市局，3-分局，4-派出所
+//            String deptLevel = map.get("deptLevel");// 2-市局，3-分局，4-派出所
+            String deptLevel= DeptLevel.getDeptLevel(deptId);
             String dataType = map.get("dataType");//10-日，20-周，30-月，40-年
             String ly = map.get("ly");
             if (!StringUtils.hasText(deptId)){

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.support.commons.springmvc.ResponseData;
 import pkubatis.common.base.ResponseDto;
+import pkubatis.common.utils.DeptLevel;
 import pkubatis.model.JsonResult;
 
 import javax.servlet.http.HttpServletRequest;
@@ -50,7 +51,8 @@ public class SuperviseController {
         try{
 //            Map<String, String> userInfo = userCenterProxyHelper.getUser(request);
             String deptId = map.get("deptId");
-            String deptLevel = map.get("deptLevel");// 2-市局，3-分局，4-派出所
+//            String deptLevel = map.get("deptLevel");// 2-市局，3-分局，4-派出所
+            String deptLevel= DeptLevel.getDeptLevel(deptId);
             if (!StringUtils.hasText(deptId)){
                 return new ResponseData<>(ResponseData.STATUS_CODE_PARAM,"单位不能为空");
             }
@@ -78,7 +80,9 @@ public class SuperviseController {
         ResponseDto<List<PcYjwt>> dto = new ResponseDto<List<PcYjwt>>();
         try{
             String deptId = map.get("deptId");
-            String deptLevel = map.get("deptLevel");
+//            String deptLevel = map.get("deptLevel");
+            String deptLevel= DeptLevel.getDeptLevel(deptId);
+            map.put("deptLevel",deptLevel);
             String wtmxBh = map.get("wtmxBh");
             if (!StringUtils.hasText(deptId)){
                 return new ResponseData<>(ResponseData.STATUS_CODE_PARAM,"单位不能为空");

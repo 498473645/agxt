@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.support.commons.springmvc.ResponseData;
+import pkubatis.common.utils.DeptLevel;
 
 import java.util.Map;
 
@@ -77,7 +78,8 @@ public class JDSplitScreenController {
     public ResponseData<Map<String,Object>> getJbjWtmxAndCount(@RequestBody(required = false) Map<String, String> map) {
         try {
             String deptId = map.get("deptId");
-            String deptLevel = map.get("deptLevel");
+//            String deptLevel = map.get("deptLevel");
+            String deptLevel= DeptLevel.getDeptLevel(deptId);
             String wtwd1 = map.get("ybabh");
             String wtlyBh = map.get("wtlyBh");
             String lx = map.get("lx");
