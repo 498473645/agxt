@@ -148,11 +148,16 @@ public class PatrolController {
                 String videoPa =serviceIp.replace("http", "rtmp")+"/rtp/"+ssrcs;
                 String dst_url = serviceIp.replace("http", "rtmp")+"/tp/"+ssrc;
                 String resultPath = serviceIp+"/tp/"+ssrc+".flv" ;
+
+
                 String key = InspectionService.addFFmpegSource(serviceIp, secret, videoPa, dst_url);
                 Map<String, String> map = new HashMap<String, String>();
                 map.put("ssrc", ssrc);
                 map.put("key", key);
                 map.put("videoPath",resultPath);
+//                jessibuca播放器
+//                String play_url = serviceIp  +"/rtp/"+ssrcs + ",flv";
+//                map.put("videoPath",play_url);
                 return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS,"通过设备id获取视屏播放参数成功",map);
             }
         } catch (Exception e) {

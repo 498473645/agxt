@@ -361,11 +361,11 @@ mybatis:
 
 
 # 服务端的登录页面。不设置，则不启用过滤器sso-cookie-authc-proxy
-shiro-proxy.sso-server-login-url: http://27.17.3.62:7100/user-center/biz/login/zfjd/login.html
+shiro-proxy.sso-server-login-url: http://27.17.3.62:20201/user-center/biz/login/babs/login.html
 # 服务端的注销地址。不设置，则不启用过滤器sso-logout-proxy
-shiro-proxy.sso-server-logout-url: http://27.17.3.62:7100/user-center/logout.do
+shiro-proxy.sso-server-logout-url: http://27.17.3.62:20201/user-center/logout.do
 # 服务端地址
-shiro-proxy.sso-server-url: http://27.17.3.62:7100/user-center
+shiro-proxy.sso-server-url: http://27.17.3.62:20201/user-center
 # （可选）成功页面。默认值：当前请求地址
 shiro-proxy.success-url: /swagger-ui.html
 

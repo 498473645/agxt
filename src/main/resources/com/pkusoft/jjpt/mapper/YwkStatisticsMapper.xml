@@ -36,13 +36,13 @@
 			AND EXTRACT(DAY FROM t.REP_TIME) = #{day,jdbcType=VARCHAR}
 		</if>
 		<if test="deptLevel != null and deptLevel != '' and deptLevel == '2'.toString()">
-			AND OWN_ORG_2 = #{deptId,jdbcType=VARCHAR}
+			AND GA_OWNER_DEPT_2 = #{deptId,jdbcType=VARCHAR}
 		</if>
 		<if test="deptLevel != null and deptLevel != '' and deptLevel == '3'.toString()">
-			AND OWN_ORG_3 = #{deptId,jdbcType=VARCHAR}
+			AND GA_OWNER_DEPT_3 = #{deptId,jdbcType=VARCHAR}
 		</if>
 		<if test="deptLevel != null and deptLevel != '' and deptLevel == '4'.toString()">
-			AND OWN_ORG_4 = #{deptId,jdbcType=VARCHAR}
+			AND GA_OWNER_DEPT_4 = #{deptId,jdbcType=VARCHAR}
 		</if>
 		<if test="ly != null and ly != ''">
 			AND LY = #{ly,jdbcType=VARCHAR}
@@ -62,13 +62,13 @@
 			AND EXTRACT(DAY FROM t.REP_TIME) = #{day,jdbcType=VARCHAR}
 		</if>
 		<if test="deptLevel != null and deptLevel != '' and deptLevel == '2'.toString()">
-			AND OWN_ORG_2 = #{deptId,jdbcType=VARCHAR}
+			AND GA_OWNER_DEPT_2 = #{deptId,jdbcType=VARCHAR}
 		</if>
 		<if test="deptLevel != null and deptLevel != '' and deptLevel == '3'.toString()">
-			AND OWN_ORG_3 = #{deptId,jdbcType=VARCHAR}
+			AND GA_OWNER_DEPT_3 = #{deptId,jdbcType=VARCHAR}
 		</if>
 		<if test="deptLevel != null and deptLevel != '' and deptLevel == '4'.toString()">
-			AND OWN_ORG_4 = #{deptId,jdbcType=VARCHAR}
+			AND GA_OWNER_DEPT_4 = #{deptId,jdbcType=VARCHAR}
 		</if>
 		<if test="ly != null and ly != ''">
 			AND LY = #{ly,jdbcType=VARCHAR}
@@ -89,13 +89,13 @@
 			AND EXTRACT(DAY FROM t.REP_TIME) = #{day,jdbcType=VARCHAR}
 		</if>
 		<if test="deptLevel != null and deptLevel != '' and deptLevel == '2'.toString()">
-			AND OWN_ORG_2 = #{deptId,jdbcType=VARCHAR}
+			AND GA_OWNER_DEPT_2 = #{deptId,jdbcType=VARCHAR}
 		</if>
 		<if test="deptLevel != null and deptLevel != '' and deptLevel == '3'.toString()">
-			AND OWN_ORG_3 = #{deptId,jdbcType=VARCHAR}
+			AND GA_OWNER_DEPT_3 = #{deptId,jdbcType=VARCHAR}
 		</if>
 		<if test="deptLevel != null and deptLevel != '' and deptLevel == '4'.toString()">
-			AND OWN_ORG_4 = #{deptId,jdbcType=VARCHAR}
+			AND GA_OWNER_DEPT_4 = #{deptId,jdbcType=VARCHAR}
 		</if>
 		<if test="ly != null and ly != ''">
 			AND LY = #{ly,jdbcType=VARCHAR}
@@ -116,13 +116,13 @@
 			AND EXTRACT(DAY FROM t.REP_TIME) = #{day,jdbcType=VARCHAR}
 		</if>
 		<if test="deptLevel != null and deptLevel != '' and deptLevel == '2'.toString()">
-			AND OWN_ORG_2 = #{deptId,jdbcType=VARCHAR}
+			AND GA_OWNER_DEPT_2 = #{deptId,jdbcType=VARCHAR}
 		</if>
 		<if test="deptLevel != null and deptLevel != '' and deptLevel == '3'.toString()">
-			AND OWN_ORG_3 = #{deptId,jdbcType=VARCHAR}
+			AND GA_OWNER_DEPT_3 = #{deptId,jdbcType=VARCHAR}
 		</if>
 		<if test="deptLevel != null and deptLevel != '' and deptLevel == '4'.toString()">
-			AND OWN_ORG_4 = #{deptId,jdbcType=VARCHAR}
+			AND GA_OWNER_DEPT_4 = #{deptId,jdbcType=VARCHAR}
 		</if>
 		<if test="ly != null and ly != ''">
 			AND LY = #{ly,jdbcType=VARCHAR}
@@ -163,13 +163,13 @@
 			AND EXTRACT(DAY FROM t.AP_TIME) = #{day,jdbcType=VARCHAR}
 		</if>
 		<if test="deptLevel != null and deptLevel != '' and deptLevel == '2'.toString()">
-			AND OWN_ORG_2 = #{deptId,jdbcType=VARCHAR}
+			AND GA_OWNER_DEPT_2 = #{deptId,jdbcType=VARCHAR}
 		</if>
 		<if test="deptLevel != null and deptLevel != '' and deptLevel == '3'.toString()">
-			AND OWN_ORG_3 = #{deptId,jdbcType=VARCHAR}
+			AND GA_OWNER_DEPT_3 = #{deptId,jdbcType=VARCHAR}
 		</if>
 		<if test="deptLevel != null and deptLevel != '' and deptLevel == '4'.toString()">
-			AND OWN_ORG_4 = #{deptId,jdbcType=VARCHAR}
+			AND GA_OWNER_DEPT_4 = #{deptId,jdbcType=VARCHAR}
 		</if>
 		GROUP BY t.STATUS
 	</select>
@@ -186,13 +186,13 @@
 			AND EXTRACT(DAY FROM t.AP_TIME) = #{day,jdbcType=VARCHAR}
 		</if>
 		<if test="deptLevel != null and deptLevel != '' and deptLevel == '2'.toString()">
-			AND OWN_ORG_2 = #{deptId,jdbcType=VARCHAR}
+			AND GA_OWNER_DEPT_2 = #{deptId,jdbcType=VARCHAR}
 		</if>
 		<if test="deptLevel != null and deptLevel != '' and deptLevel == '3'.toString()">
-			AND OWN_ORG_3 = #{deptId,jdbcType=VARCHAR}
+			AND GA_OWNER_DEPT_3 = #{deptId,jdbcType=VARCHAR}
 		</if>
 		<if test="deptLevel != null and deptLevel != '' and deptLevel == '4'.toString()">
-			AND OWN_ORG_4 = #{deptId,jdbcType=VARCHAR}
+			AND GA_OWNER_DEPT_4 = #{deptId,jdbcType=VARCHAR}
 		</if>
 		GROUP BY t.SCORE
 	</select>
