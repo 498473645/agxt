@@ -1,5 +1,7 @@
 package com.pkusoft.lesppc.service;
 
+import com.pkusoft.lesppc.model.PcBjwt;
+import com.pkusoft.lesppc.model.PcWtmx;
 import com.pkusoft.lesppc.req.*;
 
 import java.util.List;
@@ -65,4 +67,12 @@ public interface PcBjwtService {
      */
     List<WtLbVo> getWtList(Map<String, String> map);
 
+    /**
+     * 监控快照业务保存到问题子表
+     * @param pcBjwt
+     * @param wtmxbh
+     * @param user
+     * @return
+     */
+    int pcBjwtSave(PcBjwt pcBjwt, String wtmxbh,Map<String, String> user);
 }

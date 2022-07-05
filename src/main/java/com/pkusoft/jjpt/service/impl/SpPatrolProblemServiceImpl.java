@@ -49,8 +49,6 @@ public class SpPatrolProblemServiceImpl implements SpPatrolProblemService {
     }
 
     public int spPatrolProblemSave(SpPatrolProblem spPatrolProblem, Map<String,String> map){
-        String objid = UUID.randomUUID().toString();
-        spPatrolProblem.setObjid(objid);
         Date date = new Date();
         spPatrolProblem.setCreateName(map.get("userName"));
         spPatrolProblem.setCreateId(map.get("userId"));
