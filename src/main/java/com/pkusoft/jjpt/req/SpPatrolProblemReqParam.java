@@ -1,12 +1,12 @@
-package com.pkusoft.jjpt.po;
+package com.pkusoft.jjpt.req;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.springframework.format.annotation.DateTimeFormat;
+import pkubatis.common.base.Page;
 
-
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * @author
@@ -14,7 +14,7 @@ import javax.persistence.*;
  */
 @ApiModel("巡查问题信息表")
 @Table(name = "SP_PATROL_PROBLEM")
-public class SpPatrolProblem {
+public class SpPatrolProblemReqParam extends Page {
 
  	/**
      * 主键id
@@ -134,8 +134,6 @@ public class SpPatrolProblem {
      */
     @Column(name = "CREATE_TIME")
     @ApiModelProperty(value = "创建时间")
-    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss",timezone = "PRC")
     private java.util.Date createTime;
 
  	/**
@@ -215,6 +213,25 @@ public class SpPatrolProblem {
     @ApiModelProperty(value = "预留字段3")
     private String reserve3;
 
+    private String startCreateTime;
+
+    private String endCreateTime;
+
+    public String getStartCreateTime() {
+        return startCreateTime;
+    }
+
+    public void setStartCreateTime(String startCreateTime) {
+        this.startCreateTime = startCreateTime;
+    }
+
+    public String getEndCreateTime() {
+        return endCreateTime;
+    }
+
+    public void setEndCreateTime(String endCreateTime) {
+        this.endCreateTime = endCreateTime;
+    }
 
     /**
     * 获得主键id

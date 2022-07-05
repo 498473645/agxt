@@ -1,22 +1,23 @@
 package com.pkusoft.jjpt.service.impl;
 
+import com.pkusoft.jjpt.mapper.SpPatrolProblemMapper;
+import com.pkusoft.jjpt.po.SpPatrolProblem;
+import com.pkusoft.jjpt.req.SpPatrolProblemReqParam;
+import com.pkusoft.jjpt.service.SpPatrolProblemService;
+import com.pkusoft.lesp.until.PermitType;
+import com.pkusoft.usercenter.po.SysDataOwnerDept;
+import com.pkusoft.usercenter.service.SysDataOwnerDeptService;
+import com.pkusoft.usercenter.service.SysPermitService;
+import org.apache.ibatis.session.RowBounds;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
+import tk.mybatis.mapper.entity.Example;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
-
-import com.pkusoft.jjpt.mapper.SpPatrolProblemMapper;
-import com.pkusoft.jjpt.po.SpPatrolProblem;
-import com.pkusoft.jjpt.service.SpPatrolProblemService;
-import com.pkusoft.usercenter.po.SysDataOwnerDept;
-import com.pkusoft.usercenter.service.SysDataOwnerDeptService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
-import org.apache.ibatis.session.RowBounds;
-import org.springframework.util.StringUtils;
-import tk.mybatis.mapper.entity.Example;
 
 
 @Service
@@ -29,22 +30,33 @@ public class SpPatrolProblemServiceImpl implements SpPatrolProblemService {
     @Autowired
     private SysDataOwnerDeptService sysDataOwnerDeptService;
 
-    public List<SpPatrolProblem> getSpPatrolProblemList(Map<String, String> map) {
+    @Autowired
+    private SysPermitService sysPermitService;
 
-        RowBounds rowBounds = new RowBounds(Integer.parseInt(map.get("start")),Integer.parseInt(map.get("pageSize")));
+    public List<SpPatrolProblem> getSpPatrolProblemList(SpPatrolProblemReqParam spPatrolProblemReqParam, Map<String, String> map) {
+
+        RowBounds rowBounds = new RowBounds(spPatrolProblemReqParam.getStart(),spPatrolProblemReqParam.getPageSize());
         Example example = new Example(SpPatrolProblem.class);
         Example.Criteria criteria = example.createCriteria();
         //The query conditions are edited here
+        this.setCommonCondition(criteria,spPatrolProblemReqParam,map);
+        example.setOrderByClause("CREATE_TIME DESC");
+        sysPermitService.setUserDataPermitsBabs(criteria,map, PermitType.PERMIT_TYPE_BABS_QUERY);
+        if(0 == spPatrolProblemReqParam.getPageSize()){
+            return spPatrolProblemMapper.selectByExample(example);
+        }
 
         return spPatrolProblemMapper.selectByExampleAndRowBounds(example,rowBounds);
     }
 
-    public int getSpPatrolProblemCount(Map<String, String> map) {
+    public int getSpPatrolProblemCount(SpPatrolProblemReqParam spPatrolProblemReqParam, Map<String, String> map) {
 
         Example example = new Example(SpPatrolProblem.class);
         Example.Criteria criteria = example.createCriteria();
         //The query conditions are edited here
-
+        this.setCommonCondition(criteria,spPatrolProblemReqParam,map);
+        example.setOrderByClause("CREATE_TIME DESC");
+        sysPermitService.setUserDataPermitsBabs(criteria,map, PermitType.PERMIT_TYPE_BABS_QUERY);
         return spPatrolProblemMapper.selectCountByExample(example);
     }
 
@@ -98,5 +110,15 @@ public class SpPatrolProblemServiceImpl implements SpPatrolProblemService {
         int num = spPatrolProblemMapper.deleteByPrimaryKey(objid);
         return num;
     }
+
+    public void setCommonCondition(Example.Criteria criteria, SpPatrolProblemReqParam spPatrolProblemReqParam, Map<String, String> map){
+        if(StringUtils.hasText(spPatrolProblemReqParam.getTitle())){
+            criteria.andLike("title","%"  + spPatrolProblemReqParam.getTitle() + "%");
+        }
+        if( StringUtils.hasText(spPatrolProblemReqParam.getStartCreateTime()) && StringUtils.hasText(spPatrolProblemReqParam.getEndCreateTime()) ){
+            criteria.andCondition("CREATE_TIME between to_date('"+spPatrolProblemReqParam.getStartCreateTime()+"','yyyy-MM-dd hh24:mi:ss') and to_date('"+spPatrolProblemReqParam.getEndCreateTime()+"','yyyy-MM-dd hh24:mi:ss')");
+        }
+    }
+
 
 }

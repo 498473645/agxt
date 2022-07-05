@@ -1,6 +1,7 @@
 package com.pkusoft.jjpt.service;
 
 import com.pkusoft.jjpt.po.SpPatrolProblem;
+import com.pkusoft.jjpt.req.SpPatrolProblemReqParam;
 
 import java.util.List;
 import java.util.Map;
@@ -17,14 +18,14 @@ public interface SpPatrolProblemService {
     * @param map	查询条件集合
     * @return
     */
-    List<SpPatrolProblem> getSpPatrolProblemList(Map<String, String> map);
+    List<SpPatrolProblem> getSpPatrolProblemList(SpPatrolProblemReqParam spPatrolProblemReqParam, Map<String, String> map);
 
     /**
     * 查询巡查问题信息表总数
     * @param map	查询条件集合
     * @return
     */
-    int getSpPatrolProblemCount(Map<String, String> map);
+    int getSpPatrolProblemCount(SpPatrolProblemReqParam spPatrolProblemReqParam, Map<String, String> map);
 
     /**
     * 新增巡查问题信息表
