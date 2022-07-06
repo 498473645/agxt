@@ -67,6 +67,31 @@ public class SpJjxxController  {
     }
 
     /**
+     * 查询接警平台接警信息表
+     * @param request  txtQuery
+     * @return
+     */
+    @ApiOperation(value = "查询接警平台接警信息表", notes = "查询接警平台接警信息表", httpMethod = "POST")
+    @RequestMapping("/spJjxx/getSpJjxxData")
+    @ResponseBody
+    public ResponseData<SpJjxx> getSpJjxxData(HttpServletRequest request, @RequestBody SpJjxx spJjxx){
+        ResponseDto<SpJjxx> dto = new ResponseDto<SpJjxx>();
+        try{
+//            Map<String, String> user = userCenterProxyHelper.getUser(request);
+            SpJjxx result = spJjxxService.getSpJjxxData(spJjxx);
+
+            dto.setData(result);
+            dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
+            dto.setStatusMsg("查询接警平台接警信息表成功");
+            return dto;
+        }catch(Exception e){
+            logger.error("查询接警平台接警信息表错误",e);
+            e.printStackTrace();
+            return new ResponseData<>(ResponseData.STATUS_CODE_OTHER,"查询接警平台接警信息表错误"+e.getMessage());
+        }
+    }
+
+    /**
      * 查询最近受理任务
      * @param request  txtQuery
      * @return

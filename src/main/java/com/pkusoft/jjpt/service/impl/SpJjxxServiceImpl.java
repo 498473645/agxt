@@ -531,6 +531,11 @@ public class SpJjxxServiceImpl implements SpJjxxService {
         return spJjxxs;
     }
 
+    @Override
+    public SpJjxx getSpJjxxData(SpJjxx spJjxx) {
+        return spJjxxMapper.selectOne(spJjxx);
+    }
+
     public int spJjxxSave(SpJjxx spJjxx){
         return spJjxxMapper.insertSelective(spJjxx);
     }

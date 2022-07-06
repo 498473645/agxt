@@ -121,4 +121,5 @@ public interface SpJjxxService {
      */
     List<SpJjxx> spJjxxByCjrCode(String objid,String status);
 
+    SpJjxx getSpJjxxData(SpJjxx spJjxx);
 }
