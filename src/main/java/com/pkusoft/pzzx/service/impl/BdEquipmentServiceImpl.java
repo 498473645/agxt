@@ -2,9 +2,12 @@ package com.pkusoft.pzzx.service.impl;
 
 import com.pkusoft.lesp.until.PermitType;
 import com.pkusoft.pzzx.mapper.BdEquipmentMapper;
+import com.pkusoft.pzzx.mapper.BdHandlingAreaMapper;
 import com.pkusoft.pzzx.po.BdEquipment;
+import com.pkusoft.pzzx.po.BdHandlingArea;
 import com.pkusoft.pzzx.req.BdEquipmentReqParam;
 import com.pkusoft.pzzx.service.BdEquipmentService;
+import com.pkusoft.pzzx.service.BdHandlingAreaService;
 import com.pkusoft.usercenter.po.SysDataOwnerDept;
 import com.pkusoft.usercenter.service.SysDataOwnerDeptService;
 import com.pkusoft.usercenter.service.SysPermitService;
@@ -32,6 +35,9 @@ public class BdEquipmentServiceImpl implements BdEquipmentService {
 
     @Autowired
     private SysPermitService sysPermitService;
+
+    @Autowired
+    private BdHandlingAreaMapper bdHandlingAreaMapper;
 
     public List<BdEquipment> getBdEquipmentList(BdEquipmentReqParam bdEquipment, Map<String, String> map) {
 
@@ -77,30 +83,34 @@ public class BdEquipmentServiceImpl implements BdEquipmentService {
         bdEquipment.setObjid(objid);
         bdEquipment.setStatus("2010");
         Date date = new Date();
-        bdEquipment.setOrgCode(map.get("deptId"));
-        bdEquipment.setOrgName(map.get("deptName"));
         bdEquipment.setCreateName(map.get("userName"));
         bdEquipment.setCreateId(map.get("userId"));
         bdEquipment.setCreateTime(date);
         bdEquipment.setModerName(map.get("userName"));
         bdEquipment.setModerId(map.get("userId"));
         bdEquipment.setModerTime(date);
-        SysDataOwnerDept sysDataOwnerDept = sysDataOwnerDeptService.selectByDeptId(map.get("deptId"));
-        if (sysDataOwnerDept != null) {
-            if (StringUtils.hasText(sysDataOwnerDept.getOwnerDept1())) {
-                bdEquipment.setGaOwnerDept1(sysDataOwnerDept.getOwnerDept1());
-            }
-            if (StringUtils.hasText(sysDataOwnerDept.getOwnerDept2())) {
-                bdEquipment.setGaOwnerDept2(sysDataOwnerDept.getOwnerDept2());
-            }
-            if (StringUtils.hasText(sysDataOwnerDept.getOwnerDept3())) {
-                bdEquipment.setGaOwnerDept3(sysDataOwnerDept.getOwnerDept3());
-            }
-            if (StringUtils.hasText(sysDataOwnerDept.getOwnerDept4())) {
-                bdEquipment.setGaOwnerDept4(sysDataOwnerDept.getOwnerDept4());
-            }
-            if (StringUtils.hasText(sysDataOwnerDept.getOwnerDept5())) {
-                bdEquipment.setGaOwnerDept5(sysDataOwnerDept.getOwnerDept5());
+
+        if (bdEquipment.getAreaId() != null) {
+            BdHandlingArea bdHandlingArea = bdHandlingAreaMapper.selectByPrimaryKey(bdEquipment.getAreaId());
+            bdEquipment.setOrgCode(bdHandlingArea.getOrgCode());
+            bdEquipment.setOrgName(bdHandlingArea.getOrgName());
+            SysDataOwnerDept sysDataOwnerDept = sysDataOwnerDeptService.selectByDeptId(bdHandlingArea.getOrgCode());
+            if (sysDataOwnerDept != null) {
+                if (StringUtils.hasText(sysDataOwnerDept.getOwnerDept1())) {
+                    bdEquipment.setGaOwnerDept1(sysDataOwnerDept.getOwnerDept1());
+                }
+                if (StringUtils.hasText(sysDataOwnerDept.getOwnerDept2())) {
+                    bdEquipment.setGaOwnerDept2(sysDataOwnerDept.getOwnerDept2());
+                }
+                if (StringUtils.hasText(sysDataOwnerDept.getOwnerDept3())) {
+                    bdEquipment.setGaOwnerDept3(sysDataOwnerDept.getOwnerDept3());
+                }
+                if (StringUtils.hasText(sysDataOwnerDept.getOwnerDept4())) {
+                    bdEquipment.setGaOwnerDept4(sysDataOwnerDept.getOwnerDept4());
+                }
+                if (StringUtils.hasText(sysDataOwnerDept.getOwnerDept5())) {
+                    bdEquipment.setGaOwnerDept5(sysDataOwnerDept.getOwnerDept5());
+                }
             }
         }
         int num = bdEquipmentMapper.insertSelective(bdEquipment);
@@ -111,6 +121,31 @@ public class BdEquipmentServiceImpl implements BdEquipmentService {
         bdEquipment.setModerName(map.get("userName"));
         bdEquipment.setModerId(map.get("userId"));
         bdEquipment.setModerTime(new Date());
+
+        if (bdEquipment.getAreaId() != null) {
+            BdHandlingArea bdHandlingArea = bdHandlingAreaMapper.selectByPrimaryKey(bdEquipment.getAreaId());
+            bdEquipment.setOrgCode(bdHandlingArea.getOrgCode());
+            bdEquipment.setOrgName(bdHandlingArea.getOrgName());
+            SysDataOwnerDept sysDataOwnerDept = sysDataOwnerDeptService.selectByDeptId(bdHandlingArea.getOrgCode());
+            if (sysDataOwnerDept != null) {
+                if (StringUtils.hasText(sysDataOwnerDept.getOwnerDept1())) {
+                    bdEquipment.setGaOwnerDept1(sysDataOwnerDept.getOwnerDept1());
+                }
+                if (StringUtils.hasText(sysDataOwnerDept.getOwnerDept2())) {
+                    bdEquipment.setGaOwnerDept2(sysDataOwnerDept.getOwnerDept2());
+                }
+                if (StringUtils.hasText(sysDataOwnerDept.getOwnerDept3())) {
+                    bdEquipment.setGaOwnerDept3(sysDataOwnerDept.getOwnerDept3());
+                }
+                if (StringUtils.hasText(sysDataOwnerDept.getOwnerDept4())) {
+                    bdEquipment.setGaOwnerDept4(sysDataOwnerDept.getOwnerDept4());
+                }
+                if (StringUtils.hasText(sysDataOwnerDept.getOwnerDept5())) {
+                    bdEquipment.setGaOwnerDept5(sysDataOwnerDept.getOwnerDept5());
+                }
+            }
+        }
+
         int num = bdEquipmentMapper.updateByPrimaryKeySelective(bdEquipment);
         return num;
     }

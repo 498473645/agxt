@@ -92,6 +92,7 @@ public class BdHandlingAreaServiceImpl implements BdHandlingAreaService {
         bdHandlingArea.setModerName(map.get("userName"));
         bdHandlingArea.setModerId(map.get("userId"));
         bdHandlingArea.setModerTime(date);
+
         SysDataOwnerDept sysDataOwnerDept = sysDataOwnerDeptService.selectByDeptId(objcode);
         if (sysDataOwnerDept != null) {
             if (StringUtils.hasText(sysDataOwnerDept.getOwnerDept1())) {
@@ -118,6 +119,34 @@ public class BdHandlingAreaServiceImpl implements BdHandlingAreaService {
         bdHandlingArea.setModerName(map.get("userName"));
         bdHandlingArea.setModerId(map.get("userId"));
         bdHandlingArea.setModerTime(new Date());
+
+        String objcode = bdHandlingArea.getObjcode();
+        SysDept sysDept = sysDeptService.getSysDept(objcode);
+        if (sysDept==null) {
+            return -1;
+        }
+        bdHandlingArea.setOrgCode(sysDept.getDeptId());
+        bdHandlingArea.setOrgName(sysDept.getDeptName());
+
+        SysDataOwnerDept sysDataOwnerDept = sysDataOwnerDeptService.selectByDeptId(objcode);
+        if (sysDataOwnerDept != null) {
+            if (StringUtils.hasText(sysDataOwnerDept.getOwnerDept1())) {
+                bdHandlingArea.setGaOwnerDept1(sysDataOwnerDept.getOwnerDept1());
+            }
+            if (StringUtils.hasText(sysDataOwnerDept.getOwnerDept2())) {
+                bdHandlingArea.setGaOwnerDept2(sysDataOwnerDept.getOwnerDept2());
+            }
+            if (StringUtils.hasText(sysDataOwnerDept.getOwnerDept3())) {
+                bdHandlingArea.setGaOwnerDept3(sysDataOwnerDept.getOwnerDept3());
+            }
+            if (StringUtils.hasText(sysDataOwnerDept.getOwnerDept4())) {
+                bdHandlingArea.setGaOwnerDept4(sysDataOwnerDept.getOwnerDept4());
+            }
+            if (StringUtils.hasText(sysDataOwnerDept.getOwnerDept5())) {
+                bdHandlingArea.setGaOwnerDept5(sysDataOwnerDept.getOwnerDept5());
+            }
+        }
+
         int num = bdHandlingAreaMapper.updateByPrimaryKeySelective(bdHandlingArea);
         return num;
     }
