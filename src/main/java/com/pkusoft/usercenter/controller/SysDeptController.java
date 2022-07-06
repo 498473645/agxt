@@ -80,6 +80,46 @@ public class SysDeptController  {
 	}
 
 	/**
+	 * 通过当前用户权限所属单位级别查询其所属单位及下属单位
+	 *
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/sysDept/sysDeptDicByDeptLevel")
+	@ResponseBody
+	public ResponseDto<List<DicPublicType>> sysDeptDicByDeptLevel(HttpServletRequest request) {
+		ResponseDto<List<DicPublicType>> dto = new ResponseDto<List<DicPublicType>>();
+		try {
+			//获取当前操作用户信息
+			Map<String, String> user = userCenterProxyHelper.getUser(request);
+			List<SysDept> deptList = sysDeptService.sysDeptDicByDeptLevel(user.get("deptId"));
+			List<DicPublicType> dicPublicTypeList = new ArrayList<>();
+			for (SysDept sysDept:deptList){
+				DicPublicType dicPublicType = new DicPublicType();
+				dicPublicType.setItemValue(sysDept.getDeptName());
+				dicPublicType.setItemCode(sysDept.getDeptId());
+				dicPublicTypeList.add(dicPublicType);
+			}
+			if(null!= dicPublicTypeList && dicPublicTypeList.size()>0){
+				dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
+				dto.setStatusMsg("获取单位字典成功");
+				dto.setData(dicPublicTypeList);
+				return dto;
+			}else{
+				dto.setStatusCode(ResponseData.STATUS_CODE_OTHER);
+				dto.setStatusMsg("获取单位字典为空");
+				return dto;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			dto.setStatusCode(ResponseData.STATUS_CODE_OTHER);
+			dto.setStatusMsg("获取单位字典失败"+e.getMessage());
+			return dto;
+		}
+	}
+
+
+	/**
 	 * 获取部门列表
 	 *
 	 * @param

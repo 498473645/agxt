@@ -114,4 +114,6 @@ public interface SysDeptService {
 	 * @return
 	 */
 	List<SysDept> getOnlyParentDeptId(String deptId);
+
+	List<SysDept> sysDeptDicByDeptLevel(String deptId);
 }

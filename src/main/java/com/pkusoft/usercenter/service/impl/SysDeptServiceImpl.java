@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
+import pkubatis.common.utils.DeptLevel;
 import pkubatis.common.utils.PermitType;
 import tk.mybatis.mapper.entity.Example;
 
@@ -254,6 +255,23 @@ public class SysDeptServiceImpl implements SysDeptService {
 	@Override
 	public List<SysDept> getOnlyParentDeptId(String deptId){
 		return sysDeptMapper.getOnlyParentDeptId(deptId);
+	}
+
+	@Override
+	public List<SysDept> sysDeptDicByDeptLevel(String deptId) {
+		String deptLevel= DeptLevel.getDeptLevel(deptId);
+		Example example = new Example(SysDept.class);
+		example.setOrderByClause("DEPT_ID asc");
+		Example.Criteria criteria = example.createCriteria();
+		if ("2".equals(deptLevel)){
+			criteria.andEqualTo("cunitid",deptId);
+		}else if ("3".equals(deptLevel)){
+			criteria.andEqualTo("sunitid",deptId);
+		}else if ("4".equals(deptLevel)){
+			criteria.andEqualTo("tunitid",deptId);
+		}
+		List<SysDept> deptList = sysDeptMapper.selectByExample(example);
+		return deptList;
 	}
 
 
