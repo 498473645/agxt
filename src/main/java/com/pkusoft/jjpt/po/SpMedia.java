@@ -1,7 +1,9 @@
 package com.pkusoft.jjpt.po;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 import javax.persistence.*;
@@ -48,6 +50,8 @@ public class SpMedia {
      */
     @Column(name = "BEGIN_TIME")
     @ApiModelProperty(value = "开始时间")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "PRC")
     private java.util.Date beginTime;
 
  	/**
