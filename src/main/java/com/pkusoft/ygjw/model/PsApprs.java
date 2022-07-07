@@ -39,12 +39,12 @@ public class PsApprs {
     @ApiModelProperty(value = "名称")
     private String name;
 
- 	/**
-     * 事务表主键id，ps_trans.id
+    /**
+     * 接警信息表主键id，sp_jjxx.id
      */
-    @Column(name = "TRANS_ID")
-    @ApiModelProperty(value = "事务表主键id，ps_trans.id")
-    private String transId;
+    @Column(name = "JJD_OBJID")
+    @ApiModelProperty(value = "接警信息表主键id，sp_jjxx.id")
+    private String jjdObjid;
 
     /**
      * 事务表code，ps_trans.code
@@ -265,20 +265,12 @@ public class PsApprs {
         this.name = name;
     }
 
-    /**
-    * 获得事务表主键id，ps_trans.id
-    * @return TRANS_ID
-    */
-    public String getTransId() {
-        return this.transId;
+    public String getJjdObjid() {
+        return jjdObjid;
     }
 
-    /**
-    * 设置事务表主键id，ps_trans.id
-    * @param transId
-    */
-    public void setTransId(String transId) {
-        this.transId = transId;
+    public void setJjdObjid(String jjdObjid) {
+        this.jjdObjid = jjdObjid;
     }
 
     /**
