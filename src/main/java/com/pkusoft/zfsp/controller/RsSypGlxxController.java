@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,7 +19,7 @@ import org.support.commons.springmvc.ResponseData;
 import java.util.List;
 
 /**
- * @author 
+ * @author
  *  执法视音频相关操作
  */
 @Api(value="",tags={" 执法视音频相关操作"})
@@ -42,7 +43,7 @@ public class RsSypGlxxController  {
     @ResponseBody
     public ResponseData<List<RsSypGlxx>> rsSypGlxxList(@RequestBody RsSypGlxx rsSypGlxx){
         // 检查参数
-        if (rsSypGlxx.getJjbh() == null) {
+        if (!StringUtils.hasText(rsSypGlxx.getJjbh())) {
             return new ResponseData<>(ResponseData.STATUS_CODE_PARAM, "接警编号不能为空");
         }
         try {
