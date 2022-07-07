@@ -212,6 +212,42 @@ public class PsApprs {
     @ApiModelProperty(value = "预留字段2")
     private String reserve2;
 
+    /**
+     * 事务表主键id，TRANS_ID
+     */
+    @Column(name = "TRANS_ID")
+    @ApiModelProperty(value = "事务表主键id，TRANS_ID")
+    private String taranId;
+
+    @Column(name = "TRANS_CODE")
+    private String transCode;
+
+    @Column(name = "LY")
+    private String ly;     //来源（报案01， 办事02）
+
+    public String getTaranId() {
+        return taranId;
+    }
+
+    public void setTaranId(String taranId) {
+        this.taranId = taranId;
+    }
+
+    public String getTransCode() {
+        return transCode;
+    }
+
+    public void setTransCode(String transCode) {
+        this.transCode = transCode;
+    }
+
+    public String getLy() {
+        return ly;
+    }
+
+    public void setLy(String ly) {
+        this.ly = ly;
+    }
 
     /**
     * 获得主键ID

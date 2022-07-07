@@ -1,7 +1,9 @@
 package com.pkusoft.ygjw.service.impl;
 
 import com.pkusoft.jjpt.po.SpFiles;
+import com.pkusoft.jjpt.po.SpJjxx;
 import com.pkusoft.jjpt.service.SpFilesService;
+import com.pkusoft.jjpt.service.SpJjxxService;
 import com.pkusoft.lesp.until.PermitType;
 import com.pkusoft.pzzx.po.BdEquipment;
 import com.pkusoft.pzzx.service.BdEquipmentService;
@@ -46,6 +48,9 @@ public class PsApprsServiceImpl implements PsApprsService {
 
     @Autowired
     private SysPermitService sysPermitService;
+
+    @Autowired
+    private SpJjxxService spJjxxService;
 
     public List<PsApprs> getPsApprsList(PsApprsReqParam psApprsReqParam, Map<String, String> map) {
 
@@ -161,19 +166,19 @@ public class PsApprsServiceImpl implements PsApprsService {
         psApprs.setApTime(date);
         psApprs.setCreateTime(date);
         psApprs.setModerTime(date);
-        PsTrans psTrans = psTransService.getPsTrans(psApprs.getTransId());
-        if (psTrans!=null){
-            psApprs.setOrgCode(psTrans.getOrgCode());
-            psApprs.setOrgName(psTrans.getOrgName());
-            psApprs.setGaOwnerDept1(psTrans.getGaOwnerDept1());
-            psApprs.setGaOwnerDept2(psTrans.getGaOwnerDept2());
-            psApprs.setGaOwnerDept3(psTrans.getGaOwnerDept3());
-            psApprs.setGaOwnerDept4(psTrans.getGaOwnerDept4());
-            psApprs.setGaOwnerDept5(psTrans.getGaOwnerDept5());
-            psApprs.setDataType(psTrans.getDataType());
-            psApprs.setType(psTrans.getType());
-            psApprs.setName(psTrans.getName());
-            psApprs.setTransCode(psTrans.getCode());
+        SpJjxx spJjxx = spJjxxService.getSpJjxx(psApprs.getJjdObjid());
+        if (spJjxx!=null){
+            psApprs.setOrgCode(spJjxx.getOrgCode());
+            psApprs.setOrgName(spJjxx.getOrgName());
+            psApprs.setGaOwnerDept1(spJjxx.getGaOwnerDept1());
+            psApprs.setGaOwnerDept2(spJjxx.getGaOwnerDept2());
+            psApprs.setGaOwnerDept3(spJjxx.getGaOwnerDept3());
+            psApprs.setGaOwnerDept4(spJjxx.getGaOwnerDept4());
+            psApprs.setGaOwnerDept5(spJjxx.getGaOwnerDept5());
+            psApprs.setDataType(spJjxx.getReporterSource());
+            psApprs.setType(spJjxx.getJqtypeid1());
+            psApprs.setName(spJjxx.getJqtypeName1());
+            psApprs.setJjdbh(spJjxx.getJjdbh());
         }
         int num = psApprsMapper.insertSelective(psApprs);
 //        if (num>0 && "1".equals(psApprs.getDataType()) && !psApprsYgjwReqParam.getMultiFilePaths().isEmpty()){

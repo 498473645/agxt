@@ -14,6 +14,7 @@ import com.pkusoft.usercenter.po.SysDataOwnerDept;
 import com.pkusoft.usercenter.po.SysUser;
 import com.pkusoft.usercenter.service.SysDataOwnerDeptService;
 import com.pkusoft.usercenter.service.SysUserService;
+import com.pkusoft.ygjw.model.PsTrans;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -538,6 +539,17 @@ public class SpJjxxServiceImpl implements SpJjxxService {
 
     public int spJjxxSave(SpJjxx spJjxx){
         return spJjxxMapper.insertSelective(spJjxx);
+    }
+
+
+    public List<SpJjxx> getSpjjxxListByIdcard(String idcard) {
+        Example example = new Example(SpJjxx.class);
+        Example.Criteria criteria = example.createCriteria();
+        example.setOrderByClause("CREATE_TIME DESC");
+        if (StringUtils.hasText(idcard)) {
+            criteria.andEqualTo("bjrsfzh", idcard);
+        }
+        return spJjxxMapper.selectByExample(example);
     }
 
 }

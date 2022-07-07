@@ -71,8 +71,10 @@ public class HzywYbsxxbServiceImpl implements HzywYbsxxbService {
             params.put("gmsfhm", hzywYbsxxb.getRepIdcard());
             params.put("name", hzywYbsxxb.getName());
             params.put("sjgsdwdm",hzywYbsxxb.getOrgCode());
-            if (hzywYbsxxb.getOrgCode().equals(userInfo.get("deptId"))) {
-                params.put("deptLevel", userInfo.get("userLevel"));
+            if (userInfo != null) {
+                if (hzywYbsxxb.getOrgCode().equals(userInfo.get("deptId"))) {
+                    params.put("deptLevel", userInfo.get("userLevel"));
+                }
             }
             params.put("orgCode",hzywYbsxxb.getOrgCode());
             params.put("dataType", hzywYbsxxb.getDataType());

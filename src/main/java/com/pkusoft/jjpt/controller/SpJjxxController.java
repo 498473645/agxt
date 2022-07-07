@@ -4,11 +4,13 @@ import com.pkusoft.jjpt.po.SpJjxx;
 import com.pkusoft.jjpt.req.SpJjxxReqParam;
 import com.pkusoft.jjpt.service.SpJjxxService;
 import com.pkusoft.usercenterproxy.UserCenterProxyHelper;
+import com.pkusoft.ygjw.model.PsTrans;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +20,7 @@ import org.support.commons.springmvc.ResponseData;
 import pkubatis.common.base.ResponseDto;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -88,6 +91,35 @@ public class SpJjxxController  {
             logger.error("查询接警平台接警信息表错误",e);
             e.printStackTrace();
             return new ResponseData<>(ResponseData.STATUS_CODE_OTHER,"查询接警平台接警信息表错误"+e.getMessage());
+        }
+    }
+
+    /**
+     * 查询事务列表数据
+     * @return
+     */
+    @ApiOperation(value="查询事务列表数据", notes="查询事务列表数据", httpMethod="POST")
+    @RequestMapping(value = "/spJjxx/getSpJjxxListByIdcard", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    public ResponseData<List<SpJjxx>> getSpJjxxListByIdcard(HttpServletRequest request, @RequestBody Map<String,String> map){
+        ResponseDto<List<SpJjxx>> dto = new ResponseDto<List<SpJjxx>>();
+        try{
+            String idcard = map.get("idcard");
+            if (!StringUtils.hasText(idcard)){
+                return new ResponseData<>(ResponseData.STATUS_CODE_PARAM, "参数为空");
+            }
+            Map<String, String> user = new HashMap<>();
+            List<SpJjxx> list = spJjxxService.getSpjjxxListByIdcard(idcard);
+//            int count = psTransService.getPsTransCount(psTransReqParam,user);
+            dto.setData(list);
+//            dto.setCount(count);
+            dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
+            dto.setStatusMsg("查询事务数据成功");
+            return dto;
+        }catch(Exception e){
+            logger.error("查询事务数据错误",e);
+            e.printStackTrace();
+            return new ResponseData<>(ResponseData.STATUS_CODE_OTHER,"查询事务数据错误"+e.getMessage());
         }
     }
 

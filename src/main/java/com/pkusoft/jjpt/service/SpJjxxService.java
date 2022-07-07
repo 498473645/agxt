@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.pkusoft.jjpt.po.SpJjxx;
 import com.pkusoft.jjpt.req.SpJjxxReqParam;
+import com.pkusoft.ygjw.model.PsTrans;
 
 
 public interface SpJjxxService {
@@ -122,4 +123,6 @@ public interface SpJjxxService {
     List<SpJjxx> spJjxxByCjrCode(String objid,String status);
 
     SpJjxx getSpJjxxData(SpJjxx spJjxx);
+
+    List<SpJjxx> getSpjjxxListByIdcard(String idcard);
 }
