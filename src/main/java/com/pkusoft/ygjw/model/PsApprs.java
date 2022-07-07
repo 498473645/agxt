@@ -46,12 +46,8 @@ public class PsApprs {
     @ApiModelProperty(value = "接警信息表主键id，sp_jjxx.id")
     private String jjdObjid;
 
-    /**
-     * 事务表code，ps_trans.code
-     */
-    @Column(name = "TRANS_CODE")
-    @ApiModelProperty(value = "事务表code，ps_trans.code")
-    private String transCode;
+    @Column(name = "JJDBH")
+    private String jjdbh;     //接警编号
 
  	/**
      * 评价时间
@@ -593,12 +589,12 @@ public class PsApprs {
         this.handlerName = handlerName;
     }
 
-    public String getTransCode() {
-        return transCode;
+    public String getJjdbh() {
+        return jjdbh;
     }
 
-    public void setTransCode(String transCode) {
-        this.transCode = transCode;
+    public void setJjdbh(String jjdbh) {
+        this.jjdbh = jjdbh;
     }
 
     public Date getHandleTime() {
