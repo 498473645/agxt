@@ -1,11 +1,15 @@
 package com.pkusoft.lesp.controller;
 
+import com.pkusoft.usercenterproxy.UserCenterProxyHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
+import org.support.commons.springmvc.ResponseData;
 import pkubatis.common.utils.PkuCamerasPreviewURLs;
 import pkubatis.model.JsonResult;
 
@@ -25,6 +29,12 @@ import java.util.Map;
 @Controller
 public class ScreenController {
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    private RestTemplate restTemplate;
+
+    @Autowired
+    private UserCenterProxyHelper userCenterProxyHelper;
 
     /**
      * 调用流媒体服务,通过设备id获取视屏回放参数
@@ -73,6 +83,24 @@ public class ScreenController {
         } catch (Exception e) {
             logger.error("调用流媒体服务,通过设备id获取视屏回放参数出错", e);
             return new JsonResult(false, null);
+        }
+    }
+
+    /**
+     * 调用流媒体服务,通过路径获取视屏回放参数
+     * @param
+     * @return
+     */
+    @RequestMapping("/main/getMeetingFile")
+    @ResponseBody
+    public ResponseData getMeetingFile(@RequestBody Map<String,String> requestMap, HttpServletRequest request) {
+        try {
+            String serviceUrl = userCenterProxyHelper.getPara("BABS_RTMP_SERVICE_URL");
+            ResponseData response = restTemplate.postForObject(serviceUrl + "/getMeetingFile",requestMap, ResponseData.class);
+            return response;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseData<>(ResponseData.STATUS_CODE_BIZ, "获取办事过程数据异常；" + e.getMessage());
         }
     }
 
