@@ -16,10 +16,14 @@ import java.util.Date;
 @Table(name = "RS_JBJ_JGXT_DYNAMIC")
 public class RsJbjJgxtDynamic {
 
+    @Id
+    @Column(name = "OBJID")
+    @ApiModelProperty(value = "主键id")
+    private String objid;     //主键ID
+
     /**
      * 接警编号*
      */
-    @Id
     @Column(name = "JJBH")
     @ApiModelProperty(value = "接警编号*")
     private String jjbh;
@@ -320,6 +324,13 @@ public class RsJbjJgxtDynamic {
     @Column(name = "YJJBM")
     @ApiModelProperty(value = "预接警编码")
     private String yjjbm;
+
+    /**
+     * 报警类型
+     */
+    @Column(name = "BJLX")
+    @ApiModelProperty(value = "报警类型")
+    private String bjlx;
 
     public String getYjjbm() {
         return yjjbm;
@@ -975,5 +986,21 @@ public class RsJbjJgxtDynamic {
 
     public void setBjsj(Date bjsj) {
         this.bjsj = bjsj;
+    }
+
+    public String getBjlx() {
+        return bjlx;
+    }
+
+    public void setBjlx(String bjlx) {
+        this.bjlx = bjlx;
+    }
+
+    public String getObjid() {
+        return objid;
+    }
+
+    public void setObjid(String objid) {
+        this.objid = objid;
     }
 }
