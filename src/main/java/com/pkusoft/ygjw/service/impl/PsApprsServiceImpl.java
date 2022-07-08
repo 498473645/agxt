@@ -174,6 +174,7 @@ public class PsApprsServiceImpl implements PsApprsService {
         psApprs.setCreateTime(date);
         psApprs.setModerTime(date);
         SpJjxx spJjxx = spJjxxService.getSpJjxx(psApprs.getJjdObjid());
+        int num = 0;
         if (spJjxx!=null){
             psApprs.setOrgCode(spJjxx.getOrgCode());
             psApprs.setOrgName(spJjxx.getOrgName());
@@ -186,15 +187,15 @@ public class PsApprsServiceImpl implements PsApprsService {
             psApprs.setType(spJjxx.getJqtypeid1());
             psApprs.setName(spJjxx.getJqtypeName1());
             psApprs.setJjdbh(spJjxx.getJjdbh());
-        }
-        int num = psApprsMapper.insertSelective(psApprs);
-        if (num > 0) {
-            List<SpFiles> list = spFilesService.selectPicByCase(psApprs.getJjdObjid(),"0102");
-            for (SpFiles spFiles : list) {
-                spFiles.setAObjid(psApprs.getId());
-                spFiles.setOrgCode(spJjxx.getOrgCode());
-                spFiles.setOrgName(spJjxx.getOrgName());
-                spFilesMapper.updateByPrimaryKeySelective(spFiles);
+            num = psApprsMapper.insertSelective(psApprs);
+            if (num > 0) {
+                List<SpFiles> list = spFilesService.selectPicByCase(psApprs.getJjdObjid(),"0102");
+                for (SpFiles spFiles : list) {
+                    spFiles.setAObjid(psApprs.getId());
+                    spFiles.setOrgCode(spJjxx.getOrgCode());
+                    spFiles.setOrgName(spJjxx.getOrgName());
+                    spFilesMapper.updateByPrimaryKeySelective(spFiles);
+                }
             }
         }
 //        if (num>0 && "1".equals(psApprs.getDataType()) && !psApprsYgjwReqParam.getMultiFilePaths().isEmpty()){
