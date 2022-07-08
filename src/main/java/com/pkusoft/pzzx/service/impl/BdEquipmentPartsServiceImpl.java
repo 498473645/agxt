@@ -53,7 +53,6 @@ public class BdEquipmentPartsServiceImpl implements BdEquipmentPartsService {
 
     public void setCommonCondition(Example.Criteria criteria, BdEquipmentPartsReqParam bdEquipmentParts,Map<String, String> map){
         criteria.andEqualTo("eObjid",bdEquipmentParts.geteObjid());
-        criteria.andEqualTo("orgCode",map.get("deptId"));
         if (StringUtils.hasText(bdEquipmentParts.getParaCode())){
             criteria.andLike("paraCode","%"+bdEquipmentParts.getParaCode()+"%");
         }
