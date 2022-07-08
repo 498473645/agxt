@@ -100,6 +100,9 @@ public class PsApprsServiceImpl implements PsApprsService {
     }
 
     public void setCommonCondition(Example.Criteria criteria, PsApprsReqParam psApprsReqParam, Map<String, String> map){
+        if(StringUtils.hasText(psApprsReqParam.getJjdObjid())){
+            criteria.andEqualTo("jjdObjid",psApprsReqParam.getJjdObjid());
+        }
         if(StringUtils.hasText(psApprsReqParam.getTransId())){
             criteria.andEqualTo("transId",psApprsReqParam.getTransId());
         }
