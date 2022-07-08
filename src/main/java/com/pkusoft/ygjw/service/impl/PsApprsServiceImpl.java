@@ -75,14 +75,14 @@ public class PsApprsServiceImpl implements PsApprsService {
         List<PsTrans> psTransList = psTransService.getPsTransListByIdcard(idcard,"");
         List<String> tranIdList = new ArrayList<>();
         for (PsTrans psTrans:psTransList){
-            tranIdList.add(psTrans.getId());
+            tranIdList.add(psTrans.getJjdObjid());
         }
         if (!tranIdList.isEmpty()){
             Example example = new Example(PsApprs.class);
             Example.Criteria criteria = example.createCriteria();
             //The query conditions are edited here
             example.setOrderByClause("CREATE_TIME DESC");
-            criteria.andIn("transId",tranIdList);
+            criteria.andIn("jjdObjid",tranIdList);
             return psApprsMapper.selectByExample(example);
         }
         return new ArrayList<>();
