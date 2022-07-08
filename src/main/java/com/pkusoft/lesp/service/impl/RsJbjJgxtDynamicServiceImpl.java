@@ -37,7 +37,7 @@ public class RsJbjJgxtDynamicServiceImpl implements RsJbjJgxtDynamicService {
 
         RowBounds rowBounds = new RowBounds(start,pageSize);
         Example example = new Example(RsJbjJgxtDynamic.class);
-        example.setOrderByClause("JJSJ desc");
+        example.setOrderByClause("BJSJ desc");
         Example.Criteria criteria = example.createCriteria();
         //The query conditions are edited here
 //        if ("2".equals(deptLevel)){

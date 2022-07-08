@@ -28,16 +28,6 @@ public class AnalysisController {
     /**日志句柄 */
     private static Logger logger = LoggerFactory.getLogger(RsJbjJjxxController.class);
 
-    /***获取代理用户信息服务类*/
-    @Autowired
-    private UserCenterProxyHelper userCenterProxyHelper;
-
-    @Autowired
-    private RsJbjYbjxxService rsJbjYbjxxService ;
-
-    @Autowired
-    private RsJbjJjxxService rsJbjJjxxService ;
-
     @Autowired
     private AnalysisService analysisService ;
 
