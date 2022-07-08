@@ -189,6 +189,11 @@ public class PsApprsServiceImpl implements PsApprsService {
             psApprs.setJjdbh(spJjxx.getJjdbh());
             num = psApprsMapper.insertSelective(psApprs);
             if (num > 0) {
+                //评议完成后修改jjxx表中的评议状态
+                SpJjxx uptJjxx = new SpJjxx();
+                uptJjxx.setObjid(spJjxx.getObjid());
+                uptJjxx.setIsPy("1");
+                spJjxxService.spJjxxUpdate(uptJjxx,map);
                 List<SpFiles> list = spFilesService.selectPicByCase(psApprs.getJjdObjid(),"0102");
                 for (SpFiles spFiles : list) {
                     spFiles.setAObjid(psApprs.getId());
