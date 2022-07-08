@@ -1,5 +1,8 @@
 package com.pkusoft.ygjw.service.impl;
 
+import com.pkusoft.lesp.mapper.RsJbjJgxtDynamicMapper;
+import com.pkusoft.lesp.po.RsJbjJgxtDynamic;
+import com.pkusoft.lesp.service.RsJbjJgxtDynamicService;
 import com.pkusoft.lesp.until.PermitType;
 import com.pkusoft.pzzx.po.BdEquipment;
 import com.pkusoft.pzzx.service.BdEquipmentService;
@@ -34,6 +37,12 @@ public class PsTransServiceImpl implements PsTransService {
 
     @Autowired
     private SysPermitService sysPermitService;
+
+    @Autowired
+    private RsJbjJgxtDynamicService rsJbjJgxtDynamicService;
+
+    @Autowired
+    private RsJbjJgxtDynamicMapper rsJbjJgxtDynamicMapper;
 
     public List<PsTrans> getPsTransListByIdcard(String idcard,String ly) {
         Example example = new Example(PsTrans.class);
@@ -131,6 +140,30 @@ public class PsTransServiceImpl implements PsTransService {
             psTrans.setCode(this.generateJjdbh(psTrans.getOrgCode()));
         }
         int num = psTransMapper.insertSelective(psTrans);
+        if(num>0){
+            //插入RsJbjJgxtDynamic
+            RsJbjJgxtDynamic rsJbjJgxtDynamic = new RsJbjJgxtDynamic();
+            //数据来源
+            rsJbjJgxtDynamic.setYjjbm(psTrans.getId());
+            rsJbjJgxtDynamic.setJqly(psTrans.getDataType());
+            rsJbjJgxtDynamic.setBjrxm(psTrans.getRepName());
+            rsJbjJgxtDynamic.setBjrgmsfhm(psTrans.getRepIdcard());
+            rsJbjJgxtDynamic.setJjdw(psTrans.getOrgCode());
+            rsJbjJgxtDynamic.setJjdwmc(psTrans.getOrgName());
+            rsJbjJgxtDynamic.setBjsj(psTrans.getRepTime());
+            rsJbjJgxtDynamic.setSfdd(psTrans.getOccAddr());
+            rsJbjJgxtDynamic.setBjrxb(psTrans.getRepSex());
+            rsJbjJgxtDynamic.setBjrlxdh(psTrans.getRepTel());
+            rsJbjJgxtDynamic.setBjnr(psTrans.getOccDescr());
+            rsJbjJgxtDynamic.setAfsj(psTrans.getOccTime());
+            rsJbjJgxtDynamic.setBjlx(psTrans.getType());
+            rsJbjJgxtDynamic.setGaOwnerDept1(psTrans.getGaOwnerDept1());
+            rsJbjJgxtDynamic.setGaOwnerDept2(psTrans.getGaOwnerDept2());
+            rsJbjJgxtDynamic.setGaOwnerDept3(psTrans.getGaOwnerDept3());
+            rsJbjJgxtDynamic.setGaOwnerDept4(psTrans.getGaOwnerDept4());
+            rsJbjJgxtDynamic.setGaOwnerDept5(psTrans.getGaOwnerDept5());
+            int num1 = rsJbjJgxtDynamicService.rsJbjJgxtDynamicSave(rsJbjJgxtDynamic,map);
+        }
         return psTrans.getId();
     }
 
@@ -140,6 +173,21 @@ public class PsTransServiceImpl implements PsTransService {
 
     public int psTransUpdate(PsTrans psTrans, Map<String,String> map){
         int num = psTransMapper.updateByPrimaryKeySelective(psTrans);
+        return num;
+    }
+
+    @Override
+    public int psTransUpt(PsTrans psTrans, Map<String, String> map) {
+        psTransUpdate(psTrans,map);
+        //更新RsJbjJgxtDynamic
+        RsJbjJgxtDynamic rsJbjJgxtDynamic = new RsJbjJgxtDynamic();
+        rsJbjJgxtDynamic.setSfdd(psTrans.getOccAddr());
+        rsJbjJgxtDynamic.setAfsj(psTrans.getOccTime());
+        rsJbjJgxtDynamic.setBjnr(psTrans.getOccDescr());
+        Example example = new Example(RsJbjJgxtDynamic.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("yjjbm",psTrans.getId());
+        int num = rsJbjJgxtDynamicMapper.updateByExampleSelective(rsJbjJgxtDynamic,example);
         return num;
     }
 

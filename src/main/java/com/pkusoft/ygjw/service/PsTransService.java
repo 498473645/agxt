@@ -45,6 +45,14 @@ public interface PsTransService {
     int psTransUpdate(PsTrans psTrans, Map<String, String> map);
 
     /**
+     * 新增
+     * @param psTrans
+     * @param map	用户集合
+     * @return
+     */
+    int psTransUpt(PsTrans psTrans, Map<String, String> map);
+
+    /**
     * 根据主键ID查看规则信息详情
     * @param id
     * @return

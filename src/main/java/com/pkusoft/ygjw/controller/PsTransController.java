@@ -175,7 +175,7 @@ public class PsTransController  {
                     psTrans.setId(id);
                 }else{
                     //修改事务数据
-                    num = psTransService.psTransUpdate(psTrans, user);
+                    num = psTransService.psTransUpt(psTrans, user);
                 }
             }else{
                 //添加事务数据
