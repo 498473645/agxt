@@ -150,7 +150,7 @@ public class PsTransServiceImpl implements PsTransService {
             rsJbjJgxtDynamic.setBjrgmsfhm(psTrans.getRepIdcard());
             rsJbjJgxtDynamic.setJjdw(psTrans.getOrgCode());
             rsJbjJgxtDynamic.setJjdwmc(psTrans.getOrgName());
-            rsJbjJgxtDynamic.setBjsj(psTrans.getRepTime());
+            rsJbjJgxtDynamic.setBjsj(new Date());
             rsJbjJgxtDynamic.setSfdd(psTrans.getOccAddr());
             rsJbjJgxtDynamic.setBjrxb(psTrans.getRepSex());
             rsJbjJgxtDynamic.setBjrlxdh(psTrans.getRepTel());
