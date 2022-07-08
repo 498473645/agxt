@@ -1,5 +1,6 @@
 package com.pkusoft.ygjw.service.impl;
 
+import com.pkusoft.jjpt.mapper.SpFilesMapper;
 import com.pkusoft.jjpt.po.SpFiles;
 import com.pkusoft.jjpt.po.SpJjxx;
 import com.pkusoft.jjpt.service.SpFilesService;
@@ -45,6 +46,9 @@ public class PsApprsServiceImpl implements PsApprsService {
 
     @Autowired
     private SpFilesService spFilesService;
+
+    @Autowired
+    private SpFilesMapper spFilesMapper;
 
     @Autowired
     private SysPermitService sysPermitService;
@@ -181,6 +185,15 @@ public class PsApprsServiceImpl implements PsApprsService {
             psApprs.setJjdbh(spJjxx.getJjdbh());
         }
         int num = psApprsMapper.insertSelective(psApprs);
+        if (num > 0) {
+            List<SpFiles> list = spFilesService.selectPicByCase(psApprs.getJjdObjid(),"0102");
+            for (SpFiles spFiles : list) {
+                spFiles.setAObjid(psApprs.getId());
+                spFiles.setOrgCode(spJjxx.getOrgCode());
+                spFiles.setOrgName(spJjxx.getOrgName());
+                spFilesMapper.updateByPrimaryKeySelective(spFiles);
+            }
+        }
 //        if (num>0 && "1".equals(psApprs.getDataType()) && !psApprsYgjwReqParam.getMultiFilePaths().isEmpty()){
 //            // 关联材料
 //            List<String> files = psApprsYgjwReqParam.getMultiFilePaths();

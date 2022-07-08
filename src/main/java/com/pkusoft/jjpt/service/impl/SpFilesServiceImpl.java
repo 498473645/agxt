@@ -243,14 +243,14 @@ public class SpFilesServiceImpl implements SpFilesService {
         }else {
             return -2;
         }
-        // 设置单位数据
-        PsTrans psTrans = psTransService.getPsTrans(spFilesReqParam.getTransId());
-        if (psTrans!=null){
-            spFiles.setOrgCode(psTrans.getOrgCode());
-            spFiles.setOrgName(psTrans.getOrgName());
-        }else {
-            return -3;
-        }
+//        // 设置单位数据
+//        PsTrans psTrans = psTransService.getPsTrans(spFilesReqParam.getTransId());
+//        if (psTrans!=null){
+//            spFiles.setOrgCode(psTrans.getOrgCode());
+//            spFiles.setOrgName(psTrans.getOrgName());
+//        }else {
+//            return -3;
+//        }
         // 保存材料
         return this.spFilesSaveYGJW(spFiles);
     }
