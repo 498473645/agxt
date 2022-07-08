@@ -105,8 +105,8 @@ public class RsJbjJgxtDynamicServiceImpl implements RsJbjJgxtDynamicService {
     }
 
     public int rsJbjJgxtDynamicSave(RsJbjJgxtDynamic rsJbjJgxtDynamic, Map<String,String> map){
-        String bjrxm = UUID.randomUUID().toString();
-        rsJbjJgxtDynamic.setBjrxm(bjrxm);
+        String id = UUID.randomUUID().toString();
+        rsJbjJgxtDynamic.setObjid(id);
         int num = rsJbjJgxtDynamicMapper.insertSelective(rsJbjJgxtDynamic);
         return num;
     }
@@ -116,14 +116,14 @@ public class RsJbjJgxtDynamicServiceImpl implements RsJbjJgxtDynamicService {
         return num;
     }
 
-    public RsJbjJgxtDynamic getRsJbjJgxtDynamic(String bjrxm){
-        return rsJbjJgxtDynamicMapper.selectByPrimaryKey(bjrxm);
+    public RsJbjJgxtDynamic getRsJbjJgxtDynamic(String objid){
+        return rsJbjJgxtDynamicMapper.selectByPrimaryKey(objid);
     }
 
-    public int rsJbjJgxtDynamicDelete(String[] bjrxm){
+    public int rsJbjJgxtDynamicDelete(String[] objid){
         int num = 0;
-        for(int i = 0; i < bjrxm.length; i ++){
-        num = rsJbjJgxtDynamicMapper.deleteByPrimaryKey(bjrxm[i]);
+        for(int i = 0; i < objid.length; i ++){
+        num = rsJbjJgxtDynamicMapper.deleteByPrimaryKey(objid[i]);
         }
         return num;
     }

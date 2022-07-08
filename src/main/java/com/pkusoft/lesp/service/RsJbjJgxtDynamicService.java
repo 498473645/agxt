@@ -48,16 +48,16 @@ public interface RsJbjJgxtDynamicService {
 
     /**
     * 根据主键ID查看规则信息详情
-    * @param bjrxm
+    * @param objid
     * @return
     */
-    RsJbjJgxtDynamic getRsJbjJgxtDynamic(String bjrxm);
+    RsJbjJgxtDynamic getRsJbjJgxtDynamic(String objid);
 
     /**
     * 根据主键ID删除规则信息
-    * @param bjrxm
+    * @param objid
     * @return
     */
-    int rsJbjJgxtDynamicDelete(String[] bjrxm);
+    int rsJbjJgxtDynamicDelete(String[] objid);
 
 }
