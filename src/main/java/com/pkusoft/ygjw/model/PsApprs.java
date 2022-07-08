@@ -217,7 +217,7 @@ public class PsApprs {
      */
     @Column(name = "TRANS_ID")
     @ApiModelProperty(value = "事务表主键id，TRANS_ID")
-    private String taranId;
+    private String transId;
 
     @Column(name = "TRANS_CODE")
     private String transCode;
@@ -225,12 +225,12 @@ public class PsApprs {
     @Column(name = "LY")
     private String ly;     //来源（报案01， 办事02）
 
-    public String getTaranId() {
-        return taranId;
+    public String getTransId() {
+        return transId;
     }
 
-    public void setTaranId(String taranId) {
-        this.taranId = taranId;
+    public void setTransId(String transId) {
+        this.transId = transId;
     }
 
     public String getTransCode() {
