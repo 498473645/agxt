@@ -138,6 +138,31 @@ public class PsApprsReqParam  extends YgjwPage {
      */
     private String reserve2;
 
+    /**
+     * 接警信息表主键id，sp_jjxx.id
+     */
+    @Column(name = "JJD_OBJID")
+    @ApiModelProperty(value = "接警信息表主键id，sp_jjxx.id")
+    private String jjdObjid;
+
+    @Column(name = "JJDBH")
+    private String jjdbh;     //接警编号
+
+    public String getJjdObjid() {
+        return jjdObjid;
+    }
+
+    public void setJjdObjid(String jjdObjid) {
+        this.jjdObjid = jjdObjid;
+    }
+
+    public String getJjdbh() {
+        return jjdbh;
+    }
+
+    public void setJjdbh(String jjdbh) {
+        this.jjdbh = jjdbh;
+    }
 
     /**
     * 获得主键ID
