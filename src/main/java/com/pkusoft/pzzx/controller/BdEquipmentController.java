@@ -76,10 +76,21 @@ public class BdEquipmentController  {
             int num = 0;
             //获取当前操作用户信息
             Map<String, String> user = userCenterProxyHelper.getUser(request);
+            if (StringUtils.hasText(bdEquipment.getEId()) && !StringUtils.hasText(bdEquipment.getObjid())) { // 唯一标识
+               BdEquipment newBdEquipment = bdEquipmentService.getBdEquipmentByEId(bdEquipment.getEId());
+               if (newBdEquipment.getObjid() != null) {
+                   return new ResponseData<String>(ResponseData.STATUS_CODE_OTHER,"设备唯一标识已存在");
+               }
+            }
             if(!StringUtils.hasText(bdEquipment.getObjid())) {
                 //添加接警平台设备登记表
                 num = bdEquipmentService.bdEquipmentSave(bdEquipment, user);
             }else{
+                BdEquipment newBdEquipment = bdEquipmentService.getBdEquipmentByEId(bdEquipment.getEId());
+                // 根据唯一标识查询设备信息，如果获取的设备id不相同，就说明存在其他的设备，相同就是直接修改
+                if (newBdEquipment.getObjid() !=null && !bdEquipment.getObjid().equals(newBdEquipment.getObjid())) {
+                    return new ResponseData<String>(ResponseData.STATUS_CODE_OTHER,"设备唯一标识已存在");
+                }
                 //修改接警平台设备登记表
                 num = bdEquipmentService.bdEquipmentUpdate(bdEquipment, user);
             }
