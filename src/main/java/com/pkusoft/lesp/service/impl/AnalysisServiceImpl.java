@@ -386,18 +386,18 @@ public class AnalysisServiceImpl implements AnalysisService {
         //10-日，20-周，30-月，40-年
         if ("10".equals(dataType)){
             // 本日
-            List<StatisticsData> curData = ywkStatisticsMapper.getYbafsdbData(deptId,deptLevel,sdfYear.format(cur),sdfMonth.format(cur),sdfDay.format(cur),ly);
+            List<StatisticsData> curData = rsJbjJgxtDynamicMapper.getYbafsdbData(deptId,deptLevel,sdfYear.format(cur),sdfMonth.format(cur),sdfDay.format(cur));
             data.put("curData",curData);
         }else if ("20".equals(dataType)){
             // 本周
 
         }else if ("30".equals(dataType)){
             // 本月
-            List<StatisticsData> curData = ywkStatisticsMapper.getYbafsdbData(deptId,deptLevel,sdfYear.format(cur),sdfMonth.format(cur),null,ly);
+            List<StatisticsData> curData = rsJbjJgxtDynamicMapper.getYbafsdbData(deptId,deptLevel,sdfYear.format(cur),sdfMonth.format(cur),null);
             data.put("curData",curData);
         }else if ("40".equals(dataType)){
             // 本年
-            List<StatisticsData> curData = ywkStatisticsMapper.getYbafsdbData(deptId,deptLevel,sdfYear.format(cur),null,null,ly);
+            List<StatisticsData> curData = rsJbjJgxtDynamicMapper.getYbafsdbData(deptId,deptLevel,sdfYear.format(cur),null,null);
             data.put("curData",curData);
         }
         return data;

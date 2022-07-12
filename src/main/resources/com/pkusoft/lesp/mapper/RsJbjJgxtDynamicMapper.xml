@@ -144,4 +144,27 @@
         AND t.BJLX is not null
         GROUP BY t.BJLX
     </select>
+
+    <select id="getYbafsdbData" resultMap="ResultMap" >
+        select
+        COUNT(1) as  data01,t.JQLY as  data02
+        from RS_JBJ_JGXT_DYNAMIC t
+        where EXTRACT(YEAR FROM t.BJSJ) = #{year,jdbcType=VARCHAR}
+        <if test="month != null and month != ''">
+            AND EXTRACT(MONTH FROM t.BJSJ) = #{month,jdbcType=VARCHAR}
+        </if>
+        <if test="day != null and day != ''">
+            AND EXTRACT(DAY FROM t.BJSJ) = #{day,jdbcType=VARCHAR}
+        </if>
+        <if test="deptLevel != null and deptLevel != '' and deptLevel == '2'.toString()">
+            AND GA_OWNER_DEPT_2 = #{deptId,jdbcType=VARCHAR}
+        </if>
+        <if test="deptLevel != null and deptLevel != '' and deptLevel == '3'.toString()">
+            AND GA_OWNER_DEPT_3 = #{deptId,jdbcType=VARCHAR}
+        </if>
+        <if test="deptLevel != null and deptLevel != '' and deptLevel == '4'.toString()">
+            AND GA_OWNER_DEPT_4 = #{deptId,jdbcType=VARCHAR}
+        </if>
+        GROUP BY t.JQLY
+    </select>
 </mapper>

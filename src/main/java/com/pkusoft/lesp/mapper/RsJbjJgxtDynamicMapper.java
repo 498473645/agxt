@@ -25,4 +25,6 @@ public interface RsJbjJgxtDynamicMapper extends Mapper<RsJbjJgxtDynamic> {
     StatisticsData getSmbaData(@Param("deptId") String deptId, @Param("deptLevel") String deptLevel, @Param("year") String year, @Param("month") String month, @Param("day") String day);
 
     List<StatisticsData> getBalxData(@Param("deptId") String deptId, @Param("deptLevel") String deptLevel, @Param("year") String year, @Param("month") String month, @Param("day") String day);
+
+    List<StatisticsData> getYbafsdbData(@Param("deptId") String deptId, @Param("deptLevel") String deptLevel, @Param("year") String year, @Param("month") String month, @Param("day") String day);
 }
