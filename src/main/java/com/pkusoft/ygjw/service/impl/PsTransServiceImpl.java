@@ -84,6 +84,9 @@ public class PsTransServiceImpl implements PsTransService {
     }
 
     public void setCommonCondition(Example.Criteria criteria, PsTransReqParam psTransReqParam, Map<String, String> map){
+        if(StringUtils.hasText(psTransReqParam.getCode())){
+            criteria.andEqualTo("code",psTransReqParam.getCode());
+        }
         if (StringUtils.hasText(psTransReqParam.getJjdbh())){
             criteria.andLike("jjdbh","%"+psTransReqParam.getJjdbh()+"%");
         }
