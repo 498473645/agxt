@@ -108,7 +108,7 @@ public class PcYjwtServiceImpl implements PcYjwtService {
         String wtmxBh = map.get("wtmxBh");
         String start = map.get("start");
         String pageSize = map.get("pageSize");
-        String wtwd1 = map.get("ybabh");
+        String wtwd3 = map.get("ybabh");
 
         RowBounds rowBounds = new RowBounds(Integer.parseInt(start),Integer.parseInt(pageSize));
         Example example = new Example(PcYjwt.class);
@@ -116,8 +116,8 @@ public class PcYjwtServiceImpl implements PcYjwtService {
         Example.Criteria criteria = example.createCriteria();
         criteria.andEqualTo("wtmxBh",wtmxBh);
         criteria.andEqualTo("wtzt","1");
-        if (StringUtils.hasText(wtwd1)){
-            criteria.andLike("wtwd1","%"+wtwd1.trim()+"%");
+        if (StringUtils.hasText(wtwd3)){
+            criteria.andLike("wtwd3","%"+wtwd3.trim()+"%");
         }
         if ("2".equals(deptLevel)){
             criteria.andEqualTo("gaOwnerDept2",deptId);

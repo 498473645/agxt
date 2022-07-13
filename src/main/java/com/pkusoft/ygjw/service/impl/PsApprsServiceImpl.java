@@ -103,6 +103,9 @@ public class PsApprsServiceImpl implements PsApprsService {
         if(StringUtils.hasText(psApprsReqParam.getJjdObjid())){
             criteria.andEqualTo("jjdObjid",psApprsReqParam.getJjdObjid());
         }
+        if(StringUtils.hasText(psApprsReqParam.getJjdbh())){
+            criteria.andEqualTo("jjdbh",psApprsReqParam.getJjdbh());
+        }
         if(StringUtils.hasText(psApprsReqParam.getTransId())){
             criteria.andEqualTo("transId",psApprsReqParam.getTransId());
         }

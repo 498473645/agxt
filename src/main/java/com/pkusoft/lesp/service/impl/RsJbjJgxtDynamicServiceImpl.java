@@ -47,6 +47,12 @@ public class RsJbjJgxtDynamicServiceImpl implements RsJbjJgxtDynamicService {
 //        }else if ("4".equals(deptLevel)){
 //            criteria.andEqualTo("gaOwnerDept4",deptId);
 //        }
+        if (StringUtils.hasText(map.get("objid"))){
+            criteria.andEqualTo("objid",map.get("objid"));
+        }
+        if (StringUtils.hasText(map.get("bjrgmsfhm"))){
+            criteria.andEqualTo("bjrgmsfhm",map.get("bjrgmsfhm"));
+        }
         if (StringUtils.hasText(deptId)){
             criteria.andEqualTo("jjdw",deptId);
         }
