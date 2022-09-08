@@ -10,9 +10,9 @@
 
     <!--全部日志-->
     <appender name="ALL" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>logs/babsjd-all.log</file>
+        <file>logs/agxt-all.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <fileNamePattern>logs/babsjd-all-%d{yyyyMMdd}.%i.log</fileNamePattern>
+            <fileNamePattern>logs/agxt-all-%d{yyyyMMdd}.%i.log</fileNamePattern>
             <maxFileSize>10MB</maxFileSize>
             <maxHistory>30</maxHistory>
             <totalSizeCap>10GB</totalSizeCap>
@@ -25,14 +25,14 @@
 
     <!--错误日志-->
     <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>logs/babsjd-error.log</file>
+        <file>logs/agxt-error.log</file>
         <append>true</append>
         <encoder>
             <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{35}:%L - %msg%n</pattern>
             <charset>utf-8</charset>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>logs/babsjd-error-%d{yyyyMMdd}.log</fileNamePattern>
+            <fileNamePattern>logs/agxt-error-%d{yyyyMMdd}.log</fileNamePattern>
             <maxHistory>60</maxHistory>
             <totalSizeCap>3GB</totalSizeCap>
         </rollingPolicy>
@@ -45,14 +45,14 @@
 
     <!--SQL日志-->
     <appender name="SQL" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>logs/babsjd-sql.log</file>
+        <file>logs/agxt-sql.log</file>
         <append>true</append>
         <encoder>
             <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{35}:%L - %msg%n</pattern>
             <charset>utf-8</charset>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>logs/babsjd-sql-%d{yyyyMMdd}.log</fileNamePattern>
+            <fileNamePattern>logs/agxt-sql-%d{yyyyMMdd}.log</fileNamePattern>
             <maxHistory>60</maxHistory>
             <totalSizeCap>3GB</totalSizeCap>
         </rollingPolicy>

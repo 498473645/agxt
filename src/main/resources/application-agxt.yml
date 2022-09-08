@@ -95,6 +95,7 @@ shiro-proxy.filter-chain-definition-map:
   /swagger-resources/**: anon
   /v2/**: anon
   /webjars/**: anon
+  /dfsInterface/**: anon
   #/swagger-ui.html/**: anon
   # user-center-proxy
   /config: anon
@@ -204,7 +205,7 @@ mybatis:
       # （可选）当数据库不可用时，获取数据库连接快速失败。true、抛出异常；false、柱塞获取数据库连接线程。默认false
       fail-fast: true
     mapper-locations:
-      - classpath*:com/pkusoft/bazx/mapper/*.xml
+    - classpath*:com/pkusoft/bazx/mapper/*.xml
     base-package: com.pkusoft.bazx.mapper
     mapper-scanner-configurer-type: tk.mybatis.spring.mapper.MapperScannerConfigurer
     configuration:

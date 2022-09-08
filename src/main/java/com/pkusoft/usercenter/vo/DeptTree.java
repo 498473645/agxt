@@ -1,7 +1,5 @@
 package com.pkusoft.usercenter.vo;
 
-import com.pkusoft.lesp.po.StatisticsData;
-
 import java.util.List;
 
 public class DeptTree {
@@ -14,16 +12,6 @@ public class DeptTree {
     private String parentDeptId;
 
     private List<DeptTree> children;
-
-    private StatisticsData statisticsData;
-
-    public StatisticsData getStatisticsData() {
-        return statisticsData;
-    }
-
-    public void setStatisticsData(StatisticsData statisticsData) {
-        this.statisticsData = statisticsData;
-    }
 
     public String getDeptId() {
         return deptId;

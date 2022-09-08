@@ -1,9 +1,8 @@
 package com.pkusoft.usercenter.service.impl;
-import com.pkusoft.jjpt.po.SpAlarmType;
-import com.pkusoft.lesp.po.StatisticsData;
 import com.pkusoft.usercenter.mapper.SysDeptMapper;
 import com.pkusoft.usercenter.po.SysDataOwnerDept;
 import com.pkusoft.usercenter.po.SysDept;
+import com.pkusoft.usercenter.po.SysUser;
 import com.pkusoft.usercenter.service.SysDataOwnerDeptService;
 import com.pkusoft.usercenter.service.SysDeptService;
 import com.pkusoft.usercenter.service.SysPermitService;
@@ -41,74 +40,6 @@ public class SysDeptServiceImpl implements SysDeptService {
 
         return sysDeptMapper.selectByExampleAndRowBounds(example,rowBounds);
     }
-
-	/**
-	 * 查询单位树形结构数据
-	 *
-	 * @return
-	 */
-	@Override
-	public List<DeptTree> getSysDeptTreeList(String deptId,String deptLevel,List<StatisticsData> curData) {
-//		Map<String,String> retData = sysPermitService.setUserDataPermits(map, PermitType.PERMIT_TYPE_CASE_QUERY);
-//		String deptLevel = retData.get("level");
-//		String deptId = retData.get("deptId");
-		if (!StringUtils.hasText(deptLevel) || !StringUtils.hasText(deptId)){
-			return new ArrayList<DeptTree>();
-		}
-		List<DeptTree> deptTreeList = sysDeptMapper.getSysDeptList(deptLevel,deptId);
-		// 最后的结果
-		List<DeptTree> resultList = new ArrayList<DeptTree>();
-		// 先找父节点
-		for (int i = 0; i < deptTreeList.size(); i++) {
-			// 市局单位的deptLevel是 2
-			if (deptTreeList.get(i).getDeptLevel().equals(deptLevel)) {
-				for(StatisticsData statisticsData : curData) {
-					if (statisticsData.getData15().equals(deptTreeList.get(i).getDeptId())) {
-						deptTreeList.get(i).setStatisticsData(statisticsData);
-					}
-				}
-				resultList.add(deptTreeList.get(i));
-			}else if ("8".equals(deptLevel)) {
-				// 查本单位
-				resultList.add(deptTreeList.get(i));
-			}
-		}
-		// 为父节点设置子节点，getChild是递归调用的
-		for (DeptTree tree : resultList) {
-			tree.setChildren(getChildren(tree.getDeptId(), deptTreeList, curData));
-		}
-		return resultList;
-	}
-
-	/**
-	 * 递归遍历
-	 * @param deptId
-	 * @param deptTreeList
-	 * @return
-	 */
-	private List<DeptTree> getChildren(String deptId, List<DeptTree> deptTreeList,List<StatisticsData> curData) {
-		// 子节点
-		List<DeptTree> childList = new ArrayList<>();
-		for (DeptTree tree : deptTreeList) {
-			// 遍历所有节点，将父节点id与传过来的id比较
-			if (tree.getParentDeptId().equals(deptId)) {
-				for(StatisticsData statisticsData : curData) {
-					if (statisticsData.getData15().equals(tree.getDeptId())) {
-						tree.setStatisticsData(statisticsData);
-					}
-				}
-				childList.add(tree);
-			}
-		}
-		// 循环查询子节点的下级单位
-		for (DeptTree tree : childList) {
-			tree.setChildren(getChildren(tree.getDeptId(), deptTreeList, curData));
-		} // 递归退出条件
-		if (childList.size() == 0) {
-			return null;
-		}
-		return childList;
-	}
 
     public int getSysDeptCount(Map<String, String> map) {
 
@@ -165,11 +96,11 @@ public class SysDeptServiceImpl implements SysDeptService {
 	}
 
 	@Override
-	public String getDeptIdBypermit(Map<String, String> user, String permitValue) {
+	public String getDeptIdBypermit(SysUser user, String permitValue) {
 		List<SysDept> deptList = new ArrayList<SysDept>();
 		String deptId = "";
 		//1.根据登录人及权限等级查询权限部门id,根据用户所属部门查询数据归属单位表
-		SysDataOwnerDept owner = sysDataOwnerDeptService.selectByDeptId(user.get("deptId"));
+		SysDataOwnerDept owner = sysDataOwnerDeptService.selectByDeptId(user.getDeptId());
 		//循环判断对应权限所属部门
 		switch (permitValue){
 			//省级单位数据查询权限
@@ -191,7 +122,7 @@ public class SysDeptServiceImpl implements SysDeptService {
 			//所属办案区数据查询权限及本人数据查询权限
 			default:
 				//根据登录人警号查询警员表的所属单位id
-				deptId = user.get("deptId") ;
+				deptId = user.getDeptId() ;
 				break;
 		}
 		return deptId;

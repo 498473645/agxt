@@ -4,6 +4,8 @@ import com.pkusoft.usercenter.mapper.SysDeptMapper;
 import com.pkusoft.usercenter.mapper.SysUserMapper;
 import com.pkusoft.usercenter.po.SysUser;
 import com.pkusoft.usercenter.service.SysUserService;
+import com.pkusoft.usercenterproxy.UserCenterProxyHelper;
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,7 @@ import org.springframework.util.StringUtils;
 import pkubatis.common.utils.ToolUtils;
 import tk.mybatis.mapper.entity.Example;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -25,7 +28,9 @@ public class SysUserServiceImpl implements SysUserService {
     @Autowired
     private SysDeptMapper sysDeptMapper;
 
-
+    /***获取代理用户信息服务类*/
+    @Autowired
+    private UserCenterProxyHelper userCenterProxyHelper;
 
     public List<SysUser> getSysUserListByDept(String deptId) {
 
@@ -71,5 +76,26 @@ public class SysUserServiceImpl implements SysUserService {
     @Override
     public List<SysUser> selectSysUserListByExample(Example example) {
         return sysUserMapper.selectByExample(example);
+    }
+
+    /**
+     * 获取当前用户信息
+     *
+     */
+    public SysUser getCurrentUser(HttpServletRequest request) {
+        try {
+            Map<String, String> user = userCenterProxyHelper.getUser(request);
+            user.remove("addTime");
+            user.remove("modifyTime");
+            SysUser sysUser = new SysUser();
+            BeanUtils.populate(sysUser, user);
+            sysUser.setReserve1(user.get("deptName"));
+            return sysUser;
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return null;
+        }
+
     }
 }

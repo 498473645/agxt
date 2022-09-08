@@ -3,6 +3,7 @@ package com.pkusoft.usercenter.service;
 import com.pkusoft.usercenter.po.SysUser;
 import tk.mybatis.mapper.entity.Example;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -33,4 +34,6 @@ public interface SysUserService {
      * @return
      */
     List<SysUser> selectSysUserListByExample(Example example);
+
+    SysUser getCurrentUser(HttpServletRequest request);
 }
