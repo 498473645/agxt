@@ -30,18 +30,18 @@ public interface FileTempService {
     /**
     * 新增案卷模板信息表
     * @param fileTemp	案卷模板信息表
-    * @param map	用户集合
+    * @param sysUser	用户集合
     * @return
     */
-    int fileTempSave(FileTemp fileTemp, Map<String,String> map);
+    int fileTempSave(FileTemp fileTemp, SysUser sysUser);
 
     /**
     * 修改案卷模板信息表
     * @param fileTemp	案卷模板信息表
-    * @param map	用户集合
+    * @param sysUser	用户集合
     * @return
     */
-    int fileTempUpdate(FileTemp fileTemp, Map<String,String> map);
+    int fileTempUpdate(FileTemp fileTemp, SysUser sysUser);
 
     /**
     * 根据主键ID查看规则信息详情
@@ -55,6 +55,6 @@ public interface FileTempService {
     * @param id
     * @return
     */
-    int fileTempDelete(String id);
+    int fileTempDelete(String id, SysUser sysUser);
 
 }

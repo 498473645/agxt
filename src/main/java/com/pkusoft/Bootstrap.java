@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 // 参考https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-auto-configuration.html
 @EnableAutoConfiguration
-@ComponentScan(basePackages = {"org.support.pkubatis","com.pkusoft"})
+@ComponentScan(basePackages = {"org.support.pkubatis","com.pkusoft","com.pkusoft.usercenterproxy"})
 public class Bootstrap {
     public static void main(String[] args) {
         SpringApplication.run(Bootstrap.class, args);

@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -69,109 +70,97 @@ public class FileTempController  {
             dto.setData(list);
             dto.setCount(count);
             dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
-            dto.setStatusMsg("查询业务类型数据成功");
+            dto.setStatusMsg("查询案卷模板信息表成功");
             return dto;
         }catch(Exception e){
-            log.error("查询业务类型数据错误",e);
+            log.error("查询案卷模板信息表错误",e);
             e.printStackTrace();
-            return new ResponseData<>(ResponseData.STATUS_CODE_OTHER,"查询业务类型");
+            return new ResponseData<>(ResponseData.STATUS_CODE_OTHER,"查询案卷模板信息表错误");
         }
     }
 
     /**
-    * 新增案卷模板信息表
-    * @param requestBody
+    * 新增/修改案卷模板信息表
+    * @param fileTemp
     * @return
     */
-    @ApiOperation(value="新增案卷模板信息表", notes="新增案卷模板信息表")
-    @RequestMapping(value = "/fileTemp/fileTempSave", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ApiOperation(value="新增/修改案卷模板信息表", notes="新增/修改案卷模板信息表")
+    @RequestMapping(value = "/fileTemp/fileTempSaveOrUpdate", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public ResponseData<Map> fileTempSave(@RequestBody(required = false) Map<String, String> requestBody){
-        // 检查参数
-        if (requestBody == null) {
-            return new ResponseData<>(ResponseData.STATUS_CODE_PARAM, "参数为空");
-        }
+    public ResponseData<Map> fileTempSave(@RequestBody FileTemp fileTemp, HttpServletRequest request){
         try {
-            // TODO: 业务逻辑
-            Map responseData = null;
-            return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS, null, responseData);
-        } catch (Exception e) {
+            if (fileTemp == null) {
+                return new ResponseData(ResponseData.STATUS_CODE_BIZ, "参数不能为空");
+            }
+            ResponseData responseData = new ResponseData();
+            SysUser sysUser = sysUserService.getCurrentUser(request);
+            if (!StringUtils.hasText(fileTemp.getId())) {
+                // 新增
+                fileTempService.fileTempSave(fileTemp,sysUser);
+                responseData.setStatusMsg("新增案卷模板信息成功！");
+                responseData.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
+            }else {
+                // 修改
+                fileTempService.fileTempUpdate(fileTemp,sysUser);
+                responseData.setStatusMsg("修改案卷模板信息成功！");
+                responseData.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
+            }
+            return responseData;
+        }catch ( Exception e){
+            e.printStackTrace();
             log.error(e.getMessage(), e);
-            // TODO: 业务日志
-            return new ResponseData<>(ResponseData.STATUS_CODE_BIZ, "error：" + e.getMessage());
-        }
-    }
-
-    /**
-    * 修改案卷模板信息表
-    * @param requestBody
-    * @return
-    */
-    @ApiOperation(value="修改案卷模板信息表", notes="修改案卷模板信息表")
-    @RequestMapping(value = "/fileTemp/fileTempUpdate", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    @ResponseBody
-    public ResponseData<Map> fileTempUpdate(@RequestBody(required = false) Map<String, String> requestBody){
-        // 检查参数
-        if (requestBody == null) {
-            return new ResponseData<>(ResponseData.STATUS_CODE_PARAM, "参数为空");
-        }
-        try {
-            // TODO: 业务逻辑
-            Map responseData = null;
-            return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS, null, responseData);
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
-            // TODO: 业务日志
-            return new ResponseData<>(ResponseData.STATUS_CODE_BIZ, "error：" + e.getMessage());
+            return new ResponseData<>(ResponseData.STATUS_CODE_BIZ,"新增/修改案卷模板信息出错!");
         }
     }
 
     /**
     * 查看案卷模板信息表
-    * @param requestBody
+    * @param map
     * @return
     */
     @ApiOperation(value="查看案卷模板信息表", notes="查看案卷模板信息表")
     @RequestMapping(value = "/fileTemp/fileTempDetails", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public ResponseData<Map> fileTempDetails(@RequestBody(required = false) Map<String, String> requestBody){
-        // 检查参数
-        if (requestBody == null) {
-            return new ResponseData<>(ResponseData.STATUS_CODE_PARAM, "参数为空");
+    public ResponseData<FileTemp> fileTempDetails(@RequestBody(required = false) Map<String, String> map){
+        String id = map.get("id");
+        if (!StringUtils.hasText(id)) {
+            return new ResponseData(ResponseData.STATUS_CODE_OTHER, "参数不能为空");
         }
         try {
-            // TODO: 业务逻辑
-            Map responseData = null;
-            return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS, null, responseData);
+            FileTemp fileTemp = fileTempService.getFileTemp(id);
+            return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS, "操作成功", fileTemp);
         } catch (Exception e) {
-            log.error(e.getMessage(), e);
-            // TODO: 业务日志
-            return new ResponseData<>(ResponseData.STATUS_CODE_BIZ, "error：" + e.getMessage());
+            e.printStackTrace();
+            log.error("查看案卷模板信息出错", e);
+            return new ResponseData<>(ResponseData.STATUS_CODE_OTHER, "查看案卷模板信息出错：" + e.getMessage());
         }
     }
 
 
 	/**
     * 删除案卷模板信息表
-    * @param requestBody
+    * @param fileTemp
     * @return
     */
     @ApiOperation(value="删除案卷模板信息表", notes="删除案卷模板信息表")
     @RequestMapping(value = "/fileTemp/fileTempDelete", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public ResponseData<Map> fileTempDelete(@RequestBody(required = false) Map<String, String> requestBody){
-        // 检查参数
-        if (requestBody == null) {
-            return new ResponseData<>(ResponseData.STATUS_CODE_PARAM, "参数为空");
+    public ResponseData<Map> fileTempDelete(@RequestBody FileTemp fileTemp, HttpServletRequest request){
+        String id = fileTemp.getId();
+        if (!StringUtils.hasText(id)) {
+            return new ResponseData(ResponseData.STATUS_CODE_OTHER, "参数不能为空");
         }
         try {
-            // TODO: 业务逻辑
-            Map responseData = null;
-            return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS, null, responseData);
+            SysUser sysUser = sysUserService.getCurrentUser(request);
+            int num = fileTempService.fileTempDelete(id, sysUser);
+            if (num > 0) {
+                return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS, "操作成功");
+            }
+            return new ResponseData<>(ResponseData.STATUS_CODE_OTHER, "操作失败");
         } catch (Exception e) {
-            log.error(e.getMessage(), e);
-            // TODO: 业务日志
-            return new ResponseData<>(ResponseData.STATUS_CODE_BIZ, "error：" + e.getMessage());
+            e.printStackTrace();
+            log.error("删除案卷模板信息出错", e);
+            return new ResponseData<>(ResponseData.STATUS_CODE_OTHER, "删除案卷模板信息出错：" + e.getMessage());
         }
     }
 
