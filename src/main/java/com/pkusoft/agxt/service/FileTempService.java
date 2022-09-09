@@ -52,9 +52,24 @@ public interface FileTempService {
 
     /**
     * 根据主键ID删除规则信息
-    * @param id
+    * @param ids
     * @return
     */
-    int fileTempDelete(String id, SysUser sysUser);
+    int fileTempDelete(String[] ids);
 
+    List<FileTemp> getFileTempTreeList(FileTempParam fileTempParam, SysUser user);
+
+    /**
+     * 模板树节点添加
+     * @param jobFileTemp
+     * @return
+     */
+    int insertFileTempTree(FileTemp jobFileTemp,SysUser sysUser);
+
+    /**
+     * 案卷模板信息删除
+     * @param id
+     * @return
+     */
+    void newJobFileTempDel(String id);
 }

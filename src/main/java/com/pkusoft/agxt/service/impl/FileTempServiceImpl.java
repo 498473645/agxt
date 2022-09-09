@@ -11,6 +11,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.Date;
@@ -49,6 +50,9 @@ public class FileTempServiceImpl implements FileTempService {
     private void setConditions(Example.Criteria criteria, FileTempParam fileTempParam, SysUser user) {
         criteria.andEqualTo("parentId", "00000000-0000-0000-0000-000000000000");
         criteria.andEqualTo("isPublic", "1");
+        if(StringUtils.hasText(fileTempParam.getName())){
+            criteria.andLike("name", '%' + fileTempParam.getName() + '%');
+        }
     }
 
     public int fileTempSave(FileTemp fileTemp, SysUser sysUser){
@@ -106,9 +110,86 @@ public class FileTempServiceImpl implements FileTempService {
         return fileTempMapper.selectByPrimaryKey(id);
     }
 
-    public int fileTempDelete(String id, SysUser sysUser){
-        int num = fileTempMapper.deleteByPrimaryKey(id);
+    public int fileTempDelete(String[] ids){
+        int num = 0;
+        for (int i = 0; i < ids.length; i++) {
+            num = fileTempMapper.deleteByPrimaryKey(ids[i]);
+        }
         return num;
+    }
+
+    @Override
+    public List<FileTemp> getFileTempTreeList(FileTempParam fileTempParam, SysUser user) {
+        Example example = new Example(FileTemp.class);
+        Example.Criteria criteria = example.createCriteria();
+        //The query conditions are edited here
+        criteria.andNotEqualTo("parentId", "00000000-0000-0000-0000-000000000000");
+        if(StringUtils.hasText(fileTempParam.getParentId())){
+            criteria.andLike("treePath", '%' + fileTempParam.getParentId() + '%');
+        }
+        if(fileTempParam.getLev()!=null){
+            criteria.andLike("lev", String.valueOf(fileTempParam.getLev()));
+        }
+        example.setOrderByClause("lev,sn");
+        return fileTempMapper.selectByExample(example);
+    }
+
+    public int insertFileTempTree(FileTemp jobFileTemp,SysUser sysUser) {
+        String uuid = UUID.randomUUID().toString();
+        Double sn = maxSn();
+        if (StringUtils.hasText(jobFileTemp.getId())) { // 根据的树节点编号查询得到父树节点信息
+            FileTemp jobFile = fileTempMapper.selectByPrimaryKey(jobFileTemp.getId());
+            jobFileTemp.setParentId(jobFile.getId());
+            jobFileTemp.setLev(jobFile.getLev() + 1);
+            jobFileTemp.setTreePath(jobFile.getTreePath() + uuid + "/");
+            jobFileTemp.setDiskPath(jobFile.getDiskPath() + uuid + "/");
+            jobFileTemp.setType(jobFile.getType());
+            jobFileTemp.setMetalType(jobFile.getMetalType());
+            jobFileTemp.setIcon(jobFile.getIcon());
+        } else {// 默认添加的树级别为2级,并且为根节点
+            FileTemp jobFile = fileTempMapper.selectByPrimaryKey(jobFileTemp.getParentId());
+            Integer treeLevel = 2;
+            jobFileTemp.setLev(treeLevel);
+            jobFileTemp.setTreePath(jobFile.getTreePath() + uuid + "/");
+            jobFileTemp.setDiskPath("/" + uuid + "/");
+            jobFileTemp.setType(jobFile.getType());
+        }
+
+        // 生成的菜单标识号
+        jobFileTemp.setId(uuid);
+        jobFileTemp.setCode(uuid);
+
+        // 排序--随单位标识号从小到大排列,可以直接将MenuId赋值给orderFlag
+        jobFileTemp.setSn(Double.valueOf(++sn));
+
+        // 录入用户信息
+        jobFileTemp.setCreaterId(sysUser.getIdcard());
+        jobFileTemp.setCreaterName(sysUser.getUserName());
+        jobFileTemp.setCreateTime(new Date());
+        jobFileTemp.setModerId(sysUser.getIdcard());
+        jobFileTemp.setModerName(sysUser.getUserName());
+        jobFileTemp.setModTime(new Date());
+
+        return fileTempMapper.insertSelective(jobFileTemp);
+    }
+
+    public void newJobFileTempDel(String id) {
+        fileTempDel(id);
+        FileTemp fileTemp = new FileTemp();
+        fileTemp.setId(id);
+        fileTempMapper.delete(fileTemp);
+    }
+
+    private void fileTempDel(String parentId) {
+        FileTemp fileTemp = new FileTemp();
+        fileTemp.setParentId(parentId);
+        List<FileTemp> list = fileTempMapper.selectByExample(fileTemp);
+        if (list.size() > 0) {
+            for (FileTemp jobFileTemp : list) {
+                fileTempDel(jobFileTemp.getId());
+                fileTempMapper.delete(jobFileTemp);
+            }
+        }
     }
 
     /**

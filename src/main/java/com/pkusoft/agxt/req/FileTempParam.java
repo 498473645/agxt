@@ -269,6 +269,15 @@ public class FileTempParam extends Page {
     @ApiModelProperty(value = "当前数据归属单位")
     private String curOrgData;
 
+    private String[] ids;
+
+    public String[] getIds() {
+        return ids;
+    }
+
+    public void setIds(String[] ids) {
+        this.ids = ids;
+    }
 
     /**
     * 获得

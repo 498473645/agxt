@@ -32,6 +32,7 @@ import com.pkusoft.agxt.service.FileTempService;
 
 import org.support.commons.springmvc.ResponseData;
 import pkubatis.common.base.ResponseDto;
+import pkubatis.model.JsonResult;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -139,29 +140,87 @@ public class FileTempController  {
 
 	/**
     * 删除案卷模板信息表
-    * @param fileTemp
+    * @param fileTempParam
     * @return
     */
     @ApiOperation(value="删除案卷模板信息表", notes="删除案卷模板信息表")
     @RequestMapping(value = "/fileTemp/fileTempDelete", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public ResponseData<Map> fileTempDelete(@RequestBody FileTemp fileTemp, HttpServletRequest request){
-        String id = fileTemp.getId();
-        if (!StringUtils.hasText(id)) {
-            return new ResponseData(ResponseData.STATUS_CODE_OTHER, "参数不能为空");
-        }
-        try {
-            SysUser sysUser = sysUserService.getCurrentUser(request);
-            int num = fileTempService.fileTempDelete(id, sysUser);
-            if (num > 0) {
-                return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS, "操作成功");
+    public ResponseData fileTempDelete(@RequestBody FileTempParam fileTempParam){
+        if(fileTempParam.getIds() != null){
+            int num = fileTempService.fileTempDelete(fileTempParam.getIds());
+            if(num>0){
+                return new ResponseData(ResponseData.STATUS_CODE_SUCCESS, "操作成功", num);
+            }else{
+                return new ResponseData(ResponseData.STATUS_CODE_OTHER, "操作失败", num);
             }
-            return new ResponseData<>(ResponseData.STATUS_CODE_OTHER, "操作失败");
-        } catch (Exception e) {
-            e.printStackTrace();
-            log.error("删除案卷模板信息出错", e);
-            return new ResponseData<>(ResponseData.STATUS_CODE_OTHER, "删除案卷模板信息出错：" + e.getMessage());
+        }else{
+            log.error("请求参数不允许为空");
+            return new ResponseData(ResponseData.STATUS_CODE_OTHER, "请求参数不允许为空");
         }
     }
 
+    /**
+     * 模板树
+     *
+     * @param fileTempParam
+     * @return
+     */
+    @RequestMapping(value = "/fileTemp/jobFileTempTree", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    public ResponseData<List<FileTemp>> jobFileTempTree(HttpServletRequest request, @RequestBody FileTempParam fileTempParam) {
+        ResponseDto<List<FileTemp>> dto = new ResponseDto<List<FileTemp>>();
+        try{
+            SysUser user = sysUserService.getCurrentUser(request);
+            List<FileTemp> list = fileTempService.getFileTempTreeList(fileTempParam,user);
+            dto.setData(list);
+            dto.setCount(list.size());
+            dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
+            dto.setStatusMsg("查询案卷模板树信息表成功");
+            return dto;
+        }catch(Exception e){
+            log.error("查询案卷模板树信息表错误",e);
+            e.printStackTrace();
+            return new ResponseData<>(ResponseData.STATUS_CODE_OTHER,"查询案卷模板树信息表错误");
+        }
+    }
+
+    /**
+     * 新增模板树节点
+     *
+     * @param fileTemp
+     * @return
+     */
+    @RequestMapping(value = "/fileTemp/sysMenuAdd", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    public ResponseData sysMenuAdd(FileTemp fileTemp,HttpServletRequest request) {
+        try {
+            SysUser sysUser= sysUserService.getCurrentUser(request);
+            fileTemp.setId(fileTemp.getCode());
+            fileTempService.insertFileTempTree(fileTemp,sysUser);
+            // caseSortService.insertCaseSort(caseSort);
+            return new ResponseData(ResponseData.STATUS_CODE_SUCCESS,"新增模板树节点成功");
+        } catch (Exception e) {
+            log.error("新增模板树节点失败", e);
+            return new ResponseData(ResponseData.STATUS_CODE_OTHER,"新增模板树节点失败");
+        }
+    }
+
+    /**
+     * 案卷模板信息删除
+     *
+     * @param id
+     * @return JsonResult
+     */
+    @RequestMapping(value = "/fileTemp/newFileTempDel", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    public ResponseData newFileTempDel(String id) {
+        try {
+            fileTempService.newJobFileTempDel(id);
+            return new ResponseData(ResponseData.STATUS_CODE_SUCCESS,"模板信息删除成功");
+        } catch (Exception e) {
+            log.error("模板信息删除出错", e);
+            return new ResponseData(ResponseData.STATUS_CODE_OTHER,"模板信息删除出错");
+        }
+    }
 }
