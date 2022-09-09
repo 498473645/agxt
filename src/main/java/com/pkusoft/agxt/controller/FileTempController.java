@@ -1,40 +1,28 @@
 package com.pkusoft.agxt.controller;
 
 
-import java.util.List;
-import java.util.Map;
-
-
 import com.pkusoft.agxt.model.FileTemp;
 import com.pkusoft.agxt.req.FileTempParam;
-import com.pkusoft.lesp.model.KeAgAjztxx;
-import com.pkusoft.lesp.req.KeAgAjztxxParam;
+import com.pkusoft.agxt.service.FileTempService;
 import com.pkusoft.usercenter.po.SysUser;
 import com.pkusoft.usercenter.service.SysUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RequestBody;
-
-
-
-import com.pkusoft.agxt.service.FileTempService;
-
-
-
 import org.support.commons.springmvc.ResponseData;
 import pkubatis.common.base.ResponseDto;
-import pkubatis.model.JsonResult;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author
@@ -166,7 +154,7 @@ public class FileTempController  {
      * @param fileTempParam
      * @return
      */
-    @RequestMapping(value = "/fileTemp/jobFileTempTree", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "/fileTemp/fileTempTree", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     public ResponseData<List<FileTemp>> jobFileTempTree(HttpServletRequest request, @RequestBody FileTempParam fileTempParam) {
         ResponseDto<List<FileTemp>> dto = new ResponseDto<List<FileTemp>>();
@@ -191,9 +179,9 @@ public class FileTempController  {
      * @param fileTemp
      * @return
      */
-    @RequestMapping(value = "/fileTemp/sysMenuAdd", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "/fileTemp/fileTempAdd", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public ResponseData sysMenuAdd(FileTemp fileTemp,HttpServletRequest request) {
+    public ResponseData sysMenuAdd(@RequestBody FileTemp fileTemp,HttpServletRequest request) {
         try {
             SysUser sysUser= sysUserService.getCurrentUser(request);
             fileTemp.setId(fileTemp.getCode());
@@ -207,6 +195,22 @@ public class FileTempController  {
     }
 
     /**
+     * 新增模板主节点
+     */
+    @RequestMapping(value = "/fileTemp/fileTempMainAdd", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    public ResponseData sysMenuMainAdd(@RequestBody FileTemp fileTemp,HttpServletRequest request) {
+        try {
+            SysUser sysUser= sysUserService.getCurrentUser(request);
+            fileTempService.insertFileTempTree(fileTemp,sysUser);
+            return new ResponseData(ResponseData.STATUS_CODE_SUCCESS,"新增模板树主节点成功");
+        } catch (Exception e) {
+            log.error("新增模板树主节点失败", e);
+            return new ResponseData(ResponseData.STATUS_CODE_OTHER,"新增模板树主节点失败");
+        }
+    }
+
+    /**
      * 案卷模板信息删除
      *
      * @param id
@@ -216,8 +220,15 @@ public class FileTempController  {
     @ResponseBody
     public ResponseData newFileTempDel(String id) {
         try {
-            fileTempService.newJobFileTempDel(id);
-            return new ResponseData(ResponseData.STATUS_CODE_SUCCESS,"模板信息删除成功");
+            if (id != null) {
+                int num = fileTempService.newJobFileTempDel(id);
+                if (num>0) {
+                    return new ResponseData(ResponseData.STATUS_CODE_SUCCESS,"模板信息删除成功");
+                }
+                return new ResponseData(ResponseData.STATUS_CODE_OTHER,"模板信息删除出错");
+            } else {
+                return new ResponseData(ResponseData.STATUS_CODE_OTHER,"参数不能为空");
+            }
         } catch (Exception e) {
             log.error("模板信息删除出错", e);
             return new ResponseData(ResponseData.STATUS_CODE_OTHER,"模板信息删除出错");

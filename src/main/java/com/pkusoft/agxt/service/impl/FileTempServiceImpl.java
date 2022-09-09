@@ -173,17 +173,17 @@ public class FileTempServiceImpl implements FileTempService {
         return fileTempMapper.insertSelective(jobFileTemp);
     }
 
-    public void newJobFileTempDel(String id) {
+    @Transactional
+    public int newJobFileTempDel(String id) {
         fileTempDel(id);
-        FileTemp fileTemp = new FileTemp();
-        fileTemp.setId(id);
-        fileTempMapper.delete(fileTemp);
+        int num = fileTempMapper.deleteByPrimaryKey(id);
+        return num;
     }
 
     private void fileTempDel(String parentId) {
         FileTemp fileTemp = new FileTemp();
         fileTemp.setParentId(parentId);
-        List<FileTemp> list = fileTempMapper.selectByExample(fileTemp);
+        List<FileTemp> list = fileTempMapper.select(fileTemp);
         if (list.size() > 0) {
             for (FileTemp jobFileTemp : list) {
                 fileTempDel(jobFileTemp.getId());

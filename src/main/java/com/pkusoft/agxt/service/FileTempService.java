@@ -71,5 +71,5 @@ public interface FileTempService {
      * @param id
      * @return
      */
-    void newJobFileTempDel(String id);
+    int newJobFileTempDel(String id);
 }
