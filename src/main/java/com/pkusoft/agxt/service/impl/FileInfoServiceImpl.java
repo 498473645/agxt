@@ -30,9 +30,6 @@ public class FileInfoServiceImpl implements FileInfoService {
     private FileInfoMapper fileInfoMapper;
 
     @Autowired
-    private SysRoleService sysRoleService;
-
-    @Autowired
     private SysPermitService sysPermitService;
 
     public List<FileInfo> getFileInfoList(Map<String, String> map) {

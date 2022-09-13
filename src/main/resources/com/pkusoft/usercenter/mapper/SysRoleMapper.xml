@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pkusoft.usercenter.mapper.SysRoleMapper">
+    <!-- @codeGenerate -->
+    <resultMap id="BaseResultMap" type="com.pkusoft.usercenter.po.SysRole">
+        <id column="ROLE_ID" jdbcType="VARCHAR" property="roleId"/>
+        <result column="ROLE_NAME" jdbcType="VARCHAR" property="roleName"/>
+        <result column="SYS_ID" jdbcType="VARCHAR" property="sysId"/>
+        <result column="SYS_NAME" jdbcType="VARCHAR" property="sysName"/>
+        <result column="ROLE_LEVEL" jdbcType="VARCHAR" property="roleLevel"/>
+        <result column="ROLE_DERC" jdbcType="VARCHAR" property="roleDerc"/>
+        <result column="ORDER_FLAG" jdbcType="DECIMAL" property="orderFlag"/>
+        <result column="RESERVE1" jdbcType="VARCHAR" property="reserve1"/>
+        <result column="RESERVE2" jdbcType="VARCHAR" property="reserve2"/>
+        <result column="RESERVE3" jdbcType="VARCHAR" property="reserve3"/>
+        <result column="RESERVE4" jdbcType="VARCHAR" property="reserve4"/>
+        <result column="RESERVE5" jdbcType="VARCHAR" property="reserve5"/>
+        <result column="ADD_USER_ID" jdbcType="VARCHAR" property="addUserId"/>
+        <result column="ADD_USER_NAME" jdbcType="VARCHAR" property="addUserName"/>
+        <result column="ADD_TIME" jdbcType="DATE" property="addTime"/>
+        <result column="MODIFY_USER_ID" jdbcType="VARCHAR" property="modifyUserId"/>
+        <result column="MODIFY_USER_NAME" jdbcType="VARCHAR" property="modifyUserName"/>
+        <result column="MODIFY_TIME" jdbcType="DATE" property="modifyTime"/>
+        <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ROLE_ID,ROLE_NAME,ROLE_LEVEL,ROLE_DERC,ORDER_FLAG,RESERVE1,RESERVE2,RESERVE3,RESERVE4,RESERVE5,ADD_USER_ID,ADD_USER_NAME,ADD_TIME,MODIFY_USER_ID,MODIFY_USER_NAME,MODIFY_TIME
+    </sql>
+
+    <!-- user-defined -->
+
+</mapper>
