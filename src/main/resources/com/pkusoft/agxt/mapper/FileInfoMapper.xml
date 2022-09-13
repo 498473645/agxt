@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pkusoft.agxt.mapper.FileInfoMapper">
+    <!-- @codeGenerate -->
+    <resultMap id="BaseResultMap" type="com.pkusoft.agxt.model.FileInfo">
+        <id column="ID" jdbcType="VARCHAR" property="id"/>
+        <result column="CODE" jdbcType="VARCHAR" property="code"/>
+        <result column="NAME" jdbcType="VARCHAR" property="name"/>
+        <result column="CASE_ID" jdbcType="VARCHAR" property="caseId"/>
+        <result column="CASE_CODE" jdbcType="VARCHAR" property="caseCode"/>
+        <result column="CASE_NAME" jdbcType="VARCHAR" property="caseName"/>
+        <result column="HOSTER_ID" jdbcType="VARCHAR" property="hosterId"/>
+        <result column="HOSTER_PCODE" jdbcType="VARCHAR" property="hosterPcode"/>
+        <result column="HOSTER_NAME" jdbcType="VARCHAR" property="hosterName"/>
+        <result column="HANDLE_ORG_CODE" jdbcType="VARCHAR" property="handleOrgCode"/>
+        <result column="HANDLE_ORG_NAME" jdbcType="VARCHAR" property="handleOrgName"/>
+        <result column="TYPE" jdbcType="VARCHAR" property="type"/>
+        <result column="SN" jdbcType="DECIMAL" property="sn"/>
+        <result column="PLACE_ID" jdbcType="VARCHAR" property="placeId"/>
+        <result column="PLACE_NAME" jdbcType="VARCHAR" property="placeName"/>
+        <result column="AREA_ID" jdbcType="VARCHAR" property="areaId"/>
+        <result column="AREA_NAME" jdbcType="VARCHAR" property="areaName"/>
+        <result column="SPACE_ID" jdbcType="VARCHAR" property="spaceId"/>
+        <result column="SPACE_NAME" jdbcType="VARCHAR" property="spaceName"/>
+        <result column="CELL_ID" jdbcType="VARCHAR" property="cellId"/>
+        <result column="CELL_NAME" jdbcType="VARCHAR" property="cellName"/>
+        <result column="DISK_PATH" jdbcType="VARCHAR" property="diskPath"/>
+        <result column="IS_SCAN" jdbcType="DECIMAL" property="isScan"/>
+        <result column="PAGE_COUNT" jdbcType="DECIMAL" property="pageCount"/>
+        <result column="PRINT_CODE" jdbcType="VARCHAR" property="printCode"/>
+        <result column="PRINT_COUNT" jdbcType="DECIMAL" property="printCount"/>
+        <result column="BURN_COUNT" jdbcType="DECIMAL" property="burnCount"/>
+        <result column="KEYWORDS" jdbcType="VARCHAR" property="keywords"/>
+        <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+        <result column="RESERVE1" jdbcType="VARCHAR" property="reserve1"/>
+        <result column="RESERVE2" jdbcType="VARCHAR" property="reserve2"/>
+        <result column="RESERVE3" jdbcType="VARCHAR" property="reserve3"/>
+        <result column="MEMO" jdbcType="VARCHAR" property="memo"/>
+        <result column="ROW_STATUS" jdbcType="DECIMAL" property="rowStatus"/>
+        <result column="CREATER_ID" jdbcType="VARCHAR" property="createrId"/>
+        <result column="CREATER_NAME" jdbcType="VARCHAR" property="createrName"/>
+        <result column="CREATE_TIME" jdbcType="DATE" property="createTime"/>
+        <result column="MODER_ID" jdbcType="VARCHAR" property="moderId"/>
+        <result column="MODER_NAME" jdbcType="VARCHAR" property="moderName"/>
+        <result column="MOD_TIME" jdbcType="DATE" property="modTime"/>
+        <result column="ORG_C" jdbcType="VARCHAR" property="orgC"/>
+        <result column="ORG_S" jdbcType="VARCHAR" property="orgS"/>
+        <result column="ORG_T" jdbcType="VARCHAR" property="orgT"/>
+        <result column="ORG_C_DATA" jdbcType="VARCHAR" property="orgCData"/>
+        <result column="ORG_S_DATA" jdbcType="VARCHAR" property="orgSData"/>
+        <result column="ORG_T_DATA" jdbcType="VARCHAR" property="orgTData"/>
+        <result column="CUR_ORG" jdbcType="VARCHAR" property="curOrg"/>
+        <result column="CUR_ORG_DATA" jdbcType="VARCHAR" property="curOrgData"/>
+        <result column="NAME_SPELL" jdbcType="VARCHAR" property="nameSpell"/>
+        <result column="HOSTER_SPELL" jdbcType="VARCHAR" property="hosterSpell"/>
+        <result column="SUPPLEINV_COUNT" jdbcType="DECIMAL" property="suppleinvCount"/>
+        <result column="ACCEPT_TIME" jdbcType="DATE" property="acceptTime"/>
+        <result column="IS_UPD_PS" jdbcType="VARCHAR" property="isUpdPs"/>
+        <result column="UPD_PS_TIME" jdbcType="DATE" property="updPsTime"/>
+        <result column="DATA_SOURCE" jdbcType="VARCHAR" property="dataSource"/>
+
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ID
+        ,CODE,NAME,CASE_ID,CASE_CODE,CASE_NAME,HOSTER_ID,HOSTER_PCODE,HOSTER_NAME,HANDLE_ORG_CODE,HANDLE_ORG_NAME,TYPE,SN,PLACE_ID,PLACE_NAME,AREA_ID,AREA_NAME,SPACE_ID,SPACE_NAME,CELL_ID,CELL_NAME,DISK_PATH,IS_SCAN,PAGE_COUNT,PRINT_CODE,PRINT_COUNT,BURN_COUNT,KEYWORDS,STATUS,RESERVE1,RESERVE2,RESERVE3,MEMO,ROW_STATUS,CREATER_ID,CREATER_NAME,CREATE_TIME,MODER_ID,MODER_NAME,MOD_TIME,ORG_C,ORG_S,ORG_T,ORG_C_DATA,ORG_S_DATA,ORG_T_DATA,CUR_ORG,CUR_ORG_DATA,NAME_SPELL,HOSTER_SPELL,SUPPLEINV_COUNT,ACCEPT_TIME,IS_UPD_PS,UPD_PS_TIME,DATA_SOURCE
+    </sql>
+
+    <!-- user-defined -->
+    <!-- 通过用户id和案卷状态获取对象信息归还-->
+    <select id="jobFileInfoListDataSMCJ" resultMap="BaseResultMapParam" parameterType="com.pkusoft.agxt.model.FileInfo">
+        select * from(select s_.*,rownum rn_ from(
+        select distinct
+        f.*,count(distinct f.id) over () tot_cnt
+        from FILE_INFO f
+        inner join
+        File_Auth auth
+        on f.id = auth.file_id
+        <where>
+            1 = 1
+<!--            ( 1 = 1 (-->
+<!--            <if test=" operId!= null">-->
+<!--                auth.OPER_ID = #{operId,jdbcType=VARCHAR}-->
+<!--            </if>-->
+<!--            <if test="orgCData != null">-->
+<!--                auth.ORG_C_DATA = #{orgCData,jdbcType=VARCHAR}-->
+<!--            </if>-->
+<!--            <if test="orgSData != null">-->
+<!--                auth.ORG_S_DATA = #{orgSData,jdbcType=VARCHAR}-->
+<!--            </if>-->
+<!--            <if test="orgTData != null">-->
+<!--                auth.ORG_T_DATA = #{orgTData,jdbcType=VARCHAR}-->
+<!--            </if>-->
+<!--            &lt;!&ndash; <if test="orgCode != null" >-->
+<!--              or auth.ORG_CODE = #{orgCode,jdbcType=VARCHAR}-->
+<!--            </if> &ndash;&gt;-->
+
+<!--            ) or (f.HOSTER_ID = #{zbrId,jdbcType=VARCHAR}) )-->
+            <!-- 查询不等于9开头的数据,9999-作废和9000-归档都是不能查出来的,以后9开头的估计也不能查出来,所以排除9开头的 -->
+            and f.STATUS NOT LIKE '9%'
+
+            <if test=" status!= null">
+                and f.status = #{status,jdbcType=VARCHAR}
+            </if>
+            <if test=" ajbh!= null">
+                and f.CODE like #{ajbh,jdbcType=VARCHAR}
+            </if>
+            <if test=" saryxm != null">
+                and f.KEYWORDS like #{saryxm,jdbcType=VARCHAR}
+            </if>
+            <if test=" ajmc!= null">
+                and f.NAME like #{ajmc,jdbcType=VARCHAR}
+            </if>
+            <if test=" spaceId!= null">
+                and f.SPACE_ID = #{spaceId,jdbcType=VARCHAR}
+            </if>
+            <if test=" hosterId!= null">
+                and f.HOSTER_ID = #{hosterId,jdbcType=VARCHAR}
+            </if>
+            <if test=" handleOrgCode!= null">
+                and f.HANDLE_ORG_CODE =#{handleOrgCode,jdbcType=VARCHAR}
+            </if>
+            <if test=" type!= null">
+                and f.type = #{type,jdbcType=VARCHAR}
+            </if>
+            <if test=" createTimeq!= null">
+                and f.CREATE_TIME &gt;= #{createTimeq,jdbcType=VARCHAR}
+            </if>
+            <if test=" createTimej!= null">
+                and f.CREATE_TIME &lt;=#{createTimej,jdbcType=VARCHAR}
+            </if>
+        </where>
+        order by f.MOD_TIME DESC
+        ) s_ where rownum &lt;=#{start,jdbcType=DECIMAL}+#{pageSize,jdbcType=DECIMAL}) where rn_ &gt;#{start,jdbcType=DECIMAL}
+    </select>
+
+    <resultMap id="BaseResultMapParam" type="com.pkusoft.agxt.req.FileInfoParam">
+        <id column="ID" jdbcType="VARCHAR" property="id"/>
+        <result column="CODE" jdbcType="VARCHAR" property="code"/>
+        <result column="NAME" jdbcType="VARCHAR" property="name"/>
+        <result column="CASE_ID" jdbcType="VARCHAR" property="caseId"/>
+        <result column="CASE_CODE" jdbcType="VARCHAR" property="caseCode"/>
+        <result column="CASE_NAME" jdbcType="VARCHAR" property="caseName"/>
+        <result column="HOSTER_ID" jdbcType="VARCHAR" property="hosterId"/>
+        <result column="HOSTER_PCODE" jdbcType="VARCHAR" property="hosterPcode"/>
+        <result column="HOSTER_NAME" jdbcType="VARCHAR" property="hosterName"/>
+        <result column="HANDLE_ORG_CODE" jdbcType="VARCHAR" property="handleOrgCode"/>
+        <result column="HANDLE_ORG_NAME" jdbcType="VARCHAR" property="handleOrgName"/>
+        <result column="TYPE" jdbcType="VARCHAR" property="type"/>
+        <result column="SN" jdbcType="DECIMAL" property="sn"/>
+        <result column="PLACE_ID" jdbcType="VARCHAR" property="placeId"/>
+        <result column="PLACE_NAME" jdbcType="VARCHAR" property="placeName"/>
+        <result column="AREA_ID" jdbcType="VARCHAR" property="areaId"/>
+        <result column="AREA_NAME" jdbcType="VARCHAR" property="areaName"/>
+        <result column="SPACE_ID" jdbcType="VARCHAR" property="spaceId"/>
+        <result column="SPACE_NAME" jdbcType="VARCHAR" property="spaceName"/>
+        <result column="CELL_ID" jdbcType="VARCHAR" property="cellId"/>
+        <result column="CELL_NAME" jdbcType="VARCHAR" property="cellName"/>
+        <result column="DISK_PATH" jdbcType="VARCHAR" property="diskPath"/>
+        <result column="IS_SCAN" jdbcType="DECIMAL" property="isScan"/>
+        <result column="PAGE_COUNT" jdbcType="DECIMAL" property="pageCount"/>
+        <result column="PRINT_CODE" jdbcType="VARCHAR" property="printCode"/>
+        <result column="PRINT_COUNT" jdbcType="DECIMAL" property="printCount"/>
+        <result column="BURN_COUNT" jdbcType="DECIMAL" property="burnCount"/>
+        <result column="KEYWORDS" jdbcType="VARCHAR" property="keywords"/>
+        <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+        <result column="RESERVE1" jdbcType="VARCHAR" property="reserve1"/>
+        <result column="RESERVE2" jdbcType="VARCHAR" property="reserve2"/>
+        <result column="RESERVE3" jdbcType="VARCHAR" property="reserve3"/>
+        <result column="MEMO" jdbcType="VARCHAR" property="memo"/>
+        <result column="ROW_STATUS" jdbcType="DECIMAL" property="rowStatus"/>
+        <result column="CREATER_ID" jdbcType="VARCHAR" property="createrId"/>
+        <result column="CREATER_NAME" jdbcType="VARCHAR" property="createrName"/>
+        <result column="CREATE_TIME" jdbcType="DATE" property="createTime"/>
+        <result column="MODER_ID" jdbcType="VARCHAR" property="moderId"/>
+        <result column="MODER_NAME" jdbcType="VARCHAR" property="moderName"/>
+        <result column="MOD_TIME" jdbcType="DATE" property="modTime"/>
+        <result column="ORG_C" jdbcType="VARCHAR" property="orgC"/>
+        <result column="ORG_S" jdbcType="VARCHAR" property="orgS"/>
+        <result column="ORG_T" jdbcType="VARCHAR" property="orgT"/>
+        <result column="ORG_C_DATA" jdbcType="VARCHAR" property="orgCData"/>
+        <result column="ORG_S_DATA" jdbcType="VARCHAR" property="orgSData"/>
+        <result column="ORG_T_DATA" jdbcType="VARCHAR" property="orgTData"/>
+        <result column="CUR_ORG" jdbcType="VARCHAR" property="curOrg"/>
+        <result column="CUR_ORG_DATA" jdbcType="VARCHAR" property="curOrgData"/>
+        <result column="NAME_SPELL" jdbcType="VARCHAR" property="nameSpell"/>
+        <result column="HOSTER_SPELL" jdbcType="VARCHAR" property="hosterSpell"/>
+        <result column="SUPPLEINV_COUNT" jdbcType="DECIMAL" property="suppleinvCount"/>
+        <result column="ACCEPT_TIME" jdbcType="DATE" property="acceptTime"/>
+        <result column="IS_UPD_PS" jdbcType="VARCHAR" property="isUpdPs"/>
+        <result column="UPD_PS_TIME" jdbcType="DATE" property="updPsTime"/>
+        <result column="DATA_SOURCE" jdbcType="VARCHAR" property="dataSource"/>
+        <result column="operId" jdbcType="VARCHAR" property="operId"/>
+        <result column="tot_cnt" jdbcType="VARCHAR" property="tot_cnt"/>
+        <result column="isOrNot" jdbcType="VARCHAR" property="isOrNot"/>
+
+    </resultMap>
+</mapper>

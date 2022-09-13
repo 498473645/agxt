@@ -219,3 +219,5 @@ shiro-proxy.sso-server-logout-url: http://27.17.3.62:20201/user-center/logout.do
 shiro-proxy.sso-server-url: http://27.17.3.62:20201/user-center
 # （可选）成功页面。默认值：当前请求地址
 shiro-proxy.success-url: /swagger-ui.html
+
+shiro-proxy.proxy-id: 1a34cd94-f009-4b2e-a0fd-547e1e993473

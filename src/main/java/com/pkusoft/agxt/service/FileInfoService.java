@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.pkusoft.agxt.model.FileInfo;
+import com.pkusoft.agxt.req.FileInfoParam;
+import com.pkusoft.usercenter.po.SysUser;
 
 /**
 * @author
@@ -56,4 +58,11 @@ public interface FileInfoService {
     int fileInfoDelete(String id);
 
     FileInfo checkCaseInfo(FileInfo fileInfo);
+
+    /**
+     * web 扫描采集查询
+     * @param fileInfoParam
+     * @param sysUser
+     */
+    List<FileInfoParam> jobFileInfoListDataSMCJ(FileInfoParam fileInfoParam, SysUser sysUser);
 }

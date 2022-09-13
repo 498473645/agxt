@@ -198,14 +198,7 @@ public class FileTempServiceImpl implements FileTempService {
      * @return 排序号 sn
      */
     private Double maxSn() {
-        Example example = new Example(FileTemp.class);
-        example.setOrderByClause("SN desc");
-        Double sn = 1.00;
-        List<FileTemp> list = fileTempMapper.selectByExample(example);
-        if (list != null && list.size() > 0) {
-            FileTemp fileTemp = fileTempMapper.selectByExample(example).get(0);
-            sn = fileTemp.getSn();
-        }
-        return sn;
+        Integer sn = fileTempMapper.getMaxSN();
+        return Double.valueOf(sn);
     }
 }

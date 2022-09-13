@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import pkubatis.common.utils.DeptLevel;
+import pkubatis.common.utils.OrgData;
 import pkubatis.common.utils.PermitType;
 import tk.mybatis.mapper.entity.Example;
 

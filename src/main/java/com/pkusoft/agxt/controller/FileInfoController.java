@@ -1,11 +1,16 @@
 package com.pkusoft.agxt.controller;
 
 
+import java.util.List;
 import java.util.Map;
 
 
 import com.pkusoft.agxt.model.FileInfo;
+import com.pkusoft.agxt.model.FileTemp;
+import com.pkusoft.agxt.req.FileInfoParam;
 import com.pkusoft.agxt.service.FileInfoService;
+import com.pkusoft.usercenter.po.SysUser;
+import com.pkusoft.usercenter.service.SysUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -14,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,7 +29,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 import org.support.commons.springmvc.ResponseData;
+import pkubatis.common.base.ResponseDto;
 import pkubatis.constants.JobConstant;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author
@@ -39,6 +48,9 @@ public class FileInfoController  {
     @Autowired
     private FileInfoService fileInfoService ;
 
+    /***获取代理用户信息服务类*/
+    @Autowired
+    private SysUserService sysUserService;
 
     /**
     * 查询案卷信息表
@@ -190,6 +202,42 @@ public class FileInfoController  {
         } catch (Exception e) {
             log.error("检查案件是否已经建卷失败", e);
             return new ResponseData<>(ResponseData.STATUS_CODE_BIZ, "检查案件是否已经建卷失败：" + e.getMessage());
+        }
+    }
+
+    /**
+     * 案卷采集
+     * @param fileInfoParam
+     * @param request
+     * @return
+     */
+    @RequestMapping("/archives/jobFileInfoListDataAllSmcjNew")
+    @ResponseBody
+    public ResponseData jobFileInfoListDataSMCJNew(@RequestBody FileInfoParam fileInfoParam, HttpServletRequest request) {
+        ResponseDto<List<FileInfoParam>> dto = new ResponseDto<>();
+        try {
+            SysUser sysUser= sysUserService.getCurrentUser(request);
+            List<FileInfoParam> list = fileInfoService.jobFileInfoListDataSMCJ(fileInfoParam,sysUser);
+            int count = 0;
+            if (list.size() > 0) {
+                count = Integer.valueOf(list.get(0).getTot_cnt());
+            }
+            for(FileInfoParam jobFileInfoChange: list){
+                if(StringUtils.hasText(jobFileInfoChange.getReserve3()) && jobFileInfoChange.getReserve3().equals("1")){
+                    jobFileInfoChange.setReserve3("是");
+                }else{
+                    jobFileInfoChange.setReserve3("否");
+                }
+            }
+            dto.setData(list);
+            dto.setCount(count);
+            dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
+            dto.setStatusMsg("查询案卷模板树信息表成功");
+            return dto;
+
+        } catch (Exception e) {
+            log.error("案卷信息表查询列表数据出错", e);
+            return new ResponseData<>(ResponseData.STATUS_CODE_BIZ, "案卷信息表查询列表数据出错：" + e.getMessage());
         }
     }
 
