@@ -3,6 +3,7 @@ package com.pkusoft.agxt.service;
 import java.util.List;
 import java.util.Map;
 
+import com.pkusoft.agxt.model.CabArea;
 import com.pkusoft.agxt.model.CabSpace;
 import com.pkusoft.agxt.req.CabSpaceParam;
 import com.pkusoft.usercenter.po.SysUser;
@@ -18,6 +19,20 @@ public interface CabSpaceService {
     * @param sysUser	查询条件集合
     * @return
     */
+    List<CabSpaceParam> getCabSpaceParamList(CabSpaceParam cabSpaceParam, SysUser sysUser);
+
+    /**
+     * 查询案卷柜空间信息表总数
+     * @param sysUser	查询条件集合
+     * @return
+     */
+    int getCabSpaceParamCount(CabSpaceParam cabSpaceParam, SysUser sysUser);
+
+    /**
+     * 查询案卷柜空间信息表集合
+     * @param sysUser	查询条件集合
+     * @return
+     */
     List<CabSpace> getCabSpaceList(CabSpaceParam cabSpaceParam, SysUser sysUser);
 
     /**
@@ -57,4 +72,5 @@ public interface CabSpaceService {
     */
     int cabSpaceDelete(String id);
 
+    void updateByAreaId(CabArea cabArea, SysUser sysUser);
 }

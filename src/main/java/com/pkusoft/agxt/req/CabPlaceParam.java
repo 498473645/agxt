@@ -4,17 +4,16 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import pkubatis.common.base.Page;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
+
+import javax.persistence.*;
 
 /**
  * @author
- * @title: CabSpace
+ * @title: CabPlace
  */
-@ApiModel("案卷柜空间信息表")
-@Table(name = "CAB_SPACE")
-public class CabSpaceParam extends Page {
+@ApiModel("案卷柜场所信息表")
+@Table(name = "CAB_PLACE")
+public class CabPlaceParam extends Page {
 
  	/**
      *
@@ -39,46 +38,11 @@ public class CabSpaceParam extends Page {
     private String name;
 
  	/**
-     * 场所ID
-     */
-    @Column(name = "PLACE_ID")
-    @ApiModelProperty(value = "场所ID")
-    private String placeId;
-
- 	/**
-     * 场所名称
-     */
-    @Column(name = "PLACE_NAME")
-    @ApiModelProperty(value = "场所名称")
-    private String placeName;
-
- 	/**
-     * 区域ID
-     */
-    @Column(name = "AREA_ID")
-    @ApiModelProperty(value = "区域ID")
-    private String areaId;
-
- 	/**
-     * 区域名称
-     */
-    @Column(name = "AREA_NAME")
-    @ApiModelProperty(value = "区域名称")
-    private String areaName;
-
- 	/**
-     * 类型
+     * 案件类型
      */
     @Column(name = "TYPE")
-    @ApiModelProperty(value = "类型")
+    @ApiModelProperty(value = "案件类型")
     private String type;
-
- 	/**
-     * 组号
-     */
-    @Column(name = "GROUP_CODE")
-    @ApiModelProperty(value = "组号")
-    private String groupCode;
 
  	/**
      * 排序序号
@@ -88,18 +52,18 @@ public class CabSpaceParam extends Page {
     private Integer sn;
 
  	/**
-     * 所有人ID
+     * 区域总数
      */
-    @Column(name = "OWNER_ID")
-    @ApiModelProperty(value = "所有人ID")
-    private String ownerId;
+    @Column(name = "AREA_COUNT")
+    @ApiModelProperty(value = "区域总数")
+    private Integer areaCount;
 
  	/**
-     * 所有人姓名
+     * 空间总数
      */
-    @Column(name = "OWNER_NAME")
-    @ApiModelProperty(value = "所有人姓名")
-    private String ownerName;
+    @Column(name = "SPACE_COUNT")
+    @ApiModelProperty(value = "空间总数")
+    private Integer spaceCount;
 
  	/**
      * 空间格总数
@@ -109,52 +73,31 @@ public class CabSpaceParam extends Page {
     private Integer cellCount;
 
  	/**
-     * 容量
-     */
-    @Column(name = "CAPACITY")
-    @ApiModelProperty(value = "容量")
-    private Integer capacity;
-
- 	/**
-     * 已使用容量
-     */
-    @Column(name = "USED_CAP")
-    @ApiModelProperty(value = "已使用容量")
-    private Integer usedCap;
-
- 	/**
-     * 是否已满
-     */
-    @Column(name = "IS_FULL")
-    @ApiModelProperty(value = "是否已满")
-    private Integer isFull;
-
- 	/**
-     * 所属机构编码(使用者)
+     * 所属机构编码
      */
     @Column(name = "ORG_CODE")
-    @ApiModelProperty(value = "所属机构编码(使用者)")
+    @ApiModelProperty(value = "所属机构编码")
     private String orgCode;
 
  	/**
-     * 所属机构名称(使用者)
+     * 所属机构名称
      */
     @Column(name = "ORG_NAME")
-    @ApiModelProperty(value = "所属机构名称(使用者)")
+    @ApiModelProperty(value = "所属机构名称")
     private String orgName;
 
  	/**
-     * 状态  0000 - 空，关 0010 - 空，开 0020 - 空，关，加密 0030 - 空，开，加密 0100 - 已存放，关 0110 - 已存放，开 0120 - 已存放，关，加密 0130 - 已存放，开，加密 0900 - 满，关 0910 - 满，开 0920 - 满，关，加密 0930 - 满，开，加密
+     * 状态
      */
     @Column(name = "STATUS")
-    @ApiModelProperty(value = "状态  0000 - 空，关 0010 - 空，开 0020 - 空，关，加密 0030 - 空，开，加密 0100 - 已存放，关 0110 - 已存放，开 0120 - 已存放，关，加密 0130 - 已存放，开，加密 0900 - 满，关 0910 - 满，开 0920 - 满，关，加密 0930 - 满，开，加密")
+    @ApiModelProperty(value = "状态")
     private String status;
 
  	/**
-     * 人像案管柜组号(唯一)
+     * 预留字段1
      */
     @Column(name = "RESERVE1")
-    @ApiModelProperty(value = "人像案管柜组号(唯一)")
+    @ApiModelProperty(value = "预留字段1")
     private String reserve1;
 
  	/**
@@ -165,10 +108,10 @@ public class CabSpaceParam extends Page {
     private String reserve2;
 
  	/**
-     * 是否存在(1:存在,0:不存在)
+     * 预留字段3
      */
     @Column(name = "RESERVE3")
-    @ApiModelProperty(value = "是否存在(1:存在,0:不存在)")
+    @ApiModelProperty(value = "预留字段3")
     private String reserve3;
 
  	/**
@@ -270,17 +213,10 @@ public class CabSpaceParam extends Page {
     private String orgTData;
 
  	/**
-     * 是否公有, 1 - 公有, 0 - 私有
-     */
-    @Column(name = "IS_PUBLIC")
-    @ApiModelProperty(value = "是否公有, 1 - 公有, 0 - 私有")
-    private Integer isPublic;
-
- 	/**
-     * 当前归属单位(所属者)
+     * 当前归属单位
      */
     @Column(name = "CUR_ORG")
-    @ApiModelProperty(value = "当前归属单位(所属者)")
+    @ApiModelProperty(value = "当前归属单位")
     private String curOrg;
 
  	/**
@@ -291,37 +227,12 @@ public class CabSpaceParam extends Page {
     private String curOrgData;
 
  	/**
-     * 容纳案卷数
+     * 数据来源
      */
-    @Column(name = "FILE_COUNT")
-    @ApiModelProperty(value = "容纳案卷数")
-    private Integer fileCount;
+    @Column(name = "DATA_SOURCE")
+    @ApiModelProperty(value = "数据来源")
+    private String dataSource;
 
- 	/**
-     * 已放入案卷数
-     */
-    @Column(name = "CUR_FILE_COUNT")
-    @ApiModelProperty(value = "已放入案卷数")
-    private Integer curFileCount;
-
-    private java.lang.String curOrgName;
-    private java.lang.String deptName;
-
-    public String getCurOrgName() {
-        return curOrgName;
-    }
-
-    public void setCurOrgName(String curOrgName) {
-        this.curOrgName = curOrgName;
-    }
-
-    public String getDeptName() {
-        return deptName;
-    }
-
-    public void setDeptName(String deptName) {
-        this.deptName = deptName;
-    }
 
     /**
     * 获得
@@ -372,71 +283,7 @@ public class CabSpaceParam extends Page {
     }
 
     /**
-    * 获得场所ID
-    * @return PLACE_ID
-    */
-    public String getPlaceId() {
-        return this.placeId;
-    }
-
-    /**
-    * 设置场所ID
-    * @param placeId
-    */
-    public void setPlaceId(String placeId) {
-        this.placeId = placeId;
-    }
-
-    /**
-    * 获得场所名称
-    * @return PLACE_NAME
-    */
-    public String getPlaceName() {
-        return this.placeName;
-    }
-
-    /**
-    * 设置场所名称
-    * @param placeName
-    */
-    public void setPlaceName(String placeName) {
-        this.placeName = placeName;
-    }
-
-    /**
-    * 获得区域ID
-    * @return AREA_ID
-    */
-    public String getAreaId() {
-        return this.areaId;
-    }
-
-    /**
-    * 设置区域ID
-    * @param areaId
-    */
-    public void setAreaId(String areaId) {
-        this.areaId = areaId;
-    }
-
-    /**
-    * 获得区域名称
-    * @return AREA_NAME
-    */
-    public String getAreaName() {
-        return this.areaName;
-    }
-
-    /**
-    * 设置区域名称
-    * @param areaName
-    */
-    public void setAreaName(String areaName) {
-        this.areaName = areaName;
-    }
-
-    /**
-    * 获得类型
+    * 获得案件类型
     * @return TYPE
     */
     public String getType() {
@@ -444,27 +291,11 @@ public class CabSpaceParam extends Page {
     }
 
     /**
-    * 设置类型
+    * 设置案件类型
     * @param type
     */
     public void setType(String type) {
         this.type = type;
-    }
-
-    /**
-    * 获得组号
-    * @return GROUP_CODE
-    */
-    public String getGroupCode() {
-        return this.groupCode;
-    }
-
-    /**
-    * 设置组号
-    * @param groupCode
-    */
-    public void setGroupCode(String groupCode) {
-        this.groupCode = groupCode;
     }
 
     /**
@@ -484,35 +315,35 @@ public class CabSpaceParam extends Page {
     }
 
     /**
-    * 获得所有人ID
-    * @return OWNER_ID
+    * 获得区域总数
+    * @return AREA_COUNT
     */
-    public String getOwnerId() {
-        return this.ownerId;
+    public Integer getAreaCount() {
+        return this.areaCount;
     }
 
     /**
-    * 设置所有人ID
-    * @param ownerId
+    * 设置区域总数
+    * @param areaCount
     */
-    public void setOwnerId(String ownerId) {
-        this.ownerId = ownerId;
+    public void setAreaCount(Integer areaCount) {
+        this.areaCount = areaCount;
     }
 
     /**
-    * 获得所有人姓名
-    * @return OWNER_NAME
+    * 获得空间总数
+    * @return SPACE_COUNT
     */
-    public String getOwnerName() {
-        return this.ownerName;
+    public Integer getSpaceCount() {
+        return this.spaceCount;
     }
 
     /**
-    * 设置所有人姓名
-    * @param ownerName
+    * 设置空间总数
+    * @param spaceCount
     */
-    public void setOwnerName(String ownerName) {
-        this.ownerName = ownerName;
+    public void setSpaceCount(Integer spaceCount) {
+        this.spaceCount = spaceCount;
     }
 
     /**
@@ -532,55 +363,7 @@ public class CabSpaceParam extends Page {
     }
 
     /**
-    * 获得容量
-    * @return CAPACITY
-    */
-    public Integer getCapacity() {
-        return this.capacity;
-    }
-
-    /**
-    * 设置容量
-    * @param capacity
-    */
-    public void setCapacity(Integer capacity) {
-        this.capacity = capacity;
-    }
-
-    /**
-    * 获得已使用容量
-    * @return USED_CAP
-    */
-    public Integer getUsedCap() {
-        return this.usedCap;
-    }
-
-    /**
-    * 设置已使用容量
-    * @param usedCap
-    */
-    public void setUsedCap(Integer usedCap) {
-        this.usedCap = usedCap;
-    }
-
-    /**
-    * 获得是否已满
-    * @return IS_FULL
-    */
-    public Integer getIsFull() {
-        return this.isFull;
-    }
-
-    /**
-    * 设置是否已满
-    * @param isFull
-    */
-    public void setIsFull(Integer isFull) {
-        this.isFull = isFull;
-    }
-
-    /**
-    * 获得所属机构编码(使用者)
+    * 获得所属机构编码
     * @return ORG_CODE
     */
     public String getOrgCode() {
@@ -588,7 +371,7 @@ public class CabSpaceParam extends Page {
     }
 
     /**
-    * 设置所属机构编码(使用者)
+    * 设置所属机构编码
     * @param orgCode
     */
     public void setOrgCode(String orgCode) {
@@ -596,7 +379,7 @@ public class CabSpaceParam extends Page {
     }
 
     /**
-    * 获得所属机构名称(使用者)
+    * 获得所属机构名称
     * @return ORG_NAME
     */
     public String getOrgName() {
@@ -604,7 +387,7 @@ public class CabSpaceParam extends Page {
     }
 
     /**
-    * 设置所属机构名称(使用者)
+    * 设置所属机构名称
     * @param orgName
     */
     public void setOrgName(String orgName) {
@@ -612,7 +395,7 @@ public class CabSpaceParam extends Page {
     }
 
     /**
-    * 获得状态  0000 - 空，关 0010 - 空，开 0020 - 空，关，加密 0030 - 空，开，加密 0100 - 已存放，关 0110 - 已存放，开 0120 - 已存放，关，加密 0130 - 已存放，开，加密 0900 - 满，关 0910 - 满，开 0920 - 满，关，加密 0930 - 满，开，加密
+    * 获得状态
     * @return STATUS
     */
     public String getStatus() {
@@ -620,7 +403,7 @@ public class CabSpaceParam extends Page {
     }
 
     /**
-    * 设置状态  0000 - 空，关 0010 - 空，开 0020 - 空，关，加密 0030 - 空，开，加密 0100 - 已存放，关 0110 - 已存放，开 0120 - 已存放，关，加密 0130 - 已存放，开，加密 0900 - 满，关 0910 - 满，开 0920 - 满，关，加密 0930 - 满，开，加密
+    * 设置状态
     * @param status
     */
     public void setStatus(String status) {
@@ -628,7 +411,7 @@ public class CabSpaceParam extends Page {
     }
 
     /**
-    * 获得人像案管柜组号(唯一)
+    * 获得预留字段1
     * @return RESERVE1
     */
     public String getReserve1() {
@@ -636,7 +419,7 @@ public class CabSpaceParam extends Page {
     }
 
     /**
-    * 设置人像案管柜组号(唯一)
+    * 设置预留字段1
     * @param reserve1
     */
     public void setReserve1(String reserve1) {
@@ -660,7 +443,7 @@ public class CabSpaceParam extends Page {
     }
 
     /**
-    * 获得是否存在(1:存在,0:不存在)
+    * 获得预留字段3
     * @return RESERVE3
     */
     public String getReserve3() {
@@ -668,7 +451,7 @@ public class CabSpaceParam extends Page {
     }
 
     /**
-    * 设置是否存在(1:存在,0:不存在)
+    * 设置预留字段3
     * @param reserve3
     */
     public void setReserve3(String reserve3) {
@@ -900,23 +683,7 @@ public class CabSpaceParam extends Page {
     }
 
     /**
-    * 获得是否公有, 1 - 公有, 0 - 私有
-    * @return IS_PUBLIC
-    */
-    public Integer getIsPublic() {
-        return this.isPublic;
-    }
-
-    /**
-    * 设置是否公有, 1 - 公有, 0 - 私有
-    * @param isPublic
-    */
-    public void setIsPublic(Integer isPublic) {
-        this.isPublic = isPublic;
-    }
-
-    /**
-    * 获得当前归属单位(所属者)
+    * 获得当前归属单位
     * @return CUR_ORG
     */
     public String getCurOrg() {
@@ -924,7 +691,7 @@ public class CabSpaceParam extends Page {
     }
 
     /**
-    * 设置当前归属单位(所属者)
+    * 设置当前归属单位
     * @param curOrg
     */
     public void setCurOrg(String curOrg) {
@@ -948,35 +715,19 @@ public class CabSpaceParam extends Page {
     }
 
     /**
-    * 获得容纳案卷数
-    * @return FILE_COUNT
+    * 获得数据来源
+    * @return DATA_SOURCE
     */
-    public Integer getFileCount() {
-        return this.fileCount;
+    public String getDataSource() {
+        return this.dataSource;
     }
 
     /**
-    * 设置容纳案卷数
-    * @param fileCount
+    * 设置数据来源
+    * @param dataSource
     */
-    public void setFileCount(Integer fileCount) {
-        this.fileCount = fileCount;
-    }
-
-    /**
-    * 获得已放入案卷数
-    * @return CUR_FILE_COUNT
-    */
-    public Integer getCurFileCount() {
-        return this.curFileCount;
-    }
-
-    /**
-    * 设置已放入案卷数
-    * @param curFileCount
-    */
-    public void setCurFileCount(Integer curFileCount) {
-        this.curFileCount = curFileCount;
+    public void setDataSource(String dataSource) {
+        this.dataSource = dataSource;
     }
 
 

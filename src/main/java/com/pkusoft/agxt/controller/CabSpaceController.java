@@ -1,9 +1,19 @@
 package com.pkusoft.agxt.controller;
 
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
+import com.pkusoft.agxt.model.CabSpace;
+import com.pkusoft.agxt.model.FileTemp;
+import com.pkusoft.agxt.req.CabSpaceParam;
+import com.pkusoft.agxt.req.FileTempParam;
+import com.pkusoft.usercenter.po.SysDept;
+import com.pkusoft.usercenter.po.SysUser;
+import com.pkusoft.usercenter.service.SysDeptService;
+import com.pkusoft.usercenter.service.SysUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -23,6 +33,9 @@ import com.pkusoft.agxt.service.CabSpaceService;
 
 
 import org.support.commons.springmvc.ResponseData;
+import pkubatis.common.base.ResponseDto;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author
@@ -38,29 +51,49 @@ public class CabSpaceController  {
     @Autowired
     private CabSpaceService cabSpaceService ;
 
+    /***获取代理用户信息服务类*/
+    @Autowired
+    private SysUserService sysUserService;
+
+    @Autowired
+    private SysDeptService sysDeptService;
 
     /**
     * 查询案卷柜空间信息表
-    * @param requestBody
+    * @param cabSpaceParam
     * @return
     */
     @ApiOperation(value="查询案卷柜空间信息表", notes="查询案卷柜空间信息表")
     @RequestMapping(value = "/cabSpace/cabSpaceList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public ResponseData<Map> cabSpaceList(@RequestBody(required = false) Map<String, String> requestBody){
-        // 检查参数
-        if (requestBody == null) {
-            return new ResponseData<>(ResponseData.STATUS_CODE_PARAM, "参数为空");
-        }
-        try {
-            // TODO: 业务逻辑
-            Map responseData = null;
-            return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS, null, responseData);
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
-            // TODO: 业务日志
-            return new ResponseData<>(ResponseData.STATUS_CODE_BIZ, "error：" + e.getMessage());
-        }
+    public ResponseData<List<CabSpaceParam>> cabSpaceList(HttpServletRequest request, @RequestBody CabSpaceParam cabSpaceParam){
+            ResponseDto<List<CabSpaceParam>> dto = new ResponseDto<List<CabSpaceParam>>();
+            SysUser sysUser=sysUserService.getCurrentUser(request);
+            try {
+                List<CabSpaceParam> list = cabSpaceService.getCabSpaceParamList(cabSpaceParam, sysUser);
+                for (int i = 0; i < list.size(); i++) {
+                    SysDept dept = sysDeptService.getSysDept(list.get(i).getOrgCode());
+                    SysDept dept1 = sysDeptService.getSysDept(list.get(i).getCurOrg());
+                    if(dept!=null){
+                        list.get(i).setDeptName(dept.getDeptName());
+                    }
+                    if(dept1!=null){
+                        list.get(i).setCurOrgName(dept1.getDeptName());
+                    }
+                }
+                int count = cabSpaceService.getCabSpaceParamCount(cabSpaceParam, sysUser);
+
+                dto.setData(list);
+                dto.setCount(count);
+                dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
+                dto.setStatusMsg("查询案卷柜空间信息表成功");
+                return dto;
+            } catch (Exception e) {
+                log.error("空间表查询列表数据出错", e);
+                e.printStackTrace();
+                return new ResponseData<>(ResponseData.STATUS_CODE_OTHER,"空间表查询列表数据出错");
+            }
+
     }
 
     /**
