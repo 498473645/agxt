@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.pkusoft.agxt.model.CabArea;
+import com.pkusoft.agxt.model.CabPlace;
 import com.pkusoft.agxt.req.CabAreaParam;
 import com.pkusoft.usercenter.po.SysUser;
 
@@ -57,4 +58,5 @@ public interface CabAreaService {
     */
     int cabAreaDelete(String[] ids);
 
+    void updateJobCabAreaByPlaceId(CabPlace cabPlace);
 }

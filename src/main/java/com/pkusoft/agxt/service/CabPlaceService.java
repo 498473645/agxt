@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.pkusoft.agxt.model.CabPlace;
+import com.pkusoft.agxt.req.CabPlaceParam;
+import com.pkusoft.usercenter.po.SysUser;
 
 /**
 * @author
@@ -13,33 +15,33 @@ public interface CabPlaceService {
 
     /**
     * 查询案卷柜场所信息表集合
-    * @param map	查询条件集合
+    * @param sysUser	查询条件集合
     * @return
     */
-    List<CabPlace> getCabPlaceList(Map<String, String> map);
+    List<CabPlace> getCabPlaceList(CabPlaceParam cabPlaceParam, SysUser sysUser);
 
     /**
     * 查询案卷柜场所信息表总数
-    * @param map	查询条件集合
+    * @param sysUser	查询条件集合
     * @return
     */
-    int getCabPlaceCount(Map<String, String> map);
+    int getCabPlaceCount(CabPlaceParam cabPlaceParam, SysUser sysUser);
 
     /**
     * 新增案卷柜场所信息表
     * @param cabPlace	案卷柜场所信息表
-    * @param map	用户集合
+    * @param sysUser	用户集合
     * @return
     */
-    int cabPlaceSave(CabPlace cabPlace, Map<String,String> map);
+    int cabPlaceSave(CabPlace cabPlace, SysUser sysUser);
 
     /**
     * 修改案卷柜场所信息表
     * @param cabPlace	案卷柜场所信息表
-    * @param map	用户集合
+    * @param sysUser	用户集合
     * @return
     */
-    int cabPlaceUpdate(CabPlace cabPlace, Map<String,String> map);
+    int cabPlaceUpdate(CabPlace cabPlace, SysUser sysUser);
 
     /**
     * 根据主键ID查看规则信息详情
@@ -50,9 +52,9 @@ public interface CabPlaceService {
 
     /**
     * 根据主键ID删除规则信息
-    * @param id
+    * @param ids
     * @return
     */
-    int cabPlaceDelete(String id);
+    int cabPlaceDelete(String[] ids);
 
 }

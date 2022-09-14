@@ -138,6 +138,18 @@ public class CabAreaServiceImpl implements CabAreaService {
         return num;
     }
 
+    @Override
+    public void updateJobCabAreaByPlaceId(CabPlace cabPlace) {
+        CabArea jobCabArea = new CabArea();
+        jobCabArea.setPlaceName(cabPlace.getName());
+
+        Example example = new Example(CabArea.class);
+        Example.Criteria criteria = example.createCriteria();
+
+        criteria.andEqualTo("placeId", cabPlace.getId());
+        cabAreaMapper.updateByExampleSelective(jobCabArea, example);
+    }
+
     /**
      * 最大排序号
      *

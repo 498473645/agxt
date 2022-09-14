@@ -48,7 +48,7 @@ public class CabPlace {
      */
     @Column(name = "SN")
     @ApiModelProperty(value = "排序序号")
-    private Integer sn;
+    private Double sn;
 
  	/**
      * 区域总数
@@ -301,7 +301,7 @@ public class CabPlace {
     * 获得排序序号
     * @return SN
     */
-    public Integer getSn() {
+    public Double getSn() {
         return this.sn;
     }
 
@@ -309,7 +309,7 @@ public class CabPlace {
     * 设置排序序号
     * @param sn
     */
-    public void setSn(Integer sn) {
+    public void setSn(Double sn) {
         this.sn = sn;
     }
 

@@ -233,7 +233,15 @@ public class CabPlaceParam extends Page {
     @ApiModelProperty(value = "数据来源")
     private String dataSource;
 
+    private String[] ids;
 
+    public String[] getIds() {
+        return ids;
+    }
+
+    public void setIds(String[] ids) {
+        this.ids = ids;
+    }
     /**
     * 获得
     * @return ID
