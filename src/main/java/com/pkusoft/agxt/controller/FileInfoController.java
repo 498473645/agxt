@@ -1,6 +1,7 @@
 package com.pkusoft.agxt.controller;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -235,6 +236,32 @@ public class FileInfoController  {
             dto.setStatusMsg("查询案卷模板树信息表成功");
             return dto;
 
+        } catch (Exception e) {
+            log.error("案卷信息表查询列表数据出错", e);
+            return new ResponseData<>(ResponseData.STATUS_CODE_BIZ, "案卷信息表查询列表数据出错：" + e.getMessage());
+        }
+    }
+
+    /**
+     * 案卷存储位置变更
+     *
+     * @param fileInfoParam
+     *            查询条件
+     * @return 标准列表对象
+     */
+    @RequestMapping("/archives/rgJobFileInfoListDataChangeSpace")
+    @ResponseBody
+    public ResponseData jobFileInfoListChangeSpaceData(@RequestBody FileInfoParam fileInfoParam,HttpServletRequest request) {
+        try {
+            ResponseDto<List<FileInfoParam>> dto = new ResponseDto<>();
+            SysUser sysUser= sysUserService.getCurrentUser(request);
+            List<FileInfoParam> list = fileInfoService
+                    .getJobFileInfoByFileAuthoperIdKg(fileInfoParam,sysUser);
+            dto.setData(list);
+            dto.setCount(list.size());
+            dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
+            dto.setStatusMsg("查询案卷模板树信息表成功");
+            return dto;
         } catch (Exception e) {
             log.error("案卷信息表查询列表数据出错", e);
             return new ResponseData<>(ResponseData.STATUS_CODE_BIZ, "案卷信息表查询列表数据出错：" + e.getMessage());

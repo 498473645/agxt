@@ -55,7 +55,7 @@ public class CaseInfo {
      */
     @Column(name = "SN")
     @ApiModelProperty(value = "")
-    private Integer sn;
+    private Double sn;
 
  	/**
      * 案由/罪名
@@ -534,7 +534,7 @@ public class CaseInfo {
     * 获得
     * @return SN
     */
-    public Integer getSn() {
+    public Double getSn() {
         return this.sn;
     }
 
@@ -542,7 +542,7 @@ public class CaseInfo {
     * 设置
     * @param sn
     */
-    public void setSn(Integer sn) {
+    public void setSn(Double sn) {
         this.sn = sn;
     }
 

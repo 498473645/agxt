@@ -9,4 +9,5 @@ import com.pkusoft.agxt.model.CabSpace;
 
 public interface CabSpaceMapper extends Mapper<CabSpace> {
 
+    Integer getMaxSN();
 }

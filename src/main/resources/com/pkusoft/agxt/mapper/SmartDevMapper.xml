@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pkusoft.agxt.mapper.SmartDevMapper">
+    <!-- @codeGenerate -->
+    <resultMap id="BaseResultMap" type="com.pkusoft.agxt.model.SmartDev">
+            <id column="ID" jdbcType="VARCHAR" property="id"/>
+            <result column="CODE" jdbcType="VARCHAR" property="code"/>
+            <result column="NAME" jdbcType="VARCHAR" property="name"/>
+            <result column="TYPE" jdbcType="VARCHAR" property="type"/>
+            <result column="SN" jdbcType="DECIMAL" property="sn"/>
+            <result column="SMART_ID" jdbcType="VARCHAR" property="smartId"/>
+            <result column="SMART_NAME" jdbcType="VARCHAR" property="smartName"/>
+            <result column="IS_DETECT" jdbcType="DECIMAL" property="isDetect"/>
+            <result column="DETECT_TYPE" jdbcType="DECIMAL" property="detectType"/>
+            <result column="FLAG_STR" jdbcType="VARCHAR" property="flagStr"/>
+            <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+            <result column="RESERVE1" jdbcType="VARCHAR" property="reserve1"/>
+            <result column="RESERVE2" jdbcType="VARCHAR" property="reserve2"/>
+            <result column="RESERVE3" jdbcType="VARCHAR" property="reserve3"/>
+            <result column="MEMO" jdbcType="VARCHAR" property="memo"/>
+            <result column="ROW_STATUS" jdbcType="DECIMAL" property="rowStatus"/>
+            <result column="CREATER_ID" jdbcType="VARCHAR" property="createrId"/>
+            <result column="CREATER_NAME" jdbcType="VARCHAR" property="createrName"/>
+            <result column="CREATE_TIME" jdbcType="DATE" property="createTime"/>
+            <result column="MODER_ID" jdbcType="VARCHAR" property="moderId"/>
+            <result column="MODER_NAME" jdbcType="VARCHAR" property="moderName"/>
+            <result column="MOD_TIME" jdbcType="DATE" property="modTime"/>
+            <result column="CUR_ORG" jdbcType="VARCHAR" property="curOrg"/>
+            <result column="CUR_ORG_DATA" jdbcType="VARCHAR" property="curOrgData"/>
+
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ID,CODE,NAME,TYPE,SN,SMART_ID,SMART_NAME,IS_DETECT,DETECT_TYPE,FLAG_STR,STATUS,RESERVE1,RESERVE2,RESERVE3,MEMO,ROW_STATUS,CREATER_ID,CREATER_NAME,CREATE_TIME,MODER_ID,MODER_NAME,MOD_TIME,CUR_ORG,CUR_ORG_DATA
+    </sql>
+
+    <!-- user-defined -->
+
+</mapper>

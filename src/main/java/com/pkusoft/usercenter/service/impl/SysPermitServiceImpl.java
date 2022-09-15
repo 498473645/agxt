@@ -2,6 +2,7 @@ package com.pkusoft.usercenter.service.impl;
 
 import com.pkusoft.usercenter.mapper.SysDeptMapper;
 import com.pkusoft.usercenter.mapper.SysPermitMapper;
+import com.pkusoft.usercenter.mapper.SysRoleMapper;
 import com.pkusoft.usercenter.mapper.SysUserMapper;
 import com.pkusoft.usercenter.po.*;
 import com.pkusoft.usercenter.service.*;
@@ -51,78 +52,8 @@ public class SysPermitServiceImpl implements SysPermitService {
     @Autowired
     private SysRoleService sysRoleService;
 
-    /**
-     * 根据当前用户id和权限类型获取用户角色下的权限信息的值
-     * @param userId
-     * @param permitType
-     * @return
-     */
-    @Override
-    public String getUserPermitValue(String userId,String permitType){
-        Map<String,String> paraMap = new HashMap<String,String>(2);
-        paraMap.put("userId", userId);
-        paraMap.put("permitType", permitType);
-        paraMap.put("proxyId", proxyId);
-        //获取数据权限
-//        String permitValue = sysPermitMapper.getUserPermitValue(paraMap);
-        //获取数据权限（新版本）
-        String permitValue = sysPermitMapper.getUserOwnerRuleValue(paraMap);
-        return permitValue;
-    }
-
-    /**
-     * 要素库通用数据查询权限
-     * @param criteria   查询对象
-     * @param user		  用户信息
-     * @param permitsType  数据权限类型 ( 200001--办案区基础数据查询权限  200002--业务办理数据查询权限  300001--业务数据查询统计权限)
-     */
-    @Override
-    public void setUserDataPermits(Example.Criteria criteria, SysUser user, String permitsType) {
-        //查询当前登录人的权限级别
-        //获取用户的查询权限（9-本人办理的；8-本办案区办理的；4-全派出所办理的；3-全分局办理的；2-全市局办理的）
-        String permitValue = sysPermitService.getUserPermitValue(user.getUserId(), permitsType);
-        if (StringUtils.hasText(permitValue)) {
-            //查询权限单位id
-            String permitDeptId = sysDeptService.getDeptIdBypermit(user,permitValue);
-            //判断权限类型
-            switch (permitsType){
-                //办案区基础数据查询权限
-                case "100002":
-                    setBabsDataPermits(criteria,user,permitValue,permitDeptId);
-                    break;
-                default:
-                    break;
-            }
-        }else {//如果没有权限则查不出数据
-            criteria.andEqualTo("objid","0");
-        }
-    }
-    /**
-     * 要素库基础数据查询权限
-     * @param criteria   查询对象
-     * @param user		  用户信息
-     * @param permitValue  权限等级
-     * @param permitDeptId 权限单位
-     */
-    public void setBabsDataPermits(Example.Criteria criteria, SysUser user, String permitValue , String permitDeptId) {
-        //循环判断对应权限
-        switch (permitValue){
-            //市局单位数据查询权限
-            case PermitType.PERMIT_VALUE_DEPT_2:
-                criteria.andEqualTo("cstationid", permitDeptId);
-                break;
-            //分局单位数据查询权限
-            case PermitType.PERMIT_VALUE_DEPT_3:
-                criteria.andEqualTo("sstationid", permitDeptId);
-                break;
-            //派出所数据查询权限
-            case PermitType.PERMIT_VALUE_DEPT_4:
-                criteria.andEqualTo("tstationid", permitDeptId);
-                break;
-            default:
-                break;
-        }
-    }
+    @Autowired
+    private SysRoleMapper sysRoleMapper;
 
     //判断是否是案管员,是案管员就返回对应条件,不是就返回空
     public Map<String, Object> getSysRoleUserMapBySysRole(SysUser sysUser) {
@@ -167,6 +98,24 @@ public class SysPermitServiceImpl implements SysPermitService {
                         map.put("deptId", orgData.getDeptId());
                         return map;
                     }
+                }
+            }
+        }
+        return null;
+    }
+
+    public SysUser getJobFileInfoListBySysRole(String operId){
+        SysUser newSysUser = new SysUser();
+        newSysUser.setIdcard(operId);
+        SysUser sysUser= sysUserMapper.selectOne(newSysUser);
+        if(null != sysUser){
+            List<SysRoleUser> list = sysRoleUserService.getSysRoleUserListByUserId(sysUser.getUserId());
+            for(int i=0;i<list.size();i++){
+                SysRole newSysRole = new SysRole();
+                newSysRole.setRoleId(list.get(i).getRoleId());
+                SysRole sysRole = sysRoleMapper.selectOne(newSysRole);
+                if(sysRole.getRoleName().endsWith("案管员")){
+                    return sysUser;
                 }
             }
         }

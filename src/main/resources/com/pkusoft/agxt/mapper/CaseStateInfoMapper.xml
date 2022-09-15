@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pkusoft.agxt.mapper.CaseStateInfoMapper">
+    <!-- @codeGenerate -->
+    <resultMap id="BaseResultMap" type="com.pkusoft.agxt.model.CaseStateInfo">
+            <id column="ID" jdbcType="VARCHAR" property="id"/>
+            <result column="AJBH" jdbcType="VARCHAR" property="ajbh"/>
+            <result column="AJMC" jdbcType="VARCHAR" property="ajmc"/>
+            <result column="TYPE" jdbcType="VARCHAR" property="type"/>
+            <result column="TYPE_NAME" jdbcType="VARCHAR" property="typeName"/>
+            <result column="BADW_BM" jdbcType="VARCHAR" property="badwBm"/>
+            <result column="BADW_MC" jdbcType="VARCHAR" property="badwMc"/>
+            <result column="ZBR_SFZHM" jdbcType="VARCHAR" property="zbrSfzhm"/>
+            <result column="ZBR_JH" jdbcType="VARCHAR" property="zbrJh"/>
+            <result column="ZBR_XM" jdbcType="VARCHAR" property="zbrXm"/>
+            <result column="TSTATIONID" jdbcType="VARCHAR" property="tstationid"/>
+            <result column="SSTATIONID" jdbcType="VARCHAR" property="sstationid"/>
+            <result column="CSTATIONID" jdbcType="VARCHAR" property="cstationid"/>
+            <result column="SLSJ" jdbcType="DATE" property="slsj"/>
+            <result column="STATE_BM" jdbcType="VARCHAR" property="stateBm"/>
+            <result column="STATE_MC" jdbcType="VARCHAR" property="stateMc"/>
+            <result column="STATE_TIME" jdbcType="DATE" property="stateTime"/>
+            <result column="CREATER_DEPT_ID" jdbcType="VARCHAR" property="createrDeptId"/>
+            <result column="CREATER_DEPT_NAME" jdbcType="VARCHAR" property="createrDeptName"/>
+            <result column="CREATER_ID" jdbcType="VARCHAR" property="createrId"/>
+            <result column="CREATER_NAME" jdbcType="VARCHAR" property="createrName"/>
+            <result column="CREATE_TIME" jdbcType="DATE" property="createTime"/>
+
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ID,AJBH,AJMC,TYPE,TYPE_NAME,BADW_BM,BADW_MC,ZBR_SFZHM,ZBR_JH,ZBR_XM,TSTATIONID,SSTATIONID,CSTATIONID,SLSJ,STATE_BM,STATE_MC,STATE_TIME,CREATER_DEPT_ID,CREATER_DEPT_NAME,CREATER_ID,CREATER_NAME,CREATE_TIME
+    </sql>
+
+    <!-- user-defined -->
+
+</mapper>

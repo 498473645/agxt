@@ -3,7 +3,11 @@ package com.pkusoft.agxt.service;
 import java.util.List;
 import java.util.Map;
 
+import com.pkusoft.agxt.model.CabSpace;
+import com.pkusoft.agxt.model.FileInfo;
 import com.pkusoft.agxt.model.FileStore;
+import com.pkusoft.agxt.model.UserInfo;
+import org.support.commons.springmvc.ResponseData;
 
 /**
 * @author
@@ -56,4 +60,8 @@ public interface FileStoreService {
     int fileStoreDelete(String id);
 
     List<FileStore> getJobFileStoreByAreaId(String code);
+
+    FileStore getJobFileStoreByFileCode(String code);
+
+    ResponseData updateJobFileStoreByJobCabSpaceBGWZ(List<FileInfo> jobfileinfo, CabSpace jobCabSpace, UserInfo userInfo);
 }

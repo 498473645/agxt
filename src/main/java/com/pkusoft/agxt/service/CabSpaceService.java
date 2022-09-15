@@ -45,18 +45,18 @@ public interface CabSpaceService {
     /**
     * 新增案卷柜空间信息表
     * @param cabSpace	案卷柜空间信息表
-    * @param map	用户集合
+    * @param sysUser	用户集合
     * @return
     */
-    int cabSpaceSave(CabSpace cabSpace, Map<String,String> map);
+    int cabSpaceSave(CabSpace cabSpace, String ip,String port, SysUser sysUser);
 
     /**
     * 修改案卷柜空间信息表
     * @param cabSpace	案卷柜空间信息表
-    * @param map	用户集合
+    * @param sysUser	用户集合
     * @return
     */
-    int cabSpaceUpdate(CabSpace cabSpace, Map<String,String> map);
+    int cabSpaceUpdate(CabSpace cabSpace, SysUser sysUser);
 
     /**
     * 根据主键ID查看规则信息详情

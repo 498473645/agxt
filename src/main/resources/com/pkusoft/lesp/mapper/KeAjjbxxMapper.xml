@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pkusoft.lesp.mapper.KeAjjbxxMapper">
+    <!-- @codeGenerate -->
+    <resultMap id="BaseResultMap" type="com.pkusoft.lesp.model.KeAjjbxx">
+            <id column="AJBH" jdbcType="VARCHAR" property="ajbh"/>
+            <result column="AJMC" jdbcType="VARCHAR" property="ajmc"/>
+            <result column="BADW_BM" jdbcType="VARCHAR" property="badwBm"/>
+            <result column="BADW_MC" jdbcType="VARCHAR" property="badwMc"/>
+            <result column="ZBR_SFZHM" jdbcType="VARCHAR" property="zbrSfzhm"/>
+            <result column="ZBR_JH" jdbcType="VARCHAR" property="zbrJh"/>
+            <result column="ZBR_XM" jdbcType="VARCHAR" property="zbrXm"/>
+            <result column="TSTATIONID" jdbcType="VARCHAR" property="tstationid"/>
+            <result column="SSTATIONID" jdbcType="VARCHAR" property="sstationid"/>
+            <result column="CSTATIONID" jdbcType="VARCHAR" property="cstationid"/>
+            <result column="CQSJ" jdbcType="DATE" property="cqsj"/>
+            <result column="JYAQ" jdbcType="VARCHAR" property="jyaq"/>
+            <result column="SJLY" jdbcType="VARCHAR" property="sjly"/>
+            <result column="ZM_BH" jdbcType="VARCHAR" property="zmBh"/>
+            <result column="ZM_MC" jdbcType="VARCHAR" property="zmMc"/>
+            <result column="YS_BADW_BM" jdbcType="VARCHAR" property="ysBadwBm"/>
+            <result column="YS_BADW_MC" jdbcType="VARCHAR" property="ysBadwMc"/>
+            <result column="AJLB" jdbcType="VARCHAR" property="ajlb"/>
+            <result column="YS_ZBR_XM" jdbcType="VARCHAR" property="ysZbrXm"/>
+            <result column="YS_ZBR_SFZHM" jdbcType="VARCHAR" property="ysZbrSfzhm"/>
+            <result column="YS_ZBR" jdbcType="VARCHAR" property="ysZbr"/>
+            <result column="YS_XBR" jdbcType="VARCHAR" property="ysXbr"/>
+            <result column="YS_XBR_XM" jdbcType="VARCHAR" property="ysXbrXm"/>
+            <result column="SLSJ" jdbcType="DATE" property="slsj"/>
+            <result column="ISDZH" jdbcType="VARCHAR" property="isdzh"/>
+            <result column="DZHSJ" jdbcType="DATE" property="dzhsj"/>
+            <result column="AJMC_PYM" jdbcType="VARCHAR" property="ajmcPym"/>
+            <result column="ZBR_XM_PYM" jdbcType="VARCHAR" property="zbrXmPym"/>
+            <result column="SJZT" jdbcType="VARCHAR" property="sjzt"/>
+            <result column="JJBH" jdbcType="VARCHAR" property="jjbh"/>
+            <result column="DJSJ" jdbcType="DATE" property="djsj"/>
+            <result column="AJZT" jdbcType="VARCHAR" property="ajzt"/>
+            <result column="BARXM" jdbcType="VARCHAR" property="barxm"/>
+            <result column="BARLXFS" jdbcType="VARCHAR" property="barlxfs"/>
+            <result column="BARZJHM" jdbcType="VARCHAR" property="barzjhm"/>
+            <result column="JASJ" jdbcType="DATE" property="jasj"/>
+            <result column="XGSJ" jdbcType="DATE" property="xgsj"/>
+
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        AJBH,AJMC,BADW_BM,BADW_MC,ZBR_SFZHM,ZBR_JH,ZBR_XM,TSTATIONID,SSTATIONID,CSTATIONID,CQSJ,JYAQ,SJLY,ZM_BH,ZM_MC,YS_BADW_BM,YS_BADW_MC,AJLB,YS_ZBR_XM,YS_ZBR_SFZHM,YS_ZBR,YS_XBR,YS_XBR_XM,SLSJ,ISDZH,DZHSJ,AJMC_PYM,ZBR_XM_PYM,SJZT,JJBH,DJSJ,AJZT,BARXM,BARLXFS,BARZJHM,JASJ,XGSJ
+    </sql>
+
+    <!-- user-defined -->
+
+</mapper>

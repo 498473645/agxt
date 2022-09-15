@@ -3,54 +3,68 @@
 <mapper namespace="com.pkusoft.agxt.mapper.FileStoreMapper">
     <!-- @codeGenerate -->
     <resultMap id="BaseResultMap" type="com.pkusoft.agxt.model.FileStore">
-            <id column="ID" jdbcType="VARCHAR" property="id"/>
-            <result column="FILE_ID" jdbcType="VARCHAR" property="fileId"/>
-            <result column="FILE_CODE" jdbcType="VARCHAR" property="fileCode"/>
-            <result column="FILE_NAME" jdbcType="VARCHAR" property="fileName"/>
-            <result column="METAL_ID" jdbcType="VARCHAR" property="metalId"/>
-            <result column="METAL_NAME" jdbcType="VARCHAR" property="metalName"/>
-            <result column="PAGE_ID" jdbcType="VARCHAR" property="pageId"/>
-            <result column="PAGE_NAME" jdbcType="VARCHAR" property="pageName"/>
-            <result column="PLACE_ID" jdbcType="VARCHAR" property="placeId"/>
-            <result column="PLACE_NAME" jdbcType="VARCHAR" property="placeName"/>
-            <result column="AREA_ID" jdbcType="VARCHAR" property="areaId"/>
-            <result column="AREA_NAME" jdbcType="VARCHAR" property="areaName"/>
-            <result column="SPACE_ID" jdbcType="VARCHAR" property="spaceId"/>
-            <result column="SPACE_NAME" jdbcType="VARCHAR" property="spaceName"/>
-            <result column="CELL_ID" jdbcType="VARCHAR" property="cellId"/>
-            <result column="CELL_NAME" jdbcType="VARCHAR" property="cellName"/>
-            <result column="ENTRY_TIME" jdbcType="DATE" property="entryTime"/>
-            <result column="OWNER_ID" jdbcType="VARCHAR" property="ownerId"/>
-            <result column="OWNER_CODE" jdbcType="VARCHAR" property="ownerCode"/>
-            <result column="OWNER_NAME" jdbcType="VARCHAR" property="ownerName"/>
-            <result column="ORG_CODE" jdbcType="VARCHAR" property="orgCode"/>
-            <result column="ORG_NAME" jdbcType="VARCHAR" property="orgName"/>
-            <result column="STATUS" jdbcType="VARCHAR" property="status"/>
-            <result column="RESERVE2" jdbcType="VARCHAR" property="reserve2"/>
-            <result column="RESERVE3" jdbcType="VARCHAR" property="reserve3"/>
-            <result column="MEMO" jdbcType="VARCHAR" property="memo"/>
-            <result column="ROW_STATUS" jdbcType="DECIMAL" property="rowStatus"/>
-            <result column="CREATER_ID" jdbcType="VARCHAR" property="createrId"/>
-            <result column="CREATER_NAME" jdbcType="VARCHAR" property="createrName"/>
-            <result column="CREATE_TIME" jdbcType="DATE" property="createTime"/>
-            <result column="MODER_ID" jdbcType="VARCHAR" property="moderId"/>
-            <result column="MODER_NAME" jdbcType="VARCHAR" property="moderName"/>
-            <result column="MOD_TIME" jdbcType="DATE" property="modTime"/>
-            <result column="ORG_C" jdbcType="VARCHAR" property="orgC"/>
-            <result column="ORG_S" jdbcType="VARCHAR" property="orgS"/>
-            <result column="ORG_T" jdbcType="VARCHAR" property="orgT"/>
-            <result column="ORG_C_DATA" jdbcType="VARCHAR" property="orgCData"/>
-            <result column="ORG_S_DATA" jdbcType="VARCHAR" property="orgSData"/>
-            <result column="ORG_T_DATA" jdbcType="VARCHAR" property="orgTData"/>
-            <result column="CUR_ORG" jdbcType="VARCHAR" property="curOrg"/>
-            <result column="CUR_ORG_DATA" jdbcType="VARCHAR" property="curOrgData"/>
-            <result column="RESERVE1" jdbcType="CLOB" property="reserve1"/>
+        <id column="ID" jdbcType="VARCHAR" property="id"/>
+        <result column="FILE_ID" jdbcType="VARCHAR" property="fileId"/>
+        <result column="FILE_CODE" jdbcType="VARCHAR" property="fileCode"/>
+        <result column="FILE_NAME" jdbcType="VARCHAR" property="fileName"/>
+        <result column="METAL_ID" jdbcType="VARCHAR" property="metalId"/>
+        <result column="METAL_NAME" jdbcType="VARCHAR" property="metalName"/>
+        <result column="PAGE_ID" jdbcType="VARCHAR" property="pageId"/>
+        <result column="PAGE_NAME" jdbcType="VARCHAR" property="pageName"/>
+        <result column="PLACE_ID" jdbcType="VARCHAR" property="placeId"/>
+        <result column="PLACE_NAME" jdbcType="VARCHAR" property="placeName"/>
+        <result column="AREA_ID" jdbcType="VARCHAR" property="areaId"/>
+        <result column="AREA_NAME" jdbcType="VARCHAR" property="areaName"/>
+        <result column="SPACE_ID" jdbcType="VARCHAR" property="spaceId"/>
+        <result column="SPACE_NAME" jdbcType="VARCHAR" property="spaceName"/>
+        <result column="CELL_ID" jdbcType="VARCHAR" property="cellId"/>
+        <result column="CELL_NAME" jdbcType="VARCHAR" property="cellName"/>
+        <result column="ENTRY_TIME" jdbcType="DATE" property="entryTime"/>
+        <result column="OWNER_ID" jdbcType="VARCHAR" property="ownerId"/>
+        <result column="OWNER_CODE" jdbcType="VARCHAR" property="ownerCode"/>
+        <result column="OWNER_NAME" jdbcType="VARCHAR" property="ownerName"/>
+        <result column="ORG_CODE" jdbcType="VARCHAR" property="orgCode"/>
+        <result column="ORG_NAME" jdbcType="VARCHAR" property="orgName"/>
+        <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+        <result column="RESERVE2" jdbcType="VARCHAR" property="reserve2"/>
+        <result column="RESERVE3" jdbcType="VARCHAR" property="reserve3"/>
+        <result column="MEMO" jdbcType="VARCHAR" property="memo"/>
+        <result column="ROW_STATUS" jdbcType="DECIMAL" property="rowStatus"/>
+        <result column="CREATER_ID" jdbcType="VARCHAR" property="createrId"/>
+        <result column="CREATER_NAME" jdbcType="VARCHAR" property="createrName"/>
+        <result column="CREATE_TIME" jdbcType="DATE" property="createTime"/>
+        <result column="MODER_ID" jdbcType="VARCHAR" property="moderId"/>
+        <result column="MODER_NAME" jdbcType="VARCHAR" property="moderName"/>
+        <result column="MOD_TIME" jdbcType="DATE" property="modTime"/>
+        <result column="ORG_C" jdbcType="VARCHAR" property="orgC"/>
+        <result column="ORG_S" jdbcType="VARCHAR" property="orgS"/>
+        <result column="ORG_T" jdbcType="VARCHAR" property="orgT"/>
+        <result column="ORG_C_DATA" jdbcType="VARCHAR" property="orgCData"/>
+        <result column="ORG_S_DATA" jdbcType="VARCHAR" property="orgSData"/>
+        <result column="ORG_T_DATA" jdbcType="VARCHAR" property="orgTData"/>
+        <result column="CUR_ORG" jdbcType="VARCHAR" property="curOrg"/>
+        <result column="CUR_ORG_DATA" jdbcType="VARCHAR" property="curOrgData"/>
+        <result column="RESERVE1" jdbcType="CLOB" property="reserve1"/>
 
     </resultMap>
 
     <sql id="Base_Column_List">
-        ID,FILE_ID,FILE_CODE,FILE_NAME,METAL_ID,METAL_NAME,PAGE_ID,PAGE_NAME,PLACE_ID,PLACE_NAME,AREA_ID,AREA_NAME,SPACE_ID,SPACE_NAME,CELL_ID,CELL_NAME,ENTRY_TIME,OWNER_ID,OWNER_CODE,OWNER_NAME,ORG_CODE,ORG_NAME,STATUS,RESERVE2,RESERVE3,MEMO,ROW_STATUS,CREATER_ID,CREATER_NAME,CREATE_TIME,MODER_ID,MODER_NAME,MOD_TIME,ORG_C,ORG_S,ORG_T,ORG_C_DATA,ORG_S_DATA,ORG_T_DATA,CUR_ORG,CUR_ORG_DATA,RESERVE1
+        ID
+        ,FILE_ID,FILE_CODE,FILE_NAME,METAL_ID,METAL_NAME,PAGE_ID,PAGE_NAME,PLACE_ID,PLACE_NAME,AREA_ID,AREA_NAME,SPACE_ID,SPACE_NAME,CELL_ID,CELL_NAME,ENTRY_TIME,OWNER_ID,OWNER_CODE,OWNER_NAME,ORG_CODE,ORG_NAME,STATUS,RESERVE2,RESERVE3,MEMO,ROW_STATUS,CREATER_ID,CREATER_NAME,CREATE_TIME,MODER_ID,MODER_NAME,MOD_TIME,ORG_C,ORG_S,ORG_T,ORG_C_DATA,ORG_S_DATA,ORG_T_DATA,CUR_ORG,CUR_ORG_DATA,RESERVE1
     </sql>
+    <select id="getJobFileStoreByFileCode" resultType="com.pkusoft.agxt.model.FileStore">
+        select
+        <include refid="Base_Column_List"/>
+        from FILE_STORE
+        where
+        ROW_STATUS = 3
+        and
+        (PAGE_ID = #{pageId,jdbcType=VARCHAR} or PAGE_ID is null)
+        and
+        (METAL_ID = #{metalId,jdbcType=VARCHAR} or METAL_ID is null)
+        and
+        FILE_CODE = #{fileCode,jdbcType=VARCHAR}
+    </select>
 
     <!-- user-defined -->
 

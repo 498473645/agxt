@@ -111,7 +111,7 @@ public class CabSpaceAct {
      */
     @Column(name = "SN")
     @ApiModelProperty(value = "排序序号")
-    private Integer sn;
+    private Double sn;
 
  	/**
      * 状态
@@ -466,7 +466,7 @@ public class CabSpaceAct {
     * 获得排序序号
     * @return SN
     */
-    public Integer getSn() {
+    public Double getSn() {
         return this.sn;
     }
 
@@ -474,7 +474,7 @@ public class CabSpaceAct {
     * 设置排序序号
     * @param sn
     */
-    public void setSn(Integer sn) {
+    public void setSn(Double sn) {
         this.sn = sn;
     }
 

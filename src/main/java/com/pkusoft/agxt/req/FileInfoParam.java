@@ -7,6 +7,7 @@ import pkubatis.common.base.Page;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.List;
 
 /**
  * @author
@@ -106,7 +107,7 @@ public class FileInfoParam extends Page {
      */
     @Column(name = "SN")
     @ApiModelProperty(value = "排序序号")
-    private Integer sn;
+    private Double sn;
 
  	/**
      * 存放场所ID
@@ -405,6 +406,15 @@ public class FileInfoParam extends Page {
     private String operId;
     private String tot_cnt;
     private String isOrNot;
+    private List<String> idList;
+
+    public List<String> getIdList() {
+        return idList;
+    }
+
+    public void setIdList(List<String> idList) {
+        this.idList = idList;
+    }
 
     public String getOperId() {
         return operId;
@@ -626,7 +636,7 @@ public class FileInfoParam extends Page {
     * 获得排序序号
     * @return SN
     */
-    public Integer getSn() {
+    public Double getSn() {
         return this.sn;
     }
 
@@ -634,7 +644,7 @@ public class FileInfoParam extends Page {
     * 设置排序序号
     * @param sn
     */
-    public void setSn(Integer sn) {
+    public void setSn(Double sn) {
         this.sn = sn;
     }
 

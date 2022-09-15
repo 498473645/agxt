@@ -104,7 +104,7 @@ public class FileInfo {
      */
     @Column(name = "SN")
     @ApiModelProperty(value = "排序序号")
-    private Integer sn;
+    private Double sn;
 
  	/**
      * 存放场所ID
@@ -597,7 +597,7 @@ public class FileInfo {
     * 获得排序序号
     * @return SN
     */
-    public Integer getSn() {
+    public Double getSn() {
         return this.sn;
     }
 
@@ -605,7 +605,7 @@ public class FileInfo {
     * 设置排序序号
     * @param sn
     */
-    public void setSn(Integer sn) {
+    public void setSn(Double sn) {
         this.sn = sn;
     }
 

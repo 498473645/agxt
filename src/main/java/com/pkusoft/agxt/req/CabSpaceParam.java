@@ -304,8 +304,17 @@ public class CabSpaceParam extends Page {
     @ApiModelProperty(value = "已放入案卷数")
     private Integer curFileCount;
 
-    private java.lang.String curOrgName;
-    private java.lang.String deptName;
+    private String curOrgName;
+    private String deptName;
+    private String fileId;
+
+    public String getFileId() {
+        return fileId;
+    }
+
+    public void setFileId(String fileId) {
+        this.fileId = fileId;
+    }
 
     public String getCurOrgName() {
         return curOrgName;

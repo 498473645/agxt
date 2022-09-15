@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pkusoft.agxt.mapper.UserInfoMapper">
+    <!-- @codeGenerate -->
+    <resultMap id="BaseResultMap" type="com.pkusoft.agxt.model.UserInfo">
+            <id column="ID" jdbcType="VARCHAR" property="id"/>
+            <result column="CODE" jdbcType="VARCHAR" property="code"/>
+            <result column="NAME" jdbcType="VARCHAR" property="name"/>
+            <result column="TYPE" jdbcType="VARCHAR" property="type"/>
+            <result column="SN" jdbcType="DECIMAL" property="sn"/>
+            <result column="POLICE_CODE" jdbcType="VARCHAR" property="policeCode"/>
+            <result column="PASSWORD" jdbcType="VARCHAR" property="password"/>
+            <result column="PASS_SALT" jdbcType="VARCHAR" property="passSalt"/>
+            <result column="LEV" jdbcType="DECIMAL" property="lev"/>
+            <result column="DATA_LEV" jdbcType="DECIMAL" property="dataLev"/>
+            <result column="ID_CARD" jdbcType="VARCHAR" property="idCard"/>
+            <result column="TEL" jdbcType="VARCHAR" property="tel"/>
+            <result column="MOBILE" jdbcType="VARCHAR" property="mobile"/>
+            <result column="E_MAIL" jdbcType="VARCHAR" property="eMail"/>
+            <result column="CERT_CODE" jdbcType="VARCHAR" property="certCode"/>
+            <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+            <result column="RESERVE1" jdbcType="VARCHAR" property="reserve1"/>
+            <result column="RESERVE2" jdbcType="VARCHAR" property="reserve2"/>
+            <result column="RESERVE3" jdbcType="VARCHAR" property="reserve3"/>
+            <result column="MEMO" jdbcType="VARCHAR" property="memo"/>
+            <result column="ROW_STATUS" jdbcType="DECIMAL" property="rowStatus"/>
+            <result column="CREATER_ID" jdbcType="VARCHAR" property="createrId"/>
+            <result column="CREATER_NAME" jdbcType="VARCHAR" property="createrName"/>
+            <result column="CREATE_TIME" jdbcType="DATE" property="createTime"/>
+            <result column="MODER_ID" jdbcType="VARCHAR" property="moderId"/>
+            <result column="MODER_NAME" jdbcType="VARCHAR" property="moderName"/>
+            <result column="MOD_TIME" jdbcType="DATE" property="modTime"/>
+            <result column="ORG_C" jdbcType="VARCHAR" property="orgC"/>
+            <result column="ORG_S" jdbcType="VARCHAR" property="orgS"/>
+            <result column="ORG_T" jdbcType="VARCHAR" property="orgT"/>
+            <result column="ORG_C_DATA" jdbcType="VARCHAR" property="orgCData"/>
+            <result column="ORG_S_DATA" jdbcType="VARCHAR" property="orgSData"/>
+            <result column="ORG_T_DATA" jdbcType="VARCHAR" property="orgTData"/>
+            <result column="CUR_ORG" jdbcType="VARCHAR" property="curOrg"/>
+            <result column="CUR_ORG_DATA" jdbcType="VARCHAR" property="curOrgData"/>
+            <result column="LOGIN_TYPE" jdbcType="VARCHAR" property="loginType"/>
+            <result column="IS_ONLINE" jdbcType="DECIMAL" property="isOnline"/>
+            <result column="LAST_IP" jdbcType="VARCHAR" property="lastIp"/>
+            <result column="LAST_TIME" jdbcType="DATE" property="lastTime"/>
+            <result column="DEPT_CODE" jdbcType="VARCHAR" property="deptCode"/>
+            <result column="DEPT_NAME" jdbcType="VARCHAR" property="deptName"/>
+            <result column="HAS_FINGER" jdbcType="DECIMAL" property="hasFinger"/>
+
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ID,CODE,NAME,TYPE,SN,POLICE_CODE,PASSWORD,PASS_SALT,LEV,DATA_LEV,ID_CARD,TEL,MOBILE,E_MAIL,CERT_CODE,STATUS,RESERVE1,RESERVE2,RESERVE3,MEMO,ROW_STATUS,CREATER_ID,CREATER_NAME,CREATE_TIME,MODER_ID,MODER_NAME,MOD_TIME,ORG_C,ORG_S,ORG_T,ORG_C_DATA,ORG_S_DATA,ORG_T_DATA,CUR_ORG,CUR_ORG_DATA,LOGIN_TYPE,IS_ONLINE,LAST_IP,LAST_TIME,DEPT_CODE,DEPT_NAME,HAS_FINGER
+    </sql>
+
+    <!-- user-defined -->
+
+</mapper>

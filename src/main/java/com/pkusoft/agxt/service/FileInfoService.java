@@ -15,17 +15,24 @@ public interface FileInfoService {
 
     /**
     * 查询案卷信息表集合
-    * @param map	查询条件集合
+    * @param sysUser	查询条件集合
     * @return
     */
-    List<FileInfo> getFileInfoList(Map<String, String> map);
+    List<FileInfo> getFileInfoList(FileInfoParam fileInfoParam, SysUser sysUser);
+
+    /**
+     * 查询案卷信息表集合
+     * @param sysUser	查询条件集合
+     * @return
+     */
+    List<FileInfo> getFileInfoListByIdList(FileInfoParam fileInfoParam, SysUser sysUser);
 
     /**
     * 查询案卷信息表总数
-    * @param map	查询条件集合
+    * @param sysUser	查询条件集合
     * @return
     */
-    int getFileInfoCount(Map<String, String> map);
+    int getFileInfoCount(FileInfoParam fileInfoParam, SysUser sysUser);
 
     /**
     * 新增案卷信息表
@@ -65,4 +72,6 @@ public interface FileInfoService {
      * @param sysUser
      */
     List<FileInfoParam> jobFileInfoListDataSMCJ(FileInfoParam fileInfoParam, SysUser sysUser);
+
+    List<FileInfoParam> getJobFileInfoByFileAuthoperIdKg(FileInfoParam fileInfoParam, SysUser sysUser);
 }
