@@ -202,7 +202,7 @@ public class FileStoreController  {
         FileStore jobFileStore=new FileStore();
         SysUser sysUser = sysUserService.getCurrentUser(request);
         try {
-            String[] fileIds= fileStoreParam.getFileCode().split(",");
+            String[] fileIds= fileStoreParam.getFileId().split(",");
             List<String> list = new ArrayList<String>();
             for(int i=0;i<fileIds.length;i++){
                 list.add(fileIds[i]);
@@ -226,7 +226,7 @@ public class FileStoreController  {
             userInfo.setDeptCode(orgData.getDeptId());
             userInfo.setDeptName(orgData.getDeptName());
             fileStoreService.updateJobFileStoreByJobCabSpaceBGWZ(jobfileinfo,jobCabSpace,userInfo);
-            return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS, null, jobFileStore.getSpaceId());
+            return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS, "存储位置变更成功", jobFileStore.getSpaceId());
         } catch (Exception e) {
             log.error("保存案卷存储表出错", e);
             return new ResponseData<>(ResponseData.STATUS_CODE_BIZ, "保存案卷存储表出错：" + e.getMessage());
