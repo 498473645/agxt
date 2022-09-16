@@ -2,14 +2,19 @@ package com.pkusoft.agxt.controller;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 
+import com.pkusoft.agxt.model.CabSpace;
 import com.pkusoft.agxt.model.FileInfo;
+import com.pkusoft.agxt.model.FileStore;
 import com.pkusoft.agxt.model.FileTemp;
 import com.pkusoft.agxt.req.FileInfoParam;
+import com.pkusoft.agxt.service.CabSpaceService;
 import com.pkusoft.agxt.service.FileInfoService;
+import com.pkusoft.agxt.service.FileStoreService;
 import com.pkusoft.usercenter.po.SysUser;
 import com.pkusoft.usercenter.service.SysUserService;
 import io.swagger.annotations.Api;
@@ -48,6 +53,12 @@ public class FileInfoController  {
 
     @Autowired
     private FileInfoService fileInfoService ;
+
+    @Autowired
+    private FileStoreService fileStoreService;
+
+    @Autowired
+    private CabSpaceService cabSpaceService;
 
     /***获取代理用户信息服务类*/
     @Autowired
@@ -214,7 +225,7 @@ public class FileInfoController  {
      */
     @RequestMapping("/archives/jobFileInfoListDataAllSmcjNew")
     @ResponseBody
-    public ResponseData jobFileInfoListDataSMCJNew(@RequestBody FileInfoParam fileInfoParam, HttpServletRequest request) {
+    public ResponseData<List<FileInfoParam>> jobFileInfoListDataSMCJNew(@RequestBody FileInfoParam fileInfoParam, HttpServletRequest request) {
         ResponseDto<List<FileInfoParam>> dto = new ResponseDto<>();
         try {
             SysUser sysUser= sysUserService.getCurrentUser(request);
@@ -239,6 +250,39 @@ public class FileInfoController  {
         } catch (Exception e) {
             log.error("案卷信息表查询列表数据出错", e);
             return new ResponseData<>(ResponseData.STATUS_CODE_BIZ, "案卷信息表查询列表数据出错：" + e.getMessage());
+        }
+    }
+
+    /**
+     * 检查柜子是否在本单位
+     *
+     * @param fileInfoParam
+     * @return
+     */
+    @RequestMapping("/archives/checkSpaceByOrg")
+    @ResponseBody
+    public ResponseData checkSpaceByOrg(@RequestBody FileInfoParam fileInfoParam,HttpServletRequest request) {
+        try {
+            // String[] fileIds=fileId.split(",");
+            SysUser sysUser= sysUserService.getCurrentUser(request);
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("pageId", "00000000-0000-0000-0000-000000000000");
+            map.put("metalId", "00000000-0000-0000-0000-000000000000");
+            for (int i = 0; i < fileInfoParam.getFileIds().length; i++) {
+                map.put("fileId", fileInfoParam.getFileIds()[i]);
+                FileStore jobFileStore = fileStoreService.getJobFileStoreByFileIdAndPageIdAndMetalId(map);
+                if (StringUtils.hasText(jobFileStore.getSpaceId())) {
+                    CabSpace jobCabSpace = cabSpaceService.getCabSpace(jobFileStore.getSpaceId());
+                    if (!jobCabSpace.getOrgCode().equals(sysUser.getDeptId())) {
+                        return new ResponseData<>(ResponseData.STATUS_CODE_BIZ, jobFileStore.getSpaceName() + "柜子不在本单位，无法开柜！");
+                    }
+                }
+            }
+            return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS, null);
+        } catch (Exception e) {
+            log.error("案卷归档失败", e);
+            return new ResponseData<>(ResponseData.STATUS_CODE_BIZ, "案卷归档失败：" + e.getMessage());
+
         }
     }
 

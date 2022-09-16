@@ -64,4 +64,6 @@ public interface FileStoreService {
     FileStore getJobFileStoreByFileCode(String code);
 
     ResponseData updateJobFileStoreByJobCabSpaceBGWZ(List<FileInfo> jobfileinfo, CabSpace jobCabSpace, UserInfo userInfo);
+
+    FileStore getJobFileStoreByFileIdAndPageIdAndMetalId(Map<String, Object> map);
 }

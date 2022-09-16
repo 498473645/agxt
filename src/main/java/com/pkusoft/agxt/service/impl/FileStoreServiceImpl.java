@@ -172,4 +172,9 @@ public class FileStoreServiceImpl implements FileStoreService {
         }
         return new ResponseData(ResponseData.STATUS_CODE_SUCCESS,"变更案卷存储位置成功",jobFileTrackDtlList);
     }
+
+    @Override
+    public FileStore getJobFileStoreByFileIdAndPageIdAndMetalId(Map<String, Object> map) {
+        return fileStoreMapper.getJobFileStoreByFileIdAndPageIdAndMetalId(map);
+    }
 }

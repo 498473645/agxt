@@ -10,4 +10,6 @@ import com.pkusoft.agxt.model.FileStore;
 public interface FileStoreMapper extends Mapper<FileStore> {
 
     FileStore getJobFileStoreByFileCode(Map<String, Object> map);
+
+    FileStore getJobFileStoreByFileIdAndPageIdAndMetalId(Map<String, Object> map);
 }

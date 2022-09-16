@@ -407,6 +407,15 @@ public class FileInfoParam extends Page {
     private String tot_cnt;
     private String isOrNot;
     private List<String> idList;
+    private String fileIds[];
+
+    public String[] getFileIds() {
+        return fileIds;
+    }
+
+    public void setFileIds(String[] fileIds) {
+        this.fileIds = fileIds;
+    }
 
     public List<String> getIdList() {
         return idList;
