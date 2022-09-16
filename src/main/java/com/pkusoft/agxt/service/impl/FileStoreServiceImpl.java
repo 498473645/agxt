@@ -177,4 +177,13 @@ public class FileStoreServiceImpl implements FileStoreService {
     public FileStore getJobFileStoreByFileIdAndPageIdAndMetalId(Map<String, Object> map) {
         return fileStoreMapper.getJobFileStoreByFileIdAndPageIdAndMetalId(map);
     }
+
+    public List<FileStore> getJobFileStoreBySpaceId(String spaceId){
+        Map<String,Object> map=new HashMap<String,Object>();
+        map.put("pageId", JobUtil.IDDEFAULT);
+        map.put("metalId", JobUtil.IDDEFAULT);
+        map.put("spaceId", spaceId);
+        List<FileStore> list = fileStoreMapper.getJobFileStoreBySpaceId(map);
+        return list;
+    }
 }

@@ -78,6 +78,19 @@
         and
         FILE_ID = #{fileId,jdbcType=VARCHAR}
     </select>
+    <select id="getJobFileStoreBySpaceId" resultType="com.pkusoft.agxt.model.FileStore">
+        select
+        <include refid="Base_Column_List" />
+        from FILE_STORE
+        where
+        ROW_STATUS = 3
+        and
+        (PAGE_ID = #{pageId,jdbcType=VARCHAR} or PAGE_ID is null)
+        and
+        (METAL_ID = #{metalId,jdbcType=VARCHAR} or METAL_ID is null)
+        and
+        SPACE_ID = #{spaceId,jdbcType=VARCHAR}
+    </select>
 
     <!-- user-defined -->
 

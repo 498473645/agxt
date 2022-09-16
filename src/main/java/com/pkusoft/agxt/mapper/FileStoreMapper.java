@@ -12,4 +12,6 @@ public interface FileStoreMapper extends Mapper<FileStore> {
     FileStore getJobFileStoreByFileCode(Map<String, Object> map);
 
     FileStore getJobFileStoreByFileIdAndPageIdAndMetalId(Map<String, Object> map);
+
+    List<FileStore> getJobFileStoreBySpaceId(Map<String, Object> param);
 }

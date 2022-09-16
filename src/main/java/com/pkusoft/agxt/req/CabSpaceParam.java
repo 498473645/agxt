@@ -85,7 +85,7 @@ public class CabSpaceParam extends Page {
      */
     @Column(name = "SN")
     @ApiModelProperty(value = "排序序号")
-    private Integer sn;
+    private Double sn;
 
  	/**
      * 所有人ID
@@ -308,6 +308,52 @@ public class CabSpaceParam extends Page {
     private String deptName;
     private String fileId;
 
+    private String spaceNoPrefix;
+    private Integer spaceNoStartValue;
+    private Integer spaceNoCountValue;
+    private String ip;
+    private String port;
+
+    public String getSpaceNoPrefix() {
+        return spaceNoPrefix;
+    }
+
+    public void setSpaceNoPrefix(String spaceNoPrefix) {
+        this.spaceNoPrefix = spaceNoPrefix;
+    }
+
+    public Integer getSpaceNoStartValue() {
+        return spaceNoStartValue;
+    }
+
+    public void setSpaceNoStartValue(Integer spaceNoStartValue) {
+        this.spaceNoStartValue = spaceNoStartValue;
+    }
+
+    public Integer getSpaceNoCountValue() {
+        return spaceNoCountValue;
+    }
+
+    public void setSpaceNoCountValue(Integer spaceNoCountValue) {
+        this.spaceNoCountValue = spaceNoCountValue;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+    public String getPort() {
+        return port;
+    }
+
+    public void setPort(String port) {
+        this.port = port;
+    }
+
     public String getFileId() {
         return fileId;
     }
@@ -480,7 +526,7 @@ public class CabSpaceParam extends Page {
     * 获得排序序号
     * @return SN
     */
-    public Integer getSn() {
+    public Double getSn() {
         return this.sn;
     }
 
@@ -488,7 +534,7 @@ public class CabSpaceParam extends Page {
     * 设置排序序号
     * @param sn
     */
-    public void setSn(Integer sn) {
+    public void setSn(Double sn) {
         this.sn = sn;
     }
 

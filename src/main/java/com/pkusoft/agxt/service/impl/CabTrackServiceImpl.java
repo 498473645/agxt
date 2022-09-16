@@ -1,20 +1,17 @@
 package com.pkusoft.agxt.service.impl;
 
-import java.util.Date;
+import com.pkusoft.agxt.mapper.CabTrackMapper;
+import com.pkusoft.agxt.model.CabTrack;
+import com.pkusoft.agxt.service.CabTrackService;
+import org.apache.ibatis.session.RowBounds;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import tk.mybatis.mapper.entity.Example;
+
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
-import org.apache.ibatis.session.RowBounds;
-import tk.mybatis.mapper.entity.Example;
-
-import com.pkusoft.agxt.model.CabTrack;
-import com.pkusoft.agxt.service.CabTrackService;
-import com.pkusoft.agxt.mapper.CabTrackMapper;
 
 @Service
 @Transactional
@@ -61,6 +58,11 @@ public class CabTrackServiceImpl implements CabTrackService {
     public int cabTrackDelete(String id){
         int num = cabTrackMapper.deleteByPrimaryKey(id);
         return num;
+    }
+
+    @Override
+    public void insertCabTrack(CabTrack jobCabTrack) {
+        cabTrackMapper.insertSelective(jobCabTrack);
     }
 
 }

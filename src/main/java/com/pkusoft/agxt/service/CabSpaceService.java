@@ -73,4 +73,18 @@ public interface CabSpaceService {
     int cabSpaceDelete(String id);
 
     void updateByAreaId(CabArea cabArea, SysUser sysUser);
+
+    /**
+     * 查询案管人像SID+code(人像柜中SID+code必须唯一)
+     * @param reserve1
+     * @param code
+     * @return
+     */
+    List<CabSpace> getJobCabSpaceByreserve1(String reserve1,String code,String orgCode);
+
+    List<CabSpace> getJobCabSpaceBySnAndGroupCode(Double sn, String groupCode,String areaId);
+
+    String batchInsertCabSpace(CabSpaceParam cabSpaceParam, SysUser sysUser);
+
+    int insertJobCabSpaceW(CabSpace jobCabSpace, String ip, String port, SysUser user);
 }

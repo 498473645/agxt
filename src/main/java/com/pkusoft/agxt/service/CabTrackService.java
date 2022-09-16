@@ -55,4 +55,5 @@ public interface CabTrackService {
     */
     int cabTrackDelete(String id);
 
+    void insertCabTrack(CabTrack jobCabTrack);
 }

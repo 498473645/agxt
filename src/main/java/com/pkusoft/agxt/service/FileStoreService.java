@@ -66,4 +66,11 @@ public interface FileStoreService {
     ResponseData updateJobFileStoreByJobCabSpaceBGWZ(List<FileInfo> jobfileinfo, CabSpace jobCabSpace, UserInfo userInfo);
 
     FileStore getJobFileStoreByFileIdAndPageIdAndMetalId(Map<String, Object> map);
+
+    /**
+     * 检查是否有案件在该改柜子里
+     * @param spaceId
+     * @return
+     */
+    List<FileStore> getJobFileStoreBySpaceId(String spaceId);
 }

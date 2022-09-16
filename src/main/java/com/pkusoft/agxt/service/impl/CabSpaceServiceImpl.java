@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.apache.ibatis.session.RowBounds;
+import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 import pkubatis.common.utils.JobUtil;
 import pkubatis.common.utils.OrgData;
@@ -47,8 +48,8 @@ public class CabSpaceServiceImpl implements CabSpaceService {
     @Autowired
     private FileStoreService fileStoreService;
 
-    static Map<String, String>  act_public = PropertiesFileUtils.readProperties2Map("spaceAct-public.properties");
-    static Map<String, String>  act_qj = PropertiesFileUtils.readProperties2Map("spaceAct-qj.properties");
+    static Map<String, String> act_public = PropertiesFileUtils.readProperties2Map("spaceAct-public.properties");
+    static Map<String, String> act_qj = PropertiesFileUtils.readProperties2Map("spaceAct-qj.properties");
 
     public List<CabSpaceParam> getCabSpaceParamList(CabSpaceParam cabSpaceParam, SysUser sysUser) {
 
@@ -59,11 +60,11 @@ public class CabSpaceServiceImpl implements CabSpaceService {
 //        example.setOrderByClause("CREATE_TIME");
         example.setOrderByClause("REGEXP_SUBSTR(NAME, '^\\D*') NULLS FIRST, TO_NUMBER(REGEXP_SUBSTR(NAME, '\\d+'))");
         //The query conditions are edited here
-        this.setConditions(criteria,cabSpaceParam, sysUser);
+        this.setConditions(criteria, cabSpaceParam, sysUser);
         criteria.andEqualTo("curOrg", sysUser.getDeptId());
 
 
-        List<CabSpace> list = cabSpaceMapper.selectByExampleAndRowBounds(example,rowBounds);
+        List<CabSpace> list = cabSpaceMapper.selectByExampleAndRowBounds(example, rowBounds);
         List<CabSpaceParam> cabSpaceParamList = new ArrayList<>();
         for (CabSpace cabSpace : list) {
             CabSpaceParam cabSpaceParam1 = new CabSpaceParam();
@@ -78,7 +79,7 @@ public class CabSpaceServiceImpl implements CabSpaceService {
         Example example = new Example(CabSpace.class);
         Example.Criteria criteria = example.createCriteria();
         //The query conditions are edited here
-        this.setConditions(criteria,cabSpaceParam, sysUser);
+        this.setConditions(criteria, cabSpaceParam, sysUser);
         criteria.andEqualTo("curOrg", sysUser.getDeptId());
         return cabSpaceMapper.selectCountByExample(example);
     }
@@ -91,8 +92,8 @@ public class CabSpaceServiceImpl implements CabSpaceService {
 
         example.setOrderByClause("group_code,sn");
 
-        this.setConditions2(criteria,cabSpaceParam, user);
-        return cabSpaceMapper.selectByExampleAndRowBounds(example,rowBounds);
+        this.setConditions2(criteria, cabSpaceParam, user);
+        return cabSpaceMapper.selectByExampleAndRowBounds(example, rowBounds);
     }
 
     public int getCabSpaceCount(CabSpaceParam cabSpaceParam, SysUser sysUser) {
@@ -100,29 +101,29 @@ public class CabSpaceServiceImpl implements CabSpaceService {
         Example example = new Example(CabSpace.class);
         Example.Criteria criteria = example.createCriteria();
         //The query conditions are edited here
-        this.setConditions2(criteria,cabSpaceParam, sysUser);
+        this.setConditions2(criteria, cabSpaceParam, sysUser);
         return cabSpaceMapper.selectCountByExample(example);
     }
 
     private void setConditions(Example.Criteria criteria, CabSpaceParam cabSpaceParam, SysUser user) {
-        if(StringUtils.hasText(cabSpaceParam.getCode())){
+        if (StringUtils.hasText(cabSpaceParam.getCode())) {
             criteria.andLike("code", '%' + cabSpaceParam.getCode() + '%');
         }
-        if(StringUtils.hasText(cabSpaceParam.getOrgCode())){
+        if (StringUtils.hasText(cabSpaceParam.getOrgCode())) {
             criteria.andEqualTo("orgCode", cabSpaceParam.getOrgCode());
         }
     }
 
     private void setConditions2(Example.Criteria criteria, CabSpaceParam cabSpaceParam, SysUser user) {
-        OrgData orgData= sysPermitService.userOrg(user.getUserId());
-        SysUser sysUser= sysPermitService.getJobFileInfoListBySysRole(orgData.getIdCard());//判断是否是案管员,是案管员就返回案管员信息
-        if(sysUser==null){
+        OrgData orgData = sysPermitService.userOrg(user.getUserId());
+        SysUser sysUser = sysPermitService.getJobFileInfoListBySysRole(orgData.getIdCard());//判断是否是案管员,是案管员就返回案管员信息
+        if (sysUser == null) {
             criteria.andEqualTo("ownerId", orgData.getIdCard());
-            if(StringUtils.hasText(cabSpaceParam.getAreaId())){
+            if (StringUtils.hasText(cabSpaceParam.getAreaId())) {
                 criteria.andEqualTo("areaId", cabSpaceParam.getAreaId());
             }
-        }else{//案管员
-            if(StringUtils.hasText(cabSpaceParam.getAreaId())){
+        } else {//案管员
+            if (StringUtils.hasText(cabSpaceParam.getAreaId())) {
                 criteria.andEqualTo("areaId", cabSpaceParam.getAreaId());
             }
             criteria.andEqualTo("orgCode", user.getDeptId());
@@ -130,15 +131,15 @@ public class CabSpaceServiceImpl implements CabSpaceService {
         //如果案卷的状态是提请逮捕或移送起诉,那么就查出该案卷在存储表中材料和页等于0的那一条,如果该条spaceId不为空,说明该案卷已入该柜子,就只查出这一个柜子,避免分卷.
         if (cabSpaceParam.getFileId() != null) {
             FileInfo jobFileInfo = fileInfoMapper.selectByPrimaryKey(cabSpaceParam.getFileId());
-            if(cabSpaceParam.getFileId() != null && jobFileInfo.getStatus() != null
-                    && (jobFileInfo.getStatus().equals(JobConstant.TQDBSTATUS) || jobFileInfo.getStatus().equals(JobConstant.YSQSSTATUS))){
+            if (cabSpaceParam.getFileId() != null && jobFileInfo.getStatus() != null
+                    && (jobFileInfo.getStatus().equals(JobConstant.TQDBSTATUS) || jobFileInfo.getStatus().equals(JobConstant.YSQSSTATUS))) {
                 FileStore jobFileStore = fileStoreService.getJobFileStoreByFileCode(jobFileInfo.getCode());
-                if(jobFileStore != null && jobFileStore.getSpaceId() != null && !jobFileStore.getSpaceId().equals(JobUtil.IDDEFAULT)){
+                if (jobFileStore != null && jobFileStore.getSpaceId() != null && !jobFileStore.getSpaceId().equals(JobUtil.IDDEFAULT)) {
                     criteria.andEqualTo("id", jobFileStore.getSpaceId());
                 }
             }
         }
-        List<String> status= new ArrayList<>();
+        List<String> status = new ArrayList<>();
         status.add("0900");
         status.add("0910");
         status.add("0920");
@@ -146,13 +147,13 @@ public class CabSpaceServiceImpl implements CabSpaceService {
         criteria.andNotIn("status", status);
     }
 
-    public int cabSpaceSave(CabSpace cabSpace, String ip,String port, SysUser sysUser){
+    public int cabSpaceSave(CabSpace cabSpace, String ip, String port, SysUser sysUser) {
         String id = UUID.randomUUID().toString();
         cabSpace.setId(id);
 
-        OrgData orgData= sysPermitService.userOrg(sysUser.getUserId());
+        OrgData orgData = sysPermitService.userOrg(sysUser.getUserId());
         CabArea jobCabArea = cabAreaService.getCabArea(cabSpace.getAreaId());//区域表
-        CabPlace jobCabPlace= cabPlaceService.getCabPlace(jobCabArea.getPlaceId());//场所表
+        CabPlace jobCabPlace = cabPlaceService.getCabPlace(jobCabArea.getPlaceId());//场所表
 
         //空间表
         cabSpace.setId(UUID.randomUUID().toString());
@@ -160,8 +161,8 @@ public class CabSpaceServiceImpl implements CabSpaceService {
         cabSpace.setPlaceId(jobCabArea.getPlaceId());
         cabSpace.setPlaceName(jobCabArea.getPlaceName());
         cabSpace.setStatus("0000");
-        if(!"0040".equals(cabSpace.getReserve2()) && !"0050".equals(cabSpace.getReserve2())  && !"0060".equals(cabSpace.getReserve2())  && !"0070".equals(cabSpace.getReserve2()) && !"0041".equals(cabSpace.getReserve2()) && !"0042".equals(cabSpace.getReserve2())){
-            Double sn=new Double(maxSn()+1);
+        if (!"0040".equals(cabSpace.getReserve2()) && !"0050".equals(cabSpace.getReserve2()) && !"0060".equals(cabSpace.getReserve2()) && !"0070".equals(cabSpace.getReserve2()) && !"0041".equals(cabSpace.getReserve2()) && !"0042".equals(cabSpace.getReserve2())) {
+            Double sn = new Double(maxSn() + 1);
             cabSpace.setSn(sn);
         }
 
@@ -185,20 +186,20 @@ public class CabSpaceServiceImpl implements CabSpaceService {
         cabSpace.setReserve3("0");
         CabSpaceAct jobCabSpaceAct = new CabSpaceAct();//开柜指令
         CabSpaceAct jobCabSpaceActCheck = new CabSpaceAct();//查询指令
-        Double sn =cabSpace.getSn();
+        Double sn = cabSpace.getSn();
         String type = cabSpace.getReserve2();
-        if(("0050".equals(type) || "0060".equals(type) || "0070".equals(type))){
+        if (("0050".equals(type) || "0060".equals(type) || "0070".equals(type))) {
             //公版柜子
 //			if(14>=sn && sn>=1){
-            jobCabSpaceAct = insertSpaceAct(cabSpace,sysUser,sn,type,ip,port, orgData);//新增开柜指令
+            jobCabSpaceAct = insertSpaceAct(cabSpace, sysUser, sn, type, ip, port, orgData);//新增开柜指令
 //			}
-        }else if(("0040".equals(type) || "0041".equals(type) || "0042".equals(type))){
+        } else if (("0040".equals(type) || "0041".equals(type) || "0042".equals(type))) {
             //潜江柜子
 //			if(18>=sn && sn>=1){
-            jobCabSpaceAct = insertSpaceAct(cabSpace,sysUser,sn,type,ip,port, orgData);//新增开柜指令
-            jobCabSpaceActCheck  = insertSpaceActCheck(cabSpace,sysUser,sn,type,ip,port, orgData);//新增开柜指令
+            jobCabSpaceAct = insertSpaceAct(cabSpace, sysUser, sn, type, ip, port, orgData);//新增开柜指令
+            jobCabSpaceActCheck = insertSpaceActCheck(cabSpace, sysUser, sn, type, ip, port, orgData);//新增开柜指令
 //			}
-        }else{
+        } else {
             //空间指令表
             jobCabSpaceAct.setId(UUID.randomUUID().toString());
             jobCabSpaceAct.setCode(cabSpace.getCode());
@@ -227,30 +228,30 @@ public class CabSpaceServiceImpl implements CabSpaceService {
             jobCabSpaceAct.setCurOrg(orgData.getDeptId());
             jobCabSpaceAct.setCurOrgData(orgData.getDeptId());
             jobCabSpaceAct.setIp(ip);
-            if(StringUtils.hasText(port)){
+            if (StringUtils.hasText(port)) {
                 jobCabSpaceAct.setPort(Integer.valueOf(port));
             }
         }
 
 
         //空间总数
-        if(jobCabArea.getSpaceCount()!=null){
-            jobCabPlace.setSpaceCount(jobCabPlace.getSpaceCount()+1);
-        }else{
+        if (jobCabArea.getSpaceCount() != null) {
+            jobCabPlace.setSpaceCount(jobCabPlace.getSpaceCount() + 1);
+        } else {
             jobCabPlace.setSpaceCount(1);
         }
-        if(jobCabArea.getSpaceCount()!=null){
-            jobCabArea.setSpaceCount(jobCabArea.getSpaceCount()+1);
-        }else{
+        if (jobCabArea.getSpaceCount() != null) {
+            jobCabArea.setSpaceCount(jobCabArea.getSpaceCount() + 1);
+        } else {
             jobCabArea.setSpaceCount(1);
         }
 
         cabPlaceMapper.updateByPrimaryKeySelective(jobCabPlace);
         cabAreaMapper.updateByPrimaryKeySelective(jobCabArea);
-        if(jobCabSpaceAct.getId() != null){
+        if (jobCabSpaceAct.getId() != null) {
             cabSpaceActMapper.insertSelective(jobCabSpaceAct);
         }
-        if(jobCabSpaceActCheck.getId() != null){
+        if (jobCabSpaceActCheck.getId() != null) {
             cabSpaceActMapper.insertSelective(jobCabSpaceActCheck);
         }
 
@@ -258,23 +259,23 @@ public class CabSpaceServiceImpl implements CabSpaceService {
         return num;
     }
 
-    public int cabSpaceUpdate(CabSpace cabSpace, SysUser sysUser){
+    public int cabSpaceUpdate(CabSpace cabSpace, SysUser sysUser) {
         int num = cabSpaceMapper.updateByPrimaryKeySelective(cabSpace);
         return num;
     }
 
-    public CabSpace getCabSpace(String id){
+    public CabSpace getCabSpace(String id) {
         return cabSpaceMapper.selectByPrimaryKey(id);
     }
 
-    public int cabSpaceDelete(String id){
+    public int cabSpaceDelete(String id) {
         int num = cabSpaceMapper.deleteByPrimaryKey(id);
         return num;
     }
 
     @Override
     public void updateByAreaId(CabArea cabArea, SysUser sysUser) {
-        CabSpace cabSpace=new CabSpace();
+        CabSpace cabSpace = new CabSpace();
         cabSpace.setOrgCode(cabArea.getOrgCode());
         cabSpace.setOrgName(cabArea.getOrgName());
         cabSpace.setOwnerId("");
@@ -288,13 +289,13 @@ public class CabSpaceServiceImpl implements CabSpaceService {
 
         CabSpace newCabSpace = new CabSpace();
         newCabSpace.setAreaId(cabArea.getId());
-        List<CabSpace> jobCabSpaceList= cabSpaceMapper.select(newCabSpace);
+        List<CabSpace> jobCabSpaceList = cabSpaceMapper.select(newCabSpace);
         for (CabSpace jobCabSpace2 : jobCabSpaceList) {
             //修改空间指令表
             CabSpaceAct cabSpaceAct = new CabSpaceAct();
             cabSpaceAct.setSpaceId(jobCabSpace2.getId());
             List<CabSpaceAct> jobCabSpaceActList = cabSpaceActMapper.select(cabSpaceAct);
-            for(CabSpaceAct jobCabSpaceAct : jobCabSpaceActList){
+            for (CabSpaceAct jobCabSpaceAct : jobCabSpaceActList) {
 
                 jobCabSpaceAct.setCurOrg(cabArea.getOrgCode());
                 cabSpaceActMapper.updateByPrimaryKey(jobCabSpaceAct);
@@ -302,18 +303,179 @@ public class CabSpaceServiceImpl implements CabSpaceService {
         }
     }
 
-    public CabSpaceAct insertSpaceActCheck(CabSpace jobCabSpace,SysUser sysUser,Double sn,String type,String ip,String port,OrgData orgData){
-        int i=sn.intValue();
+    public List<CabSpace> getJobCabSpaceByreserve1(String reserve1, String code, String orgCode) {
+        Example example = new Example(CabSpace.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("reserve1", reserve1);
+        criteria.andEqualTo("code", code);
+        criteria.andEqualTo("orgCode", orgCode);
+        List<CabSpace> list = cabSpaceMapper.selectByExample(example);
+        return list;
+    }
+
+    @Override
+    public List<CabSpace> getJobCabSpaceBySnAndGroupCode(Double sn,
+                                                         String groupCode, String areaId) {
+        Example example = new Example(CabSpace.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("sn", sn);
+        criteria.andEqualTo("areaId", areaId);
+        criteria.andEqualTo("groupCode", groupCode);
+        List<CabSpace> list = cabSpaceMapper.selectByExample(example);
+        return list;
+    }
+
+    @Override
+    public String batchInsertCabSpace(CabSpaceParam cabSpaceParam, SysUser sysUser) {
+        String codes = "";
+        for (int i = 0; i < cabSpaceParam.getSpaceNoCountValue(); i++) {
+            String code = cabSpaceParam.getSpaceNoPrefix() + org.apache.commons.lang.StringUtils.leftPad(String.valueOf(i + cabSpaceParam.getSpaceNoStartValue()), String.valueOf(cabSpaceParam.getSpaceNoStartValue() + cabSpaceParam.getSpaceNoCountValue()).length(), "0");
+            if (StringUtils.hasText(cabSpaceParam.getReserve1())) {//人像案管柜要保证SID+code 是唯一的,所以
+                OrgData orgData = sysPermitService.userOrg(sysUser.getUserId());
+                List<CabSpace> list = getJobCabSpaceByreserve1(cabSpaceParam.getReserve1(), code, orgData.getDeptId());
+                if (list != null && list.size() > 0) {
+                    if ("".equals(codes)) {
+                        codes = code;
+                    } else {
+                        codes += ("," + code);
+                    }
+                    continue;//如果本单位sid和code已存在,那么把code记录起来跳过此次循环,不存本条数据
+                }
+            }
+            cabSpaceParam.setSn(Double.valueOf(cabSpaceParam.getSpaceNoStartValue() + i));
+            cabSpaceParam.setCode(code);
+            cabSpaceParam.setName(code);
+
+            CabSpace cabSpace = new CabSpace();
+            BeanUtils.copyProperties(cabSpaceParam, cabSpace);
+            this.insertJobCabSpaceW(cabSpace, cabSpaceParam.getIp(), cabSpaceParam.getPort(), sysUser);
+
+        }
+        return codes;
+    }
+
+    @Override
+    public int insertJobCabSpaceW(CabSpace jobCabSpace, String ip, String port, SysUser user) {
+
+        OrgData orgData = sysPermitService.userOrg(user.getUserId());
+        CabArea jobCabArea = cabAreaService.getCabArea(jobCabSpace.getAreaId());//区域表
+        CabPlace jobCabPlace = cabPlaceService.getCabPlace(jobCabArea.getPlaceId());//场所表
+
+        //空间表
+        jobCabSpace.setId(UUID.randomUUID().toString());
+        jobCabSpace.setName(jobCabSpace.getCode());
+        jobCabSpace.setPlaceId(jobCabArea.getPlaceId());
+        jobCabSpace.setPlaceName(jobCabArea.getPlaceName());
+        jobCabSpace.setStatus("0000");
+        if (!"0040".equals(jobCabSpace.getReserve2()) && !"0050".equals(jobCabSpace.getReserve2()) && !"0060".equals(jobCabSpace.getReserve2()) && !"0070".equals(jobCabSpace.getReserve2()) && !"0041".equals(jobCabSpace.getReserve2()) && !"0042".equals(jobCabSpace.getReserve2())) {
+            Double sn = new Double(maxSn() + 1);
+            jobCabSpace.setSn(sn);
+        }
+
+        jobCabSpace.setRowStatus(3);
+        jobCabSpace.setCreaterId(orgData.getIdCard());
+        jobCabSpace.setCreaterName(user.getUserName());
+        jobCabSpace.setCreateTime(new Date());
+        jobCabSpace.setModerId(orgData.getIdCard());
+        jobCabSpace.setModerName(user.getUserName());
+        jobCabSpace.setModTime(new Date());
+        jobCabSpace.setOrgC(orgData.getOrgC());
+        jobCabSpace.setOrgS(orgData.getOrgS());
+        jobCabSpace.setOrgT(orgData.getOrgT());
+        jobCabSpace.setOrgCData(orgData.getOrgCData());
+        jobCabSpace.setOrgSData(orgData.getOrgSData());
+        jobCabSpace.setOrgTData(orgData.getOrgTData());
+        jobCabSpace.setCellCount(0);
+        jobCabSpace.setCurOrg(orgData.getDeptId());
+        jobCabSpace.setCurOrgData(orgData.getDeptId());
+        jobCabSpace.setCapacity(2000);//最大存储数默认设置为2000
+        jobCabSpace.setReserve3("0");
+        CabSpaceAct jobCabSpaceAct = new CabSpaceAct();//开柜指令
+        CabSpaceAct jobCabSpaceActCheck = new CabSpaceAct();//查询指令
+        Double sn = jobCabSpace.getSn();
+        String type = jobCabSpace.getReserve2();
+        if (("0050".equals(type) || "0060".equals(type) || "0070".equals(type))) {
+            //公版柜子
+//			if(14>=sn && sn>=1){
+            jobCabSpaceAct = insertSpaceAct(jobCabSpace, user, sn, type, ip, port, orgData);//新增开柜指令
+//			}
+        } else if (("0040".equals(type) || "0041".equals(type) || "0042".equals(type))) {
+            //潜江柜子
+//			if(18>=sn && sn>=1){
+            jobCabSpaceAct = insertSpaceAct(jobCabSpace, user, sn, type, ip, port, orgData);//新增开柜指令
+            jobCabSpaceActCheck = insertSpaceActCheck(jobCabSpace, user, sn, type, ip, port, orgData);//新增开柜指令
+//			}
+        } else {
+            //空间指令表
+            jobCabSpaceAct.setId(UUID.randomUUID().toString());
+            jobCabSpaceAct.setCode(jobCabSpace.getCode());
+            jobCabSpaceAct.setName(jobCabSpace.getName());
+            jobCabSpaceAct.setPlaceId(jobCabSpace.getPlaceId());
+            jobCabSpaceAct.setPlaceName(jobCabSpace.getPlaceName());
+            jobCabSpaceAct.setAreaId(jobCabSpace.getAreaId());
+            jobCabSpaceAct.setAreaName(jobCabSpace.getAreaName());
+            jobCabSpaceAct.setSpaceId(jobCabSpace.getId());
+            jobCabSpaceAct.setSpaceName(jobCabSpace.getName());
+            jobCabSpaceAct.setType(jobCabSpace.getType());
+            jobCabSpaceAct.setSn(jobCabSpace.getSn());
+            jobCabSpaceAct.setRowStatus(3);
+            jobCabSpaceAct.setCreaterId(orgData.getIdCard());
+            jobCabSpaceAct.setCreaterName(user.getUserName());
+            jobCabSpaceAct.setCreateTime(new Date());
+            jobCabSpaceAct.setModerId(orgData.getIdCard());
+            jobCabSpaceAct.setModerName(user.getUserName());
+            jobCabSpaceAct.setModTime(new Date());
+            jobCabSpaceAct.setOrgC(orgData.getOrgC());
+            jobCabSpaceAct.setOrgS(orgData.getOrgS());
+            jobCabSpaceAct.setOrgT(orgData.getOrgT());
+            jobCabSpaceAct.setOrgCData(orgData.getOrgCData());
+            jobCabSpaceAct.setOrgSData(orgData.getOrgSData());
+            jobCabSpaceAct.setOrgTData(orgData.getOrgTData());
+            jobCabSpaceAct.setCurOrg(orgData.getDeptId());
+            jobCabSpaceAct.setCurOrgData(orgData.getDeptId());
+            jobCabSpaceAct.setIp(ip);
+            if (StringUtils.hasText(port)) {
+                jobCabSpaceAct.setPort(Integer.valueOf(port));
+            }
+        }
+
+
+        //空间总数
+        if (jobCabArea.getSpaceCount() != null) {
+            jobCabPlace.setSpaceCount(jobCabPlace.getSpaceCount() + 1);
+        } else {
+            jobCabPlace.setSpaceCount(1);
+        }
+        if (jobCabArea.getSpaceCount() != null) {
+            jobCabArea.setSpaceCount(jobCabArea.getSpaceCount() + 1);
+        } else {
+            jobCabArea.setSpaceCount(1);
+        }
+
+
+        cabPlaceMapper.updateByPrimaryKeySelective(jobCabPlace);
+        cabAreaMapper.updateByPrimaryKeySelective(jobCabArea);
+        if (jobCabSpaceAct.getId() != null) {
+            cabSpaceActMapper.insertSelective(jobCabSpaceAct);
+        }
+        if (jobCabSpaceActCheck.getId() != null) {
+            cabSpaceActMapper.insertSelective(jobCabSpaceActCheck);
+        }
+        return cabSpaceMapper.insertSelective(jobCabSpace);
+    }
+
+    public CabSpaceAct insertSpaceActCheck(CabSpace jobCabSpace, SysUser sysUser, Double sn, String type, String ip, String port, OrgData orgData) {
+        int i = sn.intValue();
         CabSpaceAct jobCabSpaceAct = new CabSpaceAct();
         jobCabSpaceAct.setId(UUID.randomUUID().toString());
         jobCabSpaceAct.setCode(jobCabSpace.getCode());
         jobCabSpaceAct.setType("G0201");
         jobCabSpaceAct.setIp(ip);
         jobCabSpaceAct.setPort(Integer.valueOf(port));
-        if("0040".equals(type)){
-            jobCabSpaceAct.setCmd(act_qj.get("check"+i));
-        }else if("0050".equals(type)){
-            jobCabSpaceAct.setCmd(act_public.get("check"+i));
+        if ("0040".equals(type)) {
+            jobCabSpaceAct.setCmd(act_qj.get("check" + i));
+        } else if ("0050".equals(type)) {
+            jobCabSpaceAct.setCmd(act_public.get("check" + i));
         }
         jobCabSpaceAct.setSn(sn);
         jobCabSpaceAct.setMemo(jobCabSpace.getReserve2());
@@ -341,18 +503,18 @@ public class CabSpaceServiceImpl implements CabSpaceService {
         return jobCabSpaceAct;
     }
 
-    public CabSpaceAct insertSpaceAct(CabSpace jobCabSpace,SysUser sysUser,Double sn,String type,String ip,String port,OrgData orgData){
-        int i=sn.intValue();
+    public CabSpaceAct insertSpaceAct(CabSpace jobCabSpace, SysUser sysUser, Double sn, String type, String ip, String port, OrgData orgData) {
+        int i = sn.intValue();
         CabSpaceAct jobCabSpaceAct = new CabSpaceAct();
         jobCabSpaceAct.setId(UUID.randomUUID().toString());
         jobCabSpaceAct.setCode(jobCabSpace.getCode());
         jobCabSpaceAct.setType("G0204");
         jobCabSpaceAct.setIp(ip);
         jobCabSpaceAct.setPort(Integer.valueOf(port));
-        if("0040".equals(type)){
-            jobCabSpaceAct.setCmd(act_qj.get("open"+i));
-        }else if("0050".equals(type)){
-            jobCabSpaceAct.setCmd(act_public.get("open"+i));
+        if ("0040".equals(type)) {
+            jobCabSpaceAct.setCmd(act_qj.get("open" + i));
+        } else if ("0050".equals(type)) {
+            jobCabSpaceAct.setCmd(act_public.get("open" + i));
         }
         jobCabSpaceAct.setSn(sn);
         jobCabSpaceAct.setMemo(jobCabSpace.getReserve2());
