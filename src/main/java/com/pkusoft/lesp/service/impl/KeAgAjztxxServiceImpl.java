@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -97,5 +98,63 @@ public class KeAgAjztxxServiceImpl implements KeAgAjztxxService {
         int num = keAgAjztxxMapper.deleteByPrimaryKey(ajbh);
         return num;
     }
-
+    @Override
+    public int updateKeAgAjztxx(String ajbh, String zt, String czyBh,
+                                String czyXm, int index) {
+        Date date=new Date();
+        KeAgAjztxx ajztxx =keAgAjztxxMapper.selectByPrimaryKey(ajbh);
+        if(ajztxx != null){
+            KeAgAjztxx keAgAjztxx=new KeAgAjztxx();
+            keAgAjztxx.setAjbh(ajbh);
+            if(index == 1){
+                keAgAjztxx.setZt1(zt);
+                keAgAjztxx.setZt1CzyBh(czyBh);
+                keAgAjztxx.setZt1CzyXm(czyXm);
+                keAgAjztxx.setZt1Czsj(date);
+                keAgAjztxx.setZt2("0");
+                keAgAjztxx.setZt2CzyBh(null);
+                keAgAjztxx.setZt2CzyXm(null);
+                keAgAjztxx.setZt2Czsj(null);
+                keAgAjztxx.setZt3("0");
+                keAgAjztxx.setZt3CzyBh(null);
+                keAgAjztxx.setZt3CzyXm(null);
+                keAgAjztxx.setZt3Czsj(null);
+                keAgAjztxx.setZt4("0");
+                keAgAjztxx.setZt4CzyBh(null);
+                keAgAjztxx.setZt4CzyXm(null);
+                keAgAjztxx.setZt4Czsj(null);
+                keAgAjztxx.setZt5("0");
+                keAgAjztxx.setZt5CzyBh(null);
+                keAgAjztxx.setZt5CzyXm(null);
+                keAgAjztxx.setZt5Czsj(null);
+                return keAgAjztxxMapper.updateByPrimaryKeySelective(keAgAjztxx);
+            }
+            if(index == 2 && ajztxx.getZt2().equals("0")){
+                keAgAjztxx.setZt2(zt);
+                keAgAjztxx.setZt2CzyBh(czyBh);
+                keAgAjztxx.setZt2CzyXm(czyXm);
+                keAgAjztxx.setZt2Czsj(date);
+                return keAgAjztxxMapper.updateByPrimaryKeySelective(keAgAjztxx);
+            }
+            if(index == 3){
+                keAgAjztxx.setZt3(zt);
+                if(StringUtils.hasText(czyBh)){
+                    keAgAjztxx.setZt3CzyBh(czyBh);
+                }
+                if(StringUtils.hasText(czyXm)){
+                    keAgAjztxx.setZt3CzyXm(czyXm);
+                }
+                keAgAjztxx.setZt3Czsj(date);
+                return keAgAjztxxMapper.updateByPrimaryKeySelective(keAgAjztxx);
+            }
+            if(index == 4 && ajztxx.getZt4().equals("0")){
+                keAgAjztxx.setZt4(zt);
+                keAgAjztxx.setZt4CzyBh(czyBh);
+                keAgAjztxx.setZt4CzyXm(czyXm);
+                keAgAjztxx.setZt4Czsj(date);
+                return keAgAjztxxMapper.updateByPrimaryKeySelective(keAgAjztxx);
+            }
+        }
+        return 0;
+    }
 }

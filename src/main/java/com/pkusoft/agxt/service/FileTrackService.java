@@ -13,10 +13,10 @@ public interface FileTrackService {
 
     /**
     * 查询案卷操作轨迹表(主表)集合
-    * @param map	查询条件集合
+    * @param fileId	查询条件集合
     * @return
     */
-    List<FileTrack> getFileTrackList(Map<String, String> map);
+    List<FileTrack> getFileTrackListByFileId(String fileId);
 
     /**
     * 查询案卷操作轨迹表(主表)总数

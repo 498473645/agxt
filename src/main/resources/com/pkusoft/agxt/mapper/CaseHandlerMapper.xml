@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pkusoft.agxt.mapper.CaseHandlerMapper">
+    <!-- @codeGenerate -->
+    <resultMap id="BaseResultMap" type="com.pkusoft.agxt.model.CaseHandler">
+            <id column="ID" jdbcType="VARCHAR" property="id"/>
+            <result column="CASE_ID" jdbcType="VARCHAR" property="caseId"/>
+            <result column="CASE_CODE" jdbcType="VARCHAR" property="caseCode"/>
+            <result column="CASE_NAME" jdbcType="VARCHAR" property="caseName"/>
+            <result column="FILE_ID" jdbcType="VARCHAR" property="fileId"/>
+            <result column="FILE_CODE" jdbcType="VARCHAR" property="fileCode"/>
+            <result column="FILE_NAME" jdbcType="VARCHAR" property="fileName"/>
+            <result column="HANDLE_ORG_CODE" jdbcType="VARCHAR" property="handleOrgCode"/>
+            <result column="HANDLE_ORG_NAME" jdbcType="VARCHAR" property="handleOrgName"/>
+            <result column="HANDLER_ID" jdbcType="VARCHAR" property="handlerId"/>
+            <result column="HANDLER_CODE" jdbcType="VARCHAR" property="handlerCode"/>
+            <result column="HANDLER_NAME" jdbcType="VARCHAR" property="handlerName"/>
+            <result column="TYPE" jdbcType="VARCHAR" property="type"/>
+            <result column="SN" jdbcType="DECIMAL" property="sn"/>
+            <result column="DATA_SOURCE" jdbcType="VARCHAR" property="dataSource"/>
+            <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+            <result column="RESERVE1" jdbcType="VARCHAR" property="reserve1"/>
+            <result column="RESERVE2" jdbcType="VARCHAR" property="reserve2"/>
+            <result column="RESERVE3" jdbcType="VARCHAR" property="reserve3"/>
+            <result column="MEMO" jdbcType="VARCHAR" property="memo"/>
+            <result column="ROW_STATUS" jdbcType="DECIMAL" property="rowStatus"/>
+            <result column="CREATER_ID" jdbcType="VARCHAR" property="createrId"/>
+            <result column="CREATER_NAME" jdbcType="VARCHAR" property="createrName"/>
+            <result column="CREATE_TIME" jdbcType="DATE" property="createTime"/>
+            <result column="MODER_ID" jdbcType="VARCHAR" property="moderId"/>
+            <result column="MODER_NAME" jdbcType="VARCHAR" property="moderName"/>
+            <result column="MOD_TIME" jdbcType="DATE" property="modTime"/>
+            <result column="ORG_C" jdbcType="VARCHAR" property="orgC"/>
+            <result column="ORG_S" jdbcType="VARCHAR" property="orgS"/>
+            <result column="ORG_T" jdbcType="VARCHAR" property="orgT"/>
+            <result column="ORG_C_DATA" jdbcType="VARCHAR" property="orgCData"/>
+            <result column="ORG_S_DATA" jdbcType="VARCHAR" property="orgSData"/>
+            <result column="ORG_T_DATA" jdbcType="VARCHAR" property="orgTData"/>
+            <result column="CUR_ORG" jdbcType="VARCHAR" property="curOrg"/>
+            <result column="CUR_ORG_DATA" jdbcType="VARCHAR" property="curOrgData"/>
+
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ID,CASE_ID,CASE_CODE,CASE_NAME,FILE_ID,FILE_CODE,FILE_NAME,HANDLE_ORG_CODE,HANDLE_ORG_NAME,HANDLER_ID,HANDLER_CODE,HANDLER_NAME,TYPE,SN,DATA_SOURCE,STATUS,RESERVE1,RESERVE2,RESERVE3,MEMO,ROW_STATUS,CREATER_ID,CREATER_NAME,CREATE_TIME,MODER_ID,MODER_NAME,MOD_TIME,ORG_C,ORG_S,ORG_T,ORG_C_DATA,ORG_S_DATA,ORG_T_DATA,CUR_ORG,CUR_ORG_DATA
+    </sql>
+
+    <!-- user-defined -->
+
+</mapper>

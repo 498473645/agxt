@@ -73,4 +73,12 @@ public interface FileStoreService {
      * @return
      */
     List<FileStore> getJobFileStoreBySpaceId(String spaceId);
+
+    /**
+     * 案卷存储表删除信息
+     *
+     * @param ajbh
+     * @return 删除记录数
+     */
+    int deleteJobFileStoreByAjbh(String ajbh);
 }

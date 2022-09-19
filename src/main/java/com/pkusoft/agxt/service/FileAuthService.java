@@ -55,4 +55,5 @@ public interface FileAuthService {
     */
     int fileAuthDelete(String id);
 
+    int deleteJobFileAuthByAjbh(String ajbh);
 }

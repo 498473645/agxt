@@ -3,73 +3,74 @@
 <mapper namespace="com.pkusoft.lesp.mapper.KeAgAjztxxMapper">
     <!-- @codeGenerate -->
     <resultMap id="BaseResultMap" type="com.pkusoft.lesp.model.KeAgAjztxx">
-            <id column="AJBH" jdbcType="VARCHAR" property="ajbh"/>
-            <result column="AJMC" jdbcType="VARCHAR" property="ajmc"/>
-            <result column="AJMC_PYM" jdbcType="VARCHAR" property="ajmcPym"/>
-            <result column="AJLB" jdbcType="VARCHAR" property="ajlb"/>
-            <result column="SLSJ" jdbcType="DATE" property="slsj"/>
-            <result column="BADW_BM" jdbcType="VARCHAR" property="badwBm"/>
-            <result column="BADW_MC" jdbcType="VARCHAR" property="badwMc"/>
-            <result column="ZBR_SFZHM" jdbcType="VARCHAR" property="zbrSfzhm"/>
-            <result column="ZBR_JH" jdbcType="VARCHAR" property="zbrJh"/>
-            <result column="ZBR_XM" jdbcType="VARCHAR" property="zbrXm"/>
-            <result column="ZBR_XM_PYM" jdbcType="VARCHAR" property="zbrXmPym"/>
-            <result column="ZM_BH" jdbcType="VARCHAR" property="zmBh"/>
-            <result column="ZM_MC" jdbcType="VARCHAR" property="zmMc"/>
-            <result column="AJ_SJZT" jdbcType="VARCHAR" property="ajSjzt"/>
-            <result column="AG_SJZT" jdbcType="VARCHAR" property="agSjzt"/>
-            <result column="CSTATIONID" jdbcType="VARCHAR" property="cstationid"/>
-            <result column="SSTATIONID" jdbcType="VARCHAR" property="sstationid"/>
-            <result column="TSTATIONID" jdbcType="VARCHAR" property="tstationid"/>
-            <result column="RSTATIONID" jdbcType="VARCHAR" property="rstationid"/>
-            <result column="ZT1" jdbcType="VARCHAR" property="zt1"/>
-            <result column="ZT1_CZY_BH" jdbcType="VARCHAR" property="zt1CzyBh"/>
-            <result column="ZT1_CZY_XM" jdbcType="VARCHAR" property="zt1CzyXm"/>
-            <result column="ZT1_CZSJ" jdbcType="DATE" property="zt1Czsj"/>
-            <result column="ZT2" jdbcType="VARCHAR" property="zt2"/>
-            <result column="ZT2_CZY_BH" jdbcType="VARCHAR" property="zt2CzyBh"/>
-            <result column="ZT2_CZY_XM" jdbcType="VARCHAR" property="zt2CzyXm"/>
-            <result column="ZT2_CZSJ" jdbcType="DATE" property="zt2Czsj"/>
-            <result column="ZT3" jdbcType="VARCHAR" property="zt3"/>
-            <result column="ZT3_CZY_BH" jdbcType="VARCHAR" property="zt3CzyBh"/>
-            <result column="ZT3_CZY_XM" jdbcType="VARCHAR" property="zt3CzyXm"/>
-            <result column="ZT3_CZSJ" jdbcType="DATE" property="zt3Czsj"/>
-            <result column="ZT4" jdbcType="VARCHAR" property="zt4"/>
-            <result column="ZT4_CZY_BH" jdbcType="VARCHAR" property="zt4CzyBh"/>
-            <result column="ZT4_CZY_XM" jdbcType="VARCHAR" property="zt4CzyXm"/>
-            <result column="ZT4_CZSJ" jdbcType="DATE" property="zt4Czsj"/>
-            <result column="ZT5" jdbcType="VARCHAR" property="zt5"/>
-            <result column="ZT5_CZY_BH" jdbcType="VARCHAR" property="zt5CzyBh"/>
-            <result column="ZT5_CZY_XM" jdbcType="VARCHAR" property="zt5CzyXm"/>
-            <result column="ZT5_CZSJ" jdbcType="DATE" property="zt5Czsj"/>
-            <result column="SARYXM" jdbcType="VARCHAR" property="saryxm"/>
-            <result column="SARYXMPYM" jdbcType="VARCHAR" property="saryxmpym"/>
-            <result column="JJBH" jdbcType="VARCHAR" property="jjbh"/>
-            <result column="ZT6" jdbcType="VARCHAR" property="zt6"/>
-            <result column="ZT6_CZY_BH" jdbcType="VARCHAR" property="zt6CzyBh"/>
-            <result column="ZT6_CZY_XM" jdbcType="VARCHAR" property="zt6CzyXm"/>
-            <result column="ZT6_CZSJ" jdbcType="DATE" property="zt6Czsj"/>
-            <result column="ZT7" jdbcType="VARCHAR" property="zt7"/>
-            <result column="ZT7_CZY_BH" jdbcType="VARCHAR" property="zt7CzyBh"/>
-            <result column="ZT7_CZY_XM" jdbcType="VARCHAR" property="zt7CzyXm"/>
-            <result column="ZT7_CZSJ" jdbcType="DATE" property="zt7Czsj"/>
-            <result column="ZT8" jdbcType="VARCHAR" property="zt8"/>
-            <result column="ZT8_CZY_BH" jdbcType="VARCHAR" property="zt8CzyBh"/>
-            <result column="ZT8_CZY_XM" jdbcType="VARCHAR" property="zt8CzyXm"/>
-            <result column="ZT8_CZSJ" jdbcType="DATE" property="zt8Czsj"/>
-            <result column="ZT9" jdbcType="VARCHAR" property="zt9"/>
-            <result column="ZT9_CZY_BH" jdbcType="VARCHAR" property="zt9CzyBh"/>
-            <result column="ZT9_CZY_XM" jdbcType="VARCHAR" property="zt9CzyXm"/>
-            <result column="ZT9_CZSJ" jdbcType="DATE" property="zt9Czsj"/>
-            <result column="ZT10" jdbcType="VARCHAR" property="zt10"/>
-            <result column="ZT10_CZY_BH" jdbcType="VARCHAR" property="zt10CzyBh"/>
-            <result column="ZT10_CZY_XM" jdbcType="VARCHAR" property="zt10CzyXm"/>
-            <result column="ZT10_CZSJ" jdbcType="DATE" property="zt10Czsj"/>
+        <id column="AJBH" jdbcType="VARCHAR" property="ajbh"/>
+        <result column="AJMC" jdbcType="VARCHAR" property="ajmc"/>
+        <result column="AJMC_PYM" jdbcType="VARCHAR" property="ajmcPym"/>
+        <result column="AJLB" jdbcType="VARCHAR" property="ajlb"/>
+        <result column="SLSJ" jdbcType="DATE" property="slsj"/>
+        <result column="BADW_BM" jdbcType="VARCHAR" property="badwBm"/>
+        <result column="BADW_MC" jdbcType="VARCHAR" property="badwMc"/>
+        <result column="ZBR_SFZHM" jdbcType="VARCHAR" property="zbrSfzhm"/>
+        <result column="ZBR_JH" jdbcType="VARCHAR" property="zbrJh"/>
+        <result column="ZBR_XM" jdbcType="VARCHAR" property="zbrXm"/>
+        <result column="ZBR_XM_PYM" jdbcType="VARCHAR" property="zbrXmPym"/>
+        <result column="ZM_BH" jdbcType="VARCHAR" property="zmBh"/>
+        <result column="ZM_MC" jdbcType="VARCHAR" property="zmMc"/>
+        <result column="AJ_SJZT" jdbcType="VARCHAR" property="ajSjzt"/>
+        <result column="AG_SJZT" jdbcType="VARCHAR" property="agSjzt"/>
+        <result column="CSTATIONID" jdbcType="VARCHAR" property="cstationid"/>
+        <result column="SSTATIONID" jdbcType="VARCHAR" property="sstationid"/>
+        <result column="TSTATIONID" jdbcType="VARCHAR" property="tstationid"/>
+        <result column="RSTATIONID" jdbcType="VARCHAR" property="rstationid"/>
+        <result column="ZT1" jdbcType="VARCHAR" property="zt1"/>
+        <result column="ZT1_CZY_BH" jdbcType="VARCHAR" property="zt1CzyBh"/>
+        <result column="ZT1_CZY_XM" jdbcType="VARCHAR" property="zt1CzyXm"/>
+        <result column="ZT1_CZSJ" jdbcType="DATE" property="zt1Czsj"/>
+        <result column="ZT2" jdbcType="VARCHAR" property="zt2"/>
+        <result column="ZT2_CZY_BH" jdbcType="VARCHAR" property="zt2CzyBh"/>
+        <result column="ZT2_CZY_XM" jdbcType="VARCHAR" property="zt2CzyXm"/>
+        <result column="ZT2_CZSJ" jdbcType="DATE" property="zt2Czsj"/>
+        <result column="ZT3" jdbcType="VARCHAR" property="zt3"/>
+        <result column="ZT3_CZY_BH" jdbcType="VARCHAR" property="zt3CzyBh"/>
+        <result column="ZT3_CZY_XM" jdbcType="VARCHAR" property="zt3CzyXm"/>
+        <result column="ZT3_CZSJ" jdbcType="DATE" property="zt3Czsj"/>
+        <result column="ZT4" jdbcType="VARCHAR" property="zt4"/>
+        <result column="ZT4_CZY_BH" jdbcType="VARCHAR" property="zt4CzyBh"/>
+        <result column="ZT4_CZY_XM" jdbcType="VARCHAR" property="zt4CzyXm"/>
+        <result column="ZT4_CZSJ" jdbcType="DATE" property="zt4Czsj"/>
+        <result column="ZT5" jdbcType="VARCHAR" property="zt5"/>
+        <result column="ZT5_CZY_BH" jdbcType="VARCHAR" property="zt5CzyBh"/>
+        <result column="ZT5_CZY_XM" jdbcType="VARCHAR" property="zt5CzyXm"/>
+        <result column="ZT5_CZSJ" jdbcType="DATE" property="zt5Czsj"/>
+        <result column="SARYXM" jdbcType="VARCHAR" property="saryxm"/>
+        <result column="SARYXMPYM" jdbcType="VARCHAR" property="saryxmpym"/>
+        <result column="JJBH" jdbcType="VARCHAR" property="jjbh"/>
+        <result column="ZT6" jdbcType="VARCHAR" property="zt6"/>
+        <result column="ZT6_CZY_BH" jdbcType="VARCHAR" property="zt6CzyBh"/>
+        <result column="ZT6_CZY_XM" jdbcType="VARCHAR" property="zt6CzyXm"/>
+        <result column="ZT6_CZSJ" jdbcType="DATE" property="zt6Czsj"/>
+        <result column="ZT7" jdbcType="VARCHAR" property="zt7"/>
+        <result column="ZT7_CZY_BH" jdbcType="VARCHAR" property="zt7CzyBh"/>
+        <result column="ZT7_CZY_XM" jdbcType="VARCHAR" property="zt7CzyXm"/>
+        <result column="ZT7_CZSJ" jdbcType="DATE" property="zt7Czsj"/>
+        <result column="ZT8" jdbcType="VARCHAR" property="zt8"/>
+        <result column="ZT8_CZY_BH" jdbcType="VARCHAR" property="zt8CzyBh"/>
+        <result column="ZT8_CZY_XM" jdbcType="VARCHAR" property="zt8CzyXm"/>
+        <result column="ZT8_CZSJ" jdbcType="DATE" property="zt8Czsj"/>
+        <result column="ZT9" jdbcType="VARCHAR" property="zt9"/>
+        <result column="ZT9_CZY_BH" jdbcType="VARCHAR" property="zt9CzyBh"/>
+        <result column="ZT9_CZY_XM" jdbcType="VARCHAR" property="zt9CzyXm"/>
+        <result column="ZT9_CZSJ" jdbcType="DATE" property="zt9Czsj"/>
+        <result column="ZT10" jdbcType="VARCHAR" property="zt10"/>
+        <result column="ZT10_CZY_BH" jdbcType="VARCHAR" property="zt10CzyBh"/>
+        <result column="ZT10_CZY_XM" jdbcType="VARCHAR" property="zt10CzyXm"/>
+        <result column="ZT10_CZSJ" jdbcType="DATE" property="zt10Czsj"/>
 
     </resultMap>
 
     <sql id="Base_Column_List">
-        AJBH,AJMC,AJMC_PYM,AJLB,SLSJ,BADW_BM,BADW_MC,ZBR_SFZHM,ZBR_JH,ZBR_XM,ZBR_XM_PYM,ZM_BH,ZM_MC,AJ_SJZT,AG_SJZT,CSTATIONID,SSTATIONID,TSTATIONID,RSTATIONID,ZT1,ZT1_CZY_BH,ZT1_CZY_XM,ZT1_CZSJ,ZT2,ZT2_CZY_BH,ZT2_CZY_XM,ZT2_CZSJ,ZT3,ZT3_CZY_BH,ZT3_CZY_XM,ZT3_CZSJ,ZT4,ZT4_CZY_BH,ZT4_CZY_XM,ZT4_CZSJ,ZT5,ZT5_CZY_BH,ZT5_CZY_XM,ZT5_CZSJ,SARYXM,SARYXMPYM,JJBH,ZT6,ZT6_CZY_BH,ZT6_CZY_XM,ZT6_CZSJ,ZT7,ZT7_CZY_BH,ZT7_CZY_XM,ZT7_CZSJ,ZT8,ZT8_CZY_BH,ZT8_CZY_XM,ZT8_CZSJ,ZT9,ZT9_CZY_BH,ZT9_CZY_XM,ZT9_CZSJ,ZT10,ZT10_CZY_BH,ZT10_CZY_XM,ZT10_CZSJ
+        AJBH
+        ,AJMC,AJMC_PYM,AJLB,SLSJ,BADW_BM,BADW_MC,ZBR_SFZHM,ZBR_JH,ZBR_XM,ZBR_XM_PYM,ZM_BH,ZM_MC,AJ_SJZT,AG_SJZT,CSTATIONID,SSTATIONID,TSTATIONID,RSTATIONID,ZT1,ZT1_CZY_BH,ZT1_CZY_XM,ZT1_CZSJ,ZT2,ZT2_CZY_BH,ZT2_CZY_XM,ZT2_CZSJ,ZT3,ZT3_CZY_BH,ZT3_CZY_XM,ZT3_CZSJ,ZT4,ZT4_CZY_BH,ZT4_CZY_XM,ZT4_CZSJ,ZT5,ZT5_CZY_BH,ZT5_CZY_XM,ZT5_CZSJ,SARYXM,SARYXMPYM,JJBH,ZT6,ZT6_CZY_BH,ZT6_CZY_XM,ZT6_CZSJ,ZT7,ZT7_CZY_BH,ZT7_CZY_XM,ZT7_CZSJ,ZT8,ZT8_CZY_BH,ZT8_CZY_XM,ZT8_CZSJ,ZT9,ZT9_CZY_BH,ZT9_CZY_XM,ZT9_CZSJ,ZT10,ZT10_CZY_BH,ZT10_CZY_XM,ZT10_CZSJ
     </sql>
 
     <!-- user-defined -->

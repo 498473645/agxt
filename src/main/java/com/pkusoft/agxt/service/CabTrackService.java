@@ -56,4 +56,10 @@ public interface CabTrackService {
     int cabTrackDelete(String id);
 
     void insertCabTrack(CabTrack jobCabTrack);
+
+    /**
+     * 查询案卷柜空间轨迹
+     * @return
+     */
+    List<CabTrack> getJobCabTrackListByFileId(String fileId);
 }

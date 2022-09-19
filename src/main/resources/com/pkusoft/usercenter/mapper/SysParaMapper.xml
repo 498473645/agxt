@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pkusoft.usercenter.mapper.SysParaMapper">
+    <!-- @codeGenerate -->
+    <resultMap id="BaseResultMap" type="com.pkusoft.usercenter.po.SysPara">
+            <id column="PARA_CODE" jdbcType="VARCHAR" property="paraCode"/>
+            <result column="PARA_NAME" jdbcType="VARCHAR" property="paraName"/>
+            <result column="PARA_VALUE" jdbcType="VARCHAR" property="paraValue"/>
+            <result column="PARA_DESC" jdbcType="VARCHAR" property="paraDesc"/>
+            <result column="VISIABLE" jdbcType="VARCHAR" property="visiable"/>
+            <result column="RESERVE1" jdbcType="VARCHAR" property="reserve1"/>
+            <result column="RESERVE2" jdbcType="VARCHAR" property="reserve2"/>
+            <result column="RESERVE3" jdbcType="VARCHAR" property="reserve3"/>
+            <result column="RESERVE4" jdbcType="VARCHAR" property="reserve4"/>
+            <result column="RESERVE5" jdbcType="VARCHAR" property="reserve5"/>
+            <result column="ADD_USER_ID" jdbcType="VARCHAR" property="addUserId"/>
+            <result column="ADD_USER_NAME" jdbcType="VARCHAR" property="addUserName"/>
+            <result column="ADD_TIME" jdbcType="DATE" property="addTime"/>
+            <result column="MODIFY_USER_ID" jdbcType="VARCHAR" property="modifyUserId"/>
+            <result column="MODIFY_USER_NAME" jdbcType="VARCHAR" property="modifyUserName"/>
+            <result column="MODIFY_TIME" jdbcType="DATE" property="modifyTime"/>
+
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        PARA_CODE,PARA_NAME,PARA_VALUE,PARA_DESC,VISIABLE,RESERVE1,RESERVE2,RESERVE3,RESERVE4,RESERVE5,ADD_USER_ID,ADD_USER_NAME,ADD_TIME,MODIFY_USER_ID,MODIFY_USER_NAME,MODIFY_TIME
+    </sql>
+
+    <!-- user-defined -->
+
+</mapper>

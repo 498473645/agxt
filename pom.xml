@@ -290,6 +290,13 @@
             <artifactId>cxf-rt-frontend-jaxws</artifactId>
             <version>3.1.6</version>
         </dependency>
+        <!-- pinyin4j 将汉字转为拼音  -->
+        <dependency>
+            <groupId>com.belerweb</groupId>
+            <artifactId>pinyin4j</artifactId>
+            <version>2.5.0</version>
+        </dependency>
+
         <!-- 测试依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

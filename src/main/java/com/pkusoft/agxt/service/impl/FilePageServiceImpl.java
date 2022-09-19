@@ -63,4 +63,20 @@ public class FilePageServiceImpl implements FilePageService {
         return num;
     }
 
+    @Override
+    public List<FilePage> getJobFilePageByajbh(String ajbh) {
+        Example example = new Example(FilePage.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("fileCode", ajbh);
+        return filePageMapper.selectByExample(example);
+    }
+
+    @Override
+    public int deleteJobFilePageByAjbh(String ajbh) {
+        Example example = new Example(FilePage.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("fileCode", ajbh);
+        return filePageMapper.deleteByExample(criteria);
+    }
+
 }

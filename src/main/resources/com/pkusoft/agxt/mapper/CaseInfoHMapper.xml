@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pkusoft.agxt.mapper.CaseInfoHMapper">
+    <!-- @codeGenerate -->
+    <resultMap id="BaseResultMap" type="com.pkusoft.agxt.model.CaseInfoH">
+            <id column="HIS_ID" jdbcType="VARCHAR" property="hisId"/>
+            <result column="ID" jdbcType="VARCHAR" property="id"/>
+            <result column="CODE" jdbcType="VARCHAR" property="code"/>
+            <result column="NAME" jdbcType="VARCHAR" property="name"/>
+            <result column="TYPE" jdbcType="VARCHAR" property="type"/>
+            <result column="TYPE_NAME" jdbcType="VARCHAR" property="typeName"/>
+            <result column="SN" jdbcType="DECIMAL" property="sn"/>
+            <result column="CAUSE" jdbcType="VARCHAR" property="cause"/>
+            <result column="SOURCE" jdbcType="VARCHAR" property="source"/>
+            <result column="DETAIL" jdbcType="VARCHAR" property="detail"/>
+            <result column="CASE_TIME_U" jdbcType="DATE" property="caseTimeU"/>
+            <result column="CASE_TIME_D" jdbcType="DATE" property="caseTimeD"/>
+            <result column="HANDLE_ORG_CODE" jdbcType="VARCHAR" property="handleOrgCode"/>
+            <result column="HANDLE_ORG_NAME" jdbcType="VARCHAR" property="handleOrgName"/>
+            <result column="HOSTER_ID" jdbcType="VARCHAR" property="hosterId"/>
+            <result column="HOSTER_PCODE" jdbcType="VARCHAR" property="hosterPcode"/>
+            <result column="HOSTER_NAME" jdbcType="VARCHAR" property="hosterName"/>
+            <result column="CASE_PLACE" jdbcType="VARCHAR" property="casePlace"/>
+            <result column="REPORT_TIME" jdbcType="DATE" property="reportTime"/>
+            <result column="REPORTER" jdbcType="VARCHAR" property="reporter"/>
+            <result column="REPORTER_ADD" jdbcType="VARCHAR" property="reporterAdd"/>
+            <result column="REPORTER_TEL" jdbcType="VARCHAR" property="reporterTel"/>
+            <result column="ALARM_TIME" jdbcType="DATE" property="alarmTime"/>
+            <result column="ALARM_NAME" jdbcType="VARCHAR" property="alarmName"/>
+            <result column="ACCEPT_TIME" jdbcType="DATE" property="acceptTime"/>
+            <result column="ACCEPT_PCODE" jdbcType="VARCHAR" property="acceptPcode"/>
+            <result column="ACCEPT_NAME" jdbcType="VARCHAR" property="acceptName"/>
+            <result column="ACCEPT_ORG_CODE" jdbcType="VARCHAR" property="acceptOrgCode"/>
+            <result column="ACCEPT_ORG_NAME" jdbcType="VARCHAR" property="acceptOrgName"/>
+            <result column="ACCEPT_LOCALE" jdbcType="VARCHAR" property="acceptLocale"/>
+            <result column="CURSTEP_ID" jdbcType="VARCHAR" property="curstepId"/>
+            <result column="CURSTEP_NAME" jdbcType="VARCHAR" property="curstepName"/>
+            <result column="REG_TIME" jdbcType="DATE" property="regTime"/>
+            <result column="RECV_TIME" jdbcType="DATE" property="recvTime"/>
+            <result column="DATA_SOURCE" jdbcType="VARCHAR" property="dataSource"/>
+            <result column="FILES_COUNT" jdbcType="DECIMAL" property="filesCount"/>
+            <result column="PRINT_CODE" jdbcType="VARCHAR" property="printCode"/>
+            <result column="PRINT_COUNT" jdbcType="DECIMAL" property="printCount"/>
+            <result column="BURN_COUNT" jdbcType="DECIMAL" property="burnCount"/>
+            <result column="KEYWORDS" jdbcType="VARCHAR" property="keywords"/>
+            <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+            <result column="RESERVE1" jdbcType="VARCHAR" property="reserve1"/>
+            <result column="RESERVE2" jdbcType="VARCHAR" property="reserve2"/>
+            <result column="RESERVE3" jdbcType="VARCHAR" property="reserve3"/>
+            <result column="MEMO" jdbcType="VARCHAR" property="memo"/>
+            <result column="ROW_STATUS" jdbcType="DECIMAL" property="rowStatus"/>
+            <result column="CREATER_ID" jdbcType="VARCHAR" property="createrId"/>
+            <result column="CREATER_NAME" jdbcType="VARCHAR" property="createrName"/>
+            <result column="CREATE_TIME" jdbcType="DATE" property="createTime"/>
+            <result column="MODER_ID" jdbcType="VARCHAR" property="moderId"/>
+            <result column="MODER_NAME" jdbcType="VARCHAR" property="moderName"/>
+            <result column="MOD_TIME" jdbcType="DATE" property="modTime"/>
+            <result column="ORG_C" jdbcType="VARCHAR" property="orgC"/>
+            <result column="ORG_S" jdbcType="VARCHAR" property="orgS"/>
+            <result column="ORG_T" jdbcType="VARCHAR" property="orgT"/>
+            <result column="ORG_C_DATA" jdbcType="VARCHAR" property="orgCData"/>
+            <result column="ORG_S_DATA" jdbcType="VARCHAR" property="orgSData"/>
+            <result column="ORG_T_DATA" jdbcType="VARCHAR" property="orgTData"/>
+            <result column="CUR_ORG" jdbcType="VARCHAR" property="curOrg"/>
+            <result column="CUR_ORG_DATA" jdbcType="VARCHAR" property="curOrgData"/>
+            <result column="RELATE_CASE" jdbcType="VARCHAR" property="relateCase"/>
+            <result column="NAME_SPELL" jdbcType="VARCHAR" property="nameSpell"/>
+            <result column="HOSTER_SPELL" jdbcType="VARCHAR" property="hosterSpell"/>
+
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        HIS_ID,ID,CODE,NAME,TYPE,TYPE_NAME,SN,CAUSE,SOURCE,DETAIL,CASE_TIME_U,CASE_TIME_D,HANDLE_ORG_CODE,HANDLE_ORG_NAME,HOSTER_ID,HOSTER_PCODE,HOSTER_NAME,CASE_PLACE,REPORT_TIME,REPORTER,REPORTER_ADD,REPORTER_TEL,ALARM_TIME,ALARM_NAME,ACCEPT_TIME,ACCEPT_PCODE,ACCEPT_NAME,ACCEPT_ORG_CODE,ACCEPT_ORG_NAME,ACCEPT_LOCALE,CURSTEP_ID,CURSTEP_NAME,REG_TIME,RECV_TIME,DATA_SOURCE,FILES_COUNT,PRINT_CODE,PRINT_COUNT,BURN_COUNT,KEYWORDS,STATUS,RESERVE1,RESERVE2,RESERVE3,MEMO,ROW_STATUS,CREATER_ID,CREATER_NAME,CREATE_TIME,MODER_ID,MODER_NAME,MOD_TIME,ORG_C,ORG_S,ORG_T,ORG_C_DATA,ORG_S_DATA,ORG_T_DATA,CUR_ORG,CUR_ORG_DATA,RELATE_CASE,NAME_SPELL,HOSTER_SPELL
+    </sql>
+
+    <!-- user-defined -->
+
+</mapper>

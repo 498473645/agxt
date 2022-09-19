@@ -55,4 +55,5 @@ public interface FileMetalService {
     */
     int fileMetalDelete(String id);
 
+    int deleteJobFileMetalByAjbh(String ajbh);
 }

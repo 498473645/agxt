@@ -55,4 +55,18 @@ public interface FilePageService {
     */
     int filePageDelete(String id);
 
+    /**
+     * 通过案件编号来获取案卷页
+     * @param ajbh
+     * @return
+     */
+    List<FilePage> getJobFilePageByajbh(String ajbh);
+
+    /**
+     * 案卷页信息表删除信息
+     *
+     * @param ajbh
+     * @return 删除记录数
+     */
+    int deleteJobFilePageByAjbh(String ajbh);
 }

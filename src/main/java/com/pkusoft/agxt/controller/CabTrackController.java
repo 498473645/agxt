@@ -1,9 +1,12 @@
 package com.pkusoft.agxt.controller;
 
 
+import java.util.List;
 import java.util.Map;
 
 
+import com.pkusoft.agxt.model.CabTrack;
+import com.pkusoft.agxt.req.FileInfoParam;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -23,6 +26,7 @@ import com.pkusoft.agxt.service.CabTrackService;
 
 
 import org.support.commons.springmvc.ResponseData;
+import pkubatis.common.base.ResponseDto;
 
 /**
  * @author
@@ -158,6 +162,23 @@ public class CabTrackController  {
             // TODO: 业务日志
             return new ResponseData<>(ResponseData.STATUS_CODE_BIZ, "error：" + e.getMessage());
         }
+    }
+
+    /**
+     * 查询开启案卷柜轨迹数据
+     * @param fileId
+     * @return
+     */
+    @RequestMapping("/archives/cabTrackSpaceList")
+    @ResponseBody
+    public ResponseData<List<CabTrack>> cabTrackSpaceList(String fileId) {
+        ResponseDto<List<CabTrack>> dto = new ResponseDto<>();
+
+        List<CabTrack> list = cabTrackService.getJobCabTrackListByFileId(fileId);
+        dto.setData(list);
+        dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
+        dto.setStatusMsg("查询案卷模板树信息表成功");
+        return dto;
     }
 
 }

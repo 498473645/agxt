@@ -57,4 +57,19 @@ public interface CaseInfoService {
     */
     int caseInfoDelete(String id);
 
+    /**
+     * 临时案件信息保存
+     * @param jobCaseInfo
+     * @param sysUser
+     * @return
+     */
+    int insertLsCaseInfo(CaseInfo jobCaseInfo, SysUser sysUser);
+
+    /**
+     * 作废删除案卷
+     *
+     * @param ajbh
+     * @return 插入记录数
+     */
+    void deleteZFSCAJ(String ajbh);
 }

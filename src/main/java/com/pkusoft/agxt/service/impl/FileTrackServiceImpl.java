@@ -23,14 +23,13 @@ public class FileTrackServiceImpl implements FileTrackService {
     @Autowired
     private FileTrackMapper fileTrackMapper;
 
-    public List<FileTrack> getFileTrackList(Map<String, String> map) {
-
-        RowBounds rowBounds = new RowBounds(Integer.parseInt(map.get("start")),Integer.parseInt(map.get("pageSize")));
+    public List<FileTrack> getFileTrackListByFileId(String fileId) {
         Example example = new Example(FileTrack.class);
         Example.Criteria criteria = example.createCriteria();
         //The query conditions are edited here
-
-        return fileTrackMapper.selectByExampleAndRowBounds(example,rowBounds);
+        criteria.andEqualTo("fileId", fileId);
+        example.setOrderByClause("CREATE_TIME desc");
+        return fileTrackMapper.selectByExample(example);
     }
 
     public int getFileTrackCount(Map<String, String> map) {

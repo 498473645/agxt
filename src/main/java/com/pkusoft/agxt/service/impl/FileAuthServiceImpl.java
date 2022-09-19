@@ -63,4 +63,12 @@ public class FileAuthServiceImpl implements FileAuthService {
         return num;
     }
 
+    @Override
+    public int deleteJobFileAuthByAjbh(String ajbh) {
+        Example example = new Example(FileAuth.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("fileCode", ajbh);
+        return fileAuthMapper.deleteByExample(example);
+    }
+
 }

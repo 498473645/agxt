@@ -7,6 +7,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
@@ -65,4 +66,16 @@ public class CabTrackServiceImpl implements CabTrackService {
         cabTrackMapper.insertSelective(jobCabTrack);
     }
 
+    @Override
+    public List<CabTrack> getJobCabTrackListByFileId(String fileId) {
+        if(!StringUtils.hasText(fileId)){
+            return null;
+        }
+        Example example = new Example(CabTrack.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("fileId", fileId);
+        example.setOrderByClause("OPER_TIME desc");
+        List<CabTrack> list = cabTrackMapper.selectByExample(example);
+        return list;
+    }
 }

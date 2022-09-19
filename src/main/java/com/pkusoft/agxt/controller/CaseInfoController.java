@@ -69,6 +69,29 @@ public class CaseInfoController  {
     }
 
     /**
+     * 保存临时案件信息
+     *
+     * @param jobCaseInfo 对象
+     * @return json结果
+     */
+    @RequestMapping(value = "/archives/lsCaseInfoSave", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    public ResponseData lsCaseInfoSave(CaseInfo jobCaseInfo,HttpServletRequest request) {
+        try {
+            SysUser sysUser = sysUserService.getCurrentUser(request);
+            int i= caseInfoService.insertLsCaseInfo(jobCaseInfo,sysUser);
+            if(i==1){
+                return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS, "没有可用的模板！");
+            }else{
+                return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS, null);
+            }
+        } catch (Exception e) {
+            log.error("保存临时案件信息出错", e);
+            return new ResponseData<>(ResponseData.STATUS_CODE_OTHER,"保存临时案件信息出错");
+        }
+    }
+
+    /**
     * 新增案件信息表
     * @param requestBody
     * @return

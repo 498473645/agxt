@@ -63,4 +63,12 @@ public class FileMetalServiceImpl implements FileMetalService {
         return num;
     }
 
+    @Override
+    public int deleteJobFileMetalByAjbh(String ajbh) {
+        Example example = new Example(FileMetal.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("fileCode", ajbh);
+        return fileMetalMapper.deleteByExample(example);
+    }
+
 }

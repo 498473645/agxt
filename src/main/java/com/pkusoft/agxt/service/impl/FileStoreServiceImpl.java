@@ -186,4 +186,12 @@ public class FileStoreServiceImpl implements FileStoreService {
         List<FileStore> list = fileStoreMapper.getJobFileStoreBySpaceId(map);
         return list;
     }
+
+    @Override
+    public int deleteJobFileStoreByAjbh(String ajbh) {
+        Example example = new Example(FileStore.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("fileCode", ajbh);
+        return fileStoreMapper.deleteByExample(example);
+    }
 }

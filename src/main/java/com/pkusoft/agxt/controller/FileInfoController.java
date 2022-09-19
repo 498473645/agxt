@@ -7,14 +7,12 @@ import java.util.List;
 import java.util.Map;
 
 
-import com.pkusoft.agxt.model.CabSpace;
-import com.pkusoft.agxt.model.FileInfo;
-import com.pkusoft.agxt.model.FileStore;
-import com.pkusoft.agxt.model.FileTemp;
+import com.pkusoft.agxt.model.*;
 import com.pkusoft.agxt.req.FileInfoParam;
 import com.pkusoft.agxt.service.CabSpaceService;
 import com.pkusoft.agxt.service.FileInfoService;
 import com.pkusoft.agxt.service.FileStoreService;
+import com.pkusoft.agxt.service.FileTrackService;
 import com.pkusoft.usercenter.po.SysUser;
 import com.pkusoft.usercenter.service.SysUserService;
 import io.swagger.annotations.Api;
@@ -56,6 +54,9 @@ public class FileInfoController  {
 
     @Autowired
     private FileStoreService fileStoreService;
+
+    @Autowired
+    private FileTrackService fileTrackService;
 
     @Autowired
     private CabSpaceService cabSpaceService;
@@ -310,6 +311,24 @@ public class FileInfoController  {
             log.error("案卷信息表查询列表数据出错", e);
             return new ResponseData<>(ResponseData.STATUS_CODE_BIZ, "案卷信息表查询列表数据出错：" + e.getMessage());
         }
+    }
+
+    /**
+     * 查询轨迹数据
+     *
+     * @param fileId
+     * @return
+     */
+    @RequestMapping("/archives/fileInfoActionGlListData")
+    @ResponseBody
+    public ResponseData<List<FileTrack>> gjcxFileInfoListData(String fileId) {
+        ResponseDto<List<FileTrack>> dto = new ResponseDto<>();
+        List<FileTrack> list = fileTrackService.getFileTrackListByFileId(fileId);
+
+        dto.setData(list);
+        dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
+        dto.setStatusMsg("查询轨迹数据成功");
+        return dto;
     }
 
 }
