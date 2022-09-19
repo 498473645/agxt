@@ -1,5 +1,6 @@
 package com.pkusoft.usercenter.service.impl;
 
+import com.pkusoft.agxt.model.FileInfo;
 import com.pkusoft.usercenter.mapper.SysDeptMapper;
 import com.pkusoft.usercenter.mapper.SysPermitMapper;
 import com.pkusoft.usercenter.mapper.SysRoleMapper;
@@ -54,6 +55,60 @@ public class SysPermitServiceImpl implements SysPermitService {
 
     @Autowired
     private SysRoleMapper sysRoleMapper;
+
+    //判断是否是案管员或法制员,是案管员就返回对应条件,不是就返回空,
+    public Map<String,Object> getSysRoleUserMapBySysRoleUser(String operId){
+        Example example = new Example(SysUser.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("idcard", operId);
+        SysUser sysUser= sysUserMapper.selectOneByExample(example);
+
+        OrgData orgData= userOrg(operId);
+        Map<String,Object> map=new HashMap<String, Object>();
+        List<String> roleIdList = new ArrayList<String>();
+        int number=0;//返回最大的角色
+        if(null != sysUser){
+            List<SysRoleUser> list=sysRoleUserService.getSysRoleUserListByUserId(sysUser.getUserId());
+            for(int i=0;i<list.size();i++){
+                roleIdList.add(list.get(i).getRoleId());
+            }
+            if(roleIdList.size() > 0){
+                List<SysRole> sysRoleList = sysRoleService.getSysRoleListByRoleIdList(roleIdList);
+                for(int i=0;i<sysRoleList.size();i++){
+                    SysRole sysRole = sysRoleList.get(i);
+                    if(sysRole.getRoleName().equals("市局案管员") || sysRole.getRoleName().equals("市局法制员")){
+                        if(number < 3){//找最大的角色
+                            number = 3;
+                        }
+                    }else if(sysRole.getRoleName().equals("分局案管员") || sysRole.getRoleName().equals("分局法制员")){
+                        if(number < 2){
+                            number = 2;
+                        }
+                    }else if(sysRole.getRoleName().equals("派出所案管员") ||sysRole.getRoleName().equals("派出所法制员")){
+                        if(number < 1){
+                            number = 1;
+                        }
+                    }
+                }
+                if(number != 0){
+                    if(number == 3){
+                        map.put("orgCData",orgData.getOrgCData());
+                        map.put("deptId", orgData.getDeptId());
+                        return map;
+                    }else if(number == 2){
+                        map.put("orgSData",orgData.getOrgSData());
+                        map.put("deptId", orgData.getDeptId());
+                        return map;
+                    }else if(number == 1){
+                        map.put("orgTData",orgData.getOrgTData());
+                        map.put("deptId", orgData.getDeptId());
+                        return map;
+                    }
+                }
+            }
+        }
+        return null;
+    }
 
     //判断是否是案管员,是案管员就返回对应条件,不是就返回空
     public Map<String, Object> getSysRoleUserMapBySysRole(SysUser sysUser) {

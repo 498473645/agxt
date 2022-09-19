@@ -833,4 +833,22 @@ public class DateTimeUtils {
 		return y+"t"+h+"z";
 	}
 
+	public static Date parse(String datestr, String pattern)
+	{
+		Date date = null;
+
+		if ((pattern == null) || ("".equals(pattern))) {
+			pattern = "yyyy-MM-dd";
+		}
+		try
+		{
+			SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
+			date = dateFormat.parse(datestr);
+		}
+		catch (ParseException localParseException)
+		{
+		}
+
+		return date;
+	}
 }

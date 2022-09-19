@@ -22,10 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.util.StringUtils;
 import org.support.commons.springmvc.ResponseData;
-import pkubatis.common.utils.JobUtil;
-import pkubatis.common.utils.OrgData;
-import pkubatis.common.utils.PinyinUtils;
-import pkubatis.common.utils.UserUtil;
+import pkubatis.common.utils.*;
 import pkubatis.constants.JobConstant;
 import tk.mybatis.mapper.entity.Example;
 
@@ -461,5 +458,61 @@ public class FileInfoServiceImpl implements FileInfoService {
         Example.Criteria criteria = example.createCriteria();
         criteria.andEqualTo("code", ajbh);
         return fileInfoMapper.deleteByExample(example);
+    }
+    //案卷公用查询方法（阅卷）
+    public List<FileInfoParam> getJobFileInfoByFileAuthoperIdAJYL(FileInfoParam fileInfoParam,SysUser sysUser) {
+        OrgData orgData=sysPermitService.userOrg(sysUser.getUserId());
+        Map<String,Object> param=sysPermitService.getSysRoleUserMapBySysRoleUser(orgData.getIdCard());
+//      SysUser sysUser=UserUtil.getJobFileInfoListBySysRole(orgData.getIdCard());//判断是否是案管员,是案管员就返回案管员信息
+//      Map<String,Object> param=new HashMap<String,Object>();
+        if(null == param){
+            param=new HashMap<String, Object>();
+            param.put("operId", orgData.getIdCard());
+        }else{
+            param.put("orgCode", orgData.getDeptId());
+        }
+        if(StringUtils.hasText(fileInfoParam.getCode())){
+            param.put("ajbh", fileInfoParam.getCode().toUpperCase()+"%");
+        }
+        if(StringUtils.hasText(fileInfoParam.getName())){
+            param.put("ajmc", fileInfoParam.getName().toUpperCase()+"%");
+        }
+        if(StringUtils.hasText(fileInfoParam.getKeywords())){
+            param.put("saryxm","%"+ fileInfoParam.getKeywords()+"%");
+        }
+        if(StringUtils.hasText(fileInfoParam.getSpaceId())){
+            param.put("spaceId", fileInfoParam.getSpaceId());
+        }
+        if(StringUtils.hasText(fileInfoParam.getOrgSData())){
+            param.put("sstationid", fileInfoParam.getOrgSData());
+        }
+        if(StringUtils.hasText(fileInfoParam.getOrgTData())){
+            param.put("tstationid", fileInfoParam.getOrgTData());
+        }
+        if(StringUtils.hasText(fileInfoParam.getHosterId())){
+            param.put("hosterId", fileInfoParam.getHosterId());
+        }
+        if(StringUtils.hasText(fileInfoParam.getStatus())){
+            param.put("status", fileInfoParam.getStatus());
+        }
+        if(StringUtils.hasText(fileInfoParam.getType())){
+            param.put("type", fileInfoParam.getType());
+        }
+        if(StringUtils.hasText(fileInfoParam.getAcceptTimeStart())){
+            Date date = DateTimeUtils.parse(fileInfoParam.getAcceptTimeStart(),null);
+            param.put("acceptTimeq", date);
+        }
+        if(StringUtils.hasText(fileInfoParam.getAcceptTimeEnd())){
+            Date date=   DateTimeUtils.parse(fileInfoParam.getAcceptTimeEnd(),null);
+            param.put("acceptTimej", date);
+        }
+        if(StringUtils.hasText(fileInfoParam.getReserve3())){
+            param.put("reserve3", fileInfoParam.getReserve3());
+        }
+
+        param.put("start", fileInfoParam.getStart());
+
+        List<FileInfoParam> list=fileInfoMapper.getJobFileInfoByFileAuthoperIdAJYL(param);
+        return list;
     }
 }

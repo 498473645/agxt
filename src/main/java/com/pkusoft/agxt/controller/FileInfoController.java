@@ -255,6 +255,43 @@ public class FileInfoController  {
     }
 
     /**
+     * 案卷公用查询方法（阅卷）
+     *
+     * @param fileInfoParam
+     *            查询条件
+     * @return 标准列表对象
+     */
+    @RequestMapping("/archives/jobFileInfoListDataAllNew")
+    @ResponseBody
+    public ResponseData<List<FileInfoParam>> jobFileInfoListDataNew(@RequestBody FileInfoParam fileInfoParam, HttpServletRequest request) {
+        ResponseDto<List<FileInfoParam>> dto = new ResponseDto<>();
+        try {
+            SysUser sysUser = sysUserService.getCurrentUser(request);
+            List<FileInfoParam> list = fileInfoService.getJobFileInfoByFileAuthoperIdAJYL(fileInfoParam,sysUser);
+            for(FileInfoParam jobFileInfoChange: list){
+
+                if(StringUtils.hasText(jobFileInfoChange.getReserve3()) && jobFileInfoChange.getReserve3().equals("1")){
+                    jobFileInfoChange.setReserve3("是");
+                }else{
+                    jobFileInfoChange.setReserve3("否");
+                }
+            }
+            int count = 0;
+            if (list.size() > 0) {
+                count = Integer.valueOf(list.get(0).getTot_cnt());
+            }
+            dto.setData(list);
+            dto.setCount(count);
+            dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
+            dto.setStatusMsg("查询案卷模板树信息表成功");
+            return dto;
+        } catch (Exception e) {
+            log.error("案卷信息表查询列表数据出错", e);
+            return new ResponseData<>(ResponseData.STATUS_CODE_BIZ, "案卷信息表查询列表数据出错：" + e.getMessage());
+        }
+    }
+
+    /**
      * 检查柜子是否在本单位
      *
      * @param fileInfoParam

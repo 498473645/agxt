@@ -85,4 +85,9 @@ public interface FileInfoService {
     ResponseData jianJuan(CaseInfo jobCaseInfo, List<FileTemp> temp, CabSpace space, UserInfo userInfo);
 
     int deleteJobFileInfoByAjbh(String ajbh);
+    /**
+     * 案卷阅览查询
+     * @return
+     */
+    List<FileInfoParam> getJobFileInfoByFileAuthoperIdAJYL(FileInfoParam fileInfoParam, SysUser sysUser);
 }

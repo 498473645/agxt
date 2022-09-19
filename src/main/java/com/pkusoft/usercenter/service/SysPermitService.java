@@ -9,6 +9,13 @@ import java.util.Map;
 public interface SysPermitService {
 
 	/**
+	 *  判断是否是案管员或法制员,是案管员就返回对应条件,不是就返回空,
+	 * @param operId
+	 * @return
+	 */
+	Map<String,Object> getSysRoleUserMapBySysRoleUser(String operId);
+
+	/**
 	 *  判断是否是案管员,是案管员就返回对应条件,不是就返回空
 	 * @param sysUser
 	 * @return

@@ -7,6 +7,7 @@ import pkubatis.common.base.Page;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -275,7 +276,7 @@ public class FileInfoParam extends Page {
      */
     @Column(name = "CREATE_TIME")
     @ApiModelProperty(value = "创建时间")
-    private java.util.Date createTime;
+    private Date createTime;
 
  	/**
      * 最后修改者ID
@@ -296,7 +297,7 @@ public class FileInfoParam extends Page {
      */
     @Column(name = "MOD_TIME")
     @ApiModelProperty(value = "最后修改时间")
-    private java.util.Date modTime;
+    private Date modTime;
 
  	/**
      * 所属市局
@@ -380,7 +381,7 @@ public class FileInfoParam extends Page {
      */
     @Column(name = "ACCEPT_TIME")
     @ApiModelProperty(value = "受理时间")
-    private java.util.Date acceptTime;
+    private Date acceptTime;
 
  	/**
      * 是否上传警综(0未同步,1已同步)
@@ -394,7 +395,7 @@ public class FileInfoParam extends Page {
      */
     @Column(name = "UPD_PS_TIME")
     @ApiModelProperty(value = "上传警综时间")
-    private java.util.Date updPsTime;
+    private Date updPsTime;
 
  	/**
      * 数据来源
@@ -408,6 +409,17 @@ public class FileInfoParam extends Page {
     private String isOrNot;
     private List<String> idList;
     private String fileIds[];
+
+    private String acceptTimeStart;
+    private String acceptTimeEnd;
+
+    public String getAcceptTimeEnd() {
+        return acceptTimeEnd;
+    }
+
+    public void setAcceptTimeEnd(String acceptTimeEnd) {
+        this.acceptTimeEnd = acceptTimeEnd;
+    }
 
     public String[] getFileIds() {
         return fileIds;
@@ -1029,7 +1041,7 @@ public class FileInfoParam extends Page {
     * 获得创建时间
     * @return CREATE_TIME
     */
-    public java.util.Date getCreateTime() {
+    public Date getCreateTime() {
         return this.createTime;
     }
 
@@ -1037,7 +1049,7 @@ public class FileInfoParam extends Page {
     * 设置创建时间
     * @param createTime
     */
-    public void setCreateTime(java.util.Date createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
@@ -1077,7 +1089,7 @@ public class FileInfoParam extends Page {
     * 获得最后修改时间
     * @return MOD_TIME
     */
-    public java.util.Date getModTime() {
+    public Date getModTime() {
         return this.modTime;
     }
 
@@ -1085,7 +1097,7 @@ public class FileInfoParam extends Page {
     * 设置最后修改时间
     * @param modTime
     */
-    public void setModTime(java.util.Date modTime) {
+    public void setModTime(Date modTime) {
         this.modTime = modTime;
     }
 
@@ -1269,7 +1281,7 @@ public class FileInfoParam extends Page {
     * 获得受理时间
     * @return ACCEPT_TIME
     */
-    public java.util.Date getAcceptTime() {
+    public Date getAcceptTime() {
         return this.acceptTime;
     }
 
@@ -1277,7 +1289,7 @@ public class FileInfoParam extends Page {
     * 设置受理时间
     * @param acceptTime
     */
-    public void setAcceptTime(java.util.Date acceptTime) {
+    public void setAcceptTime(Date acceptTime) {
         this.acceptTime = acceptTime;
     }
 
@@ -1301,7 +1313,7 @@ public class FileInfoParam extends Page {
     * 获得上传警综时间
     * @return UPD_PS_TIME
     */
-    public java.util.Date getUpdPsTime() {
+    public Date getUpdPsTime() {
         return this.updPsTime;
     }
 
@@ -1309,7 +1321,7 @@ public class FileInfoParam extends Page {
     * 设置上传警综时间
     * @param updPsTime
     */
-    public void setUpdPsTime(java.util.Date updPsTime) {
+    public void setUpdPsTime(Date updPsTime) {
         this.updPsTime = updPsTime;
     }
 
@@ -1330,4 +1342,11 @@ public class FileInfoParam extends Page {
     }
 
 
+    public String getAcceptTimeStart() {
+        return acceptTimeStart;
+    }
+
+    public void setAcceptTimeStart(String acceptTimeStart) {
+        this.acceptTimeStart = acceptTimeStart;
+    }
 }

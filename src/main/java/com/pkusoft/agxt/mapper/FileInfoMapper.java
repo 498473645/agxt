@@ -13,4 +13,6 @@ public interface FileInfoMapper extends Mapper<FileInfo> {
     List<FileInfoParam> jobFileInfoListDataSMCJ(Map<String,Object> param);
 
     List<FileInfoParam> getJobFileInfoByFileAuthoperIdKg(Map<String, Object> param);
+
+    List<FileInfoParam> getJobFileInfoByFileAuthoperIdAJYL(Map<String, Object> param);
 }
