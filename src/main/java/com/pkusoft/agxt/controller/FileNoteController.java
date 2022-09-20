@@ -1,9 +1,13 @@
 package com.pkusoft.agxt.controller;
 
 
+import java.util.List;
 import java.util.Map;
 
 
+import com.pkusoft.agxt.model.FileNote;
+import com.pkusoft.agxt.req.FileInfoParam;
+import com.pkusoft.agxt.req.FileNoteParam;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -23,6 +27,7 @@ import com.pkusoft.agxt.service.FileNoteService;
 
 
 import org.support.commons.springmvc.ResponseData;
+import pkubatis.common.base.ResponseDto;
 
 /**
  * @author
@@ -160,4 +165,28 @@ public class FileNoteController  {
         }
     }
 
+    /**
+     * 整改意见
+     *
+     * @param fileNoteParam 查询条件
+     * @return 标准列表对象
+     */
+    @RequestMapping("/archives/jobNoteDetailDataWeb")
+    @ResponseBody
+    public ResponseData<List<FileNote>> jobNoteDetailDataWeb(@RequestBody FileNoteParam fileNoteParam) {
+        ResponseDto<List<FileNote>> dto = new ResponseDto<>();
+        try {
+            List<FileNote> list = fileNoteService.getFileNoteList(fileNoteParam);
+            int count = fileNoteService.getFileNoteCount(fileNoteParam);
+
+            dto.setData(list);
+            dto.setCount(count);
+            dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
+            dto.setStatusMsg("查询整改意见数据成功");
+            return dto;
+        } catch (Exception e) {
+            log.error("查询整改意见数据出错", e);
+            return new ResponseData<>(ResponseData.STATUS_CODE_BIZ, "查询整改意见数据出错：" + e.getMessage());
+        }
+    }
 }

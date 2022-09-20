@@ -5,11 +5,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import com.pkusoft.agxt.req.FileNoteParam;
+import com.pkusoft.agxt.req.FileTempParam;
+import com.pkusoft.usercenter.po.SysUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.apache.ibatis.session.RowBounds;
+import org.springframework.util.StringUtils;
 import tk.mybatis.mapper.entity.Example;
 
 import com.pkusoft.agxt.model.FileNote;
@@ -23,23 +27,30 @@ public class FileNoteServiceImpl implements FileNoteService {
     @Autowired
     private FileNoteMapper fileNoteMapper;
 
-    public List<FileNote> getFileNoteList(Map<String, String> map) {
+    public List<FileNote> getFileNoteList(FileNoteParam fileNoteParam) {
 
-        RowBounds rowBounds = new RowBounds(Integer.parseInt(map.get("start")),Integer.parseInt(map.get("pageSize")));
+        RowBounds rowBounds = new RowBounds(fileNoteParam.getStart(),fileNoteParam.getPageSize());
         Example example = new Example(FileNote.class);
         Example.Criteria criteria = example.createCriteria();
         //The query conditions are edited here
-
+        this.setConditions(criteria, fileNoteParam);
         return fileNoteMapper.selectByExampleAndRowBounds(example,rowBounds);
     }
 
-    public int getFileNoteCount(Map<String, String> map) {
+    public int getFileNoteCount(FileNoteParam fileNoteParam) {
 
         Example example = new Example(FileNote.class);
         Example.Criteria criteria = example.createCriteria();
         //The query conditions are edited here
-
+        this.setConditions(criteria, fileNoteParam);
         return fileNoteMapper.selectCountByExample(example);
+    }
+
+    private void setConditions(Example.Criteria criteria, FileNoteParam fileNoteParam) {
+        criteria.andEqualTo("rowStatus", 3);
+        if(StringUtils.hasText(fileNoteParam.getFileId())){
+            criteria.andEqualTo("fileId", fileNoteParam.getFileId());
+        }
     }
 
     public int fileNoteSave(FileNote fileNote, Map<String,String> map){

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.pkusoft.agxt.model.FileNote;
+import com.pkusoft.agxt.req.FileNoteParam;
 
 /**
 * @author
@@ -13,17 +14,17 @@ public interface FileNoteService {
 
     /**
     * 查询案卷页备注信息表集合
-    * @param map	查询条件集合
+    * @param fileId	查询条件集合
     * @return
     */
-    List<FileNote> getFileNoteList(Map<String, String> map);
+    List<FileNote> getFileNoteList(FileNoteParam fileNoteParam);
 
     /**
     * 查询案卷页备注信息表总数
-    * @param map	查询条件集合
+    * @param fileId	查询条件集合
     * @return
     */
-    int getFileNoteCount(Map<String, String> map);
+    int getFileNoteCount(FileNoteParam fileNoteParam);
 
     /**
     * 新增案卷页备注信息表
