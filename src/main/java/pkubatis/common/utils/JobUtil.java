@@ -699,6 +699,103 @@ public static CaseInfo changeJobCaseInfo(CaseInfo jobCaseInfo,CaseInfo cas){
     jobCaseInfo.setOrgTData(cas.getOrgTData());
     return jobCaseInfo;
 }
+    public static CaseInfo changeJobCaseInfo(KeAgAjztxx keAgAjztxx){
+        CaseInfo caseinfo=new CaseInfo();
+        caseinfo.setId(UUID.randomUUID().toString());
+        caseinfo.setCode(keAgAjztxx.getAjbh());
+        caseinfo.setName(keAgAjztxx.getAjmc());
+        if(null != keAgAjztxx.getAjlb() && keAgAjztxx.getAjlb().equals("01")){
+            caseinfo.setType(JobConstant.XINGSHI);
+            caseinfo.setTypeName("刑事案件");
+        }else if(null != keAgAjztxx.getAjlb() && keAgAjztxx.getAjlb().equals("02")){
+            caseinfo.setType(JobConstant.XINGZHENG);
+            caseinfo.setTypeName("行政案件");
+        }else if(null != keAgAjztxx.getAjlb() && keAgAjztxx.getAjlb().equals("03")){
+            caseinfo.setType(JobConstant.XINGZHENGFUYI);
+            caseinfo.setTypeName("行政复议");
+        }else if(null != keAgAjztxx.getAjlb() && keAgAjztxx.getAjlb().equals("04")){
+            caseinfo.setType(JobConstant.XINGZHENGSS);
+            caseinfo.setTypeName("行政诉讼");
+        }else if(null != keAgAjztxx.getAjlb() && keAgAjztxx.getAjlb().equals("05")){
+            caseinfo.setType(JobConstant.GUOJIAPEICHANG);
+            caseinfo.setTypeName("国家赔偿");
+        }else{
+            caseinfo.setType(JobConstant.QITA);
+            caseinfo.setTypeName("其他");
+        }
+
+        caseinfo.setSn(0.0);
+//    caseinfo.setCause(changeString(dic.getCMc()));
+//    caseinfo.setCause(keAgAjztxx.getZmMc());
+        caseinfo.setSource("");//案件来源没翻译
+//    caseinfo.setDetail(keAgAjztxx.getJyaq());
+//    caseinfo.setCaseTimeU();
+        caseinfo.setHandleOrgCode(keAgAjztxx.getBadwBm());
+        caseinfo.setHandleOrgName(keAgAjztxx.getBadwMc());
+        caseinfo.setHosterId(keAgAjztxx.getZbrSfzhm());//还没有,以后通过警号到人员表里查
+        caseinfo.setHosterPcode(keAgAjztxx.getZbrJh());
+        caseinfo.setHosterName(keAgAjztxx.getZbrXm());
+        caseinfo.setCasePlace("");
+//    caseinfo.setReportTime(getDate());
+        caseinfo.setReporter("");
+        caseinfo.setReporterAdd("");
+        caseinfo.setReporterTel("");
+//    caseinfo.setAlarmTime(getDate());
+        caseinfo.setAlarmName("");
+        caseinfo.setAcceptTime(keAgAjztxx.getSlsj());
+        caseinfo.setAcceptPcode("");
+        caseinfo.setAcceptName("");
+        caseinfo.setAcceptOrgCode("");
+        caseinfo.setAcceptOrgName("");
+        caseinfo.setAcceptLocale("");
+        caseinfo.setCurstepId(UUID.fromString("00000000-0000-0000-0000-000000000000").toString());
+        caseinfo.setCurstepName("");
+//    caseinfo.setRegTime(getDate());
+//    caseinfo.setRecvTime(getDate());
+        caseinfo.setDataSource("");
+//     caseinfo.setDataSource("0");
+        caseinfo.setFilesCount(0);
+        caseinfo.setPrintCode("");
+        caseinfo.setPrintCount(0);
+        caseinfo.setBurnCount(0);
+        caseinfo.setKeywords("");
+        caseinfo.setStatus("");
+        caseinfo.setReserve1("");
+        caseinfo.setReserve2("");
+        caseinfo.setReserve3("");
+        caseinfo.setMemo("");
+        caseinfo.setRowStatus(3);
+        caseinfo.setCreaterId("");//dzajCaseInfo.getDjr()
+        caseinfo.setCreaterName("");
+//    caseinfo.setCreateTime(keAgAjztxx.getCqsj());
+        caseinfo.setModerId("");//
+        caseinfo.setModerName("");
+//    caseinfo.setModTime(getDate());
+        caseinfo.setOrgC(keAgAjztxx.getCstationid());
+        caseinfo.setOrgS(keAgAjztxx.getSstationid());
+        caseinfo.setOrgT(keAgAjztxx.getTstationid());
+        caseinfo.setOrgCData(keAgAjztxx.getCstationid());
+        caseinfo.setOrgSData(keAgAjztxx.getSstationid());
+        caseinfo.setOrgTData(keAgAjztxx.getTstationid());
+//    caseinfo.setCaseTimeD(getDate());
+        caseinfo.setCurOrg("");
+        caseinfo.setCurOrgData("");
+        if(keAgAjztxx.getAjmcPym() != null){
+            caseinfo.setNameSpell(keAgAjztxx.getAjmcPym());
+        }else{
+            if(keAgAjztxx.getAjmc() != null && !keAgAjztxx.getAjmc().equals("")){
+                String code=PinyinUtils.getPinyin(keAgAjztxx.getAjmc());//案卷拼音码
+                caseinfo.setNameSpell(code);
+            }
+        }
+        if(keAgAjztxx.getZbrXmPym() == null && keAgAjztxx.getZbrXm()!=null){
+            String hosterName=PinyinUtils.getPinyin(keAgAjztxx.getZbrXm());
+            caseinfo.setHosterSpell(hosterName);
+        }else{
+            caseinfo.setHosterSpell(keAgAjztxx.getZbrXmPym());
+        }
+        return caseinfo;
+    }
 public static FileInfo establishJobFileInfo(FileStore store,CaseInfo caseinfo,UserInfo userInfo){
     FileInfo fileinfo=new FileInfo();
     fileinfo.setId(UUID.randomUUID().toString());

@@ -3,55 +3,69 @@
 <mapper namespace="com.pkusoft.agxt.mapper.FileMetalMapper">
     <!-- @codeGenerate -->
     <resultMap id="BaseResultMap" type="com.pkusoft.agxt.model.FileMetal">
-            <id column="ID" jdbcType="VARCHAR" property="id"/>
-            <result column="CODE" jdbcType="VARCHAR" property="code"/>
-            <result column="NAME" jdbcType="VARCHAR" property="name"/>
-            <result column="CASE_ID" jdbcType="VARCHAR" property="caseId"/>
-            <result column="CASE_CODE" jdbcType="VARCHAR" property="caseCode"/>
-            <result column="CASE_NAME" jdbcType="VARCHAR" property="caseName"/>
-            <result column="FILE_ID" jdbcType="VARCHAR" property="fileId"/>
-            <result column="FILE_CODE" jdbcType="VARCHAR" property="fileCode"/>
-            <result column="FILE_NAME" jdbcType="VARCHAR" property="fileName"/>
-            <result column="PARENT_ID" jdbcType="VARCHAR" property="parentId"/>
-            <result column="TYPE" jdbcType="VARCHAR" property="type"/>
-            <result column="SN" jdbcType="DECIMAL" property="sn"/>
-            <result column="TREE_PATH" jdbcType="VARCHAR" property="treePath"/>
-            <result column="DISK_PATH" jdbcType="VARCHAR" property="diskPath"/>
-            <result column="ICON" jdbcType="VARCHAR" property="icon"/>
-            <result column="IS_SCAN" jdbcType="DECIMAL" property="isScan"/>
-            <result column="PAGE_COUNT" jdbcType="DECIMAL" property="pageCount"/>
-            <result column="PAGE_START" jdbcType="DECIMAL" property="pageStart"/>
-            <result column="PAGE_END" jdbcType="DECIMAL" property="pageEnd"/>
-            <result column="PRINT_CODE" jdbcType="VARCHAR" property="printCode"/>
-            <result column="PRINT_COUNT" jdbcType="DECIMAL" property="printCount"/>
-            <result column="BURN_COUNT" jdbcType="DECIMAL" property="burnCount"/>
-            <result column="KEYWORDS" jdbcType="VARCHAR" property="keywords"/>
-            <result column="STATUS" jdbcType="VARCHAR" property="status"/>
-            <result column="RESERVE1" jdbcType="VARCHAR" property="reserve1"/>
-            <result column="RESERVE2" jdbcType="VARCHAR" property="reserve2"/>
-            <result column="RESERVE3" jdbcType="VARCHAR" property="reserve3"/>
-            <result column="MEMO" jdbcType="VARCHAR" property="memo"/>
-            <result column="ROW_STATUS" jdbcType="DECIMAL" property="rowStatus"/>
-            <result column="CREATER_ID" jdbcType="VARCHAR" property="createrId"/>
-            <result column="CREATER_NAME" jdbcType="VARCHAR" property="createrName"/>
-            <result column="CREATE_TIME" jdbcType="DATE" property="createTime"/>
-            <result column="MODER_ID" jdbcType="VARCHAR" property="moderId"/>
-            <result column="MODER_NAME" jdbcType="VARCHAR" property="moderName"/>
-            <result column="MOD_TIME" jdbcType="DATE" property="modTime"/>
-            <result column="ORG_C" jdbcType="VARCHAR" property="orgC"/>
-            <result column="ORG_S" jdbcType="VARCHAR" property="orgS"/>
-            <result column="ORG_T" jdbcType="VARCHAR" property="orgT"/>
-            <result column="ORG_C_DATA" jdbcType="VARCHAR" property="orgCData"/>
-            <result column="ORG_S_DATA" jdbcType="VARCHAR" property="orgSData"/>
-            <result column="ORG_T_DATA" jdbcType="VARCHAR" property="orgTData"/>
-            <result column="CUR_ORG" jdbcType="VARCHAR" property="curOrg"/>
-            <result column="CUR_ORG_DATA" jdbcType="VARCHAR" property="curOrgData"/>
+        <id column="ID" jdbcType="VARCHAR" property="id"/>
+        <result column="CODE" jdbcType="VARCHAR" property="code"/>
+        <result column="NAME" jdbcType="VARCHAR" property="name"/>
+        <result column="CASE_ID" jdbcType="VARCHAR" property="caseId"/>
+        <result column="CASE_CODE" jdbcType="VARCHAR" property="caseCode"/>
+        <result column="CASE_NAME" jdbcType="VARCHAR" property="caseName"/>
+        <result column="FILE_ID" jdbcType="VARCHAR" property="fileId"/>
+        <result column="FILE_CODE" jdbcType="VARCHAR" property="fileCode"/>
+        <result column="FILE_NAME" jdbcType="VARCHAR" property="fileName"/>
+        <result column="PARENT_ID" jdbcType="VARCHAR" property="parentId"/>
+        <result column="TYPE" jdbcType="VARCHAR" property="type"/>
+        <result column="SN" jdbcType="DECIMAL" property="sn"/>
+        <result column="TREE_PATH" jdbcType="VARCHAR" property="treePath"/>
+        <result column="DISK_PATH" jdbcType="VARCHAR" property="diskPath"/>
+        <result column="ICON" jdbcType="VARCHAR" property="icon"/>
+        <result column="IS_SCAN" jdbcType="DECIMAL" property="isScan"/>
+        <result column="PAGE_COUNT" jdbcType="DECIMAL" property="pageCount"/>
+        <result column="PAGE_START" jdbcType="DECIMAL" property="pageStart"/>
+        <result column="PAGE_END" jdbcType="DECIMAL" property="pageEnd"/>
+        <result column="PRINT_CODE" jdbcType="VARCHAR" property="printCode"/>
+        <result column="PRINT_COUNT" jdbcType="DECIMAL" property="printCount"/>
+        <result column="BURN_COUNT" jdbcType="DECIMAL" property="burnCount"/>
+        <result column="KEYWORDS" jdbcType="VARCHAR" property="keywords"/>
+        <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+        <result column="RESERVE1" jdbcType="VARCHAR" property="reserve1"/>
+        <result column="RESERVE2" jdbcType="VARCHAR" property="reserve2"/>
+        <result column="RESERVE3" jdbcType="VARCHAR" property="reserve3"/>
+        <result column="MEMO" jdbcType="VARCHAR" property="memo"/>
+        <result column="ROW_STATUS" jdbcType="DECIMAL" property="rowStatus"/>
+        <result column="CREATER_ID" jdbcType="VARCHAR" property="createrId"/>
+        <result column="CREATER_NAME" jdbcType="VARCHAR" property="createrName"/>
+        <result column="CREATE_TIME" jdbcType="DATE" property="createTime"/>
+        <result column="MODER_ID" jdbcType="VARCHAR" property="moderId"/>
+        <result column="MODER_NAME" jdbcType="VARCHAR" property="moderName"/>
+        <result column="MOD_TIME" jdbcType="DATE" property="modTime"/>
+        <result column="ORG_C" jdbcType="VARCHAR" property="orgC"/>
+        <result column="ORG_S" jdbcType="VARCHAR" property="orgS"/>
+        <result column="ORG_T" jdbcType="VARCHAR" property="orgT"/>
+        <result column="ORG_C_DATA" jdbcType="VARCHAR" property="orgCData"/>
+        <result column="ORG_S_DATA" jdbcType="VARCHAR" property="orgSData"/>
+        <result column="ORG_T_DATA" jdbcType="VARCHAR" property="orgTData"/>
+        <result column="CUR_ORG" jdbcType="VARCHAR" property="curOrg"/>
+        <result column="CUR_ORG_DATA" jdbcType="VARCHAR" property="curOrgData"/>
 
     </resultMap>
 
     <sql id="Base_Column_List">
-        ID,CODE,NAME,CASE_ID,CASE_CODE,CASE_NAME,FILE_ID,FILE_CODE,FILE_NAME,PARENT_ID,TYPE,SN,TREE_PATH,DISK_PATH,ICON,IS_SCAN,PAGE_COUNT,PAGE_START,PAGE_END,PRINT_CODE,PRINT_COUNT,BURN_COUNT,KEYWORDS,STATUS,RESERVE1,RESERVE2,RESERVE3,MEMO,ROW_STATUS,CREATER_ID,CREATER_NAME,CREATE_TIME,MODER_ID,MODER_NAME,MOD_TIME,ORG_C,ORG_S,ORG_T,ORG_C_DATA,ORG_S_DATA,ORG_T_DATA,CUR_ORG,CUR_ORG_DATA
+        ID
+        ,CODE,NAME,CASE_ID,CASE_CODE,CASE_NAME,FILE_ID,FILE_CODE,FILE_NAME,PARENT_ID,TYPE,SN,TREE_PATH,DISK_PATH,ICON,IS_SCAN,PAGE_COUNT,PAGE_START,PAGE_END,PRINT_CODE,PRINT_COUNT,BURN_COUNT,KEYWORDS,STATUS,RESERVE1,RESERVE2,RESERVE3,MEMO,ROW_STATUS,CREATER_ID,CREATER_NAME,CREATE_TIME,MODER_ID,MODER_NAME,MOD_TIME,ORG_C,ORG_S,ORG_T,ORG_C_DATA,ORG_S_DATA,ORG_T_DATA,CUR_ORG,CUR_ORG_DATA
     </sql>
+    <update id="updatefileMetalBySn">
+        update FILE_METAL
+        set SN         =SN + 1,
+            MODER_ID   = #{moderId,jdbcType=VARCHAR},
+            MODER_NAME = #{moderName,jdbcType=VARCHAR},
+            MOD_TIME   = #{modTime,jdbcType=TIMESTAMP}
+        where ROW_STATUS = 3
+          and SN &gt; #{sn,jdbcType=DECIMAL}
+          and FILE_ID = #{fileId,jdbcType=VARCHAR}
+    </update>
+    <select id="getJobFileMetalSn" resultType="java.lang.Integer">
+        select max(sn) from FILE_METAL where  FILE_ID = #{fileId,jdbcType=VARCHAR}
+    </select>
 
     <!-- user-defined -->
 

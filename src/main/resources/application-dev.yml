@@ -221,3 +221,8 @@ shiro-proxy.sso-server-url: http://27.17.3.62:20201/user-center
 shiro-proxy.success-url: /swagger-ui.html
 
 shiro-proxy.proxy-id: 1a34cd94-f009-4b2e-a0fd-547e1e993473
+
+sync_flag: false
+
+#\u83B7\u53D6\u6848\u7BA1\u7CFB\u7EDFhadoop\u56FE\u7247\u63A5\u53E3\u5730\u5740
+agxt-hadoop: http://192.168.1.225:8081/agxt/getPic

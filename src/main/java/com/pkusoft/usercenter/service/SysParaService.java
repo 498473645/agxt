@@ -54,4 +54,11 @@ public interface SysParaService {
     * @return
     */
     int sysParaDelete(String paraCode);
+
+    /**
+     * 查询参数
+     * @param hadoopUrlNew
+     * @return
+     */
+    SysPara getSysParaByParaCode(String hadoopUrlNew);
 }

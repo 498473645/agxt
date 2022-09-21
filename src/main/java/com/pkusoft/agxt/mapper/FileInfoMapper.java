@@ -15,4 +15,8 @@ public interface FileInfoMapper extends Mapper<FileInfo> {
     List<FileInfoParam> getJobFileInfoByFileAuthoperIdKg(Map<String, Object> param);
 
     List<FileInfoParam> getJobFileInfoByFileAuthoperIdAJYL(Map<String, Object> param);
+
+    List<FileInfoParam> getJobFileInfoByFileAuthoperIdRg(Map<String, Object> param);
+
+    List<FileInfoParam> getJobFileInfoByFileAuthoperIdChangeNatureData(Map<String, Object> param);
 }

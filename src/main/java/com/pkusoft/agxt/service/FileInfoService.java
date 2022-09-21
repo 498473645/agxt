@@ -90,4 +90,26 @@ public interface FileInfoService {
      * @return
      */
     List<FileInfoParam> getJobFileInfoByFileAuthoperIdAJYL(FileInfoParam fileInfoParam, SysUser sysUser);
+    /**
+     * 案卷入柜查询
+     * @param fileInfoParam
+     * @param sysUser
+     * @return
+     */
+    List<FileInfoParam> getJobFileInfoByFileAuthoperIdRg(FileInfoParam fileInfoParam, SysUser sysUser);
+
+    /**
+     * 案卷归档
+     * @param fileinfo
+     * @param userInfo
+     */
+    ResponseData AnJuanGuiDang(FileInfo fileinfo,UserInfo userInfo);
+
+    List<FileInfoParam> getJobFileInfoByFileAuthoperIdChangeNatureData(FileInfoParam fileInfoParam, SysUser sysUser);
+    /**
+     * 变更案卷性质
+     * @param temp
+     * @param fileId
+     */
+    void changeFileInfoNature(String temp, String fileId, String tempType, SysUser sysUser);
 }

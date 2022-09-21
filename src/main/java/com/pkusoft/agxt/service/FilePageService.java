@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.pkusoft.agxt.model.FilePage;
+import pkubatis.common.utils.JobFilePage;
 
 /**
 * @author
@@ -69,4 +70,8 @@ public interface FilePageService {
      * @return 删除记录数
      */
     int deleteJobFilePageByAjbh(String ajbh);
+
+    List<FilePage> getJobFilePageByFileId(String fileId);
+
+    Map<String, Object> TabZfjdArchiveData(FilePage jobFilePage, Integer sfsc);
 }

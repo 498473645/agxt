@@ -63,4 +63,10 @@ public class SysParaServiceImpl implements SysParaService {
         return num;
     }
 
+    //查询参数
+    @Override
+    public SysPara getSysParaByParaCode(String paraCode) {
+        SysPara sysPara=sysParaMapper.selectByPrimaryKey(paraCode);
+        return sysPara;
+    }
 }

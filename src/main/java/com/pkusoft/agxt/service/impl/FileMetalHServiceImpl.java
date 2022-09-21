@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import com.pkusoft.agxt.mapper.FileMetalMapper;
 import com.pkusoft.agxt.model.FileMetal;
+import com.pkusoft.agxt.service.FileMetalService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,8 @@ public class FileMetalHServiceImpl implements FileMetalHService {
 
     @Autowired
     private FileMetalHMapper fileMetalHMapper;
+    @Autowired
+    private FileMetalMapper fileMetalMapper;
 
     public List<FileMetalH> getFileMetalHList(Map<String, String> map) {
 
@@ -71,5 +75,19 @@ public class FileMetalHServiceImpl implements FileMetalHService {
         BeanUtils.copyProperties(jobFileMetal,jobFileMetalH);
         jobFileMetalH.setHisId(UUID.randomUUID().toString());
         fileMetalHMapper.insertSelective(jobFileMetalH);
+    }
+
+    //将变更数据存入历史表
+    public void TemporalTableByFileId(String fileId){
+        Example example = new Example(FileMetal.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("fileId", fileId);
+        List<FileMetal> jobFileMetal= fileMetalMapper.selectByExample(example);
+        for(int i=0;i<jobFileMetal.size();i++){
+            FileMetalH jobFileMetalH = new FileMetalH();
+            BeanUtils.copyProperties(jobFileMetal.get(i),jobFileMetalH);
+            jobFileMetalH.setHisId(UUID.randomUUID().toString());
+            fileMetalHMapper.insertSelective(jobFileMetalH);
+        }
     }
 }

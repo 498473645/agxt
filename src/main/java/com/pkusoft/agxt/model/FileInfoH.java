@@ -1,27 +1,30 @@
-package com.pkusoft.agxt.req;
+package com.pkusoft.agxt.model;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import pkubatis.common.base.Page;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.util.Date;
-import java.util.List;
+
+import javax.persistence.*;
 
 /**
  * @author
- * @title: FileInfo
+ * @title: FileInfoH
  */
-@ApiModel("案卷信息表")
-@Table(name = "FILE_INFO")
-public class FileInfoParam extends Page {
+@ApiModel("案卷历史信息表")
+@Table(name = "FILE_INFO_H")
+public class FileInfoH {
+
+ 	/**
+     * 历史ID
+     */
+    @Id
+    @Column(name = "HIS_ID")
+    @ApiModelProperty(value = "历史ID")
+    private String hisId;
 
  	/**
      *
      */
-    @Id
     @Column(name = "ID")
     @ApiModelProperty(value = "")
     private String id;
@@ -83,20 +86,6 @@ public class FileInfoParam extends Page {
     private String hosterName;
 
  	/**
-     * 办案机构编码
-     */
-    @Column(name = "HANDLE_ORG_CODE")
-    @ApiModelProperty(value = "办案机构编码")
-    private String handleOrgCode;
-
- 	/**
-     * 办案机构名称
-     */
-    @Column(name = "HANDLE_ORG_NAME")
-    @ApiModelProperty(value = "办案机构名称")
-    private String handleOrgName;
-
- 	/**
      * 案卷类型(案件的类型)
      */
     @Column(name = "TYPE")
@@ -108,7 +97,7 @@ public class FileInfoParam extends Page {
      */
     @Column(name = "SN")
     @ApiModelProperty(value = "排序序号")
-    private Double sn;
+    private Integer sn;
 
  	/**
      * 存放场所ID
@@ -153,20 +142,6 @@ public class FileInfoParam extends Page {
     private String spaceName;
 
  	/**
-     * 空间格ID
-     */
-    @Column(name = "CELL_ID")
-    @ApiModelProperty(value = "空间格ID")
-    private String cellId;
-
- 	/**
-     * 空间格名称
-     */
-    @Column(name = "CELL_NAME")
-    @ApiModelProperty(value = "空间格名称")
-    private String cellName;
-
- 	/**
      * 磁盘路径(相对)
      */
     @Column(name = "DISK_PATH")
@@ -209,10 +184,10 @@ public class FileInfoParam extends Page {
     private Integer burnCount;
 
  	/**
-     * 嫌疑人姓名
+     * 关键词
      */
     @Column(name = "KEYWORDS")
-    @ApiModelProperty(value = "嫌疑人姓名")
+    @ApiModelProperty(value = "关键词")
     private String keywords;
 
  	/**
@@ -223,10 +198,10 @@ public class FileInfoParam extends Page {
     private String status;
 
  	/**
-     * 嫌疑人姓名拼音码
+     * 预留字段1
      */
     @Column(name = "RESERVE1")
-    @ApiModelProperty(value = "嫌疑人姓名拼音码")
+    @ApiModelProperty(value = "预留字段1")
     private String reserve1;
 
  	/**
@@ -237,10 +212,10 @@ public class FileInfoParam extends Page {
     private String reserve2;
 
  	/**
-     * 案卷标签(人像案管柜)
+     * 预留字段3
      */
     @Column(name = "RESERVE3")
-    @ApiModelProperty(value = "案卷标签(人像案管柜)")
+    @ApiModelProperty(value = "预留字段3")
     private String reserve3;
 
  	/**
@@ -276,7 +251,7 @@ public class FileInfoParam extends Page {
      */
     @Column(name = "CREATE_TIME")
     @ApiModelProperty(value = "创建时间")
-    private Date createTime;
+    private java.util.Date createTime;
 
  	/**
      * 最后修改者ID
@@ -297,7 +272,7 @@ public class FileInfoParam extends Page {
      */
     @Column(name = "MOD_TIME")
     @ApiModelProperty(value = "最后修改时间")
-    private Date modTime;
+    private java.util.Date modTime;
 
  	/**
      * 所属市局
@@ -381,112 +356,23 @@ public class FileInfoParam extends Page {
      */
     @Column(name = "ACCEPT_TIME")
     @ApiModelProperty(value = "受理时间")
-    private Date acceptTime;
+    private java.util.Date acceptTime;
 
- 	/**
-     * 是否上传警综(0未同步,1已同步)
-     */
-    @Column(name = "IS_UPD_PS")
-    @ApiModelProperty(value = "是否上传警综(0未同步,1已同步)")
-    private String isUpdPs;
 
- 	/**
-     * 上传警综时间
-     */
-    @Column(name = "UPD_PS_TIME")
-    @ApiModelProperty(value = "上传警综时间")
-    private Date updPsTime;
-
- 	/**
-     * 数据来源
-     */
-    @Column(name = "DATA_SOURCE")
-    @ApiModelProperty(value = "数据来源")
-    private String dataSource;
-
-    private String operId;
-    private String tot_cnt;
-    private String isOrNot;
-    private List<String> idList;
-    private String fileIds[];
-
-    private String acceptTimeStart;
-    private String acceptTimeEnd;
-
-    private String bussType;
-    private String startDate;
-    private String endDate;
-
-    public String getStartDate() {
-        return startDate;
+    /**
+    * 获得历史ID
+    * @return HIS_ID
+    */
+    public String getHisId() {
+        return this.hisId;
     }
 
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
-    }
-
-    public String getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
-    }
-
-    public String getBussType() {
-        return bussType;
-    }
-
-    public void setBussType(String bussType) {
-        this.bussType = bussType;
-    }
-
-    public String getAcceptTimeEnd() {
-        return acceptTimeEnd;
-    }
-
-    public void setAcceptTimeEnd(String acceptTimeEnd) {
-        this.acceptTimeEnd = acceptTimeEnd;
-    }
-
-    public String[] getFileIds() {
-        return fileIds;
-    }
-
-    public void setFileIds(String[] fileIds) {
-        this.fileIds = fileIds;
-    }
-
-    public List<String> getIdList() {
-        return idList;
-    }
-
-    public void setIdList(List<String> idList) {
-        this.idList = idList;
-    }
-
-    public String getOperId() {
-        return operId;
-    }
-
-    public void setOperId(String operId) {
-        this.operId = operId;
-    }
-
-    public String getTot_cnt() {
-        return tot_cnt;
-    }
-
-    public void setTot_cnt(String tot_cnt) {
-        this.tot_cnt = tot_cnt;
-    }
-
-    public String getIsOrNot() {
-        return isOrNot;
-    }
-
-    public void setIsOrNot(String isOrNot) {
-        this.isOrNot = isOrNot;
+    /**
+    * 设置历史ID
+    * @param hisId
+    */
+    public void setHisId(String hisId) {
+        this.hisId = hisId;
     }
 
     /**
@@ -634,38 +520,6 @@ public class FileInfoParam extends Page {
     }
 
     /**
-    * 获得办案机构编码
-    * @return HANDLE_ORG_CODE
-    */
-    public String getHandleOrgCode() {
-        return this.handleOrgCode;
-    }
-
-    /**
-    * 设置办案机构编码
-    * @param handleOrgCode
-    */
-    public void setHandleOrgCode(String handleOrgCode) {
-        this.handleOrgCode = handleOrgCode;
-    }
-
-    /**
-    * 获得办案机构名称
-    * @return HANDLE_ORG_NAME
-    */
-    public String getHandleOrgName() {
-        return this.handleOrgName;
-    }
-
-    /**
-    * 设置办案机构名称
-    * @param handleOrgName
-    */
-    public void setHandleOrgName(String handleOrgName) {
-        this.handleOrgName = handleOrgName;
-    }
-
-    /**
     * 获得案卷类型(案件的类型)
     * @return TYPE
     */
@@ -685,7 +539,7 @@ public class FileInfoParam extends Page {
     * 获得排序序号
     * @return SN
     */
-    public Double getSn() {
+    public Integer getSn() {
         return this.sn;
     }
 
@@ -693,7 +547,7 @@ public class FileInfoParam extends Page {
     * 设置排序序号
     * @param sn
     */
-    public void setSn(Double sn) {
+    public void setSn(Integer sn) {
         this.sn = sn;
     }
 
@@ -794,38 +648,6 @@ public class FileInfoParam extends Page {
     }
 
     /**
-    * 获得空间格ID
-    * @return CELL_ID
-    */
-    public String getCellId() {
-        return this.cellId;
-    }
-
-    /**
-    * 设置空间格ID
-    * @param cellId
-    */
-    public void setCellId(String cellId) {
-        this.cellId = cellId;
-    }
-
-    /**
-    * 获得空间格名称
-    * @return CELL_NAME
-    */
-    public String getCellName() {
-        return this.cellName;
-    }
-
-    /**
-    * 设置空间格名称
-    * @param cellName
-    */
-    public void setCellName(String cellName) {
-        this.cellName = cellName;
-    }
-
-    /**
     * 获得磁盘路径(相对)
     * @return DISK_PATH
     */
@@ -922,7 +744,7 @@ public class FileInfoParam extends Page {
     }
 
     /**
-    * 获得嫌疑人姓名
+    * 获得关键词
     * @return KEYWORDS
     */
     public String getKeywords() {
@@ -930,7 +752,7 @@ public class FileInfoParam extends Page {
     }
 
     /**
-    * 设置嫌疑人姓名
+    * 设置关键词
     * @param keywords
     */
     public void setKeywords(String keywords) {
@@ -954,7 +776,7 @@ public class FileInfoParam extends Page {
     }
 
     /**
-    * 获得嫌疑人姓名拼音码
+    * 获得预留字段1
     * @return RESERVE1
     */
     public String getReserve1() {
@@ -962,7 +784,7 @@ public class FileInfoParam extends Page {
     }
 
     /**
-    * 设置嫌疑人姓名拼音码
+    * 设置预留字段1
     * @param reserve1
     */
     public void setReserve1(String reserve1) {
@@ -986,7 +808,7 @@ public class FileInfoParam extends Page {
     }
 
     /**
-    * 获得案卷标签(人像案管柜)
+    * 获得预留字段3
     * @return RESERVE3
     */
     public String getReserve3() {
@@ -994,7 +816,7 @@ public class FileInfoParam extends Page {
     }
 
     /**
-    * 设置案卷标签(人像案管柜)
+    * 设置预留字段3
     * @param reserve3
     */
     public void setReserve3(String reserve3) {
@@ -1069,7 +891,7 @@ public class FileInfoParam extends Page {
     * 获得创建时间
     * @return CREATE_TIME
     */
-    public Date getCreateTime() {
+    public java.util.Date getCreateTime() {
         return this.createTime;
     }
 
@@ -1077,7 +899,7 @@ public class FileInfoParam extends Page {
     * 设置创建时间
     * @param createTime
     */
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(java.util.Date createTime) {
         this.createTime = createTime;
     }
 
@@ -1117,7 +939,7 @@ public class FileInfoParam extends Page {
     * 获得最后修改时间
     * @return MOD_TIME
     */
-    public Date getModTime() {
+    public java.util.Date getModTime() {
         return this.modTime;
     }
 
@@ -1125,7 +947,7 @@ public class FileInfoParam extends Page {
     * 设置最后修改时间
     * @param modTime
     */
-    public void setModTime(Date modTime) {
+    public void setModTime(java.util.Date modTime) {
         this.modTime = modTime;
     }
 
@@ -1309,7 +1131,7 @@ public class FileInfoParam extends Page {
     * 获得受理时间
     * @return ACCEPT_TIME
     */
-    public Date getAcceptTime() {
+    public java.util.Date getAcceptTime() {
         return this.acceptTime;
     }
 
@@ -1317,64 +1139,9 @@ public class FileInfoParam extends Page {
     * 设置受理时间
     * @param acceptTime
     */
-    public void setAcceptTime(Date acceptTime) {
+    public void setAcceptTime(java.util.Date acceptTime) {
         this.acceptTime = acceptTime;
     }
 
-    /**
-    * 获得是否上传警综(0未同步,1已同步)
-    * @return IS_UPD_PS
-    */
-    public String getIsUpdPs() {
-        return this.isUpdPs;
-    }
 
-    /**
-    * 设置是否上传警综(0未同步,1已同步)
-    * @param isUpdPs
-    */
-    public void setIsUpdPs(String isUpdPs) {
-        this.isUpdPs = isUpdPs;
-    }
-
-    /**
-    * 获得上传警综时间
-    * @return UPD_PS_TIME
-    */
-    public Date getUpdPsTime() {
-        return this.updPsTime;
-    }
-
-    /**
-    * 设置上传警综时间
-    * @param updPsTime
-    */
-    public void setUpdPsTime(Date updPsTime) {
-        this.updPsTime = updPsTime;
-    }
-
-    /**
-    * 获得数据来源
-    * @return DATA_SOURCE
-    */
-    public String getDataSource() {
-        return this.dataSource;
-    }
-
-    /**
-    * 设置数据来源
-    * @param dataSource
-    */
-    public void setDataSource(String dataSource) {
-        this.dataSource = dataSource;
-    }
-
-
-    public String getAcceptTimeStart() {
-        return acceptTimeStart;
-    }
-
-    public void setAcceptTimeStart(String acceptTimeStart) {
-        this.acceptTimeStart = acceptTimeStart;
-    }
 }

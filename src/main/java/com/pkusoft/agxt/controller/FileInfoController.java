@@ -1,12 +1,10 @@
 package com.pkusoft.agxt.controller;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
+import com.alibaba.fastjson.JSON;
 import com.pkusoft.agxt.model.*;
 import com.pkusoft.agxt.req.FileInfoParam;
 import com.pkusoft.agxt.service.CabSpaceService;
@@ -321,6 +319,36 @@ public class FileInfoController  {
     }
 
     /**
+     * 案卷公用查询方法（扫描采集）(电子案卷列表信息)
+     *
+     * @param fileInfoParam
+     *            查询条件
+     * @return 标准列表对象
+     */
+    @RequestMapping("/archives/jobFileInfoListDataAllSmcj")
+    @ResponseBody
+    public ResponseData<List<FileInfoParam>> jobFileInfoListDataSMCJ(@RequestBody FileInfoParam fileInfoParam,HttpServletRequest request) {
+        ResponseDto<List<FileInfoParam>> dto = new ResponseDto<>();
+        try {
+            SysUser sysUser = sysUserService.getCurrentUser(request);
+            List<FileInfoParam> list = fileInfoService.jobFileInfoListDataSMCJ(fileInfoParam,sysUser);
+            int count = 0;
+            if (list.size() > 0) {
+                count = Integer.valueOf(list.get(0).getTot_cnt());
+            }
+            dto.setData(list);
+            dto.setCount(count);
+            dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
+            dto.setStatusMsg("查询案卷列表信息成功");
+            return dto;
+
+        } catch (Exception e) {
+            log.error("案卷信息表查询列表数据出错", e);
+            return new ResponseData<>(ResponseData.STATUS_CODE_BIZ, "案卷信息表查询列表数据出错：" + e.getMessage());
+        }
+    }
+
+    /**
      * 检查柜子是否在本单位
      *
      * @param fileInfoParam
@@ -396,5 +424,109 @@ public class FileInfoController  {
         dto.setStatusMsg("查询轨迹数据成功");
         return dto;
     }
+
+    /**
+     * 待入柜案卷列表查询
+     *
+     * @param fileInfoParam
+     *            查询条件
+     * @return 标准列表对象
+     */
+    @RequestMapping("/archives/rgJobFileInfoListDataSpace")
+    @ResponseBody
+    public ResponseData jobFileInfoListRgData(@RequestBody FileInfoParam fileInfoParam,HttpServletRequest request) {
+        try {
+            ResponseDto<List<FileInfoParam>> dto = new ResponseDto<>();
+            SysUser sysUser=sysUserService.getCurrentUser(request);
+
+            List<FileInfoParam> list = fileInfoService.getJobFileInfoByFileAuthoperIdRg(fileInfoParam,sysUser);
+            int count = 0;
+            if (list.size() != 0) {
+                count = Integer.parseInt(list.get(0).getTot_cnt());
+            }
+            dto.setData(list);
+            dto.setCount(count);
+            dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
+            dto.setStatusMsg("查询案卷模板树信息表成功");
+            return dto;
+        } catch (Exception e) {
+            log.error("案卷信息表查询列表数据出错", e);
+            return new ResponseData<>(ResponseData.STATUS_CODE_BIZ, "案卷信息表查询列表数据出错：" + e.getMessage());
+        }
+    }
+
+    /**
+     * web端案卷归档
+     *
+     * @param fileId
+     * @return
+     */
+    @RequestMapping("/archives/ajgdFileInfoSave")
+    @ResponseBody
+    public ResponseData ajgdFileInfoSave(String fileId,HttpServletRequest request) {
+        try {
+            SysUser sysUser=sysUserService.getCurrentUser(request);
+            FileInfo jobFileInfo = fileInfoService.getFileInfo(fileId);
+            UserInfo jobUserInfo = new UserInfo();
+            jobUserInfo.setId(UUID.randomUUID().toString());
+            jobUserInfo.setCode(sysUser.getIdcard());
+            jobUserInfo.setName(sysUser.getUserName());
+
+            fileInfoService.AnJuanGuiDang(jobFileInfo, jobUserInfo);
+            return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS, "案卷归档成功");
+        } catch (Exception e) {
+            log.error("案卷归档失败", e);
+            return new ResponseData<>(ResponseData.STATUS_CODE_BIZ, "案卷归档失败：" + e.getMessage());
+        }
+    }
+
+    /**
+     * 变更案卷性质案卷列表
+     *
+     * @param fileInfoParam
+     * @return
+     */
+    @RequestMapping("/archives/changeNatureData")
+    @ResponseBody
+    public ResponseData<List<FileInfoParam>> changeNatureData(@RequestBody FileInfoParam fileInfoParam,HttpServletRequest request) {
+        try {
+            ResponseDto<List<FileInfoParam>> dto = new ResponseDto<>();
+            SysUser sysUser=sysUserService.getCurrentUser(request);
+            List<FileInfoParam> list = fileInfoService.getJobFileInfoByFileAuthoperIdChangeNatureData(fileInfoParam,sysUser);
+            int count = 0;
+            if (list.size() > 0) {
+                count = Integer.valueOf(list.get(0).getTot_cnt());
+            }
+            dto.setData(list);
+            dto.setCount(count);
+            dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
+            dto.setStatusMsg("查询变更案卷性质案卷列表成功");
+            return dto;
+        } catch (Exception e) {
+            log.error("案卷信息表查询列表数据出错", e);
+            return new ResponseData<>(ResponseData.STATUS_CODE_BIZ, "案卷信息表查询列表数据出错：" + e.getMessage());
+        }
+    }
+
+    /**
+     * 变更案卷性质
+     *
+     * @param fileId
+     * @return
+     */
+    @RequestMapping("/archives/changeFileInfoNature")
+    @ResponseBody
+    public ResponseData changeFileInfoNature(String temp, String fileId,
+                                           String tempType,HttpServletRequest request) {
+        try {
+            SysUser sysUser=sysUserService.getCurrentUser(request);
+            fileInfoService.changeFileInfoNature(temp, fileId, tempType,sysUser);
+            return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS, "变更案卷性质成功");
+        } catch (Exception e) {
+            log.error("变更案卷性质失败", e);
+            return new ResponseData<>(ResponseData.STATUS_CODE_BIZ, "变更案卷性质失败：" + e.getMessage());
+        }
+    }
+
 
 }

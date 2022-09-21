@@ -275,6 +275,137 @@
         ) A__ order by A__.ACCEPT_TIME desc
         ) s_ where rownum &lt;=#{start,jdbcType=DECIMAL}+20 ) where rn_ &gt;#{start,jdbcType=DECIMAL}
     </select>
+    <select id="getJobFileInfoByFileAuthoperIdRg" resultMap="BaseResultMapParam" resultType="com.pkusoft.agxt.req.FileInfoParam">
+        select * from(select s_.*,rownum rn_ from(
+        select f1.*, count(*) over() tot_cnt from(
+        select distinct f.* from
+        FILE_INFO f,File_Auth auth,file_store store
+        <where>
+            f.id = auth.file_id and f.id = store.file_id
+            and store.ROW_STATUS = 3
+            <if test=" ajzfStatus != null">
+                and f.status != #{ajzfStatus,jdbcType=VARCHAR}
+            </if>
+            <if test=" operId!= null">
+                and auth.OPER_ID = #{operId,jdbcType=VARCHAR}
+            </if>
+            and auth.ORG_C_DATA = #{orgCData,jdbcType=VARCHAR}
+            <if test=" orgSData != null">
+                and NVL(auth.ORG_S_DATA, '&lt;Null&gt;') = #{orgSData,jdbcType=VARCHAR}
+            </if>
+            <if test=" orgTData != null">
+                and NVL(auth.ORG_T_DATA, '&lt;Null&gt;') = #{orgTData,jdbcType=VARCHAR}
+            </if>
+            and store.ORG_C_DATA = #{orgCData,jdbcType=VARCHAR}
+            <if test=" orgSData != null">
+                and NVL(store.ORG_S_DATA, '&lt;Null&gt;') = #{orgSData,jdbcType=VARCHAR}
+            </if>
+            <if test=" orgTData != null">
+                and NVL(store.ORG_T_DATA, '&lt;Null&gt;') = #{orgTData,jdbcType=VARCHAR}
+            </if>
+            and
+            (
+            (f.STATUS = #{status1,jdbcType=VARCHAR} and auth.STATUS = #{operType1,jdbcType=VARCHAR} and auth.Oper_Type
+            != '0100')
+            or
+            (f.STATUS = #{status2,jdbcType=VARCHAR} and auth.STATUS = #{operType2,jdbcType=VARCHAR})
+            or
+            (f.STATUS = #{status3,jdbcType=VARCHAR} )
+            or
+            (f.STATUS = #{status4,jdbcType=VARCHAR} )
+            or
+            (f.STATUS = #{yzf,jdbcType=VARCHAR} )
+            ) and (store.metal_id='00000000-0000-0000-0000-000000000000'
+            and store.page_id='00000000-0000-0000-0000-000000000000'
+            and (store.SPACE_ID is null or store.SPACE_ID = #{status6,jdbcType=VARCHAR}))
+
+            <if test=" ajbh!= null">
+                and f.CODE like #{ajbh,jdbcType=VARCHAR}
+            </if>
+            <if test=" ajmc!= null">
+                and f.NAME like #{ajmc,jdbcType=VARCHAR}
+            </if>
+            <if test=" saryxm != null">
+                and f.KEYWORDS like #{saryxm,jdbcType=VARCHAR}
+            </if>
+            <if test=" spaceId!= null">
+                and f.id in
+                ( select store.file_id from file_store store
+                where
+                store.metal_id='00000000-0000-0000-0000-000000000000'
+                and store.page_id='00000000-0000-0000-0000-000000000000'
+                and store.space_id=#{spaceId,jdbcType=VARCHAR}
+                and store.ROW_STATUS = 3
+                )
+            </if>
+            <if test=" hosterId!= null">
+                and f.HOSTER_ID = #{hosterId,jdbcType=VARCHAR}
+            </if>
+            <if test=" handleOrgCode!= null">
+                and f.HANDLE_ORG_CODE = #{handleOrgCode,jdbcType=VARCHAR}
+            </if>
+        </where>
+        order by f.CREATE_TIME desc) f1
+        ) s_ where rownum &lt;=#{start,jdbcType=DECIMAL}+20) where rn_ &gt;#{start,jdbcType=DECIMAL}
+    </select>
+    <select id="getJobFileInfoByFileAuthoperIdChangeNatureData" resultMap="BaseResultMapParam"
+            resultType="com.pkusoft.agxt.req.FileInfoParam">
+        select * from(select s_.*,rownum rn_ from(
+        select  distinct
+        f.*,count(distinct f.id) over () tot_cnt
+        from
+        FILE_INFO f,File_Auth auth,file_store store
+        <where>
+            f.id = auth.file_id and f.id = store.file_id
+            and store.ROW_STATUS = 3
+            <if test=" operId!= null">
+                and auth.OPER_ID = #{operId,jdbcType=VARCHAR}
+            </if>
+            <!--
+            <if test="orgCData != null" >
+                and   auth.ORG_C_DATA = #{orgCData,jdbcType=VARCHAR}
+             </if>
+             <if test="orgSData != null" >
+                and  auth.ORG_S_DATA = #{orgSData,jdbcType=VARCHAR}
+             </if>
+             <if test="orgTData != null" >
+                and  auth.ORG_T_DATA = #{orgTData,jdbcType=VARCHAR}
+             </if>
+             -->
+            <if test=" handleOrgCode!= null">
+                and auth.ORG_CODE = #{handleOrgCode,jdbcType=VARCHAR}
+            </if>
+            <!--      and store.ORG_CODE = #{orgCode,jdbcType=VARCHAR} -->
+            <if test="orgCData != null" >
+                and   store.ORG_C_DATA = #{orgCData,jdbcType=VARCHAR}
+            </if>
+            <if test="orgSData != null" >
+                and  store.ORG_S_DATA = #{orgSData,jdbcType=VARCHAR}
+            </if>
+            <if test="orgTData != null" >
+                and  store.ORG_T_DATA = #{orgTData,jdbcType=VARCHAR}
+            </if>
+            and (f.STATUS = #{status1,jdbcType=VARCHAR} or f.STATUS = #{status2,jdbcType=VARCHAR})
+            <!-- and (f.TYPE = #{type1,jdbcType=VARCHAR} or f.TYPE = #{type2,jdbcType=VARCHAR}) -->
+            <if test=" ajbh!= null">
+                and f.CODE like #{ajbh,jdbcType=VARCHAR}
+            </if>
+            <if test=" ajmc!= null">
+                and f.NAME like #{ajmc,jdbcType=VARCHAR}
+            </if>
+            <if test=" hosterId!= null">
+                and f.HOSTER_ID = #{hosterId,jdbcType=VARCHAR}
+            </if>
+            <if test=" handleOrgCode!= null">
+                and f.HANDLE_ORG_CODE = #{handleOrgCode,jdbcType=VARCHAR}
+            </if>
+            <if test=" saryxm != null">
+                and f.KEYWORDS like #{saryxm,jdbcType=VARCHAR}
+            </if>
+        </where>
+        order by f.CREATE_TIME desc
+        ) s_ where rownum &lt;=#{start,jdbcType=DECIMAL}+20) where rn_ &gt;#{start,jdbcType=DECIMAL}
+    </select>
 
     <resultMap id="BaseResultMapParam" type="com.pkusoft.agxt.req.FileInfoParam">
         <id column="ID" jdbcType="VARCHAR" property="id"/>

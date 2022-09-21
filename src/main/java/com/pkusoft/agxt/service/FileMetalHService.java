@@ -61,4 +61,10 @@ public interface FileMetalHService {
      * @param jobFileMetal
      */
     void TemporalTable(FileMetal jobFileMetal);
+
+    /**
+     * 将该案卷下所有的材料存入历史表
+     * @param fileId
+     */
+    void TemporalTableByFileId(String fileId);
 }

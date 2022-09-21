@@ -9,4 +9,7 @@ import com.pkusoft.agxt.model.FileMetal;
 
 public interface FileMetalMapper extends Mapper<FileMetal> {
 
+    int updatefileMetalBySn(Map<String, Object> map);
+
+    Integer getJobFileMetalSn(String fileId);
 }

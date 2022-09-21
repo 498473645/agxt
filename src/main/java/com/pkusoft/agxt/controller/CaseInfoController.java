@@ -3,6 +3,7 @@ package com.pkusoft.agxt.controller;
 
 import com.pkusoft.agxt.model.CaseInfo;
 import com.pkusoft.agxt.req.CaseInfoParam;
+import com.pkusoft.agxt.req.FileInfoParam;
 import com.pkusoft.agxt.service.CaseInfoService;
 import com.pkusoft.usercenter.po.SysUser;
 import com.pkusoft.usercenter.service.SysUserService;

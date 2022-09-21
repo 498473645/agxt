@@ -16,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
+import org.support.commons.springmvc.ResponseData;
+import pkubatis.common.base.ResponseDto;
 import pkubatis.common.utils.JobUtil;
 import pkubatis.common.utils.OrgData;
 import pkubatis.common.utils.PinyinUtils;
@@ -81,16 +83,16 @@ public class CaseInfoServiceImpl implements CaseInfoService {
 
     public List<CaseInfo> getCaseInfoList(CaseInfoParam caseInfo, SysUser user) {
 
-        RowBounds rowBounds = new RowBounds(caseInfo.getStart(),caseInfo.getPageSize());
+        RowBounds rowBounds = new RowBounds(caseInfo.getStart(), caseInfo.getPageSize());
         Example example = new Example(CaseInfo.class);
         Example.Criteria criteria = example.createCriteria();
         //The query conditions are edited here
 
-        return caseInfoMapper.selectByExampleAndRowBounds(example,rowBounds);
+        return caseInfoMapper.selectByExampleAndRowBounds(example, rowBounds);
     }
 
     public int getCaseInfoCount(CaseInfoParam caseInfo, SysUser user) {
-        RowBounds rowBounds = new RowBounds(caseInfo.getStart(),caseInfo.getPageSize());
+        RowBounds rowBounds = new RowBounds(caseInfo.getStart(), caseInfo.getPageSize());
         Example example = new Example(CaseInfo.class);
         Example.Criteria criteria = example.createCriteria();
         //The query conditions are edited here
@@ -98,36 +100,36 @@ public class CaseInfoServiceImpl implements CaseInfoService {
         return caseInfoMapper.selectCountByExample(example);
     }
 
-    public int caseInfoSave(CaseInfo caseInfo, Map<String,String> map){
+    public int caseInfoSave(CaseInfo caseInfo, Map<String, String> map) {
         String id = UUID.randomUUID().toString();
         caseInfo.setId(id);
         int num = caseInfoMapper.insertSelective(caseInfo);
         return num;
     }
 
-    public int caseInfoUpdate(CaseInfo caseInfo, Map<String,String> map){
+    public int caseInfoUpdate(CaseInfo caseInfo, Map<String, String> map) {
         int num = caseInfoMapper.updateByPrimaryKeySelective(caseInfo);
         return num;
     }
 
-    public CaseInfo getCaseInfo(String id){
+    public CaseInfo getCaseInfo(String id) {
         return caseInfoMapper.selectByPrimaryKey(id);
     }
 
-    public int caseInfoDelete(String id){
+    public int caseInfoDelete(String id) {
         int num = caseInfoMapper.deleteByPrimaryKey(id);
         return num;
     }
 
     @Override
-    public int insertLsCaseInfo(CaseInfo jobCaseInfo,SysUser sysUser) {
-        Date date=new Date();
-        OrgData orgDataUser= sysPermitService.userOrg(sysUser.getUserId().toString());
-        OrgData orgData= sysPermitService.userOrg(jobCaseInfo.getHosterId());
-        String code="";//案件名称拼音码
-        String hosterName="";//主办人姓名拼音码
+    public int insertLsCaseInfo(CaseInfo jobCaseInfo, SysUser sysUser) {
+        Date date = new Date();
+        OrgData orgDataUser = sysPermitService.userOrg(sysUser.getUserId().toString());
+        OrgData orgData = sysPermitService.userOrg(jobCaseInfo.getHosterId());
+        String code = "";//案件名称拼音码
+        String hosterName = "";//主办人姓名拼音码
         //案件
-        String uid=UUID.randomUUID().toString();
+        String uid = UUID.randomUUID().toString();
         jobCaseInfo.setId(uid);
         jobCaseInfo.setSn(0.00);
         jobCaseInfo.setCaseTimeD(jobCaseInfo.getCaseTimeU());
@@ -150,13 +152,13 @@ public class CaseInfoServiceImpl implements CaseInfoService {
         jobCaseInfo.setCurOrg(orgData.getDeptId());
         jobCaseInfo.setCurOrgData(orgData.getDeptId());
         jobCaseInfo.setDataSource("1");//临时手工录入
-        if(jobCaseInfo.getName() != null && !jobCaseInfo.getName().equals("")){
+        if (jobCaseInfo.getName() != null && !jobCaseInfo.getName().equals("")) {
             code = PinyinUtils.getPinyin(jobCaseInfo.getName()).toUpperCase();//案卷拼音码
             jobCaseInfo.setNameSpell(code);
 
         }
-        if(StringUtils.hasText(jobCaseInfo.getHosterName())){
-            hosterName=PinyinUtils.getPinyin(jobCaseInfo.getHosterName()).toUpperCase();//主办人拼音码
+        if (StringUtils.hasText(jobCaseInfo.getHosterName())) {
+            hosterName = PinyinUtils.getPinyin(jobCaseInfo.getHosterName()).toUpperCase();//主办人拼音码
             jobCaseInfo.setHosterSpell(hosterName);
         }
 
@@ -168,30 +170,30 @@ public class CaseInfoServiceImpl implements CaseInfoService {
 
         List<FileTemp> list = fileTempMapper.selectByExample(example);
         jobCaseInfo.setReserve1(null);
-        List<FileTemp> temps=new ArrayList<FileTemp>();
+        List<FileTemp> temps = new ArrayList<FileTemp>();
         //模板
-        if(list.size()>0&&list!=null){
+        if (list.size() > 0 && list != null) {
             Example example2 = new Example(FileTemp.class);
             Example.Criteria criteria2 = example.createCriteria();
 
-            criteria2.andLike("treePath", list.get(0).getTreePath()+"%");
+            criteria2.andLike("treePath", list.get(0).getTreePath() + "%");
             temps = fileTempMapper.selectByExample(example2);
-            if (temps.size()==1) {
+            if (temps.size() == 1) {
                 return 1;
             }
-        }else{
+        } else {
             return 1;
         }
 
         //用户信息
-        UserInfo userInfo=new UserInfo();
+        UserInfo userInfo = new UserInfo();
         userInfo.setName(sysUser.getUserName());
         userInfo.setCode(sysUser.getLoginName());
         userInfo.setPoliceCode(orgData.getPoliceCode());
         userInfo.setId(orgData.getIdCard());
         userInfo.setIdCard(orgData.getIdCard());
         userInfo.setLoginType(JobConstant.USERNAMELOGIN);
-        CabSpace jobCabSpace=new CabSpace();
+        CabSpace jobCabSpace = new CabSpace();
         jobCabSpace.setId(JobUtil.IDDEFAULT);
         jobCabSpace.setAreaId(JobUtil.IDDEFAULT);
         jobCabSpace.setPlaceId(JobUtil.IDDEFAULT);
@@ -201,7 +203,7 @@ public class CaseInfoServiceImpl implements CaseInfoService {
         //建卷
 
         //手动建卷时向案件状态信息表插入基础数据
-        KeAgAjztxx keAgAjztxx=new KeAgAjztxx();
+        KeAgAjztxx keAgAjztxx = new KeAgAjztxx();
         keAgAjztxx.setAjbh(jobCaseInfo.getCode());
         keAgAjztxx.setAjmc(jobCaseInfo.getName());
         keAgAjztxx.setAjmcPym(code);
@@ -230,18 +232,18 @@ public class CaseInfoServiceImpl implements CaseInfoService {
         keAgAjztxx.setZt8("0");
         keAgAjztxx.setZt9("0");
         keAgAjztxx.setZt10("0");
-        if(jobCaseInfo.getCode() != null){
-            String saryxm=null;
-            String saryxmpym=null;
-            List<KeAjSary> keAjSaryList=keAjSaryService.getKeAjSaryByAjbh(jobCaseInfo.getCode(), "1");
-            if(keAjSaryList != null && keAjSaryList.size() > 0){
-                for(KeAjSary keAjSary : keAjSaryList){
-                    if(keAjSary.getXm() != null){
-                        if(saryxm == null){
+        if (jobCaseInfo.getCode() != null) {
+            String saryxm = null;
+            String saryxmpym = null;
+            List<KeAjSary> keAjSaryList = keAjSaryService.getKeAjSaryByAjbh(jobCaseInfo.getCode(), "1");
+            if (keAjSaryList != null && keAjSaryList.size() > 0) {
+                for (KeAjSary keAjSary : keAjSaryList) {
+                    if (keAjSary.getXm() != null) {
+                        if (saryxm == null) {
                             saryxm = keAjSary.getXm();
                             saryxmpym = PinyinUtils.getPinyin(keAjSary.getXm()).toUpperCase();
-                        }else{
-                            saryxm +=(","+ keAjSary.getXm());
+                        } else {
+                            saryxm += ("," + keAjSary.getXm());
                             saryxmpym += ("," + PinyinUtils.getPinyin(keAjSary.getXm()).toUpperCase());
                         }
                     }
@@ -267,7 +269,7 @@ public class CaseInfoServiceImpl implements CaseInfoService {
         fileMetalService.deleteJobFileMetalByAjbh(ajbh);
         fileNoteService.deleteJobFileNoteByAjbh(ajbh);
         //通过案件编号获取案卷页信息
-        List<FilePage> jobFilePagelist= filePageService.getJobFilePageByajbh(ajbh);
+        List<FilePage> jobFilePagelist = filePageService.getJobFilePageByajbh(ajbh);
         //保存案卷页信息到案卷页回收记录表
         filePageRecycleService.saveFilePageRecycle(jobFilePagelist);
         filePageService.deleteJobFilePageByAjbh(ajbh);

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.pkusoft.agxt.model.FileMetal;
+import com.pkusoft.usercenter.po.SysUser;
 
 /**
 * @author
@@ -56,4 +57,10 @@ public interface FileMetalService {
     int fileMetalDelete(String id);
 
     int deleteJobFileMetalByAjbh(String ajbh);
+    /**
+     * web端案卷采集功能增加材料
+     * @param jobFileMetal
+     * @param caseId
+     */
+    String JobFileMetalAdd(FileMetal jobFileMetal, String caseId, SysUser sysUser);
 }

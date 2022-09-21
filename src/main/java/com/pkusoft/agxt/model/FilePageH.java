@@ -1,43 +1,46 @@
-package com.pkusoft.agxt.req;
+package com.pkusoft.agxt.model;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import pkubatis.common.base.Page;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.util.Date;
-import java.util.List;
+
+import javax.persistence.*;
 
 /**
  * @author
- * @title: FileInfo
+ * @title: FilePageH
  */
-@ApiModel("案卷信息表")
-@Table(name = "FILE_INFO")
-public class FileInfoParam extends Page {
+@ApiModel("案卷页历史信息表")
+@Table(name = "FILE_PAGE_H")
+public class FilePageH {
+
+ 	/**
+     * 历史ID
+     */
+    @Id
+    @Column(name = "HIS_ID")
+    @ApiModelProperty(value = "历史ID")
+    private String hisId;
 
  	/**
      *
      */
-    @Id
     @Column(name = "ID")
     @ApiModelProperty(value = "")
     private String id;
 
  	/**
-     * 代码(案件编号)
+     * 代码
      */
     @Column(name = "CODE")
-    @ApiModelProperty(value = "代码(案件编号)")
+    @ApiModelProperty(value = "代码")
     private String code;
 
  	/**
-     * 名称(案件名称)
+     * 名称
      */
     @Column(name = "NAME")
-    @ApiModelProperty(value = "名称(案件名称)")
+    @ApiModelProperty(value = "名称")
     private String name;
 
  	/**
@@ -62,45 +65,45 @@ public class FileInfoParam extends Page {
     private String caseName;
 
  	/**
-     * 主办人ID
+     * 案卷ID
      */
-    @Column(name = "HOSTER_ID")
-    @ApiModelProperty(value = "主办人ID")
-    private String hosterId;
+    @Column(name = "FILE_ID")
+    @ApiModelProperty(value = "案卷ID")
+    private String fileId;
 
  	/**
-     * 主办人警号
+     * 案卷编号
      */
-    @Column(name = "HOSTER_PCODE")
-    @ApiModelProperty(value = "主办人警号")
-    private String hosterPcode;
+    @Column(name = "FILE_CODE")
+    @ApiModelProperty(value = "案卷编号")
+    private String fileCode;
 
  	/**
-     * 主办人姓名
+     * 案卷名称
      */
-    @Column(name = "HOSTER_NAME")
-    @ApiModelProperty(value = "主办人姓名")
-    private String hosterName;
+    @Column(name = "FILE_NAME")
+    @ApiModelProperty(value = "案卷名称")
+    private String fileName;
 
  	/**
-     * 办案机构编码
+     * 材料ID
      */
-    @Column(name = "HANDLE_ORG_CODE")
-    @ApiModelProperty(value = "办案机构编码")
-    private String handleOrgCode;
+    @Column(name = "METAL_ID")
+    @ApiModelProperty(value = "材料ID")
+    private String metalId;
 
  	/**
-     * 办案机构名称
+     * 材料名称
      */
-    @Column(name = "HANDLE_ORG_NAME")
-    @ApiModelProperty(value = "办案机构名称")
-    private String handleOrgName;
+    @Column(name = "METAL_NAME")
+    @ApiModelProperty(value = "材料名称")
+    private String metalName;
 
  	/**
-     * 案卷类型(案件的类型)
+     * 材料类型
      */
     @Column(name = "TYPE")
-    @ApiModelProperty(value = "案卷类型(案件的类型)")
+    @ApiModelProperty(value = "材料类型")
     private String type;
 
  	/**
@@ -108,90 +111,27 @@ public class FileInfoParam extends Page {
      */
     @Column(name = "SN")
     @ApiModelProperty(value = "排序序号")
-    private Double sn;
+    private Integer sn;
 
  	/**
-     * 存放场所ID
-     */
-    @Column(name = "PLACE_ID")
-    @ApiModelProperty(value = "存放场所ID")
-    private String placeId;
-
- 	/**
-     * 存放场所名称
-     */
-    @Column(name = "PLACE_NAME")
-    @ApiModelProperty(value = "存放场所名称")
-    private String placeName;
-
- 	/**
-     * 存放区域ID
-     */
-    @Column(name = "AREA_ID")
-    @ApiModelProperty(value = "存放区域ID")
-    private String areaId;
-
- 	/**
-     * 存放区域名称
-     */
-    @Column(name = "AREA_NAME")
-    @ApiModelProperty(value = "存放区域名称")
-    private String areaName;
-
- 	/**
-     * 存放空间ID
-     */
-    @Column(name = "SPACE_ID")
-    @ApiModelProperty(value = "存放空间ID")
-    private String spaceId;
-
- 	/**
-     * 存放空间名称
-     */
-    @Column(name = "SPACE_NAME")
-    @ApiModelProperty(value = "存放空间名称")
-    private String spaceName;
-
- 	/**
-     * 空间格ID
-     */
-    @Column(name = "CELL_ID")
-    @ApiModelProperty(value = "空间格ID")
-    private String cellId;
-
- 	/**
-     * 空间格名称
-     */
-    @Column(name = "CELL_NAME")
-    @ApiModelProperty(value = "空间格名称")
-    private String cellName;
-
- 	/**
-     * 磁盘路径(相对)
+     * 电子案卷存放路径(相对)
      */
     @Column(name = "DISK_PATH")
-    @ApiModelProperty(value = "磁盘路径(相对)")
+    @ApiModelProperty(value = "电子案卷存放路径(相对)")
     private String diskPath;
 
  	/**
-     * 是否采集
+     * 电子案卷存放的文件名称
      */
-    @Column(name = "IS_SCAN")
-    @ApiModelProperty(value = "是否采集")
-    private Integer isScan;
+    @Column(name = "DISK_FILENAME")
+    @ApiModelProperty(value = "电子案卷存放的文件名称")
+    private String diskFilename;
 
  	/**
-     * 已采集材料的页总数
-     */
-    @Column(name = "PAGE_COUNT")
-    @ApiModelProperty(value = "已采集材料的页总数")
-    private Integer pageCount;
-
- 	/**
-     *
+     * 打印编号
      */
     @Column(name = "PRINT_CODE")
-    @ApiModelProperty(value = "")
+    @ApiModelProperty(value = "打印编号")
     private String printCode;
 
  	/**
@@ -209,11 +149,32 @@ public class FileInfoParam extends Page {
     private Integer burnCount;
 
  	/**
-     * 嫌疑人姓名
+     * 关键词
      */
     @Column(name = "KEYWORDS")
-    @ApiModelProperty(value = "嫌疑人姓名")
+    @ApiModelProperty(value = "关键词")
     private String keywords;
+
+ 	/**
+     * 当前所有人ID
+     */
+    @Column(name = "OWNER_ID")
+    @ApiModelProperty(value = "当前所有人ID")
+    private String ownerId;
+
+ 	/**
+     * 所有人警号
+     */
+    @Column(name = "OWNER_CODE")
+    @ApiModelProperty(value = "所有人警号")
+    private String ownerCode;
+
+ 	/**
+     * 所有人名称
+     */
+    @Column(name = "OWNER_NAME")
+    @ApiModelProperty(value = "所有人名称")
+    private String ownerName;
 
  	/**
      * 状态
@@ -223,10 +184,10 @@ public class FileInfoParam extends Page {
     private String status;
 
  	/**
-     * 嫌疑人姓名拼音码
+     * 预留字段1
      */
     @Column(name = "RESERVE1")
-    @ApiModelProperty(value = "嫌疑人姓名拼音码")
+    @ApiModelProperty(value = "预留字段1")
     private String reserve1;
 
  	/**
@@ -237,10 +198,10 @@ public class FileInfoParam extends Page {
     private String reserve2;
 
  	/**
-     * 案卷标签(人像案管柜)
+     * 预留字段3
      */
     @Column(name = "RESERVE3")
-    @ApiModelProperty(value = "案卷标签(人像案管柜)")
+    @ApiModelProperty(value = "预留字段3")
     private String reserve3;
 
  	/**
@@ -276,7 +237,7 @@ public class FileInfoParam extends Page {
      */
     @Column(name = "CREATE_TIME")
     @ApiModelProperty(value = "创建时间")
-    private Date createTime;
+    private java.util.Date createTime;
 
  	/**
      * 最后修改者ID
@@ -297,7 +258,7 @@ public class FileInfoParam extends Page {
      */
     @Column(name = "MOD_TIME")
     @ApiModelProperty(value = "最后修改时间")
-    private Date modTime;
+    private java.util.Date modTime;
 
  	/**
      * 所属市局
@@ -356,137 +317,55 @@ public class FileInfoParam extends Page {
     private String curOrgData;
 
  	/**
-     * 案卷名称拼音简码
+     * 加密图片文件大小
      */
-    @Column(name = "NAME_SPELL")
-    @ApiModelProperty(value = "案卷名称拼音简码")
-    private String nameSpell;
+    @Column(name = "ENCRYFILE_SIZE")
+    @ApiModelProperty(value = "加密图片文件大小")
+    private Integer encryfileSize;
 
  	/**
-     * 主办人姓名拼音简码
+     * 原始图片文件大小
      */
-    @Column(name = "HOSTER_SPELL")
-    @ApiModelProperty(value = "主办人姓名拼音简码")
-    private String hosterSpell;
+    @Column(name = "DIGITFILE_SIZE")
+    @ApiModelProperty(value = "原始图片文件大小")
+    private Integer digitfileSize;
 
  	/**
-     * 补充侦查次数
+     * 树路径
      */
-    @Column(name = "SUPPLEINV_COUNT")
-    @ApiModelProperty(value = "补充侦查次数")
-    private Integer suppleinvCount;
+    @Column(name = "TREE_PATH")
+    @ApiModelProperty(value = "树路径")
+    private String treePath;
 
  	/**
-     * 受理时间
-     */
-    @Column(name = "ACCEPT_TIME")
-    @ApiModelProperty(value = "受理时间")
-    private Date acceptTime;
-
- 	/**
-     * 是否上传警综(0未同步,1已同步)
+     *
      */
     @Column(name = "IS_UPD_PS")
-    @ApiModelProperty(value = "是否上传警综(0未同步,1已同步)")
+    @ApiModelProperty(value = "")
     private String isUpdPs;
 
  	/**
-     * 上传警综时间
+     *
      */
     @Column(name = "UPD_PS_TIME")
-    @ApiModelProperty(value = "上传警综时间")
-    private Date updPsTime;
+    @ApiModelProperty(value = "")
+    private java.util.Date updPsTime;
 
- 	/**
-     * 数据来源
-     */
-    @Column(name = "DATA_SOURCE")
-    @ApiModelProperty(value = "数据来源")
-    private String dataSource;
 
-    private String operId;
-    private String tot_cnt;
-    private String isOrNot;
-    private List<String> idList;
-    private String fileIds[];
-
-    private String acceptTimeStart;
-    private String acceptTimeEnd;
-
-    private String bussType;
-    private String startDate;
-    private String endDate;
-
-    public String getStartDate() {
-        return startDate;
+    /**
+    * 获得历史ID
+    * @return HIS_ID
+    */
+    public String getHisId() {
+        return this.hisId;
     }
 
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
-    }
-
-    public String getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
-    }
-
-    public String getBussType() {
-        return bussType;
-    }
-
-    public void setBussType(String bussType) {
-        this.bussType = bussType;
-    }
-
-    public String getAcceptTimeEnd() {
-        return acceptTimeEnd;
-    }
-
-    public void setAcceptTimeEnd(String acceptTimeEnd) {
-        this.acceptTimeEnd = acceptTimeEnd;
-    }
-
-    public String[] getFileIds() {
-        return fileIds;
-    }
-
-    public void setFileIds(String[] fileIds) {
-        this.fileIds = fileIds;
-    }
-
-    public List<String> getIdList() {
-        return idList;
-    }
-
-    public void setIdList(List<String> idList) {
-        this.idList = idList;
-    }
-
-    public String getOperId() {
-        return operId;
-    }
-
-    public void setOperId(String operId) {
-        this.operId = operId;
-    }
-
-    public String getTot_cnt() {
-        return tot_cnt;
-    }
-
-    public void setTot_cnt(String tot_cnt) {
-        this.tot_cnt = tot_cnt;
-    }
-
-    public String getIsOrNot() {
-        return isOrNot;
-    }
-
-    public void setIsOrNot(String isOrNot) {
-        this.isOrNot = isOrNot;
+    /**
+    * 设置历史ID
+    * @param hisId
+    */
+    public void setHisId(String hisId) {
+        this.hisId = hisId;
     }
 
     /**
@@ -506,7 +385,7 @@ public class FileInfoParam extends Page {
     }
 
     /**
-    * 获得代码(案件编号)
+    * 获得代码
     * @return CODE
     */
     public String getCode() {
@@ -514,7 +393,7 @@ public class FileInfoParam extends Page {
     }
 
     /**
-    * 设置代码(案件编号)
+    * 设置代码
     * @param code
     */
     public void setCode(String code) {
@@ -522,7 +401,7 @@ public class FileInfoParam extends Page {
     }
 
     /**
-    * 获得名称(案件名称)
+    * 获得名称
     * @return NAME
     */
     public String getName() {
@@ -530,7 +409,7 @@ public class FileInfoParam extends Page {
     }
 
     /**
-    * 设置名称(案件名称)
+    * 设置名称
     * @param name
     */
     public void setName(String name) {
@@ -586,87 +465,87 @@ public class FileInfoParam extends Page {
     }
 
     /**
-    * 获得主办人ID
-    * @return HOSTER_ID
+    * 获得案卷ID
+    * @return FILE_ID
     */
-    public String getHosterId() {
-        return this.hosterId;
+    public String getFileId() {
+        return this.fileId;
     }
 
     /**
-    * 设置主办人ID
-    * @param hosterId
+    * 设置案卷ID
+    * @param fileId
     */
-    public void setHosterId(String hosterId) {
-        this.hosterId = hosterId;
+    public void setFileId(String fileId) {
+        this.fileId = fileId;
     }
 
     /**
-    * 获得主办人警号
-    * @return HOSTER_PCODE
+    * 获得案卷编号
+    * @return FILE_CODE
     */
-    public String getHosterPcode() {
-        return this.hosterPcode;
+    public String getFileCode() {
+        return this.fileCode;
     }
 
     /**
-    * 设置主办人警号
-    * @param hosterPcode
+    * 设置案卷编号
+    * @param fileCode
     */
-    public void setHosterPcode(String hosterPcode) {
-        this.hosterPcode = hosterPcode;
+    public void setFileCode(String fileCode) {
+        this.fileCode = fileCode;
     }
 
     /**
-    * 获得主办人姓名
-    * @return HOSTER_NAME
+    * 获得案卷名称
+    * @return FILE_NAME
     */
-    public String getHosterName() {
-        return this.hosterName;
+    public String getFileName() {
+        return this.fileName;
     }
 
     /**
-    * 设置主办人姓名
-    * @param hosterName
+    * 设置案卷名称
+    * @param fileName
     */
-    public void setHosterName(String hosterName) {
-        this.hosterName = hosterName;
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
     /**
-    * 获得办案机构编码
-    * @return HANDLE_ORG_CODE
+    * 获得材料ID
+    * @return METAL_ID
     */
-    public String getHandleOrgCode() {
-        return this.handleOrgCode;
+    public String getMetalId() {
+        return this.metalId;
     }
 
     /**
-    * 设置办案机构编码
-    * @param handleOrgCode
+    * 设置材料ID
+    * @param metalId
     */
-    public void setHandleOrgCode(String handleOrgCode) {
-        this.handleOrgCode = handleOrgCode;
+    public void setMetalId(String metalId) {
+        this.metalId = metalId;
     }
 
     /**
-    * 获得办案机构名称
-    * @return HANDLE_ORG_NAME
+    * 获得材料名称
+    * @return METAL_NAME
     */
-    public String getHandleOrgName() {
-        return this.handleOrgName;
+    public String getMetalName() {
+        return this.metalName;
     }
 
     /**
-    * 设置办案机构名称
-    * @param handleOrgName
+    * 设置材料名称
+    * @param metalName
     */
-    public void setHandleOrgName(String handleOrgName) {
-        this.handleOrgName = handleOrgName;
+    public void setMetalName(String metalName) {
+        this.metalName = metalName;
     }
 
     /**
-    * 获得案卷类型(案件的类型)
+    * 获得材料类型
     * @return TYPE
     */
     public String getType() {
@@ -674,7 +553,7 @@ public class FileInfoParam extends Page {
     }
 
     /**
-    * 设置案卷类型(案件的类型)
+    * 设置材料类型
     * @param type
     */
     public void setType(String type) {
@@ -685,7 +564,7 @@ public class FileInfoParam extends Page {
     * 获得排序序号
     * @return SN
     */
-    public Double getSn() {
+    public Integer getSn() {
         return this.sn;
     }
 
@@ -693,140 +572,12 @@ public class FileInfoParam extends Page {
     * 设置排序序号
     * @param sn
     */
-    public void setSn(Double sn) {
+    public void setSn(Integer sn) {
         this.sn = sn;
     }
 
     /**
-    * 获得存放场所ID
-    * @return PLACE_ID
-    */
-    public String getPlaceId() {
-        return this.placeId;
-    }
-
-    /**
-    * 设置存放场所ID
-    * @param placeId
-    */
-    public void setPlaceId(String placeId) {
-        this.placeId = placeId;
-    }
-
-    /**
-    * 获得存放场所名称
-    * @return PLACE_NAME
-    */
-    public String getPlaceName() {
-        return this.placeName;
-    }
-
-    /**
-    * 设置存放场所名称
-    * @param placeName
-    */
-    public void setPlaceName(String placeName) {
-        this.placeName = placeName;
-    }
-
-    /**
-    * 获得存放区域ID
-    * @return AREA_ID
-    */
-    public String getAreaId() {
-        return this.areaId;
-    }
-
-    /**
-    * 设置存放区域ID
-    * @param areaId
-    */
-    public void setAreaId(String areaId) {
-        this.areaId = areaId;
-    }
-
-    /**
-    * 获得存放区域名称
-    * @return AREA_NAME
-    */
-    public String getAreaName() {
-        return this.areaName;
-    }
-
-    /**
-    * 设置存放区域名称
-    * @param areaName
-    */
-    public void setAreaName(String areaName) {
-        this.areaName = areaName;
-    }
-
-    /**
-    * 获得存放空间ID
-    * @return SPACE_ID
-    */
-    public String getSpaceId() {
-        return this.spaceId;
-    }
-
-    /**
-    * 设置存放空间ID
-    * @param spaceId
-    */
-    public void setSpaceId(String spaceId) {
-        this.spaceId = spaceId;
-    }
-
-    /**
-    * 获得存放空间名称
-    * @return SPACE_NAME
-    */
-    public String getSpaceName() {
-        return this.spaceName;
-    }
-
-    /**
-    * 设置存放空间名称
-    * @param spaceName
-    */
-    public void setSpaceName(String spaceName) {
-        this.spaceName = spaceName;
-    }
-
-    /**
-    * 获得空间格ID
-    * @return CELL_ID
-    */
-    public String getCellId() {
-        return this.cellId;
-    }
-
-    /**
-    * 设置空间格ID
-    * @param cellId
-    */
-    public void setCellId(String cellId) {
-        this.cellId = cellId;
-    }
-
-    /**
-    * 获得空间格名称
-    * @return CELL_NAME
-    */
-    public String getCellName() {
-        return this.cellName;
-    }
-
-    /**
-    * 设置空间格名称
-    * @param cellName
-    */
-    public void setCellName(String cellName) {
-        this.cellName = cellName;
-    }
-
-    /**
-    * 获得磁盘路径(相对)
+    * 获得电子案卷存放路径(相对)
     * @return DISK_PATH
     */
     public String getDiskPath() {
@@ -834,7 +585,7 @@ public class FileInfoParam extends Page {
     }
 
     /**
-    * 设置磁盘路径(相对)
+    * 设置电子案卷存放路径(相对)
     * @param diskPath
     */
     public void setDiskPath(String diskPath) {
@@ -842,39 +593,23 @@ public class FileInfoParam extends Page {
     }
 
     /**
-    * 获得是否采集
-    * @return IS_SCAN
+    * 获得电子案卷存放的文件名称
+    * @return DISK_FILENAME
     */
-    public Integer getIsScan() {
-        return this.isScan;
+    public String getDiskFilename() {
+        return this.diskFilename;
     }
 
     /**
-    * 设置是否采集
-    * @param isScan
+    * 设置电子案卷存放的文件名称
+    * @param diskFilename
     */
-    public void setIsScan(Integer isScan) {
-        this.isScan = isScan;
+    public void setDiskFilename(String diskFilename) {
+        this.diskFilename = diskFilename;
     }
 
     /**
-    * 获得已采集材料的页总数
-    * @return PAGE_COUNT
-    */
-    public Integer getPageCount() {
-        return this.pageCount;
-    }
-
-    /**
-    * 设置已采集材料的页总数
-    * @param pageCount
-    */
-    public void setPageCount(Integer pageCount) {
-        this.pageCount = pageCount;
-    }
-
-    /**
-    * 获得
+    * 获得打印编号
     * @return PRINT_CODE
     */
     public String getPrintCode() {
@@ -882,7 +617,7 @@ public class FileInfoParam extends Page {
     }
 
     /**
-    * 设置
+    * 设置打印编号
     * @param printCode
     */
     public void setPrintCode(String printCode) {
@@ -922,7 +657,7 @@ public class FileInfoParam extends Page {
     }
 
     /**
-    * 获得嫌疑人姓名
+    * 获得关键词
     * @return KEYWORDS
     */
     public String getKeywords() {
@@ -930,11 +665,59 @@ public class FileInfoParam extends Page {
     }
 
     /**
-    * 设置嫌疑人姓名
+    * 设置关键词
     * @param keywords
     */
     public void setKeywords(String keywords) {
         this.keywords = keywords;
+    }
+
+    /**
+    * 获得当前所有人ID
+    * @return OWNER_ID
+    */
+    public String getOwnerId() {
+        return this.ownerId;
+    }
+
+    /**
+    * 设置当前所有人ID
+    * @param ownerId
+    */
+    public void setOwnerId(String ownerId) {
+        this.ownerId = ownerId;
+    }
+
+    /**
+    * 获得所有人警号
+    * @return OWNER_CODE
+    */
+    public String getOwnerCode() {
+        return this.ownerCode;
+    }
+
+    /**
+    * 设置所有人警号
+    * @param ownerCode
+    */
+    public void setOwnerCode(String ownerCode) {
+        this.ownerCode = ownerCode;
+    }
+
+    /**
+    * 获得所有人名称
+    * @return OWNER_NAME
+    */
+    public String getOwnerName() {
+        return this.ownerName;
+    }
+
+    /**
+    * 设置所有人名称
+    * @param ownerName
+    */
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
     }
 
     /**
@@ -954,7 +737,7 @@ public class FileInfoParam extends Page {
     }
 
     /**
-    * 获得嫌疑人姓名拼音码
+    * 获得预留字段1
     * @return RESERVE1
     */
     public String getReserve1() {
@@ -962,7 +745,7 @@ public class FileInfoParam extends Page {
     }
 
     /**
-    * 设置嫌疑人姓名拼音码
+    * 设置预留字段1
     * @param reserve1
     */
     public void setReserve1(String reserve1) {
@@ -986,7 +769,7 @@ public class FileInfoParam extends Page {
     }
 
     /**
-    * 获得案卷标签(人像案管柜)
+    * 获得预留字段3
     * @return RESERVE3
     */
     public String getReserve3() {
@@ -994,7 +777,7 @@ public class FileInfoParam extends Page {
     }
 
     /**
-    * 设置案卷标签(人像案管柜)
+    * 设置预留字段3
     * @param reserve3
     */
     public void setReserve3(String reserve3) {
@@ -1069,7 +852,7 @@ public class FileInfoParam extends Page {
     * 获得创建时间
     * @return CREATE_TIME
     */
-    public Date getCreateTime() {
+    public java.util.Date getCreateTime() {
         return this.createTime;
     }
 
@@ -1077,7 +860,7 @@ public class FileInfoParam extends Page {
     * 设置创建时间
     * @param createTime
     */
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(java.util.Date createTime) {
         this.createTime = createTime;
     }
 
@@ -1117,7 +900,7 @@ public class FileInfoParam extends Page {
     * 获得最后修改时间
     * @return MOD_TIME
     */
-    public Date getModTime() {
+    public java.util.Date getModTime() {
         return this.modTime;
     }
 
@@ -1125,7 +908,7 @@ public class FileInfoParam extends Page {
     * 设置最后修改时间
     * @param modTime
     */
-    public void setModTime(Date modTime) {
+    public void setModTime(java.util.Date modTime) {
         this.modTime = modTime;
     }
 
@@ -1258,71 +1041,55 @@ public class FileInfoParam extends Page {
     }
 
     /**
-    * 获得案卷名称拼音简码
-    * @return NAME_SPELL
+    * 获得加密图片文件大小
+    * @return ENCRYFILE_SIZE
     */
-    public String getNameSpell() {
-        return this.nameSpell;
+    public Integer getEncryfileSize() {
+        return this.encryfileSize;
     }
 
     /**
-    * 设置案卷名称拼音简码
-    * @param nameSpell
+    * 设置加密图片文件大小
+    * @param encryfileSize
     */
-    public void setNameSpell(String nameSpell) {
-        this.nameSpell = nameSpell;
+    public void setEncryfileSize(Integer encryfileSize) {
+        this.encryfileSize = encryfileSize;
     }
 
     /**
-    * 获得主办人姓名拼音简码
-    * @return HOSTER_SPELL
+    * 获得原始图片文件大小
+    * @return DIGITFILE_SIZE
     */
-    public String getHosterSpell() {
-        return this.hosterSpell;
+    public Integer getDigitfileSize() {
+        return this.digitfileSize;
     }
 
     /**
-    * 设置主办人姓名拼音简码
-    * @param hosterSpell
+    * 设置原始图片文件大小
+    * @param digitfileSize
     */
-    public void setHosterSpell(String hosterSpell) {
-        this.hosterSpell = hosterSpell;
+    public void setDigitfileSize(Integer digitfileSize) {
+        this.digitfileSize = digitfileSize;
     }
 
     /**
-    * 获得补充侦查次数
-    * @return SUPPLEINV_COUNT
+    * 获得树路径
+    * @return TREE_PATH
     */
-    public Integer getSuppleinvCount() {
-        return this.suppleinvCount;
+    public String getTreePath() {
+        return this.treePath;
     }
 
     /**
-    * 设置补充侦查次数
-    * @param suppleinvCount
+    * 设置树路径
+    * @param treePath
     */
-    public void setSuppleinvCount(Integer suppleinvCount) {
-        this.suppleinvCount = suppleinvCount;
+    public void setTreePath(String treePath) {
+        this.treePath = treePath;
     }
 
     /**
-    * 获得受理时间
-    * @return ACCEPT_TIME
-    */
-    public Date getAcceptTime() {
-        return this.acceptTime;
-    }
-
-    /**
-    * 设置受理时间
-    * @param acceptTime
-    */
-    public void setAcceptTime(Date acceptTime) {
-        this.acceptTime = acceptTime;
-    }
-
-    /**
-    * 获得是否上传警综(0未同步,1已同步)
+    * 获得
     * @return IS_UPD_PS
     */
     public String getIsUpdPs() {
@@ -1330,7 +1097,7 @@ public class FileInfoParam extends Page {
     }
 
     /**
-    * 设置是否上传警综(0未同步,1已同步)
+    * 设置
     * @param isUpdPs
     */
     public void setIsUpdPs(String isUpdPs) {
@@ -1338,43 +1105,20 @@ public class FileInfoParam extends Page {
     }
 
     /**
-    * 获得上传警综时间
+    * 获得
     * @return UPD_PS_TIME
     */
-    public Date getUpdPsTime() {
+    public java.util.Date getUpdPsTime() {
         return this.updPsTime;
     }
 
     /**
-    * 设置上传警综时间
+    * 设置
     * @param updPsTime
     */
-    public void setUpdPsTime(Date updPsTime) {
+    public void setUpdPsTime(java.util.Date updPsTime) {
         this.updPsTime = updPsTime;
     }
 
-    /**
-    * 获得数据来源
-    * @return DATA_SOURCE
-    */
-    public String getDataSource() {
-        return this.dataSource;
-    }
 
-    /**
-    * 设置数据来源
-    * @param dataSource
-    */
-    public void setDataSource(String dataSource) {
-        this.dataSource = dataSource;
-    }
-
-
-    public String getAcceptTimeStart() {
-        return acceptTimeStart;
-    }
-
-    public void setAcceptTimeStart(String acceptTimeStart) {
-        this.acceptTimeStart = acceptTimeStart;
-    }
 }
