@@ -64,7 +64,7 @@ public class FileInfoController  {
     private SysUserService sysUserService;
 
     /**
-    * 查询案卷信息表
+    * 查询案卷信息表getCaseListDate
     * @param requestBody
     * @return
     */
@@ -137,25 +137,24 @@ public class FileInfoController  {
 
     /**
     * 查看案卷信息表
-    * @param requestBody
+    * @param map
     * @return
     */
     @ApiOperation(value="查看案卷信息表", notes="查看案卷信息表")
     @RequestMapping(value = "/fileInfo/fileInfoDetails", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public ResponseData<Map> fileInfoDetails(@RequestBody(required = false) Map<String, String> requestBody){
-        // 检查参数
-        if (requestBody == null) {
-            return new ResponseData<>(ResponseData.STATUS_CODE_PARAM, "参数为空");
+    public ResponseData<FileInfo> fileInfoDetails(@RequestBody(required = false) Map<String, String> map){
+        String id = map.get("id");
+        if (!StringUtils.hasText(id)) {
+            return new ResponseData(ResponseData.STATUS_CODE_OTHER, "参数不能为空");
         }
         try {
-            // TODO: 业务逻辑
-            Map responseData = null;
-            return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS, null, responseData);
+            FileInfo fileInfo = fileInfoService.getFileInfo(id);
+            return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS, "操作成功", fileInfo);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             // TODO: 业务日志
-            return new ResponseData<>(ResponseData.STATUS_CODE_BIZ, "error：" + e.getMessage());
+            return new ResponseData<>(ResponseData.STATUS_CODE_BIZ, "查看案卷信息表出错：" + e.getMessage());
         }
     }
 
@@ -358,7 +357,6 @@ public class FileInfoController  {
     @ResponseBody
     public ResponseData checkSpaceByOrg(@RequestBody FileInfoParam fileInfoParam,HttpServletRequest request) {
         try {
-            // String[] fileIds=fileId.split(",");
             SysUser sysUser= sysUserService.getCurrentUser(request);
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("pageId", "00000000-0000-0000-0000-000000000000");
@@ -525,6 +523,31 @@ public class FileInfoController  {
         } catch (Exception e) {
             log.error("变更案卷性质失败", e);
             return new ResponseData<>(ResponseData.STATUS_CODE_BIZ, "变更案卷性质失败：" + e.getMessage());
+        }
+    }
+
+    /**
+     * 案卷归档/恢复(web端)
+     *
+     * @param fileInfoParam
+     * @return
+     */
+    @RequestMapping("/archives/ajgdJobFileInfoListData")
+    @ResponseBody
+    public ResponseData ajgdJobFileInfoListData(@RequestBody FileInfoParam fileInfoParam,HttpServletRequest request) {
+        try {
+            SysUser sysUser=sysUserService.getCurrentUser(request);
+            String bussType = "";
+            if (fileInfoParam.getBussType() == null || "".equals(fileInfoParam.getBussType())) {
+                bussType = JobConstant.AJGD;
+            }
+            return fileInfoService
+                    .getJobFileInfoListByBussType(sysUser,
+                            bussType, fileInfoParam.getPageSize(), fileInfoParam.getStart(),
+                            null, null, null, fileInfoParam.getKeywords(),null,null);
+        } catch (Exception e) {
+            log.error("案卷信息表查询列表数据出错", e);
+            return new ResponseData<>(ResponseData.STATUS_CODE_BIZ, "案卷信息表查询列表数据出错：" + e.getMessage());
         }
     }
 

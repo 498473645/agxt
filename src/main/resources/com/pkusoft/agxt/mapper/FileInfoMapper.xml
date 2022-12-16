@@ -77,25 +77,24 @@
         File_Auth auth
         on f.id = auth.file_id
         <where>
-            1 = 1
-            <!--            ( 1 = 1 (-->
-            <!--            <if test=" operId!= null">-->
-            <!--                auth.OPER_ID = #{operId,jdbcType=VARCHAR}-->
-            <!--            </if>-->
-            <!--            <if test="orgCData != null">-->
-            <!--                auth.ORG_C_DATA = #{orgCData,jdbcType=VARCHAR}-->
-            <!--            </if>-->
-            <!--            <if test="orgSData != null">-->
-            <!--                auth.ORG_S_DATA = #{orgSData,jdbcType=VARCHAR}-->
-            <!--            </if>-->
-            <!--            <if test="orgTData != null">-->
-            <!--                auth.ORG_T_DATA = #{orgTData,jdbcType=VARCHAR}-->
-            <!--            </if>-->
-            <!--            &lt;!&ndash; <if test="orgCode != null" >-->
-            <!--              or auth.ORG_CODE = #{orgCode,jdbcType=VARCHAR}-->
-            <!--            </if> &ndash;&gt;-->
+            ((
+            <if test=" operId!= null">
+                auth.OPER_ID = #{operId,jdbcType=VARCHAR}
+            </if>
+            <if test="orgCData != null">
+                auth.ORG_C_DATA = #{orgCData,jdbcType=VARCHAR}
+            </if>
+            <if test="orgSData != null">
+                auth.ORG_S_DATA = #{orgSData,jdbcType=VARCHAR}
+            </if>
+            <if test="orgTData != null">
+                auth.ORG_T_DATA = #{orgTData,jdbcType=VARCHAR}
+            </if>
+            <!-- <if test="orgCode != null" >
+              or auth.ORG_CODE = #{orgCode,jdbcType=VARCHAR}
+            </if> -->
 
-            <!--            ) or (f.HOSTER_ID = #{zbrId,jdbcType=VARCHAR}) )-->
+            ) or (f.HOSTER_ID = #{zbrId,jdbcType=VARCHAR}) )
             <!-- 查询不等于9开头的数据,9999-作废和9000-归档都是不能查出来的,以后9开头的估计也不能查出来,所以排除9开头的 -->
             and f.STATUS NOT LIKE '9%'
 
@@ -131,7 +130,7 @@
             </if>
         </where>
         order by f.MOD_TIME DESC
-        ) s_ where rownum &lt;=#{start,jdbcType=DECIMAL}+#{pageSize,jdbcType=DECIMAL}) where rn_ &gt;#{start,jdbcType=DECIMAL}
+        ) s_ where rownum &lt;=#{start,jdbcType=DECIMAL}+20) where rn_ &gt;#{start,jdbcType=DECIMAL}
     </select>
     <select id="getJobFileInfoByFileAuthoperIdKg" resultMap="BaseResultMapParam"
             resultType="com.pkusoft.agxt.req.FileInfoParam">
@@ -206,7 +205,7 @@
             </if>
         </where>
         order by f.CREATE_TIME desc
-        ) s_ where rownum &lt;=#{start,jdbcType=DECIMAL}+#{pageSize,jdbcType=DECIMAL}) where rn_ &gt;#{start,jdbcType=DECIMAL}
+        ) s_ where rownum &lt;=#{start,jdbcType=DECIMAL}+20) where rn_ &gt;#{start,jdbcType=DECIMAL}
     </select>
     <select id="getJobFileInfoByFileAuthoperIdAJYL" resultMap="BaseResultMapParam"
             resultType="com.pkusoft.agxt.req.FileInfoParam">
@@ -405,6 +404,943 @@
         </where>
         order by f.CREATE_TIME desc
         ) s_ where rownum &lt;=#{start,jdbcType=DECIMAL}+20) where rn_ &gt;#{start,jdbcType=DECIMAL}
+    </select>
+    <select id="getJobFileInfoByFileAuthoperIdYssh" resultMap="BaseResultMapParam" resultType="com.pkusoft.agxt.req.FileInfoParam">
+        select * from(select s_.*,rownum rn_ from(
+        select  distinct
+        f.*,count(*) over () tot_cnt
+        from FILE_INFO f
+        inner join
+        File_Auth auth
+        on f.id = auth.file_id
+
+        <!-- <if test="orgCData != null" >
+           and  ( auth.ORG_C_DATA = #{orgCData,jdbcType=VARCHAR}
+           or auth.ORG_CODE = #{authOrgCode,jdbcType=VARCHAR})
+        </if>
+        <if test="orgSData != null" >
+           and ( auth.ORG_S_DATA = #{orgSData,jdbcType=VARCHAR}
+           or auth.ORG_CODE = #{authOrgCode,jdbcType=VARCHAR})
+        </if>
+        <if test="orgTData != null" >
+           and ( auth.ORG_T_DATA = #{orgTData,jdbcType=VARCHAR}
+           or auth.ORG_CODE = #{authOrgCode,jdbcType=VARCHAR} )
+        </if>
+    -->    <!-- <if test=" handleOrgCode!= null">
+     and auth.ORG_CODE = #{handleOrgCode,jdbcType=VARCHAR}
+    </if> -->
+        where
+        (
+        (f.STATUS = #{status1,jdbcType=VARCHAR} and auth.STATUS = #{operType1,jdbcType=VARCHAR})
+        or
+        (f.STATUS = #{status2,jdbcType=VARCHAR} and auth.STATUS = #{operType2,jdbcType=VARCHAR})
+        or
+        (f.STATUS = #{status3,jdbcType=VARCHAR} and auth.STATUS = #{operType3,jdbcType=VARCHAR} and auth.Oper_Type != '0100')
+        or
+        (f.STATUS = #{status4,jdbcType=VARCHAR} and auth.STATUS = #{operType4,jdbcType=VARCHAR})
+        )
+        <if test=" operId!= null">
+            and auth.OPER_ID = #{operId,jdbcType=VARCHAR}
+        </if>
+        <if test=" orgCData != null">
+            and auth.ORG_C_DATA = #{orgCData,jdbcType=VARCHAR}
+        </if>
+        <if test="orgSData != null" >
+            and NVL(auth.ORG_S_DATA, '&lt;Null&gt;') =  #{orgSData,jdbcType=VARCHAR}
+        </if>
+        <if test="orgTData != null" >
+            and NVL(auth.ORG_T_DATA, '&lt;Null&gt;') = #{orgTData,jdbcType=VARCHAR}
+        </if>
+        <if test=" code!= null">
+            and f.CODE like #{code,jdbcType=VARCHAR}
+        </if>
+        <if test=" name!= null">
+            and f.NAME like #{name,jdbcType=VARCHAR}
+        </if>
+        <if test=" saryxm != null">
+            and f.KEYWORDS like #{saryxm,jdbcType=VARCHAR}
+        </if>
+        <if test=" hosterId!= null">
+            and f.HOSTER_ID = #{hosterId,jdbcType=VARCHAR}
+        </if>
+        <if test=" handleOrgCode!= null">
+            and f.HANDLE_ORG_CODE = #{handleOrgCode,jdbcType=VARCHAR}
+        </if>
+        order by f.CREATE_TIME desc
+        ) s_ where rownum &lt;=#{start,jdbcType=DECIMAL}+20) where rn_ &gt;#{start,jdbcType=DECIMAL}
+    </select>
+    <select id="getJobFileInfoByFileAuthoperIdYSQSTQDB" resultMap="BaseResultMap" resultType="com.pkusoft.agxt.model.FileInfo">
+        select * from(select s_.*,rownum rn_ from(
+        select distinct
+        f.*
+        from FILE_PAGE page
+        inner join FILE_AUTH auth on page.file_id = auth.file_id
+        left join FILE_INFO f on page.File_Id = f.id
+        where
+        (
+        auth.STATUS = #{status1,jdbcType=VARCHAR}
+        or
+        auth.STATUS = #{status3,jdbcType=VARCHAR}
+        or
+        auth.STATUS = #{status2,jdbcType=VARCHAR}
+        or
+        auth.STATUS = #{status4,jdbcType=VARCHAR}
+        <if test="status7 != null" >
+            or
+            auth.STATUS = #{status7,jdbcType=VARCHAR}
+        </if>
+        ) and (
+        page.STATUS = #{status5,jdbcType=VARCHAR}
+        or
+        page.STATUS = #{status6,jdbcType=VARCHAR}
+        )
+        <if test=" operId!= null">
+            and auth.OPER_ID = #{operId,jdbcType=VARCHAR}
+        </if>
+        <if test="fileCode != null" >
+            and f.CODE = #{fileCode,jdbcType=VARCHAR}
+        </if>
+
+        and page.ROW_STATUS = 3
+
+        <if test=" orgCData != null">
+            and auth.ORG_C_DATA = #{orgCData,jdbcType=VARCHAR}
+        </if>
+        <if test="orgSData != null" >
+            and NVL(auth.ORG_S_DATA, '&lt;Null&gt;') =  #{orgSData,jdbcType=VARCHAR}
+        </if>
+        <if test="orgTData != null" >
+            and NVL(auth.ORG_T_DATA, '&lt;Null&gt;') = #{orgTData,jdbcType=VARCHAR}
+        </if>
+        <if test=" name!= null">
+            and f.NAME =#{ajmc,jdbcType=VARCHAR}
+        </if>
+        <if test="whereCondition != null" >
+            and   (Instr(f.CODE, #{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            OR Instr(f.NAME, #{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            OR Instr(f.HOSTER_NAME, #{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            OR Instr(f.NAME_SPELL,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            OR Instr(f.HOSTER_SPELL,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            OR Instr(f.KEYWORDS,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            OR Instr(f.RESERVE1,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            )
+        </if>
+        <if test=" startTime != null">
+            and f.ACCEPT_TIME &gt;= #{startTime,jdbcType=VARCHAR}
+        </if>
+        <if test=" endTime != null">
+            and f.ACCEPT_TIME &lt;=#{endTime,jdbcType=VARCHAR}
+        </if>
+        order by f.MOD_TIME DESC
+        ) s_ where rownum &lt;=#{start,jdbcType=DECIMAL}+20) where rn_ &gt;#{start,jdbcType=DECIMAL}
+    </select>
+    <select id="getJobFileInfoByFileAuthoperIdYSQSTQDB_Count" resultType="java.lang.Integer">
+        select distinct
+        count(distinct f.id)
+        from FILE_PAGE page
+        inner join FILE_AUTH auth on page.file_id = auth.file_id
+        left join FILE_INFO f on page.File_Id = f.id
+        where
+        (
+        auth.STATUS = #{status1,jdbcType=VARCHAR}
+        or
+        auth.STATUS = #{status3,jdbcType=VARCHAR}
+        or
+        auth.STATUS = #{status2,jdbcType=VARCHAR}
+        or
+        auth.STATUS = #{status4,jdbcType=VARCHAR}
+        <if test="status7 != null" >
+            or
+            auth.STATUS = #{status7,jdbcType=VARCHAR}
+        </if>
+        ) and (
+        page.STATUS = #{status5,jdbcType=VARCHAR}
+        or
+        page.STATUS = #{status6,jdbcType=VARCHAR}
+        )
+        <if test=" operId!= null">
+            and auth.OPER_ID = #{operId,jdbcType=VARCHAR}
+        </if>
+        <if test="fileCode != null" >
+            and f.CODE = #{fileCode,jdbcType=VARCHAR}
+        </if>
+        and page.ROW_STATUS = 3
+
+        <if test=" orgCData != null">
+            and auth.ORG_C_DATA = #{orgCData,jdbcType=VARCHAR}
+        </if>
+        <if test="orgSData != null" >
+            and NVL(auth.ORG_S_DATA, '&lt;Null&gt;') =  #{orgSData,jdbcType=VARCHAR}
+        </if>
+        <if test="orgTData != null" >
+            and NVL(auth.ORG_T_DATA, '&lt;Null&gt;') = #{orgTData,jdbcType=VARCHAR}
+        </if>
+
+        <if test=" name!= null">
+            and f.NAME =#{ajmc,jdbcType=VARCHAR}
+        </if>
+        <if test="whereCondition != null" >
+            and   (Instr(f.CODE, #{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            OR Instr(f.NAME, #{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR Instr(f.HOSTER_NAME, #{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR
+            Instr(f.NAME_SPELL,#{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR Instr(f.HOSTER_SPELL,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            OR Instr(f.KEYWORDS,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            OR Instr(f.RESERVE1,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            )
+        </if>
+        <if test=" startTime != null">
+            and f.ACCEPT_TIME &gt;= #{startTime,jdbcType=VARCHAR}
+        </if>
+        <if test=" endTime != null">
+            and f.ACCEPT_TIME &lt;=#{endTime,jdbcType=VARCHAR}
+        </if>
+    </select>
+    <select id="getJobFileInfoByFileAuthDeptId" resultMap="BaseResultMap" resultType="com.pkusoft.agxt.model.FileInfo">
+        select * from(select s_.*,rownum rn_ from(
+        select t.* from(
+        select distinct f.*
+        from FILE_INFO f
+        inner join File_Auth auth on f.id = auth.file_id
+        where
+        (
+        (f.STATUS = #{status1,jdbcType=VARCHAR} and auth.STATUS = #{operType1,jdbcType=VARCHAR})
+        or
+        (f.STATUS = #{status2,jdbcType=VARCHAR} and auth.STATUS = #{operType2,jdbcType=VARCHAR})
+        or
+        (f.STATUS = #{status3,jdbcType=VARCHAR} and auth.STATUS = #{operType1,jdbcType=VARCHAR})
+        )
+        <if test="operId != null" >
+            and auth.OPER_ID = #{operId,jdbcType=VARCHAR}
+        </if>
+        <if test="orgCData != null" >
+            and auth.ORG_C_DATA = #{orgCData,jdbcType=VARCHAR}
+        </if>
+        <if test="orgSData != null" >
+            and NVL(auth.ORG_S_DATA, '&lt;Null&gt;') =  #{orgSData,jdbcType=VARCHAR}
+        </if>
+        <if test="orgTData != null" >
+            and NVL(auth.ORG_T_DATA, '&lt;Null&gt;') = #{orgTData,jdbcType=VARCHAR}
+        </if>
+        <if test="fileCode != null" >
+            and f.CODE = #{fileCode,jdbcType=VARCHAR}
+        </if>
+        <if test="whereCondition != null" >
+            and   (Instr(f.CODE, #{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            OR Instr(f.NAME, #{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR Instr(f.HOSTER_NAME, #{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR
+            Instr(f.NAME_SPELL,#{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR Instr(f.HOSTER_SPELL,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            OR Instr(f.KEYWORDS,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            OR Instr(f.RESERVE1,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            )
+        </if>
+        <if test=" startTime != null">
+            and f.ACCEPT_TIME &gt;= #{startTime,jdbcType=VARCHAR}
+        </if>
+        <if test=" endTime != null">
+            and f.ACCEPT_TIME &lt;=#{endTime,jdbcType=VARCHAR}
+        </if>
+        UNION
+        select distinct f.*
+        from FILE_INFO f
+        inner join File_Page page on page.file_id = f.id
+        inner join File_Auth auth on f.id = auth.file_id
+        where
+        page.STATUS = #{status4,jdbcType=VARCHAR} and page.row_status= 3
+        <if test="operId != null" >
+            and auth.OPER_ID = #{operId,jdbcType=VARCHAR}
+        </if>
+        <if test="orgCData != null" >
+            and auth.ORG_C_DATA = #{orgCData,jdbcType=VARCHAR}
+        </if>
+        <if test="orgSData != null" >
+            and NVL(auth.ORG_S_DATA, '&lt;Null&gt;') =  #{orgSData,jdbcType=VARCHAR}
+        </if>
+        <if test="orgTData != null" >
+            and NVL(auth.ORG_T_DATA, '&lt;Null&gt;') = #{orgTData,jdbcType=VARCHAR}
+        </if>
+        <if test="fileCode != null" >
+            and f.CODE = #{fileCode,jdbcType=VARCHAR}
+        </if>
+        <if test="whereCondition != null" >
+            and   (Instr(f.CODE, #{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            OR Instr(f.NAME, #{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR Instr(f.HOSTER_NAME, #{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR
+            Instr(f.NAME_SPELL,#{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR Instr(f.HOSTER_SPELL,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            OR Instr(f.KEYWORDS,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            OR Instr(f.RESERVE1,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            )
+        </if>
+        <if test=" startTime != null">
+            and f.ACCEPT_TIME &gt;= #{startTime,jdbcType=VARCHAR}
+        </if>
+        <if test=" endTime != null">
+            and f.ACCEPT_TIME &lt;=#{endTime,jdbcType=VARCHAR}
+        </if>
+        ) t
+        order by t.MOD_TIME DESC
+        ) s_ where rownum &lt;=#{start,jdbcType=DECIMAL}+20) where rn_ &gt;#{start,jdbcType=DECIMAL}
+    </select>
+    <select id="getJobFileInfoByFileAuthDeptId_Count" resultType="java.lang.Integer">
+        select count(distinct t.id) from(
+        select distinct f.*
+        from FILE_INFO f
+        inner join File_Auth auth on f.id = auth.file_id
+        where
+        (
+        (f.STATUS = #{status1,jdbcType=VARCHAR} and auth.STATUS = #{operType1,jdbcType=VARCHAR})
+        or
+        (f.STATUS = #{status2,jdbcType=VARCHAR} and auth.STATUS = #{operType2,jdbcType=VARCHAR})
+        or
+        (f.STATUS = #{status3,jdbcType=VARCHAR} and auth.STATUS = #{operType1,jdbcType=VARCHAR})
+        )
+        <if test="operId != null" >
+            and auth.OPER_ID = #{operId,jdbcType=VARCHAR}
+        </if>
+        <if test="orgCData != null" >
+            and auth.ORG_C_DATA = #{orgCData,jdbcType=VARCHAR}
+        </if>
+        <if test="orgSData != null" >
+            and NVL(auth.ORG_S_DATA, '&lt;Null&gt;') =  #{orgSData,jdbcType=VARCHAR}
+        </if>
+        <if test="orgTData != null" >
+            and NVL(auth.ORG_T_DATA, '&lt;Null&gt;') = #{orgTData,jdbcType=VARCHAR}
+        </if>
+        <if test="fileCode != null" >
+            and f.CODE = #{fileCode,jdbcType=VARCHAR}
+        </if>
+        <if test="whereCondition != null" >
+            and   (Instr(f.CODE, #{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            OR Instr(f.NAME, #{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR Instr(f.HOSTER_NAME, #{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR
+            Instr(f.NAME_SPELL,#{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR Instr(f.HOSTER_SPELL,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            OR Instr(f.KEYWORDS,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            OR Instr(f.RESERVE1,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            )
+        </if>
+        <if test=" startTime != null">
+            and f.ACCEPT_TIME &gt;= #{startTime,jdbcType=VARCHAR}
+        </if>
+        <if test=" endTime != null">
+            and f.ACCEPT_TIME &lt;=#{endTime,jdbcType=VARCHAR}
+        </if>
+        UNION
+        select distinct f.*
+        from FILE_INFO f
+        inner join File_Page page on page.file_id = f.id
+        inner join File_Auth auth on f.id = auth.file_id
+        where
+        page.STATUS = #{status4,jdbcType=VARCHAR} and page.row_status= 3
+        <if test="operId != null" >
+            and auth.OPER_ID = #{operId,jdbcType=VARCHAR}
+        </if>
+        <if test="orgCData != null" >
+            and auth.ORG_C_DATA = #{orgCData,jdbcType=VARCHAR}
+        </if>
+        <if test="orgSData != null" >
+            and NVL(auth.ORG_S_DATA, '&lt;Null&gt;') =  #{orgSData,jdbcType=VARCHAR}
+        </if>
+        <if test="orgTData != null" >
+            and NVL(auth.ORG_T_DATA, '&lt;Null&gt;') = #{orgTData,jdbcType=VARCHAR}
+        </if>
+        <if test="fileCode != null" >
+            and f.CODE = #{fileCode,jdbcType=VARCHAR}
+        </if>
+        <if test="whereCondition != null" >
+            and   (Instr(f.CODE, #{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            OR Instr(f.NAME, #{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR Instr(f.HOSTER_NAME, #{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR
+            Instr(f.NAME_SPELL,#{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR Instr(f.HOSTER_SPELL,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            OR Instr(f.KEYWORDS,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            OR Instr(f.RESERVE1,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            )
+        </if>
+        <if test=" startTime != null">
+            and f.ACCEPT_TIME &gt;= #{startTime,jdbcType=VARCHAR}
+        </if>
+        <if test=" endTime != null">
+            and f.ACCEPT_TIME &lt;=#{endTime,jdbcType=VARCHAR}
+        </if>
+        ) t
+    </select>
+    <select id="getJobFileInfoByHandlerId"  resultMap="BaseResultMap" resultType="com.pkusoft.agxt.model.FileInfo">
+        select * from(select s_.*,rownum rn_ from(
+        select distinct
+        f.*
+        from FILE_INFO f
+        inner join File_Auth auth on f.ID = auth.File_ID
+        inner join File_Page page on page.file_id = f.id
+        where
+        page.STATUS = #{status2,jdbcType=VARCHAR} and page.row_status= 3
+        <if test=" operId!= null">
+            and auth.OPER_ID = #{operId,jdbcType=VARCHAR}
+        </if>
+        <!-- <if test="orgCData != null" >
+           auth.ORG_C_DATA = #{orgCData,jdbcType=VARCHAR}
+          </if>
+          <if test="orgSData != null" >
+           auth.ORG_S_DATA = #{orgSData,jdbcType=VARCHAR}
+          </if>
+          <if test="orgTData != null" >
+           auth.ORG_T_DATA = #{orgTData,jdbcType=VARCHAR}
+          </if> -->
+        <if test=" orgCData != null">
+            and auth.ORG_C_DATA = #{orgCData,jdbcType=VARCHAR}
+        </if>
+        <if test="orgSData != null" >
+            and NVL(auth.ORG_S_DATA, '&lt;Null&gt;') =  #{orgSData,jdbcType=VARCHAR}
+        </if>
+        <if test="orgTData != null" >
+            and NVL(auth.ORG_T_DATA, '&lt;Null&gt;') = #{orgTData,jdbcType=VARCHAR}
+        </if>
+        <if test="fileCode != null" >
+            and f.CODE = #{fileCode,jdbcType=VARCHAR}
+        </if>
+        <if test="whereCondition != null" >
+            and   (Instr(f.CODE, #{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            OR Instr(f.NAME, #{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR Instr(f.HOSTER_NAME, #{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR
+            Instr(f.NAME_SPELL,#{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR Instr(f.HOSTER_SPELL,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            OR Instr(f.KEYWORDS,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            OR Instr(f.RESERVE1,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            )
+        </if>
+        <if test=" startTime != null">
+            and f.ACCEPT_TIME &gt;= #{startTime,jdbcType=VARCHAR}
+        </if>
+        <if test=" endTime != null">
+            and f.ACCEPT_TIME &lt;=#{endTime,jdbcType=VARCHAR}
+        </if>
+        order by f.MOD_TIME DESC
+        ) s_ where rownum &lt;=#{start,jdbcType=DECIMAL}+20) where rn_ &gt;#{start,jdbcType=DECIMAL}
+    </select>
+    <select id="getJobFileInfoByHandlerId_Count" resultType="java.lang.Integer">
+        select distinct
+        count(distinct f.id)
+        from FILE_INFO f
+        inner join File_Auth auth on f.ID = auth.File_ID
+        inner join File_Page page on page.file_id = f.id
+        where
+        page.STATUS = #{status2,jdbcType=VARCHAR} and page.row_status= 3
+        <if test=" operId!= null">
+            and auth.OPER_ID = #{operId,jdbcType=VARCHAR}
+        </if>
+        <!-- <if test="orgCData != null" >
+           auth.ORG_C_DATA = #{orgCData,jdbcType=VARCHAR}
+          </if>
+          <if test="orgSData != null" >
+           auth.ORG_S_DATA = #{orgSData,jdbcType=VARCHAR}
+          </if>
+          <if test="orgTData != null" >
+           auth.ORG_T_DATA = #{orgTData,jdbcType=VARCHAR}
+          </if> -->
+        <if test=" orgCData != null">
+            and auth.ORG_C_DATA = #{orgCData,jdbcType=VARCHAR}
+        </if>
+        <if test="orgSData != null" >
+            and NVL(auth.ORG_S_DATA, '&lt;Null&gt;') =  #{orgSData,jdbcType=VARCHAR}
+        </if>
+        <if test="orgTData != null" >
+            and NVL(auth.ORG_T_DATA, '&lt;Null&gt;') = #{orgTData,jdbcType=VARCHAR}
+        </if>
+        <if test="fileCode != null" >
+            and f.CODE = #{fileCode,jdbcType=VARCHAR}
+        </if>
+        <if test="whereCondition != null" >
+            and   (Instr(f.CODE, #{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            OR Instr(f.NAME, #{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR Instr(f.HOSTER_NAME, #{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR
+            Instr(f.NAME_SPELL,#{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR Instr(f.HOSTER_SPELL,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            OR Instr(f.KEYWORDS,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            OR Instr(f.RESERVE1,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            )
+        </if>
+        <if test=" startTime != null">
+            and f.ACCEPT_TIME &gt;= #{startTime,jdbcType=VARCHAR}
+        </if>
+        <if test=" endTime != null">
+            and f.ACCEPT_TIME &lt;=#{endTime,jdbcType=VARCHAR}
+        </if>
+    </select>
+    <select id="getJobFileInfoListSMCJ" resultMap="BaseResultMap" resultType="com.pkusoft.agxt.model.FileInfo">
+        select * from(select s_.*,rownum rn_ from(
+        select  distinct
+        f.*
+        from FILE_INFO f
+        inner join
+        File_Auth auth
+        on f.id = auth.file_id
+        <where>
+            ((
+            <if test=" operId!= null">
+                auth.OPER_ID = #{operId,jdbcType=VARCHAR}
+            </if>
+            <if test="orgCData != null" >
+                auth.ORG_C_DATA = #{orgCData,jdbcType=VARCHAR}
+            </if>
+            <if test="orgSData != null" >
+                auth.ORG_S_DATA = #{orgSData,jdbcType=VARCHAR}
+            </if>
+            <if test="orgTData != null" >
+                auth.ORG_T_DATA = #{orgTData,jdbcType=VARCHAR}
+            </if>
+            <!-- <if test="orgCode != null" >
+              or auth.ORG_CODE = #{orgCode,jdbcType=VARCHAR}
+            </if> -->
+
+            ) or (f.HOSTER_ID = #{zbrId,jdbcType=VARCHAR}) )
+            <!-- 查询不等于9开头的数据,9999-作废和9000-归档都是不能查出来的,以后9开头的估计也不能查出来,所以排除9开头的 -->
+
+            and f.STATUS NOT LIKE '9%'
+
+            <if test="fileCode != null" >
+                and f.CODE = #{fileCode,jdbcType=VARCHAR}
+            </if>
+            <!--  and  f.status != #{YSQSSTATUS,jdbcType=VARCHAR} -->
+            <if test="whereCondition != null" >
+                and   (Instr(f.CODE, #{whereCondition,jdbcType=VARCHAR}) &gt; 0
+                OR Instr(f.NAME, #{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR Instr(f.HOSTER_NAME, #{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR
+                Instr(f.NAME_SPELL,#{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR Instr(f.HOSTER_SPELL,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+                OR Instr(f.KEYWORDS,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+                OR Instr(f.RESERVE1,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+                )
+            </if>
+            <if test=" startTime != null">
+                and f.ACCEPT_TIME &gt;= #{startTime,jdbcType=VARCHAR}
+            </if>
+            <if test=" endTime != null">
+                and f.ACCEPT_TIME &lt;=#{endTime,jdbcType=VARCHAR}
+            </if>
+            <if test=" caseCode != null">
+                <!-- and f.CASE_CODE like concat(concat('%',#{caseCode,jdbcType=VARCHAR}),'%') -->
+                and f.CASE_CODE like '%'||#{caseCode,jdbcType=VARCHAR}||'%'
+            </if>
+            <if test=" caseName != null">
+                <!--          and f.CASE_NAME like concat(concat('%',#{caseName,jdbcType=VARCHAR}),'%') -->
+                and f.CASE_NAME like '%'||#{caseName,jdbcType=VARCHAR}||'%'
+            </if>
+            order by f.MOD_TIME DESC
+        </where>
+        ) s_ where rownum &lt;=#{start,jdbcType=DECIMAL}+20) where rn_ &gt;#{start,jdbcType=DECIMAL}
+    </select>
+    <select id="getJobFileInfoListSMCJ_Count" resultType="java.lang.Integer">
+        select  distinct
+        count(distinct f.id)
+        from FILE_INFO f
+        inner join
+        File_Auth auth
+        on f.id = auth.file_id
+        <where>
+            ((
+            <if test=" operId!= null">
+                auth.OPER_ID = #{operId,jdbcType=VARCHAR}
+            </if>
+            <if test="orgCData != null" >
+                auth.ORG_C_DATA = #{orgCData,jdbcType=VARCHAR}
+            </if>
+            <if test="orgSData != null" >
+                auth.ORG_S_DATA = #{orgSData,jdbcType=VARCHAR}
+            </if>
+            <if test="orgTData != null" >
+                auth.ORG_T_DATA = #{orgTData,jdbcType=VARCHAR}
+            </if>
+            <!-- <if test="orgCode != null" >
+              or auth.ORG_CODE = #{orgCode,jdbcType=VARCHAR}
+            </if> -->
+
+            ) or (f.HOSTER_ID = #{zbrId,jdbcType=VARCHAR}) )
+            <!-- 查询不等于9开头的数据,9999-作废和9000-归档都是不能查出来的,以后9开头的估计也不能查出来,所以排除9开头的 -->
+
+            and f.STATUS NOT LIKE '9%'
+
+            <if test="fileCode != null" >
+                and f.CODE = #{fileCode,jdbcType=VARCHAR}
+            </if>
+            <!-- and  f.status != #{YSQSSTATUS,jdbcType=VARCHAR} -->
+        </where>
+        <if test="whereCondition != null" >
+            and   (Instr(f.CODE, #{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            OR Instr(f.NAME, #{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR Instr(f.HOSTER_NAME, #{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR
+            Instr(f.NAME_SPELL,#{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR Instr(f.HOSTER_SPELL,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            OR Instr(f.KEYWORDS,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            OR Instr(f.RESERVE1,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            )
+        </if>
+        <if test=" startTime != null">
+            and f.ACCEPT_TIME &gt;= #{startTime,jdbcType=VARCHAR}
+        </if>
+        <if test=" endTime != null">
+            and f.ACCEPT_TIME &lt;=#{endTime,jdbcType=VARCHAR}
+        </if>
+        <if test=" caseCode != null">
+            <!-- and f.CASE_CODE like concat(concat('%',#{caseCode,jdbcType=VARCHAR}),'%') -->
+            and f.CASE_CODE like '%'||#{caseCode,jdbcType=VARCHAR}||'%'
+        </if>
+        <if test=" caseName != null">
+            <!--          and f.CASE_NAME like concat(concat('%',#{caseName,jdbcType=VARCHAR}),'%') -->
+            and f.CASE_NAME like '%'||#{caseName,jdbcType=VARCHAR}||'%'
+        </if>
+    </select>
+    <select id="getJobFileInfoByFileAuthoperIdAJKL" resultMap="BaseResultMap" resultType="com.pkusoft.agxt.model.FileInfo">
+        select * from(select s_.*,rownum rn_ from(
+        select  distinct
+        f.*
+        from
+        FILE_INFO f,File_Auth auth
+        where
+        f.id = auth.file_id
+        and f.page_count > 0
+        <!-- 查询不等于9开头的数据,9999-作废和9000-归档都是不能查出来的,以后9开头的估计也不能查出来,所以排除9开头的 -->
+        and f.STATUS NOT LIKE '9%'
+        <if test=" operId!= null">
+            and auth.OPER_ID = #{operId,jdbcType=VARCHAR}
+        </if>
+        <!-- <if test=" handleOrgCode!= null">
+         and auth.ORG_CODE = #{handleOrgCode,jdbcType=VARCHAR}
+        </if>  -->
+        <if test="fileCode != null" >
+            and f.CODE = #{fileCode,jdbcType=VARCHAR}
+        </if>
+        <if test="orgCData != null" >
+            and auth.ORG_C_DATA = #{orgCData,jdbcType=VARCHAR}
+        </if>
+        <if test="orgSData != null" >
+            and auth.ORG_S_DATA = #{orgSData,jdbcType=VARCHAR}
+        </if>
+        <if test="orgTData != null" >
+            and auth.ORG_T_DATA = #{orgTData,jdbcType=VARCHAR}
+        </if>
+        <if test="whereCondition != null" >
+            and   (Instr(f.CODE, #{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            OR Instr(f.NAME, #{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR Instr(f.HOSTER_NAME, #{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR
+            Instr(f.NAME_SPELL,#{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR Instr(f.HOSTER_SPELL,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            OR Instr(f.KEYWORDS,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            OR Instr(f.RESERVE1,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            )
+        </if>
+        <if test=" startTime != null">
+            and f.ACCEPT_TIME &gt;= #{startTime,jdbcType=VARCHAR}
+        </if>
+        <if test=" endTime != null">
+            and f.ACCEPT_TIME &lt;=#{endTime,jdbcType=VARCHAR}
+        </if>
+        order by f.MOD_TIME DESC
+        ) s_ where rownum &lt;=#{start,jdbcType=DECIMAL}+20) where rn_ &gt;#{start,jdbcType=DECIMAL}
+    </select>
+    <select id="getJobFileInfoByFileAuthoperIdAJKL_Count" resultType="java.lang.Integer">
+        select  distinct
+        count(distinct f.id)
+        from
+        FILE_INFO f,File_Auth auth
+        where
+        f.id = auth.file_id
+        and f.page_count > 0
+
+        <!-- 查询不等于9开头的数据,9999-作废和9000-归档都是不能查出来的,以后9开头的估计也不能查出来,所以排除9开头的 -->
+        and f.STATUS NOT LIKE '9%'
+
+        <if test=" operId!= null">
+            and auth.OPER_ID = #{operId,jdbcType=VARCHAR}
+        </if>
+        <!-- <if test=" handleOrgCode!= null">
+         and auth.ORG_CODE = #{handleOrgCode,jdbcType=VARCHAR}
+        </if>  -->
+        <if test="fileCode != null" >
+            and f.CODE = #{fileCode,jdbcType=VARCHAR}
+        </if>
+        <if test="orgCData != null" >
+            and auth.ORG_C_DATA = #{orgCData,jdbcType=VARCHAR}
+        </if>
+        <if test="orgSData != null" >
+            and auth.ORG_S_DATA = #{orgSData,jdbcType=VARCHAR}
+        </if>
+        <if test="orgTData != null" >
+            and auth.ORG_T_DATA = #{orgTData,jdbcType=VARCHAR}
+        </if>
+        <if test="whereCondition != null" >
+            and   (Instr(f.CODE, #{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            OR Instr(f.NAME, #{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR Instr(f.HOSTER_NAME, #{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR
+            Instr(f.NAME_SPELL,#{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR Instr(f.HOSTER_SPELL,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            OR Instr(f.KEYWORDS,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            OR Instr(f.RESERVE1,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            )
+        </if>
+        <if test=" startTime != null">
+            and f.ACCEPT_TIME &gt;= #{startTime,jdbcType=VARCHAR}
+        </if>
+        <if test=" endTime != null">
+            and f.ACCEPT_TIME &lt;=#{endTime,jdbcType=VARCHAR}
+        </if>
+    </select>
+    <select id="getJobFileInfoByFileAuthoperIdYLAJ" resultMap="BaseResultMap" resultType="com.pkusoft.agxt.model.FileInfo">
+        select * from(select s_.*,rownum rn_ from(
+        select  distinct
+        f.*
+        from
+        FILE_INFO f,File_Auth auth
+        where
+        f.id = auth.file_id
+        and f.page_count > 0
+        <if test=" operId!= null">
+            and auth.OPER_ID = #{operId,jdbcType=VARCHAR}
+        </if>
+        <if test="orgCData != null" >
+            and auth.ORG_C_DATA = #{orgCData,jdbcType=VARCHAR}
+        </if>
+        <if test="orgSData != null" >
+            and auth.ORG_S_DATA = #{orgSData,jdbcType=VARCHAR}
+        </if>
+        <if test="orgTData != null" >
+            and auth.ORG_T_DATA = #{orgTData,jdbcType=VARCHAR}
+        </if>
+        <if test="fileCode != null" >
+            and f.CODE = #{fileCode,jdbcType=VARCHAR}
+        </if>
+        <if test="whereCondition != null" >
+            and   (Instr(f.CODE, #{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            OR Instr(f.NAME, #{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR Instr(f.HOSTER_NAME, #{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR
+            Instr(f.NAME_SPELL,#{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR Instr(f.HOSTER_SPELL,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            OR Instr(f.KEYWORDS,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            OR Instr(f.RESERVE1,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            )
+        </if>
+        <if test=" startTime != null">
+            and f.ACCEPT_TIME &gt;= #{startTime,jdbcType=VARCHAR}
+        </if>
+        <if test=" endTime != null">
+            and f.ACCEPT_TIME &lt;=#{endTime,jdbcType=VARCHAR}
+        </if>
+        order by f.MOD_TIME DESC
+        ) s_ where rownum &lt;=#{start,jdbcType=DECIMAL}+20) where rn_ &gt;#{start,jdbcType=DECIMAL}
+    </select>
+    <select id="getJobFileInfoByFileAuthoperIdYLAJ_Count" resultType="java.lang.Integer">
+        select  distinct
+        count(distinct f.id)
+        from
+        FILE_INFO f,File_Auth auth
+        where
+        f.id = auth.file_id
+        and f.page_count > 0
+        <if test=" operId!= null">
+            and auth.OPER_ID = #{operId,jdbcType=VARCHAR}
+        </if>
+        <if test="orgCData != null" >
+            and auth.ORG_C_DATA = #{orgCData,jdbcType=VARCHAR}
+        </if>
+        <if test="orgSData != null" >
+            and auth.ORG_S_DATA = #{orgSData,jdbcType=VARCHAR}
+        </if>
+        <if test="orgTData != null" >
+            and auth.ORG_T_DATA = #{orgTData,jdbcType=VARCHAR}
+        </if>
+        <if test="fileCode != null" >
+            and f.CODE = #{fileCode,jdbcType=VARCHAR}
+        </if>
+        <if test="whereCondition != null" >
+            and   (Instr(f.CODE, #{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            OR Instr(f.NAME, #{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR Instr(f.HOSTER_NAME, #{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR
+            Instr(f.NAME_SPELL,#{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR Instr(f.HOSTER_SPELL,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            OR Instr(f.KEYWORDS,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            OR Instr(f.RESERVE1,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            )
+        </if>
+        <if test=" startTime != null">
+            and f.ACCEPT_TIME &gt;= #{startTime,jdbcType=VARCHAR}
+        </if>
+        <if test=" endTime != null">
+            and f.ACCEPT_TIME &lt;=#{endTime,jdbcType=VARCHAR}
+        </if>
+    </select>
+    <select id="getJobFileInfoListAJZF" resultMap="BaseResultMap" resultType="com.pkusoft.agxt.model.FileInfo">
+        select * from(select s_.*,rownum rn_ from(
+        select  distinct
+        f.*
+        from FILE_INFO f
+        inner join
+        File_Auth auth
+        on f.id = auth.file_id
+        <where>
+            ((
+            <if test=" operId!= null">
+                auth.OPER_ID = #{operId,jdbcType=VARCHAR}
+            </if>
+            <if test="orgCData != null" >
+                auth.ORG_C_DATA = #{orgCData,jdbcType=VARCHAR}
+                and NVL(auth.ORG_S_DATA,'&lt;Null&gt;') = #{orgSData,jdbcType=VARCHAR}
+                and NVL(auth.ORG_T_DATA, '&lt;Null&gt;') = #{orgTData,jdbcType=VARCHAR}
+            </if>
+
+            <!-- <if test="orgCode != null" >
+              or auth.ORG_CODE = #{orgCode,jdbcType=VARCHAR}
+            </if> -->
+
+            ) or (f.HOSTER_ID = #{zbrId,jdbcType=VARCHAR}) )
+            <if test=" yzfzt != null">
+                and f.STATUS = #{yzfzt,jdbcType=VARCHAR}
+            </if>
+            <if test=" ptzt != null">
+                and f.STATUS = #{ptzt,jdbcType=VARCHAR}
+            </if>
+            <if test="fileCode != null" >
+                and f.CODE = #{fileCode,jdbcType=VARCHAR}
+            </if>
+            <if test=" saryxm != null">
+                and f.KEYWORDS like #{saryxm,jdbcType=VARCHAR}
+            </if>
+            <!--  and  f.status != #{YSQSSTATUS,jdbcType=VARCHAR} -->
+            <if test="whereCondition != null" >
+                and   (Instr(f.CODE, #{whereCondition,jdbcType=VARCHAR}) &gt; 0
+                OR Instr(f.NAME, #{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR Instr(f.HOSTER_NAME, #{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR
+                Instr(f.NAME_SPELL,#{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR Instr(f.HOSTER_SPELL,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+                OR Instr(f.KEYWORDS,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+                OR Instr(f.RESERVE1,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+                )
+            </if>
+            <if test=" startTime != null">
+                and f.ACCEPT_TIME &gt;= #{startTime,jdbcType=VARCHAR}
+            </if>
+            <if test=" endTime != null">
+                and f.ACCEPT_TIME &lt;=#{endTime,jdbcType=VARCHAR}
+            </if>
+            order by f.MOD_TIME DESC
+        </where>
+        ) s_ where rownum &lt;=#{start,jdbcType=DECIMAL}+20) where rn_ &gt;#{start,jdbcType=DECIMAL}
+    </select>
+    <select id="getJobFileInfoListAJZF_Count" resultType="java.lang.Integer">
+        select  distinct
+        count(distinct f.id)
+        from FILE_INFO f
+        inner join
+        File_Auth auth
+        on f.id = auth.file_id
+        <where>
+            ((
+            <if test=" operId!= null">
+                auth.OPER_ID = #{operId,jdbcType=VARCHAR}
+            </if>
+            <if test="orgCData != null" >
+                auth.ORG_C_DATA = #{orgCData,jdbcType=VARCHAR}
+                and NVL(auth.ORG_S_DATA,'&lt;Null&gt;') = #{orgSData,jdbcType=VARCHAR}
+                and NVL(auth.ORG_T_DATA, '&lt;Null&gt;') = #{orgTData,jdbcType=VARCHAR}
+            </if>
+            <!-- <if test="orgCode != null" >
+              or auth.ORG_CODE = #{orgCode,jdbcType=VARCHAR}
+            </if> -->
+
+            ) or (f.HOSTER_ID = #{zbrId,jdbcType=VARCHAR}) )
+            <if test=" yzfzt != null">
+                and f.STATUS = #{yzfzt,jdbcType=VARCHAR}
+            </if>
+            <if test=" ptzt != null">
+                and f.STATUS = #{ptzt,jdbcType=VARCHAR}
+            </if>
+            <if test="fileCode != null" >
+                and f.CODE = #{fileCode,jdbcType=VARCHAR}
+            </if>
+            <if test=" saryxm != null">
+                and f.KEYWORDS like #{saryxm,jdbcType=VARCHAR}
+            </if>
+            <!-- and  f.status != #{YSQSSTATUS,jdbcType=VARCHAR} -->
+        </where>
+        <if test="whereCondition != null" >
+            and   (Instr(f.CODE, #{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            OR Instr(f.NAME, #{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR Instr(f.HOSTER_NAME, #{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR
+            Instr(f.NAME_SPELL,#{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR Instr(f.HOSTER_SPELL,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            OR Instr(f.KEYWORDS,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            OR Instr(f.RESERVE1,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+            )
+        </if>
+        <if test=" startTime != null">
+            and f.ACCEPT_TIME &gt;= #{startTime,jdbcType=VARCHAR}
+        </if>
+        <if test=" endTime != null">
+            and f.ACCEPT_TIME &lt;=#{endTime,jdbcType=VARCHAR}
+        </if>
+    </select>
+    <select id="jobFileInfoListDataBGBADW" resultMap="BaseResultMapParam" resultType="com.pkusoft.agxt.req.FileInfoParam">
+        select * from(select s_.*,rownum rn_ from(
+        select distinct
+        f.* ,count(distinct f.id) over () tot_cnt
+        from FILE_AUTH  auth
+        left join  FILE_INFO f  on f.id= auth.file_id
+        where
+        <if test="operId != null" >
+            auth.OPER_ID=#{operId,jdbcType=VARCHAR}
+        </if>
+        <if test="orgCData != null" >
+            auth.ORG_C_DATA = #{orgCData,jdbcType=VARCHAR}
+        </if>
+        <if test="orgSData != null" >
+            auth.ORG_S_DATA = #{orgSData,jdbcType=VARCHAR}
+        </if>
+        <if test="orgTData != null" >
+            auth.ORG_T_DATA = #{orgTData,jdbcType=VARCHAR}
+        </if>
+        <if test="ajbh != null" >
+            and Upper(f.CODE) = #{ajbh,jdbcType=VARCHAR}
+        </if>
+        <if test="ajmc != null" >
+            and Upper(f.NAME) like #{ajmc,jdbcType=VARCHAR}
+        </if>
+        <if test=" saryxm != null">
+            and f.KEYWORDS like #{saryxm,jdbcType=VARCHAR}
+        </if>
+        <if test=" hosterId!= null">
+            and f.HOSTER_ID = #{hosterId,jdbcType=VARCHAR}
+        </if>
+        <if test=" handleOrgCode!= null">
+            and f.HANDLE_ORG_CODE =#{handleOrgCode,jdbcType=VARCHAR}
+        </if>
+
+        <!-- 查询不等于9开头的数据,9999-作废和9000-归档都是不能查出来的,以后9开头的估计也不能查出来,所以排除9开头的 -->
+        and f.STATUS NOT LIKE '9%'
+
+        and f.STATUS != #{status,jdbcType=VARCHAR}
+        and f.STATUS != #{status1,jdbcType=VARCHAR}
+        order by f.MOD_TIME DESC
+        ) s_ where rownum &lt;=#{start,jdbcType=DECIMAL}+20) where rn_ &gt;#{start,jdbcType=DECIMAL}
+    </select>
+    <select id="getJobFileInfoListAJGD" resultMap="BaseResultMapParam" resultType="com.pkusoft.agxt.req.FileInfoParam">
+        select * from(select s_.*,rownum rn_ from(
+        select
+        distinct f.*,count(distinct f.id) over () tot_cnt
+        from FILE_INFO f
+        inner join
+        File_Auth auth
+        on f.id = auth.file_id
+        <where>
+            ((
+            <if test=" operId!= null">
+                auth.OPER_ID = #{operId,jdbcType=VARCHAR}
+            </if>
+            <if test="orgCData != null" >
+                auth.ORG_C_DATA = #{orgCData,jdbcType=VARCHAR}
+                and NVL(auth.ORG_S_DATA,'&lt;Null&gt;') = #{orgSData,jdbcType=VARCHAR}
+                and NVL(auth.ORG_T_DATA, '&lt;Null&gt;') = #{orgTData,jdbcType=VARCHAR}
+            </if>
+            ) or (f.HOSTER_ID = #{zbrId,jdbcType=VARCHAR}) )
+            <if test=" ptzt != null">
+                and (f.STATUS = #{ptzt,jdbcType=VARCHAR} or f.STATUS = #{ysqs,jdbcType=VARCHAR})
+            </if>
+            <if test=" status != null">
+                and f.STATUS = #{status,jdbcType=VARCHAR}
+            </if>
+            <if test="fileCode != null" >
+                and f.CODE = #{fileCode,jdbcType=VARCHAR}
+            </if>
+            <if test=" saryxm != null">
+                and f.KEYWORDS like #{saryxm,jdbcType=VARCHAR}
+            </if>
+            <!--  and  f.status != #{YSQSSTATUS,jdbcType=VARCHAR} -->
+            <if test="whereCondition != null" >
+                and   (Instr(f.CODE, #{whereCondition,jdbcType=VARCHAR}) &gt; 0
+                OR Instr(f.NAME, #{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR Instr(f.HOSTER_NAME, #{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR
+                Instr(f.NAME_SPELL,#{whereCondition,jdbcType=VARCHAR}) &gt; 0 OR Instr(f.HOSTER_SPELL,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+                OR Instr(f.KEYWORDS,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+                OR Instr(f.RESERVE1,#{whereCondition,jdbcType=VARCHAR}) &gt; 0
+                )
+            </if>
+            <if test=" startTime != null">
+                and f.ACCEPT_TIME &gt;= #{startTime,jdbcType=VARCHAR}
+            </if>
+            <if test=" endTime != null">
+                and f.ACCEPT_TIME &lt;=#{endTime,jdbcType=VARCHAR}
+            </if>
+            order by f.MOD_TIME DESC
+        </where>
+        ) s_ where rownum &gt;#{start,jdbcType=DECIMAL}) where rn_ &gt;#{start,jdbcType=DECIMAL}
     </select>
 
     <resultMap id="BaseResultMapParam" type="com.pkusoft.agxt.req.FileInfoParam">

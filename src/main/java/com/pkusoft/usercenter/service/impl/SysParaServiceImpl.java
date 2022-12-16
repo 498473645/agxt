@@ -28,7 +28,6 @@ public class SysParaServiceImpl implements SysParaService {
         RowBounds rowBounds = new RowBounds(Integer.parseInt(map.get("start")),Integer.parseInt(map.get("pageSize")));
         Example example = new Example(SysPara.class);
         Example.Criteria criteria = example.createCriteria();
-        //The query conditions are edited here
 
         return sysParaMapper.selectByExampleAndRowBounds(example,rowBounds);
     }

@@ -112,4 +112,6 @@ public interface FileInfoService {
      * @param fileId
      */
     void changeFileInfoNature(String temp, String fileId, String tempType, SysUser sysUser);
+
+    ResponseData getJobFileInfoListByBussType(SysUser sysUser,String bussType,Integer rowCount_Page,Integer rowStart,String fileCode,String startDate,String endDate,String saryxm,String caseCode,String caseName);
 }

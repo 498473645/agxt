@@ -59,4 +59,6 @@ public interface CabAreaService {
     int cabAreaDelete(String[] ids);
 
     void updateJobCabAreaByPlaceId(CabPlace cabPlace);
+
+    CabArea getJobCabAreaById(String areaId);
 }

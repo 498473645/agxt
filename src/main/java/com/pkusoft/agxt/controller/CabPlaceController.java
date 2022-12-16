@@ -5,8 +5,10 @@ import java.util.List;
 import java.util.Map;
 
 
+import com.pkusoft.agxt.model.CabArea;
 import com.pkusoft.agxt.model.CabPlace;
 import com.pkusoft.agxt.model.FileTemp;
+import com.pkusoft.agxt.req.CabAreaParam;
 import com.pkusoft.agxt.req.CabPlaceParam;
 import com.pkusoft.agxt.req.FileTempParam;
 import com.pkusoft.agxt.service.CabAreaService;
@@ -153,6 +155,16 @@ public class CabPlaceController  {
     @ResponseBody
     public ResponseData<Map> cabPlaceDelete(@RequestBody(required = false) CabPlaceParam cabPlaceParam){
         if(cabPlaceParam.getIds() != null){
+            for (int i=0; i < cabPlaceParam.getIds().length; i++) {
+                CabAreaParam cabAreaParam = new CabAreaParam();
+                cabAreaParam.setPlaceId(cabPlaceParam.getIds()[0]);
+                List<CabAreaParam> list = cabAreaService.getCabAreaParamList(cabAreaParam, null);
+                if (list.size() > 0) {
+                    return new ResponseData(ResponseData.STATUS_CODE_OTHER, "请先删除场所下面的区域!");
+
+                }
+            }
+
             int num = cabPlaceService.cabPlaceDelete(cabPlaceParam.getIds());
             if(num>0){
                 return new ResponseData(ResponseData.STATUS_CODE_SUCCESS, "操作成功", num);

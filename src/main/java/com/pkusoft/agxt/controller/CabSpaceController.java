@@ -207,46 +207,48 @@ public class CabSpaceController  {
 
     /**
     * 查看案卷柜空间信息表
-    * @param requestBody
+    * @param map
     * @return
     */
     @ApiOperation(value="查看案卷柜空间信息表", notes="查看案卷柜空间信息表")
     @RequestMapping(value = "/cabSpace/cabSpaceDetails", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public ResponseData<Map> cabSpaceDetails(@RequestBody(required = false) Map<String, String> requestBody){
-        // 检查参数
-        if (requestBody == null) {
-            return new ResponseData<>(ResponseData.STATUS_CODE_PARAM, "参数为空");
+    public ResponseData<CabSpace> cabSpaceDetails(@RequestBody(required = false) Map<String, String> map){
+        String id = map.get("id");
+        if (!StringUtils.hasText(id)) {
+            return new ResponseData(ResponseData.STATUS_CODE_OTHER, "参数不能为空");
         }
         try {
-            // TODO: 业务逻辑
-            Map responseData = null;
-            return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS, null, responseData);
+            CabSpace cabSpace = cabSpaceService.getCabSpace(id);
+            return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS, "操作成功", cabSpace);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             // TODO: 业务日志
-            return new ResponseData<>(ResponseData.STATUS_CODE_BIZ, "error：" + e.getMessage());
+            return new ResponseData<>(ResponseData.STATUS_CODE_BIZ, "查看案卷柜空间信息表出错：" + e.getMessage());
         }
     }
 
 
 	/**
     * 删除案卷柜空间信息表
-    * @param requestBody
+    * @param id
     * @return
     */
     @ApiOperation(value="删除案卷柜空间信息表", notes="删除案卷柜空间信息表")
     @RequestMapping(value = "/cabSpace/cabSpaceDelete", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public ResponseData<Map> cabSpaceDelete(@RequestBody(required = false) Map<String, String> requestBody){
+    public ResponseData<Integer> cabSpaceDelete(java.lang.String[] id){
         // 检查参数
-        if (requestBody == null) {
+        if (id == null) {
             return new ResponseData<>(ResponseData.STATUS_CODE_PARAM, "参数为空");
         }
         try {
-            // TODO: 业务逻辑
-            Map responseData = null;
-            return new ResponseData<>(ResponseData.STATUS_CODE_SUCCESS, null, responseData);
+            int num = cabSpaceService.deleteJobCabSpace(id);
+            if(num>0){
+                return new ResponseData(ResponseData.STATUS_CODE_SUCCESS, "删除案卷柜空间信息表成功", num);
+            }else{
+                return new ResponseData(ResponseData.STATUS_CODE_OTHER, "删除案卷柜空间信息表成功", num);
+            }
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             // TODO: 业务日志

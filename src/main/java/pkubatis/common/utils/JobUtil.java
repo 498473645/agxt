@@ -445,6 +445,12 @@ public static List<FileAuth> changeJobFileAuth(List<FileAuth> list){
     }
     return list;
 }
+    public static List<FileInfoParam> isNotNullJobFileInfoChange(List<FileInfoParam> list){
+        for (int i = 0; i < list.size(); i++) {
+            notNull(list.get(i));
+        }
+        return list;
+    }
 public static FileStore getJobFileStore(CabSpace jobCabSpace, UserInfo userInfo, CaseInfo caseInfo){
     FileStore jobFileStore=new FileStore();
     jobFileStore.setId(UUID.randomUUID().toString());
@@ -3445,6 +3451,18 @@ public static Integer changeInteger(Object inte){
     }
     return Integer.parseInt(String.valueOf(inte));
 }
+    public static List<FileInfo> changeJobFileInfo(List<FileInfoParam> list){
+        List<FileInfo> jobFileInfoList = new ArrayList<>();
+        if(list == null || list.size() == 0){
+            return jobFileInfoList;
+        }
+        for(FileInfoParam jobFileInfoChange : list){
+            FileInfo jobFileInfo = new FileInfo();
+            BeanUtils.copyProperties(jobFileInfoChange, jobFileInfo);
+            jobFileInfoList.add(notNull(jobFileInfo));
+        }
+        return jobFileInfoList;
+    }
 
     public static FileInfoParam notNull(FileInfoParam fileinfo){
         if(fileinfo == null){

@@ -87,4 +87,6 @@ public interface CabSpaceService {
     String batchInsertCabSpace(CabSpaceParam cabSpaceParam, SysUser sysUser);
 
     int insertJobCabSpaceW(CabSpace jobCabSpace, String ip, String port, SysUser user);
+
+    int deleteJobCabSpace(String[] id);
 }

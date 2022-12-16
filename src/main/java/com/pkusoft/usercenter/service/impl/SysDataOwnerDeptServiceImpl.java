@@ -26,7 +26,6 @@ public class SysDataOwnerDeptServiceImpl implements SysDataOwnerDeptService {
         RowBounds rowBounds = new RowBounds(Integer.parseInt(map.get("start")),Integer.parseInt(map.get("pageSize")));
         Example example = new Example(SysDataOwnerDept.class);
         Example.Criteria criteria = example.createCriteria();
-        //The query conditions are edited here
 
         return sysDataOwnerDeptMapper.selectByExampleAndRowBounds(example,rowBounds);
     }
@@ -36,7 +35,6 @@ public class SysDataOwnerDeptServiceImpl implements SysDataOwnerDeptService {
 
         Example example = new Example(SysDataOwnerDept.class);
         Example.Criteria criteria = example.createCriteria();
-        //The query conditions are edited here
 
         return sysDataOwnerDeptMapper.selectCountByExample(example);
     }
@@ -45,18 +43,12 @@ public class SysDataOwnerDeptServiceImpl implements SysDataOwnerDeptService {
     public int sysDataOwnerDeptSave(SysDataOwnerDept sysDataOwnerDept, Map<String,String> map){
         String dataOwnerDeptId = UUID.randomUUID().toString();
         sysDataOwnerDept.setDataOwnerDeptId(dataOwnerDeptId);
- /*       sysDataOwnerDept.setModifyUserName(map.get("userName"));
-        sysDataOwnerDept.setModifyUserId(map.get("userId"));
-        sysDataOwnerDept.setModifyTime(new Date());*/
         int num = sysDataOwnerDeptMapper.insertSelective(sysDataOwnerDept);
         return num;
     }
 
     @Override
     public int sysDataOwnerDeptUpdate(SysDataOwnerDept sysDataOwnerDept, Map<String,String> map){
-       /* sysDataOwnerDept.setModifyUserName(map.get("userName"));
-        sysDataOwnerDept.setModifyUserId(map.get("userId"));
-        sysDataOwnerDept.setModifyTime(new Date());*/
         int num = sysDataOwnerDeptMapper.updateByPrimaryKeySelective(sysDataOwnerDept);
         return num;
     }
@@ -79,7 +71,7 @@ public class SysDataOwnerDeptServiceImpl implements SysDataOwnerDeptService {
     public SysDataOwnerDept selectByDeptId(String deptId) {
         Example example = new Example(SysDataOwnerDept.class);
         Example.Criteria criteria = example.createCriteria();
-        //The query conditions are edited here
+
         criteria.andEqualTo("deptId", deptId);
         List<SysDataOwnerDept> list = sysDataOwnerDeptMapper.selectByExample(example);
         if(list != null && list.size() > 0){

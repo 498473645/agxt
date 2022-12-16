@@ -6,9 +6,11 @@ import java.util.Map;
 
 
 import com.pkusoft.agxt.model.CabArea;
+import com.pkusoft.agxt.model.CabSpace;
 import com.pkusoft.agxt.model.FileStore;
 import com.pkusoft.agxt.model.FileTemp;
 import com.pkusoft.agxt.req.CabAreaParam;
+import com.pkusoft.agxt.req.CabSpaceParam;
 import com.pkusoft.agxt.req.FileTempParam;
 import com.pkusoft.agxt.service.CabSpaceService;
 import com.pkusoft.agxt.service.FileStoreService;
@@ -37,6 +39,7 @@ import com.pkusoft.agxt.service.CabAreaService;
 
 import org.support.commons.springmvc.ResponseData;
 import pkubatis.common.base.ResponseDto;
+import tk.mybatis.mapper.entity.Example;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -177,6 +180,17 @@ public class CabAreaController  {
     @ResponseBody
     public ResponseData<Map> cabAreaDelete(@RequestBody(required = false) CabAreaParam cabAreaParam){
         if(cabAreaParam.getIds() != null){
+
+            for (int i=0; i < cabAreaParam.getIds().length; i++) {
+
+                CabSpaceParam cabSpaceParam = new CabSpaceParam();
+                cabSpaceParam.setAreaId(cabAreaParam.getIds()[0]);
+                List<CabSpace> list = cabSpaceService.getCabSpaceList(cabSpaceParam, null);
+                if (list.size() > 0) {
+                    return new ResponseData(ResponseData.STATUS_CODE_OTHER, "请先删除区域下面的空间");
+                }
+            }
+
             int num = cabAreaService.cabAreaDelete(cabAreaParam.getIds());
             if(num>0){
                 return new ResponseData(ResponseData.STATUS_CODE_SUCCESS, "操作成功", num);

@@ -133,7 +133,13 @@ public class CabAreaServiceImpl implements CabAreaService {
     public int cabAreaDelete(String[] ids){
         int num = 0;
         for (int i = 0; i < ids.length; i++) {
+            CabArea jobCabArea = this.getJobCabAreaById(ids[i]);
+            CabPlace newJobCabPlace = cabPlaceMapper.selectByPrimaryKey(jobCabArea.getPlaceId());
+
             num = cabAreaMapper.deleteByPrimaryKey(ids[i]);
+
+            newJobCabPlace.setAreaCount(newJobCabPlace.getAreaCount() - 1);
+            cabPlaceMapper.updateByPrimaryKeySelective(newJobCabPlace);// 修改场所区域数
         }
         return num;
     }
@@ -158,6 +164,20 @@ public class CabAreaServiceImpl implements CabAreaService {
     private Double maxSn() {
         Integer sn = cabAreaMapper.getMaxSN();
         return Double.valueOf(sn);
+    }
+
+    @Override
+    public CabArea getJobCabAreaById(String areaId) {
+
+        Example example = new Example(CabArea.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("id", areaId);
+        List<CabArea> list = cabAreaMapper.selectByExample(example);
+        if(list.size()>0){
+            return list.get(0);
+        }else{
+            return null;
+        }
     }
 
 }

@@ -28,6 +28,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.util.StringUtils;
 import org.support.commons.springmvc.ResponseData;
+import pkubatis.common.base.ResponseDto;
 import pkubatis.common.utils.*;
 import pkubatis.constants.JobConstant;
 import tk.mybatis.mapper.entity.Example;
@@ -115,6 +116,9 @@ public class FileInfoServiceImpl implements FileInfoService {
 
     @Autowired
     private FileNoteMapper fileNoteMapper;
+
+    @Autowired
+    private FileInfoAService fileInfoAService;
 
     public List<FileInfo> getFileInfoList(FileInfoParam fileInfoParam, SysUser sysUser) {
 
@@ -888,5 +892,648 @@ public class FileInfoServiceImpl implements FileInfoService {
         jobFileTrack.setLoginType(JobConstant.USERNAMELOGIN);
         jobFileTrack.setOperDetail("由"+userInfo.getName()+"将案卷 '"+jobFileInfo.getName()+"' 从 '"+type+"' 类型变更为 '"+tempTypeName+"' 类型");
         fileTrackMapper.insertSelective(jobFileTrack);
+    }
+
+    //通过用户身份证号和业务类型返回对应列表(如业务类型是扫描采集的,就返回扫描采集的案卷列表)
+    public ResponseData getJobFileInfoListByBussType(SysUser sysUser, String bussType,Integer rowCount_Page,Integer rowStart,String fileCode,String startDate,String endDate,String saryxm,String caseCode,String caseName) {
+        OrgData orgData=sysPermitService.userOrg(sysUser.getIdcard());
+        if(orgData.getErrorMessage() != null){
+            return new ResponseData(ResponseData.STATUS_CODE_OTHER,orgData.getErrorMessage());
+        }
+        if(orgData.getOrgCData()==null){
+            orgData.setOrgCData("<Null>");
+        }
+        if(orgData.getOrgSData()==null){
+            orgData.setOrgSData("<Null>");
+        }
+        if(orgData.getOrgTData()==null){
+            orgData.setOrgTData("<Null>");
+        }
+        Map<String,Object> map=sysPermitService.getSysRoleUserMapBySysRole(sysUser);
+        Date startTime=null;
+        Date endTime=null;
+        try {
+            SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            if(startDate != null && !startDate.equals("")){
+                startTime=sdf.parse(startDate);
+            }
+            if(endDate != null && !endDate.equals("")){
+                endTime=sdf.parse(endDate);
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        if(JobConstant.YSSH.equals(bussType )|| JobConstant.YSQS.equals(bussType) || JobConstant.TQDB.equals(bussType)){
+            if(map == null){//如果不是案管员,就返回主办人是自己的案卷.
+                if(bussType.equals(JobConstant.YSSH )){
+                    map=new HashMap<String, Object>();
+                    map.put("operId", sysUser.getIdcard());
+                    if(StringUtils.hasText(saryxm)){
+                        map.put("saryxm","%"+ saryxm+"%");
+                    }
+                    map.put("start", rowStart);
+                    map.put("pageSize",rowCount_Page);
+                    if(StringUtils.hasText(fileCode)){
+                        map.put("fileCode", fileCode);
+                    }
+
+                    if(startTime != null){
+                        map.put("startTime", startTime);
+                    }
+                    if(endTime != null){
+                        map.put("endTime", endTime);
+                    }
+                    map.put("status1", JobConstant.PUTONGSTATUS);
+                    map.put("status2", JobConstant.YIYISONGSHENHESTATUS);
+                    map.put("status3", JobConstant.JSAJSTATUS);
+                    map.put("status4", JobConstant.YIYIJIAO_FEIZHUBANREN);
+                    map.put("operType1", JobConstant.PUTONGSTATUS);
+                    map.put("operType2", JobConstant.YIYISONGSHENHESTATUS);
+                    map.put("operType3", JobConstant.JSAJSTATUS);
+                    map.put("operType4", JobConstant.YIYIJIAO_FEIZHUBANREN);
+                    List<FileInfoParam> list=fileInfoMapper.getJobFileInfoByFileAuthoperIdYssh(map);
+                    Integer count = 0;
+                    if (list.size() > 0) {
+                        count = Integer.parseInt(list.get(0).getTot_cnt());
+                    }
+                    ResponseDto dto = new ResponseDto<>();
+                    dto.setData(JobUtil.changeJobFileInfo(list));
+                    dto.setCount(count);
+                    dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
+                    dto.setStatusMsg("通过用户编号获取案卷信息表信息成功");
+                    return dto;
+                }else{
+                    map=new HashMap<String,Object>();
+                    map.put("operId", sysUser.getIdcard());
+//                    map.put("orgCData",orgData.getOrgCData());
+//                	map.put("orgSData",JobUtil.returnNull(orgData.getOrgSData()));
+//                	map.put("orgTData",JobUtil.returnNull(orgData.getOrgTData()));
+                    map.put("status1", JobConstant.PUTONGSTATUS);
+                    map.put("status2", JobConstant.TQDBSTATUS);
+                    map.put("status4", JobConstant.YSQSSTATUS);
+                    map.put("status3", JobConstant.JSAJSTATUS);
+                    map.put("status5", JobConstant.PUTONGSTATUS);
+                    map.put("status6", JobConstant.JSAJSTATUS);
+//                    map.put("status7", JobConstant.YIYISONGSHENHESTATUS);
+                    map.put("start", rowStart);
+                    map.put("pageSize",rowCount_Page);
+                    if(StringUtils.hasText(fileCode)){
+                        map.put("fileCode", fileCode);
+                    }
+                    if(startTime != null){
+                        map.put("startTime", startTime);
+                    }
+                    if(endTime != null){
+                        map.put("endTime", endTime);
+                    }
+                    List<FileInfo> list=fileInfoMapper.getJobFileInfoByFileAuthoperIdYSQSTQDB(map);
+                    Integer count=fileInfoMapper.getJobFileInfoByFileAuthoperIdYSQSTQDB_Count(map);
+//                    return notNullList(list);
+                    ResponseDto dto = new ResponseDto<>();
+                    dto.setData(notNullList(list));
+                    dto.setCount(count);
+                    dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
+                    dto.setStatusMsg("通过用户编号获取案卷信息表信息成功");
+                    return dto;
+                }
+            }else{//如果是案管员,就返回本单位的案卷.
+                if(bussType.equals(JobConstant.YSSH )){
+                    map.put("orgCData",JobUtil.returnNull(orgData.getOrgCData()));
+                    map.put("orgSData",JobUtil.returnNull(orgData.getOrgSData()));
+                    map.put("orgTData",JobUtil.returnNull(orgData.getOrgTData()));
+                    if(StringUtils.hasText(saryxm)){
+                        map.put("saryxm","%"+ saryxm+"%");
+                    }
+                    map.put("start", rowStart);
+                    map.put("pageSize",rowCount_Page);
+                    if(StringUtils.hasText(fileCode)){
+                        map.put("fileCode", fileCode);
+                    }
+                    if(startTime != null){
+                        map.put("startTime", startTime);
+                    }
+                    if(endTime != null){
+                        map.put("endTime", endTime);
+                    }
+                    map.put("status1", JobConstant.PUTONGSTATUS);
+                    map.put("status2", JobConstant.YIYISONGSHENHESTATUS);
+                    map.put("status3", JobConstant.JSAJSTATUS);
+                    map.put("status4", JobConstant.YIYIJIAO_FEIZHUBANREN);
+                    map.put("operType1", JobConstant.PUTONGSTATUS);
+                    map.put("operType2", JobConstant.YIYISONGSHENHESTATUS);
+                    map.put("operType3", JobConstant.JSAJSTATUS);
+                    map.put("operType4", JobConstant.YIYIJIAO_FEIZHUBANREN);
+                    List<FileInfoParam> list=fileInfoMapper.getJobFileInfoByFileAuthoperIdYssh(map);
+                    Integer count = 0;
+                    if (list.size() > 0) {
+                        count = Integer.parseInt(list.get(0).getTot_cnt());
+                    }
+                    ResponseDto dto = new ResponseDto<>();
+                    dto.setData(JobUtil.changeJobFileInfo(list));
+                    dto.setCount(count);
+                    dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
+                    dto.setStatusMsg("通过用户编号获取案卷信息表信息成功");
+                    return dto;
+                }else{
+                    map.put("orgCData",orgData.getOrgCData());
+                    map.put("orgSData",JobUtil.returnNull(orgData.getOrgSData()));
+                    map.put("orgTData",JobUtil.returnNull(orgData.getOrgTData()));
+                    map.put("status1", JobConstant.PUTONGSTATUS);
+                    map.put("status2", JobConstant.TQDBSTATUS);
+                    map.put("status4", JobConstant.YSQSSTATUS);
+                    map.put("status3", JobConstant.JSAJSTATUS);
+                    map.put("status5", JobConstant.PUTONGSTATUS);
+                    map.put("status6", JobConstant.JSAJSTATUS);
+//                    map.put("status7", JobConstant.YIYISONGSHENHESTATUS);
+                    map.put("start", rowStart);
+                    map.put("pageSize",rowCount_Page);
+                    if(StringUtils.hasText(fileCode)){
+                        map.put("fileCode", fileCode);
+                    }
+                    if(startTime != null){
+                        map.put("startTime", startTime);
+                    }
+                    if(endTime != null){
+                        map.put("endTime", endTime);
+                    }
+                    List<FileInfo> list=fileInfoMapper.getJobFileInfoByFileAuthoperIdYSQSTQDB(map);
+                    Integer count=fileInfoMapper.getJobFileInfoByFileAuthoperIdYSQSTQDB_Count(map);
+//                    return notNullList(list);
+                    ResponseDto dto = new ResponseDto<>();
+                    dto.setData(notNullList(list));
+                    dto.setCount(count);
+                    dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
+                    dto.setStatusMsg("通过用户编号获取案卷信息表信息成功");
+                    return dto;
+                }
+            }
+        }else if(JobConstant.JSAJ.equals(bussType)){
+            if(null == map){
+                map=new HashMap<String, Object>();
+                map.put("operId", sysUser.getIdcard());
+                map.put("status1", JobConstant.YIYISONGSHENHESTATUS);
+                map.put("status2", JobConstant.GHAJSTATUS);
+                map.put("status3", JobConstant.YIYIJIAO_FEIZHUBANREN);
+                map.put("status4", JobConstant.TQDBSTATUS);
+                map.put("operType1", JobConstant.WEIZHISTATUS);
+                map.put("operType2", JobConstant.YIYISONGSHENHESTATUS);
+                map.put("start", rowStart);
+                map.put("pageSize",rowCount_Page);
+                if(StringUtils.hasText(fileCode)){
+                    map.put("fileCode", fileCode);
+                }
+                if(startTime != null){
+                    map.put("startTime", startTime);
+                }
+                if(endTime != null){
+                    map.put("endTime", endTime);
+                }
+                List<FileInfo> list=fileInfoMapper.getJobFileInfoByFileAuthDeptId(map);
+                Integer count=fileInfoMapper.getJobFileInfoByFileAuthDeptId_Count(map);
+//                    return notNullList(list);
+                ResponseDto dto = new ResponseDto<>();
+                dto.setData(notNullList(list));
+                dto.setCount(count);
+                dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
+                dto.setStatusMsg("通过用户编号获取案卷信息表信息成功");
+                return dto;
+            }else{
+                map.put("handleOrgCode", map.get("deptId").toString());
+                map.put("status1", JobConstant.YIYISONGSHENHESTATUS);
+                map.put("status2", JobConstant.GHAJSTATUS);
+                map.put("status3", JobConstant.YIYIJIAO_FEIZHUBANREN);
+                map.put("status4", JobConstant.TQDBSTATUS);
+                map.put("operType1", JobConstant.WEIZHISTATUS);
+                map.put("operType2", JobConstant.YIYISONGSHENHESTATUS);
+                map.put("start", rowStart);
+                map.put("pageSize",rowCount_Page);
+                if(StringUtils.hasText(fileCode)){
+                    map.put("fileCode", fileCode);
+                }
+                map.put("orgCData",orgData.getOrgCData());
+                map.put("orgSData",JobUtil.returnNull(orgData.getOrgSData()));
+                map.put("orgTData",JobUtil.returnNull(orgData.getOrgTData()));
+                if(startTime != null){
+                    map.put("startTime", startTime);
+                }
+                if(endTime != null){
+                    map.put("endTime", endTime);
+                }
+                List<FileInfo> list=fileInfoMapper.getJobFileInfoByFileAuthDeptId(map);
+                Integer count=fileInfoMapper.getJobFileInfoByFileAuthDeptId_Count(map);
+//                    return notNullList(list);
+                ResponseDto dto = new ResponseDto<>();
+                dto.setData(notNullList(list));
+                dto.setCount(count);
+                dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
+                dto.setStatusMsg("通过用户编号获取案卷信息表信息成功");
+                return dto;
+            }
+        }else if(JobConstant.BCZC.equals(bussType)){
+            if(null == map){
+                map=new HashMap<String, Object>();
+                map.put("operId", sysUser.getIdcard());
+//                map.put("status1", JobConstant.TQDBSTATUS);
+                map.put("status2", JobConstant.YSQSSTATUS);
+//                map.put("orgCData",JobUtil.returnNull(orgData.getOrgCData()));
+//            	map.put("orgSData",JobUtil.returnNull(orgData.getOrgSData()));
+//            	map.put("orgTData",JobUtil.returnNull(orgData.getOrgTData()));
+                map.put("start", rowStart);
+                map.put("pageSize",rowCount_Page);
+                if(StringUtils.hasText(fileCode)){
+                    map.put("fileCode", fileCode);
+                }
+                if(startTime != null){
+                    map.put("startTime", startTime);
+                }
+                if(endTime != null){
+                    map.put("endTime", endTime);
+                }
+                List<FileInfo> list=fileInfoMapper.getJobFileInfoByHandlerId(map);
+                Integer count=fileInfoMapper.getJobFileInfoByHandlerId_Count(map);
+//                return notNullList(list);
+                ResponseDto dto = new ResponseDto<>();
+                dto.setData(notNullList(list));
+                dto.setCount(count);
+                dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
+                dto.setStatusMsg("通过用户编号获取案卷信息表信息成功");
+                return dto;
+            }else{
+//                map.put("status1", JobConstant.TQDBSTATUS);
+                map.put("status2", JobConstant.YSQSSTATUS);
+                map.put("orgCData",JobUtil.returnNull(orgData.getOrgCData()));
+                map.put("orgSData",JobUtil.returnNull(orgData.getOrgSData()));
+                map.put("orgTData",JobUtil.returnNull(orgData.getOrgTData()));
+                map.put("start", rowStart);
+                map.put("pageSize",rowCount_Page);
+                if(StringUtils.hasText(fileCode)){
+                    map.put("fileCode", fileCode);
+                }
+                if(startTime != null){
+                    map.put("startTime", startTime);
+                }
+                if(endTime != null){
+                    map.put("endTime", endTime);
+                }
+                List<FileInfo> list=fileInfoMapper.getJobFileInfoByHandlerId(map);
+                Integer count=fileInfoMapper.getJobFileInfoByHandlerId_Count(map);
+//                return notNullList(list);
+
+                ResponseDto dto = new ResponseDto<>();
+                dto.setData(notNullList(list));
+                dto.setCount(count);
+                dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
+                dto.setStatusMsg("通过用户编号获取案卷信息表信息成功");
+                return dto;
+            }
+        }else if(JobConstant.SMCJ.equals(bussType)){
+
+            if(null == map){
+                map=new HashMap<String, Object>();
+                map.put("operId",sysUser.getIdcard());
+            }
+//            map.put("YSQSSTATUS", JobConstant.YSQSSTATUS);
+            map.put("zbrId", orgData.getIdCard());
+            map.put("start", rowStart);
+            map.put("pageSize",rowCount_Page);
+            map.put("status",JobConstant.ZUOFEISTATUS);
+            if(StringUtils.hasText(fileCode)){
+                map.put("fileCode", fileCode);
+            }
+            if(startTime != null){
+                map.put("startTime", startTime);
+            }
+            if(endTime != null){
+                map.put("endTime", endTime);
+            }
+            if(StringUtils.hasText(caseCode)){
+                map.put("caseCode", caseCode);
+            }
+            if(StringUtils.hasText(caseName)){
+                map.put("caseName", caseName);
+            }
+            List<FileInfo> jobFileInfoList = fileInfoMapper.getJobFileInfoListSMCJ(map);
+            Integer count=fileInfoMapper.getJobFileInfoListSMCJ_Count(map);
+            if(jobFileInfoList != null){
+//                return notNullList(jobFileInfoList);
+
+                ResponseDto dto = new ResponseDto<>();
+                dto.setData(notNullList(jobFileInfoList));
+                dto.setCount(count);
+                dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
+                dto.setStatusMsg("通过用户编号获取案卷信息表信息成功");
+                return dto;
+            }
+        }else if(JobConstant.AJKL.equals(bussType)){
+//            SysUser sysUser=WebUtils.getBean(SysUserService.class).getByProperty("idcard",hosterId);
+//            Map<String,Object> ConditionMap=new HashMap<String, Object>();
+            if(map == null){
+                map=new HashMap<String, Object>();
+                map.put("operId",sysUser.getIdcard());
+            }
+
+//            map.put("orgCData",JobUtil.returnNull(orgData.getOrgCData()));
+//        	map.put("orgSData",JobUtil.returnNull(orgData.getOrgSData()));
+//        	map.put("orgTData",JobUtil.returnNull(orgData.getOrgTData()));
+//            map.put("handleOrgCode", orgData.getDeptId());
+            map.put("start", rowStart);
+            map.put("pageSize",rowCount_Page);
+            map.put("status",JobConstant.ZUOFEISTATUS);
+            if(StringUtils.hasText(fileCode)){
+                map.put("fileCode", fileCode);
+            }
+            if(startTime != null){
+                map.put("startTime", startTime);
+            }
+            if(endTime != null){
+                map.put("endTime", endTime);
+            }
+            List<FileInfo> list=fileInfoMapper.getJobFileInfoByFileAuthoperIdAJKL(map);
+            Integer count=fileInfoMapper.getJobFileInfoByFileAuthoperIdAJKL_Count(map);
+//            return list;
+            ResponseDto dto = new ResponseDto<>();
+            dto.setData(notNullList(list));
+            dto.setCount(count);
+            dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
+            dto.setStatusMsg("通过用户编号获取案卷信息表信息成功");
+            return dto;
+        }else if(JobConstant.AJYL.equals(bussType)){
+            if(map == null){
+                map=new HashMap<String, Object>();
+                map.put("operId",sysUser.getIdcard());
+            }
+            map.put("start", rowStart);
+            map.put("pageSize",rowCount_Page);
+            if(StringUtils.hasText(fileCode)){
+                map.put("fileCode", fileCode);
+            }
+            if(startTime != null){
+                map.put("startTime", startTime);
+            }
+            if(endTime != null){
+                map.put("endTime", endTime);
+            }
+            List<FileInfo> list=fileInfoMapper.getJobFileInfoByFileAuthoperIdYLAJ(map);
+            Integer count=fileInfoMapper.getJobFileInfoByFileAuthoperIdYLAJ_Count(map);
+//            return list;
+            ResponseDto dto = new ResponseDto<>();
+            dto.setData(notNullList(list));
+            dto.setCount(count);
+            dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
+            dto.setStatusMsg("通过用户编号获取案卷信息表信息成功");
+            return dto;
+        }else if(JobConstant.ZZTM.equals(bussType)){
+            if(null == map){
+                map=new HashMap<String, Object>();
+                map.put("operId",sysUser.getIdcard());
+            }
+//            map.put("YSQSSTATUS", JobConstant.YSQSSTATUS);
+            map.put("zbrId", orgData.getIdCard());
+            map.put("start", rowStart);
+            map.put("pageSize",rowCount_Page);
+            if(StringUtils.hasText(fileCode)){
+                map.put("fileCode", fileCode);
+            }
+            if(startTime != null){
+                map.put("startTime", startTime);
+            }
+            if(endTime != null){
+                map.put("endTime", endTime);
+            }
+            List<FileInfo> jobFileInfoList = fileInfoMapper.getJobFileInfoListSMCJ(map);
+            Integer count=fileInfoMapper.getJobFileInfoListSMCJ_Count(map);
+            if(jobFileInfoList != null){
+//                return notNullList(jobFileInfoList);
+
+                ResponseDto dto = new ResponseDto<>();
+                dto.setData(notNullList(jobFileInfoList));
+                dto.setCount(count);
+                dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
+                dto.setStatusMsg("通过用户编号获取案卷信息表信息成功");
+                return dto;
+            }
+        }else if(JobConstant.AJZF_9999.equals(bussType)){
+            if(null == map){
+                map=new HashMap<String, Object>();
+                map.put("operId",sysUser.getIdcard());
+            }else{
+                map.put("orgCData",orgData.getOrgCData());
+                map.put("orgSData",JobUtil.returnNull(orgData.getOrgSData()));
+                map.put("orgTData",JobUtil.returnNull(orgData.getOrgTData()));
+            }
+            map.put("zbrId", orgData.getIdCard());
+            map.put("start", rowStart);
+            map.put("pageSize",rowCount_Page);
+            if(StringUtils.hasText(fileCode)){
+                map.put("fileCode", fileCode);
+            }
+            if(StringUtils.hasText(saryxm)){
+                map.put("saryxm","%"+ saryxm+"%");
+            }
+            if(startTime != null){
+                map.put("startTime", startTime);
+            }
+            if(endTime != null){
+                map.put("endTime", endTime);
+            }
+            map.put("ptzt", JobConstant.PUTONGSTATUS);
+            List<FileInfo> jobFileInfoList = fileInfoMapper.getJobFileInfoListAJZF(map);
+            Integer count=fileInfoMapper.getJobFileInfoListAJZF_Count(map);
+            if(jobFileInfoList != null){
+                ResponseDto dto = new ResponseDto<>();
+                dto.setData(notNullList(jobFileInfoList));
+                dto.setCount(count);
+                dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
+                dto.setStatusMsg("获取案卷信息成功");
+                return dto;
+            }
+        }else if(JobConstant.ZFHF_9998.equals(bussType)){
+            if(null == map){
+                map=new HashMap<String, Object>();
+                map.put("operId",sysUser.getIdcard());
+            }else{
+                map.put("orgCData",orgData.getOrgCData());
+                map.put("orgSData",JobUtil.returnNull(orgData.getOrgSData()));
+                map.put("orgTData",JobUtil.returnNull(orgData.getOrgTData()));
+            }
+            map.put("zbrId", orgData.getIdCard());
+            map.put("start", rowStart);
+            map.put("pageSize",rowCount_Page);
+            if(StringUtils.hasText(fileCode)){
+                map.put("fileCode", fileCode);
+            }
+            if(StringUtils.hasText(saryxm)){
+                map.put("saryxm","%"+ saryxm+"%");
+            }
+            if(startTime != null){
+                map.put("startTime", startTime);
+            }
+            if(endTime != null){
+                map.put("endTime", endTime);
+            }
+            map.put("yzfzt", JobConstant.ZUOFEISTATUS);
+            List<FileInfo> jobFileInfoList = fileInfoMapper.getJobFileInfoListAJZF(map);
+            Integer count=fileInfoMapper.getJobFileInfoListAJZF_Count(map);
+            if(jobFileInfoList != null){
+                ResponseDto dto = new ResponseDto<>();
+                dto.setData(notNullList(jobFileInfoList));
+                dto.setCount(count);
+                dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
+                dto.setStatusMsg("获取案卷信息成功");
+                return dto;
+            }
+        }else if(JobConstant.YJAJIAN.equals(bussType)){
+            if(null == map){
+                map=new HashMap<String, Object>();
+                map.put("operId", orgData.getIdCard());
+            }
+            if(StringUtils.hasText(saryxm)){
+                map.put("saryxm","%"+ saryxm+"%");
+            }
+            map.put("start", rowStart);
+            map.put("pageSize",rowCount_Page);
+            if(StringUtils.hasText(fileCode)){
+                map.put("fileCode", fileCode);
+            }
+            if(startTime != null){
+                map.put("startTime", startTime);
+            }
+            if(endTime != null){
+                map.put("endTime", endTime);
+            }
+            map.put("status", JobConstant.YIYISONGSHENHESTATUS);
+            map.put("status1", JobConstant.YIYIJIAO_FEIZHUBANREN);
+            map.put("ajzfStatus",JobConstant.ZUOFEISTATUS);
+            map.put("zbrId", orgData.getIdCard());
+            List<FileInfoParam> list=fileInfoMapper.jobFileInfoListDataBGBADW(map);
+            Integer count = 0;
+            if (list.size() > 0) {
+                count = Integer.parseInt(list.get(0).getTot_cnt());
+            }
+            ResponseDto dto = new ResponseDto<>();
+            dto.setData(JobUtil.changeJobFileInfo(list));
+            dto.setCount(count);
+            dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
+            dto.setStatusMsg("通过用户编号获取案卷信息表信息成功");
+            return dto;
+        }else if(JobConstant.AJGD.equals(bussType)){
+            if(null == map){
+                map=new HashMap<String, Object>();
+                map.put("operId",sysUser.getIdcard());
+            }else{
+                if(orgData.getOrgCData() != null)
+                    map.put("orgCData",orgData.getOrgCData());
+                if(orgData.getOrgSData() != null)
+                    map.put("orgSData",JobUtil.returnNull(orgData.getOrgSData()));
+                if(orgData.getOrgTData() != null)
+                    map.put("orgTData",JobUtil.returnNull(orgData.getOrgTData()));
+            }
+            map.put("zbrId", orgData.getIdCard());
+            map.put("start", rowStart);
+            map.put("pageSize",rowCount_Page);
+            if(StringUtils.hasText(fileCode)){
+                map.put("fileCode", fileCode);
+            }
+            if(StringUtils.hasText(saryxm)){
+                map.put("saryxm","%"+ saryxm+"%");
+            }
+            if(startTime != null){
+                map.put("startTime", startTime);
+            }
+            if(endTime != null){
+                map.put("endTime", endTime);
+            }
+            map.put("ptzt", JobConstant.PUTONGSTATUS);
+            map.put("ysqs", JobConstant.YSQSSTATUS);
+            List<FileInfoParam> list = fileInfoMapper.getJobFileInfoListAJGD(map);
+            int count = 0;
+            if (list.size() > 0) {
+                count = Integer.valueOf(list.get(0).getTot_cnt());
+            }
+            Object a =JobUtil.field(list);
+            if(list != null){
+                ResponseDto dto = new ResponseDto<>();
+                dto.setData(JobUtil.isNotNullJobFileInfoChange(list));
+                dto.setCount(count);
+                dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
+                dto.setStatusMsg("获取案卷信息成功");
+                return dto;
+            }
+        }else if(JobConstant.AJGD_DC.equals(bussType) || JobConstant.AJGD_DC_YJ.equals(bussType)){
+            if(null != map){
+//                map.put("orgCData",orgData.getOrgCData());
+//                map.put("orgSData",JobUtil.returnNull(orgData.getOrgSData()));
+//                map.put("orgTData",JobUtil.returnNull(orgData.getOrgTData()));
+                if(orgData.getOrgCData() != null)
+                    map.put("orgCData",orgData.getOrgCData());
+                if(orgData.getOrgSData() != null)
+                    map.put("orgSData",JobUtil.returnNull(orgData.getOrgSData()));
+                if(orgData.getOrgTData() != null)
+                    map.put("orgTData",JobUtil.returnNull(orgData.getOrgTData()));
+            }else{
+                map=new HashMap<String, Object>();
+            }
+            map.put("zbrId", orgData.getIdCard());
+            map.put("start", rowStart);
+            map.put("pageSize",rowCount_Page);
+            if(StringUtils.hasText(fileCode)){
+                map.put("fileCode", fileCode);
+            }
+            if(StringUtils.hasText(saryxm)){
+                map.put("saryxm","%"+ saryxm+"%");
+            }
+            if(startTime != null){
+                map.put("startTime", startTime);
+            }
+            if(endTime != null){
+                map.put("endTime", endTime);
+            }
+            List<FileInfoA> list = fileInfoAService.getFileInfoAListAJGD(map);
+            Integer	count = fileInfoAService.getFileInfoAListAJGDConut(map);
+            if(list != null){
+                ResponseDto dto = new ResponseDto<>();
+                dto.setData(JobUtil.field(list));
+                dto.setCount(count);
+                dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
+                dto.setStatusMsg("获取案卷信息成功");
+                return dto;
+            }
+        }else{
+            if(null == map){
+                map=new HashMap<String, Object>();
+                map.put("operId",sysUser.getIdcard());
+            }
+            map.put("zbrId", orgData.getIdCard());
+            map.put("start", rowStart);
+            map.put("pageSize",rowCount_Page);
+            if(StringUtils.hasText(fileCode)){
+                map.put("fileCode", fileCode);
+            }
+            if(startTime != null){
+                map.put("startTime", startTime);
+            }
+            if(endTime != null){
+                map.put("endTime", endTime);
+            }
+            List<FileInfo> jobFileInfoList = fileInfoMapper.getJobFileInfoListSMCJ(map);
+
+            Integer count=fileInfoMapper.getJobFileInfoListSMCJ_Count(map);
+            if(jobFileInfoList != null){
+                ResponseDto dto = new ResponseDto<>();
+                dto.setData(notNullList(jobFileInfoList));
+                dto.setCount(count);
+                dto.setStatusCode(ResponseData.STATUS_CODE_SUCCESS);
+                dto.setStatusMsg("通过用户编号获取案卷信息表信息成功");
+                return dto;
+            }
+        }
+        return null;
+    }
+
+    public List<FileInfo> notNullList(List<FileInfo> list){
+        for(int i=0;i<list.size();i++){
+            JobUtil.notNull(list.get(i));
+        }
+        return list;
     }
 }

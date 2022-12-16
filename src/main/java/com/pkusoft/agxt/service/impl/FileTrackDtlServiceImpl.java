@@ -28,7 +28,6 @@ public class FileTrackDtlServiceImpl implements FileTrackDtlService {
         RowBounds rowBounds = new RowBounds(Integer.parseInt(map.get("start")),Integer.parseInt(map.get("pageSize")));
         Example example = new Example(FileTrackDtl.class);
         Example.Criteria criteria = example.createCriteria();
-        //The query conditions are edited here
 
         return fileTrackDtlMapper.selectByExampleAndRowBounds(example,rowBounds);
     }
@@ -37,7 +36,6 @@ public class FileTrackDtlServiceImpl implements FileTrackDtlService {
 
         Example example = new Example(FileTrackDtl.class);
         Example.Criteria criteria = example.createCriteria();
-        //The query conditions are edited here
 
         return fileTrackDtlMapper.selectCountByExample(example);
     }

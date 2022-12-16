@@ -464,6 +464,25 @@ public class CabSpaceServiceImpl implements CabSpaceService {
         return cabSpaceMapper.insertSelective(jobCabSpace);
     }
 
+    public int deleteJobCabSpace(String[] id) {
+
+        int count = 0;
+        for (int i = 0; i < id.length; i++) {
+            CabSpace jobCabSpace = cabSpaceMapper.selectByPrimaryKey(id[i]);
+
+            CabPlace newJobCabPlace = cabPlaceMapper.selectByPrimaryKey(jobCabSpace.getPlaceId());
+            CabArea newJobCabArea = cabAreaMapper.selectByPrimaryKey(jobCabSpace.getAreaId());
+            count = count + cabSpaceMapper.deleteByPrimaryKey(id[i]);
+
+            newJobCabArea.setSpaceCount(newJobCabArea.getSpaceCount() -1);
+            newJobCabPlace.setSpaceCount(newJobCabPlace.getSpaceCount() - 1);
+            cabAreaMapper.updateByPrimaryKeySelective(newJobCabArea);// 修改区域空间数
+            cabPlaceMapper.updateByPrimaryKeySelective(newJobCabPlace);// 修改场所空间数
+
+        }
+        return count;
+    }
+
     public CabSpaceAct insertSpaceActCheck(CabSpace jobCabSpace, SysUser sysUser, Double sn, String type, String ip, String port, OrgData orgData) {
         int i = sn.intValue();
         CabSpaceAct jobCabSpaceAct = new CabSpaceAct();
